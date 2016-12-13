@@ -32,99 +32,99 @@ tags:
 comments: []
 ---
 <div dir="ltr" style="text-align: left;">Забегу вперед, покажу что мы хотим получить</p>
-<div class="separator" style="clear: both; text-align: center;"><&#47;div></p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;3.bp.blogspot.com&#47;-NJC2AaCVquY&#47;VVGT3J3uerI&#47;AAAAAAAAAXk&#47;6Hj6LGac46k&#47;s1600&#47;Screenshot_17.png"><img src="http:&#47;&#47;3.bp.blogspot.com&#47;-NJC2AaCVquY&#47;VVGT3J3uerI&#47;AAAAAAAAAXk&#47;6Hj6LGac46k&#47;s1600&#47;Screenshot_17.png" alt="" border="0" &#47;><&#47;a><&#47;div></p>
-<div class="separator" style="clear: both; text-align: center;"><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"></div></p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://3.bp.blogspot.com/-NJC2AaCVquY/VVGT3J3uerI/AAAAAAAAAXk/6Hj6LGac46k/s1600/Screenshot_17.png"><img src="http://3.bp.blogspot.com/-NJC2AaCVquY/VVGT3J3uerI/AAAAAAAAAXk/6Hj6LGac46k/s1600/Screenshot_17.png" alt="" border="0" /></a></div></p>
+<div class="separator" style="clear: both; text-align: center;"></div><br />
 Пойдем по шагам. Подразумевается, что yii у вас установлен и настроен. Если нет, то смотрите как это делается в предыдущих уроках.<br />
 1. Создаем таблицу.<br />
 Я решил работать с PostgreSQL поэтому DDL такой</p>
-<pre style="background: #000; color: #f8f8f8;"><span style="color: #e28964;">CREATE<&#47;span> <span style="color: #e28964;">TABLE<&#47;span> "<span style="color: #89bdff;">SC_Wonder<&#47;span>".t_page (<br />
-  p_id <span style="color: #99cf50;">SERIAL<&#47;span>,<br />
-  p_title <span style="color: #99cf50;">TEXT<&#47;span> <span style="color: #e28964;">NOT NULL<&#47;span>,<br />
-  p_link <span style="color: #99cf50;">TEXT<&#47;span>,<br />
-  p_parent <span style="color: #99cf50;">INTEGER<&#47;span>,<br />
-  p_order <span style="color: #99cf50;">INTEGER<&#47;span>,<br />
-  p_type <span style="color: #99cf50;">INTEGER<&#47;span>,<br />
-  p_comment <span style="color: #99cf50;">TEXT<&#47;span><br />
+<pre style="background: #000; color: #f8f8f8;"><span style="color: #e28964;">CREATE</span> <span style="color: #e28964;">TABLE</span> "<span style="color: #89bdff;">SC_Wonder</span>".t_page (<br />
+  p_id <span style="color: #99cf50;">SERIAL</span>,<br />
+  p_title <span style="color: #99cf50;">TEXT</span> <span style="color: #e28964;">NOT NULL</span>,<br />
+  p_link <span style="color: #99cf50;">TEXT</span>,<br />
+  p_parent <span style="color: #99cf50;">INTEGER</span>,<br />
+  p_order <span style="color: #99cf50;">INTEGER</span>,<br />
+  p_type <span style="color: #99cf50;">INTEGER</span>,<br />
+  p_comment <span style="color: #99cf50;">TEXT</span><br />
 )<br />
-WITH (oids <span style="color: #e28964;">=<&#47;span> false);</p>
-<p>COMMENT <span style="color: #e28964;">ON<&#47;span> TABLE <span style="color: #65b042;">"SC_Wonder"<&#47;span>.t_page<br />
-IS <span style="color: #65b042;">'таблица страниц'<&#47;span>;</p>
-<p>COMMENT <span style="color: #e28964;">ON<&#47;span> COLUMN <span style="color: #65b042;">"SC_Wonder"<&#47;span>.<span style="color: #3387cc;">t_page<&#47;span>.<span style="color: #3387cc;">p_id<&#47;span><br />
-IS <span style="color: #65b042;">'ид'<&#47;span>;</p>
-<p>COMMENT <span style="color: #e28964;">ON<&#47;span> COLUMN <span style="color: #65b042;">"SC_Wonder"<&#47;span>.<span style="color: #3387cc;">t_page<&#47;span>.<span style="color: #3387cc;">p_title<&#47;span><br />
-IS <span style="color: #65b042;">'название'<&#47;span>;</p>
-<p>COMMENT <span style="color: #e28964;">ON<&#47;span> COLUMN <span style="color: #65b042;">"SC_Wonder"<&#47;span>.<span style="color: #3387cc;">t_page<&#47;span>.<span style="color: #3387cc;">p_link<&#47;span><br />
-IS <span style="color: #65b042;">'ссылка'<&#47;span>;</p>
-<p>COMMENT <span style="color: #e28964;">ON<&#47;span> COLUMN <span style="color: #65b042;">"SC_Wonder"<&#47;span>.<span style="color: #3387cc;">t_page<&#47;span>.<span style="color: #3387cc;">p_parent<&#47;span><br />
-IS <span style="color: #65b042;">'предок'<&#47;span>;</p>
-<p>COMMENT <span style="color: #e28964;">ON<&#47;span> COLUMN <span style="color: #65b042;">"SC_Wonder"<&#47;span>.<span style="color: #3387cc;">t_page<&#47;span>.<span style="color: #3387cc;">p_order<&#47;span><br />
-IS <span style="color: #65b042;">'позиция'<&#47;span>;</p>
-<p>COMMENT <span style="color: #e28964;">ON<&#47;span> COLUMN <span style="color: #65b042;">"SC_Wonder"<&#47;span>.<span style="color: #3387cc;">t_page<&#47;span>.<span style="color: #3387cc;">p_type<&#47;span><br />
-IS <span style="color: #65b042;">'тип'<&#47;span>;</p>
-<p>COMMENT <span style="color: #e28964;">ON<&#47;span> COLUMN <span style="color: #65b042;">"SC_Wonder"<&#47;span>.<span style="color: #3387cc;">t_page<&#47;span>.<span style="color: #3387cc;">p_comment<&#47;span><br />
-IS <span style="color: #65b042;">'комментарий'<&#47;span>;<&#47;pre><br />
+WITH (oids <span style="color: #e28964;">=</span> false);</p>
+<p>COMMENT <span style="color: #e28964;">ON</span> TABLE <span style="color: #65b042;">"SC_Wonder"</span>.t_page<br />
+IS <span style="color: #65b042;">'таблица страниц'</span>;</p>
+<p>COMMENT <span style="color: #e28964;">ON</span> COLUMN <span style="color: #65b042;">"SC_Wonder"</span>.<span style="color: #3387cc;">t_page</span>.<span style="color: #3387cc;">p_id</span><br />
+IS <span style="color: #65b042;">'ид'</span>;</p>
+<p>COMMENT <span style="color: #e28964;">ON</span> COLUMN <span style="color: #65b042;">"SC_Wonder"</span>.<span style="color: #3387cc;">t_page</span>.<span style="color: #3387cc;">p_title</span><br />
+IS <span style="color: #65b042;">'название'</span>;</p>
+<p>COMMENT <span style="color: #e28964;">ON</span> COLUMN <span style="color: #65b042;">"SC_Wonder"</span>.<span style="color: #3387cc;">t_page</span>.<span style="color: #3387cc;">p_link</span><br />
+IS <span style="color: #65b042;">'ссылка'</span>;</p>
+<p>COMMENT <span style="color: #e28964;">ON</span> COLUMN <span style="color: #65b042;">"SC_Wonder"</span>.<span style="color: #3387cc;">t_page</span>.<span style="color: #3387cc;">p_parent</span><br />
+IS <span style="color: #65b042;">'предок'</span>;</p>
+<p>COMMENT <span style="color: #e28964;">ON</span> COLUMN <span style="color: #65b042;">"SC_Wonder"</span>.<span style="color: #3387cc;">t_page</span>.<span style="color: #3387cc;">p_order</span><br />
+IS <span style="color: #65b042;">'позиция'</span>;</p>
+<p>COMMENT <span style="color: #e28964;">ON</span> COLUMN <span style="color: #65b042;">"SC_Wonder"</span>.<span style="color: #3387cc;">t_page</span>.<span style="color: #3387cc;">p_type</span><br />
+IS <span style="color: #65b042;">'тип'</span>;</p>
+<p>COMMENT <span style="color: #e28964;">ON</span> COLUMN <span style="color: #65b042;">"SC_Wonder"</span>.<span style="color: #3387cc;">t_page</span>.<span style="color: #3387cc;">p_comment</span><br />
+IS <span style="color: #65b042;">'комментарий'</span>;</pre><br />
 DDL for MySQL</p>
-<pre style="background: #000; color: #f8f8f8;"><span style="color: #e28964;">CREATE<&#47;span> <span style="color: #e28964;">TABLE<&#47;span> `<span style="color: #89bdff;">t_page<&#47;span>` (<br />
-  <span style="color: #65b042;">`p_id`<&#47;span> <span style="color: #99cf50;">INTEGER<&#47;span>(<span style="color: #3387cc;">11<&#47;span>) <span style="color: #e28964;">NOT NULL<&#47;span> AUTO_INCREMENT COMMENT <span style="color: #65b042;">'ид'<&#47;span>,<br />
-  <span style="color: #65b042;">`p_title`<&#47;span> <span style="color: #99cf50;">TEXT<&#47;span> COLLATE utf8_general_ci <span style="color: #e28964;">NOT NULL<&#47;span> COMMENT <span style="color: #65b042;">'название'<&#47;span>,<br />
-  <span style="color: #65b042;">`p_link`<&#47;span> <span style="color: #99cf50;">TEXT<&#47;span> COLLATE utf8_general_ci COMMENT <span style="color: #65b042;">'ссылка'<&#47;span>,<br />
-  <span style="color: #65b042;">`p_parent`<&#47;span> <span style="color: #99cf50;">INTEGER<&#47;span>(<span style="color: #3387cc;">11<&#47;span>) DEFAULT <span style="color: #e28964;">NULL<&#47;span> COMMENT <span style="color: #65b042;">'предок'<&#47;span>,<br />
-  <span style="color: #65b042;">`p_order`<&#47;span> <span style="color: #99cf50;">INTEGER<&#47;span>(<span style="color: #3387cc;">11<&#47;span>) DEFAULT <span style="color: #e28964;">NULL<&#47;span> COMMENT <span style="color: #65b042;">'позиция'<&#47;span>,<br />
-  <span style="color: #65b042;">`p_type`<&#47;span> <span style="color: #99cf50;">INTEGER<&#47;span>(<span style="color: #3387cc;">11<&#47;span>) DEFAULT <span style="color: #e28964;">NULL<&#47;span> COMMENT <span style="color: #65b042;">'тип'<&#47;span>,<br />
-  <span style="color: #65b042;">`p_comment`<&#47;span> <span style="color: #99cf50;">INTEGER<&#47;span>(<span style="color: #3387cc;">11<&#47;span>) DEFAULT <span style="color: #e28964;">NULL<&#47;span> COMMENT <span style="color: #65b042;">'комментарий'<&#47;span>,<br />
-  <span style="color: #99cf50;">PRIMARY KEY<&#47;span> (<span style="color: #65b042;">`p_id`<&#47;span>) USING BTREE,<br />
-  UNIQUE KEY <span style="color: #65b042;">`p_id`<&#47;span> (<span style="color: #65b042;">`p_id`<&#47;span>) USING BTREE<br />
-) ENGINE<span style="color: #e28964;">=<&#47;span>InnoDB<br />
-AUTO_INCREMENT<span style="color: #e28964;">=<&#47;span><span style="color: #3387cc;">1<&#47;span> CHARACTER <span style="color: #e28964;">SET<&#47;span> <span style="color: #65b042;">'utf8'<&#47;span> COLLATE <span style="color: #65b042;">'utf8_general_ci'<&#47;span><br />
-COMMENT<span style="color: #e28964;">=<&#47;span><span style="color: #65b042;">'таблица страниц'<&#47;span><br />
-;<&#47;pre><br />
+<pre style="background: #000; color: #f8f8f8;"><span style="color: #e28964;">CREATE</span> <span style="color: #e28964;">TABLE</span> `<span style="color: #89bdff;">t_page</span>` (<br />
+  <span style="color: #65b042;">`p_id`</span> <span style="color: #99cf50;">INTEGER</span>(<span style="color: #3387cc;">11</span>) <span style="color: #e28964;">NOT NULL</span> AUTO_INCREMENT COMMENT <span style="color: #65b042;">'ид'</span>,<br />
+  <span style="color: #65b042;">`p_title`</span> <span style="color: #99cf50;">TEXT</span> COLLATE utf8_general_ci <span style="color: #e28964;">NOT NULL</span> COMMENT <span style="color: #65b042;">'название'</span>,<br />
+  <span style="color: #65b042;">`p_link`</span> <span style="color: #99cf50;">TEXT</span> COLLATE utf8_general_ci COMMENT <span style="color: #65b042;">'ссылка'</span>,<br />
+  <span style="color: #65b042;">`p_parent`</span> <span style="color: #99cf50;">INTEGER</span>(<span style="color: #3387cc;">11</span>) DEFAULT <span style="color: #e28964;">NULL</span> COMMENT <span style="color: #65b042;">'предок'</span>,<br />
+  <span style="color: #65b042;">`p_order`</span> <span style="color: #99cf50;">INTEGER</span>(<span style="color: #3387cc;">11</span>) DEFAULT <span style="color: #e28964;">NULL</span> COMMENT <span style="color: #65b042;">'позиция'</span>,<br />
+  <span style="color: #65b042;">`p_type`</span> <span style="color: #99cf50;">INTEGER</span>(<span style="color: #3387cc;">11</span>) DEFAULT <span style="color: #e28964;">NULL</span> COMMENT <span style="color: #65b042;">'тип'</span>,<br />
+  <span style="color: #65b042;">`p_comment`</span> <span style="color: #99cf50;">INTEGER</span>(<span style="color: #3387cc;">11</span>) DEFAULT <span style="color: #e28964;">NULL</span> COMMENT <span style="color: #65b042;">'комментарий'</span>,<br />
+  <span style="color: #99cf50;">PRIMARY KEY</span> (<span style="color: #65b042;">`p_id`</span>) USING BTREE,<br />
+  UNIQUE KEY <span style="color: #65b042;">`p_id`</span> (<span style="color: #65b042;">`p_id`</span>) USING BTREE<br />
+) ENGINE<span style="color: #e28964;">=</span>InnoDB<br />
+AUTO_INCREMENT<span style="color: #e28964;">=</span><span style="color: #3387cc;">1</span> CHARACTER <span style="color: #e28964;">SET</span> <span style="color: #65b042;">'utf8'</span> COLLATE <span style="color: #65b042;">'utf8_general_ci'</span><br />
+COMMENT<span style="color: #e28964;">=</span><span style="color: #65b042;">'таблица страниц'</span><br />
+;</pre><br />
 ..<br />
 2. Создаем model и crud<br />
 3.Дальше пошла магия.<br />
-<a href="https:&#47;&#47;drive.google.com&#47;file&#47;d&#47;0B8SBzylZ-emOa1VFVjZCeWs3b1k&#47;view?usp=sharing">Вот качаем расширение<&#47;a><br />
+<a href="https://drive.google.com/file/d/0B8SBzylZ-emOa1VFVjZCeWs3b1k/view?usp=sharing">Вот качаем расширение</a><br />
 Кидаем как обычно в ..protectedextensions<br />
 добавляем в main</p>
-<pre style="background: #000; color: #f8f8f8;">&#47;&#47;config&#47;main.php<br />
+<pre style="background: #000; color: #f8f8f8;">//config/main.php<br />
 'components' => array(<br />
-        'import' => 'simpletree_widget',<&#47;pre><br />
+        'import' => 'simpletree_widget',</pre><br />
 ..<br />
 4. Систему мы настроили<br />
 5.А сейчас пойдет самое интересное<br />
-Изменим page&#47;index.php</p>
+Изменим page/index.php</p>
 <pre style="background: #000; color: #f8f8f8;"><?php<br />
-<span style="color: #aeaeae; font-style: italic;">&#47;* @var $this PageController *&#47;<&#47;span><br />
-<span style="color: #aeaeae; font-style: italic;">&#47;* @var $dataProvider CActiveDataProvider *&#47;<&#47;span></p>
-<p><span style="color: #3e87e3;">$this<&#47;span><span style="color: #e28964;">-><&#47;span>breadcrumbs <span style="color: #e28964;">=<&#47;span> <span style="color: #dad085;">array<&#47;span>(<br />
-    <span style="color: #65b042;">'Страницы'<&#47;span>,<br />
+<span style="color: #aeaeae; font-style: italic;">/* @var $this PageController */</span><br />
+<span style="color: #aeaeae; font-style: italic;">/* @var $dataProvider CActiveDataProvider */</span></p>
+<p><span style="color: #3e87e3;">$this</span><span style="color: #e28964;">-></span>breadcrumbs <span style="color: #e28964;">=</span> <span style="color: #dad085;">array</span>(<br />
+    <span style="color: #65b042;">'Страницы'</span>,<br />
 );<br />
 ?><br />
-<?php<span style="color: #e28964;"> if<&#47;span> (<span style="color: #9b859d;">Yii<&#47;span><span style="color: #e28964;">::<&#47;span>app()<span style="color: #e28964;">-><&#47;span>user<span style="color: #e28964;">-><&#47;span>hasFlash(<span style="color: #65b042;">'flash'<&#47;span>)): ?><br />
-    <span style="color: #89bdff;"><<span style="color: #89bdff;">div<&#47;span> <span style="color: #89bdff;">class<&#47;span>=<span style="color: #65b042;">"info"<&#47;span>><&#47;span><br />
-        <?php <span style="color: #dad085;">echo<&#47;span> <span style="color: #9b859d;">Yii<&#47;span><span style="color: #e28964;">::<&#47;span>app()<span style="color: #e28964;">-><&#47;span>user<span style="color: #e28964;">-><&#47;span>getFlash(<span style="color: #65b042;">'flash'<&#47;span>); ?><br />
-    <span style="color: #89bdff;"><&#47;<span style="color: #89bdff;">div<&#47;span>><&#47;span><br />
-<?php<span style="color: #e28964;"> endif<&#47;span>; ?><br />
+<?php<span style="color: #e28964;"> if</span> (<span style="color: #9b859d;">Yii</span><span style="color: #e28964;">::</span>app()<span style="color: #e28964;">-></span>user<span style="color: #e28964;">-></span>hasFlash(<span style="color: #65b042;">'flash'</span>)): ?><br />
+    <span style="color: #89bdff;"><<span style="color: #89bdff;">div</span> <span style="color: #89bdff;">class</span>=<span style="color: #65b042;">"info"</span>></span><br />
+        <?php <span style="color: #dad085;">echo</span> <span style="color: #9b859d;">Yii</span><span style="color: #e28964;">::</span>app()<span style="color: #e28964;">-></span>user<span style="color: #e28964;">-></span>getFlash(<span style="color: #65b042;">'flash'</span>); ?><br />
+    <span style="color: #89bdff;"></<span style="color: #89bdff;">div</span>></span><br />
+<?php<span style="color: #e28964;"> endif</span>; ?><br />
 <?php<br />
-<span style="color: #3e87e3;">$this<&#47;span><span style="color: #e28964;">-><&#47;span>menu <span style="color: #e28964;">=<&#47;span> <span style="color: #dad085;">array<&#47;span>(<br />
-    <span style="color: #dad085;">array<&#47;span>(<span style="color: #65b042;">'label'<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #65b042;">'Поиск'<&#47;span>, <span style="color: #65b042;">'url'<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #dad085;">array<&#47;span>(<span style="color: #65b042;">'admin'<&#47;span>)),<br />
+<span style="color: #3e87e3;">$this</span><span style="color: #e28964;">-></span>menu <span style="color: #e28964;">=</span> <span style="color: #dad085;">array</span>(<br />
+    <span style="color: #dad085;">array</span>(<span style="color: #65b042;">'label'</span> <span style="color: #e28964;">=></span> <span style="color: #65b042;">'Поиск'</span>, <span style="color: #65b042;">'url'</span> <span style="color: #e28964;">=></span> <span style="color: #dad085;">array</span>(<span style="color: #65b042;">'admin'</span>)),<br />
 );<br />
 ?><br />
-<span style="color: #89bdff;"><<span style="color: #89bdff;">h1<&#47;span>><&#47;span>Страницы<span style="color: #89bdff;"><&#47;<span style="color: #89bdff;">h1<&#47;span>><&#47;span></p>
+<span style="color: #89bdff;"><<span style="color: #89bdff;">h1</span>></span>Страницы<span style="color: #89bdff;"></<span style="color: #89bdff;">h1</span>></span></p>
 <p><?php<br />
-<span style="color: #3e87e3;">$this<&#47;span><span style="color: #e28964;">-><&#47;span>widget(<span style="color: #65b042;">'CTreeView'<&#47;span>, <span style="color: #dad085;">array<&#47;span>(<br />
-    <span style="color: #65b042;">'data'<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #3e87e3;">$dataTree<&#47;span>,<br />
-    <span style="color: #65b042;">'htmlOptions'<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #dad085;">array<&#47;span>(<br />
-        <span style="color: #65b042;">'id'<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #65b042;">'treeview-categ'<&#47;span>,<br />
-        <span style="color: #65b042;">'class'<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #65b042;">'treeview-red'<&#47;span>, <span style="color: #aeaeae; font-style: italic;">&#47;&#47;there are some classes that ready to use<&#47;span><br />
+<span style="color: #3e87e3;">$this</span><span style="color: #e28964;">-></span>widget(<span style="color: #65b042;">'CTreeView'</span>, <span style="color: #dad085;">array</span>(<br />
+    <span style="color: #65b042;">'data'</span> <span style="color: #e28964;">=></span> <span style="color: #3e87e3;">$dataTree</span>,<br />
+    <span style="color: #65b042;">'htmlOptions'</span> <span style="color: #e28964;">=></span> <span style="color: #dad085;">array</span>(<br />
+        <span style="color: #65b042;">'id'</span> <span style="color: #e28964;">=></span> <span style="color: #65b042;">'treeview-categ'</span>,<br />
+        <span style="color: #65b042;">'class'</span> <span style="color: #e28964;">=></span> <span style="color: #65b042;">'treeview-red'</span>, <span style="color: #aeaeae; font-style: italic;">//there are some classes that ready to use</span><br />
     ),<br />
 ));</p>
-<p><span style="color: #e28964;">if<&#47;span> (<span style="color: #e28964;">!<&#47;span><span style="color: #3e87e3;">$dataTree<&#47;span>)<br />
-    <span style="color: #dad085;">echo<&#47;span> <span style="color: #9b859d;">CHtml<&#47;span><span style="color: #e28964;">::<&#47;span>link(<span style="color: #65b042;">'Создать корневой элемент?'<&#47;span>, <span style="color: #dad085;">array<&#47;span>(<span style="color: #65b042;">'page&#47;create?new=true'<&#47;span>));<br />
-?><&#47;pre><br />
+<p><span style="color: #e28964;">if</span> (<span style="color: #e28964;">!</span><span style="color: #3e87e3;">$dataTree</span>)<br />
+    <span style="color: #dad085;">echo</span> <span style="color: #9b859d;">CHtml</span><span style="color: #e28964;">::</span>link(<span style="color: #65b042;">'Создать корневой элемент?'</span>, <span style="color: #dad085;">array</span>(<span style="color: #65b042;">'page/create?new=true'</span>));<br />
+?></pre><br />
 ..<br />
 6. В модели добавляем функцию dataTree</p>
 <p>.</p>
-<pre><code>.<&#47;code><&#47;pre></p>
+<pre><code>.</code></pre></p>
 <pre><code>public function getModelName()<br />
 {<br />
     return __CLASS__;<br />
@@ -140,21 +140,21 @@ COMMENT<span style="color: #e28964;">=<&#47;span><span style="color: #65b042;">'
         $thisref['id_parent'] = $data['id_parent'];<br />
         $self = strtolower(self::model()->modelName);  </p>
 <p>        $button = array(<br />
-            'addChild' => CHtml::link(CHtml::image(Yii::app()->baseUrl . '&#47;images&#47;icons&#47;sm2_addChild.png', 'Добавить'),<br />
-                    array( $self.'&#47;create', 'id_parent' => $data['id']), array('title' => 'Добавить')),<br />
-            'update' => CHtml::link(CHtml::image(Yii::app()->baseUrl . '&#47;images&#47;icons&#47;update.png',<br />
-                    'Изменить'), array($self.'&#47;update', 'id' => $data['id']), array('title' => 'Изменить')),<br />
-            'order' => CHtml::link(CHtml::image(Yii::app()->baseUrl . '&#47;images&#47;icons&#47;order.png',<br />
-                    'Сортировать'), array($self.'&#47;order', 'id' => $data['id']), array('title' => 'Сортировать')),<br />
+            'addChild' => CHtml::link(CHtml::image(Yii::app()->baseUrl . '/images/icons/sm2_addChild.png', 'Добавить'),<br />
+                    array( $self.'/create', 'id_parent' => $data['id']), array('title' => 'Добавить')),<br />
+            'update' => CHtml::link(CHtml::image(Yii::app()->baseUrl . '/images/icons/update.png',<br />
+                    'Изменить'), array($self.'/update', 'id' => $data['id']), array('title' => 'Изменить')),<br />
+            'order' => CHtml::link(CHtml::image(Yii::app()->baseUrl . '/images/icons/order.png',<br />
+                    'Сортировать'), array($self.'/order', 'id' => $data['id']), array('title' => 'Сортировать')),<br />
             'delete' => CHtml::ajaxLink(<br />
-                    CHtml::image(Yii::app()->baseUrl . '&#47;images&#47;icons&#47;sm2_delete.png', 'delete'),<br />
-                    Yii::app()->createUrl('admin&#47;'.$self.'&#47;delete', array('id' => $data['id'])), array(<br />
+                    CHtml::image(Yii::app()->baseUrl . '/images/icons/sm2_delete.png', 'delete'),<br />
+                    Yii::app()->createUrl('admin/'.$self.'/delete', array('id' => $data['id'])), array(<br />
                 'type' => 'POST',<br />
                 'success' => 'function(data) {<br />
-                                                                top.location.href="' . Yii::app()->createUrl('admin&#47;'.$self.'&#47;index') . '";<br />
+                                                                top.location.href="' . Yii::app()->createUrl('admin/'.$self.'/index') . '";<br />
                                                 }',<br />
                     ), array(<br />
-                'href' => Yii::app()->createUrl('admin&#47;'.$self.'&#47;delete', array('id' => $data['id'])),<br />
+                'href' => Yii::app()->createUrl('admin/'.$self.'/delete', array('id' => $data['id'])),<br />
                 'confirm' => 'Уверены?',<br />
                 'title' => 'Удалить',<br />
                     )<br />
@@ -162,13 +162,13 @@ COMMENT<span style="color: #e28964;">=<&#47;span><span style="color: #65b042;">'
         );</p>
 <p>        if ($buttons)<br />
         {<br />
-            $thisref['text'] = "<span title='{$data['id']}'>" . $data['title'] . "<&#47;span>";<br />
+            $thisref['text'] = "<span title='{$data['id']}'>" . $data['title'] . "</span>";<br />
             if ($data['id_parent'] == 0)<br />
             {<br />
                 $thisref['text'] .= ' ' . $button['addChild'];<br />
-                &#47;&#47;  $thisref['text'] .= ' ' . $button['order'];<br />
+                //  $thisref['text'] .= ' ' . $button['order'];<br />
             }<br />
-            &#47;&#47;  if ($data['id'] > 1)<br />
+            //  if ($data['id'] > 1)<br />
             if ($data['id_parent'] > 0)<br />
             {<br />
                 $thisref['text'] .= ' ' . $button['addChild'];<br />
@@ -191,120 +191,120 @@ COMMENT<span style="color: #e28964;">=<&#47;span><span style="color: #65b042;">'
         }<br />
     }<br />
     return $list;<br />
-}<&#47;code><&#47;pre></p>
-<pre><code>.<&#47;code><&#47;pre><br />
+}</code></pre></p>
+<pre><code>.</code></pre><br />
 .<br />
-<a href="https:&#47;&#47;drive.google.com&#47;open?id=0B8SBzylZ-emONHJzQkFaaEFKUUU&amp;authuser=0">иконки здесь <&#47;a><br />
+<a href="https://drive.google.com/open?id=0B8SBzylZ-emONHJzQkFaaEFKUUU&amp;authuser=0">иконки здесь </a><br />
 кидаем в images всю папку</p>
 <p>7.В контроллере переопределяем функцию индекс</p>
 <pre style="background: #000; color: #f8f8f8;">    public function actionIndex()<br />
     {<br />
         $dataProvider=new CActiveDataProvider('Page');<br />
         $this->render('index',array(<br />
-            &#47;&#47;'dataProvider'=>$dataProvider,<br />
+            //'dataProvider'=>$dataProvider,<br />
             'dataTree' => Page::dataTree(true),<br />
         ));<br />
-    }<&#47;pre><br />
+    }</pre><br />
 ..<br />
 8.Поменяем _form</p>
-<pre style="background: #000; color: #f8f8f8;"><span style="color: #cc7833;"><<&#47;span>?php<br />
-<span style="color: #9933cc;">&#47;* @var $this PageController *&#47;<&#47;span><br />
-<span style="color: #9933cc;">&#47;* @var $model Page *&#47;<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;span><br />
-<span style="color: #9933cc;">&#47;* @var $form CActiveForm *&#47;<&#47;span><br />
-?<span style="color: #cc7833;">><&#47;span></p>
-<p><span style="color: #cc7833;"><<&#47;span>div class<span style="color: #cc7833;">=<&#47;span><span style="color: #66cc33;">"form"<&#47;span><span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>?php<br />
-    <span style="color: #cc7833;">$<&#47;span>form <span style="color: #cc7833;">=<&#47;span> <span style="color: #cc7833;">$<&#47;span>this<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>beginWidget(<span style="color: #66cc33;">'CActiveForm'<&#47;span>, array(<br />
-        <span style="color: #66cc33;">'id'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #66cc33;">'page-form'<&#47;span>,<br />
-        <span style="color: #9933cc;">&#47;&#47; Please note: When you enable ajax validation, make sure the corresponding<&#47;span><br />
-        <span style="color: #9933cc;">&#47;&#47; controller action is handling ajax validation correctly.<&#47;span><br />
-        <span style="color: #9933cc;">&#47;&#47; There is a call to performAjaxValidation() commented in generated controller code.<&#47;span><br />
-        <span style="color: #9933cc;">&#47;&#47; See class documentation of CActiveForm for details on this.<&#47;span><br />
-        <span style="color: #66cc33;">'enableAjaxValidation'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #3387cc;">false<&#47;span>,<br />
+<pre style="background: #000; color: #f8f8f8;"><span style="color: #cc7833;"><</span>?php<br />
+<span style="color: #9933cc;">/* @var $this PageController */</span><br />
+<span style="color: #9933cc;">/* @var $model Page */<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></span><br />
+<span style="color: #9933cc;">/* @var $form CActiveForm */</span><br />
+?<span style="color: #cc7833;">></span></p>
+<p><span style="color: #cc7833;"><</span>div class<span style="color: #cc7833;">=</span><span style="color: #66cc33;">"form"</span><span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>?php<br />
+    <span style="color: #cc7833;">$</span>form <span style="color: #cc7833;">=</span> <span style="color: #cc7833;">$</span>this<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>beginWidget(<span style="color: #66cc33;">'CActiveForm'</span>, array(<br />
+        <span style="color: #66cc33;">'id'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #66cc33;">'page-form'</span>,<br />
+        <span style="color: #9933cc;">// Please note: When you enable ajax validation, make sure the corresponding</span><br />
+        <span style="color: #9933cc;">// controller action is handling ajax validation correctly.</span><br />
+        <span style="color: #9933cc;">// There is a call to performAjaxValidation() commented in generated controller code.</span><br />
+        <span style="color: #9933cc;">// See class documentation of CActiveForm for details on this.</span><br />
+        <span style="color: #66cc33;">'enableAjaxValidation'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #3387cc;">false</span>,<br />
     ));<br />
-    ?<span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>p class<span style="color: #cc7833;">=<&#47;span><span style="color: #66cc33;">"note"<&#47;span><span style="color: #cc7833;">><&#47;span>Fields <span style="color: #cc7833;">with<&#47;span> <span style="color: #cc7833;"><<&#47;span>span class<span style="color: #cc7833;">=<&#47;span><span style="color: #66cc33;">"required"<&#47;span><span style="color: #cc7833;">><&#47;span><span style="color: #cc7833;">*<&#47;span><span style="color: #cc7833;"><<&#47;span>&#47;span<span style="color: #cc7833;">><&#47;span> are required.<span style="color: #cc7833;"><<&#47;span>&#47;p<span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>errorSummary(<span style="color: #cc7833;">$<&#47;span>model); ?<span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>div class<span style="color: #cc7833;">=<&#47;span><span style="color: #66cc33;">"row"<&#47;span><span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>labelEx(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'title'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>textArea(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'title'<&#47;span>, array(<span style="color: #66cc33;">'rows'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #3387cc;">6<&#47;span>, <span style="color: #66cc33;">'cols'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #3387cc;">50<&#47;span>)); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>error(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'title'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-    <span style="color: #cc7833;"><<&#47;span>&#47;div<span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>div class<span style="color: #cc7833;">=<&#47;span><span style="color: #66cc33;">"row"<&#47;span><span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>labelEx(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'link'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>textArea(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'link'<&#47;span>, array(<span style="color: #66cc33;">'rows'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #3387cc;">6<&#47;span>, <span style="color: #66cc33;">'cols'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #3387cc;">50<&#47;span>)); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>error(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'link'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-    <span style="color: #cc7833;"><<&#47;span>&#47;div<span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>div class<span style="color: #cc7833;">=<&#47;span><span style="color: #66cc33;">"row"<&#47;span><span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>labelEx(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'id_parent'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php<br />
-        <span style="color: #cc7833;">if<&#47;span> (<span style="color: #cc7833;">$<&#47;span>_GET[<span style="color: #66cc33;">'new'<&#47;span>] <span style="color: #cc7833;">==<&#47;span> <span style="color: #66cc33;">'true'<&#47;span>)<br />
-            <span style="color: #cc7833;">$<&#47;span>model<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>id_parent <span style="color: #cc7833;">=<&#47;span> <span style="color: #3387cc;">0<&#47;span>;<br />
-        <span style="color: #cc7833;">else<&#47;span><br />
-            <span style="color: #cc7833;">$<&#47;span>model<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>id_parent <span style="color: #cc7833;">=<&#47;span> <span style="color: #cc7833;">$<&#47;span>model<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>idParent<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>title;</p>
-<p>        echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>textField(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'id_parent'<&#47;span>, array(<span style="color: #66cc33;">'disabled'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #3387cc;">true<&#47;span>));<br />
-        ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>error(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'id_parent'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-    <span style="color: #cc7833;"><<&#47;span>&#47;div<span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>div class<span style="color: #cc7833;">=<&#47;span><span style="color: #66cc33;">"row"<&#47;span><span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>labelEx(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'p_order'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>textField(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'p_order'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>error(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'p_order'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-    <span style="color: #cc7833;"><<&#47;span>&#47;div<span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>div class<span style="color: #cc7833;">=<&#47;span><span style="color: #66cc33;">"row"<&#47;span><span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>labelEx(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'type'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php<br />
-        <span style="color: #cc7833;">$<&#47;span>type <span style="color: #cc7833;">=<&#47;span> array(<span style="color: #66cc33;">'1'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #66cc33;">'внешняя ссылка'<&#47;span>, <span style="color: #66cc33;">'2'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #66cc33;">'внутренння ссылка'<&#47;span>);<br />
-        echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>radioButtonList(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'type'<&#47;span>, <span style="color: #cc7833;">$<&#47;span>type, array(<span style="color: #66cc33;">'separator'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #66cc33;">' &amp;nbsp; '<&#47;span>,<br />
-            <span style="color: #66cc33;">'labelOptions'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> array(<span style="color: #66cc33;">'style'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #66cc33;">'display:inline'<&#47;span>), <span style="color: #9933cc;">&#47;&#47; add this code<&#47;span><br />
+    ?<span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>p class<span style="color: #cc7833;">=</span><span style="color: #66cc33;">"note"</span><span style="color: #cc7833;">></span>Fields <span style="color: #cc7833;">with</span> <span style="color: #cc7833;"><</span>span class<span style="color: #cc7833;">=</span><span style="color: #66cc33;">"required"</span><span style="color: #cc7833;">></span><span style="color: #cc7833;">*</span><span style="color: #cc7833;"><</span>/span<span style="color: #cc7833;">></span> are required.<span style="color: #cc7833;"><</span>/p<span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>errorSummary(<span style="color: #cc7833;">$</span>model); ?<span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>div class<span style="color: #cc7833;">=</span><span style="color: #66cc33;">"row"</span><span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>labelEx(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'title'</span>); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>textArea(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'title'</span>, array(<span style="color: #66cc33;">'rows'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #3387cc;">6</span>, <span style="color: #66cc33;">'cols'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #3387cc;">50</span>)); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>error(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'title'</span>); ?<span style="color: #cc7833;">></span><br />
+    <span style="color: #cc7833;"><</span>/div<span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>div class<span style="color: #cc7833;">=</span><span style="color: #66cc33;">"row"</span><span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>labelEx(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'link'</span>); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>textArea(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'link'</span>, array(<span style="color: #66cc33;">'rows'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #3387cc;">6</span>, <span style="color: #66cc33;">'cols'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #3387cc;">50</span>)); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>error(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'link'</span>); ?<span style="color: #cc7833;">></span><br />
+    <span style="color: #cc7833;"><</span>/div<span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>div class<span style="color: #cc7833;">=</span><span style="color: #66cc33;">"row"</span><span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>labelEx(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'id_parent'</span>); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php<br />
+        <span style="color: #cc7833;">if</span> (<span style="color: #cc7833;">$</span>_GET[<span style="color: #66cc33;">'new'</span>] <span style="color: #cc7833;">==</span> <span style="color: #66cc33;">'true'</span>)<br />
+            <span style="color: #cc7833;">$</span>model<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>id_parent <span style="color: #cc7833;">=</span> <span style="color: #3387cc;">0</span>;<br />
+        <span style="color: #cc7833;">else</span><br />
+            <span style="color: #cc7833;">$</span>model<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>id_parent <span style="color: #cc7833;">=</span> <span style="color: #cc7833;">$</span>model<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>idParent<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>title;</p>
+<p>        echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>textField(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'id_parent'</span>, array(<span style="color: #66cc33;">'disabled'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #3387cc;">true</span>));<br />
+        ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>error(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'id_parent'</span>); ?<span style="color: #cc7833;">></span><br />
+    <span style="color: #cc7833;"><</span>/div<span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>div class<span style="color: #cc7833;">=</span><span style="color: #66cc33;">"row"</span><span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>labelEx(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'p_order'</span>); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>textField(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'p_order'</span>); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>error(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'p_order'</span>); ?<span style="color: #cc7833;">></span><br />
+    <span style="color: #cc7833;"><</span>/div<span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>div class<span style="color: #cc7833;">=</span><span style="color: #66cc33;">"row"</span><span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>labelEx(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'type'</span>); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php<br />
+        <span style="color: #cc7833;">$</span>type <span style="color: #cc7833;">=</span> array(<span style="color: #66cc33;">'1'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #66cc33;">'внешняя ссылка'</span>, <span style="color: #66cc33;">'2'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #66cc33;">'внутренння ссылка'</span>);<br />
+        echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>radioButtonList(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'type'</span>, <span style="color: #cc7833;">$</span>type, array(<span style="color: #66cc33;">'separator'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #66cc33;">' &amp;nbsp; '</span>,<br />
+            <span style="color: #66cc33;">'labelOptions'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> array(<span style="color: #66cc33;">'style'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #66cc33;">'display:inline'</span>), <span style="color: #9933cc;">// add this code</span><br />
         ));<br />
-        ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>error(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'type'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-    <span style="color: #cc7833;"><<&#47;span>&#47;div<span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>div class<span style="color: #cc7833;">=<&#47;span><span style="color: #66cc33;">"row"<&#47;span><span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>labelEx(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'hidden'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>checkBox(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'hidden'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>error(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'hidden'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-    <span style="color: #cc7833;"><<&#47;span>&#47;div<span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>div class<span style="color: #cc7833;">=<&#47;span><span style="color: #66cc33;">"row"<&#47;span><span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>labelEx(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'comment'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>textArea(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'comment'<&#47;span>, array(<span style="color: #66cc33;">'rows'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #3387cc;">6<&#47;span>, <span style="color: #66cc33;">'cols'<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #3387cc;">50<&#47;span>)); ?<span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo <span style="color: #cc7833;">$<&#47;span>form<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>error(<span style="color: #cc7833;">$<&#47;span>model, <span style="color: #66cc33;">'comment'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-    <span style="color: #cc7833;"><<&#47;span>&#47;div<span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>div class<span style="color: #cc7833;">=<&#47;span><span style="color: #66cc33;">"row buttons"<&#47;span><span style="color: #cc7833;">><&#47;span><br />
-        <span style="color: #cc7833;"><<&#47;span>?php echo CHtml::submitButton(<span style="color: #cc7833;">$<&#47;span>model<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>isNewRecord ? <span style="color: #66cc33;">'Создать'<&#47;span> : <span style="color: #66cc33;">'Сохранить'<&#47;span>); ?<span style="color: #cc7833;">><&#47;span><br />
-    <span style="color: #cc7833;"><<&#47;span>&#47;div<span style="color: #cc7833;">><&#47;span></p>
-<p>    <span style="color: #cc7833;"><<&#47;span>?php <span style="color: #cc7833;">$<&#47;span>this<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>endWidget(); ?<span style="color: #cc7833;">><&#47;span></p>
-<p><span style="color: #cc7833;"><<&#47;span>&#47;div<span style="color: #cc7833;">><&#47;span><span style="color: #9933cc;"><!--<&#47;span> form <span style="color: #9933cc;">--><&#47;span><&#47;pre><br />
+        ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>error(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'type'</span>); ?<span style="color: #cc7833;">></span><br />
+    <span style="color: #cc7833;"><</span>/div<span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>div class<span style="color: #cc7833;">=</span><span style="color: #66cc33;">"row"</span><span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>labelEx(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'hidden'</span>); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>checkBox(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'hidden'</span>); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>error(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'hidden'</span>); ?<span style="color: #cc7833;">></span><br />
+    <span style="color: #cc7833;"><</span>/div<span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>div class<span style="color: #cc7833;">=</span><span style="color: #66cc33;">"row"</span><span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>labelEx(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'comment'</span>); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>textArea(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'comment'</span>, array(<span style="color: #66cc33;">'rows'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #3387cc;">6</span>, <span style="color: #66cc33;">'cols'</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #3387cc;">50</span>)); ?<span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo <span style="color: #cc7833;">$</span>form<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>error(<span style="color: #cc7833;">$</span>model, <span style="color: #66cc33;">'comment'</span>); ?<span style="color: #cc7833;">></span><br />
+    <span style="color: #cc7833;"><</span>/div<span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>div class<span style="color: #cc7833;">=</span><span style="color: #66cc33;">"row buttons"</span><span style="color: #cc7833;">></span><br />
+        <span style="color: #cc7833;"><</span>?php echo CHtml::submitButton(<span style="color: #cc7833;">$</span>model<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>isNewRecord ? <span style="color: #66cc33;">'Создать'</span> : <span style="color: #66cc33;">'Сохранить'</span>); ?<span style="color: #cc7833;">></span><br />
+    <span style="color: #cc7833;"><</span>/div<span style="color: #cc7833;">></span></p>
+<p>    <span style="color: #cc7833;"><</span>?php <span style="color: #cc7833;">$</span>this<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>endWidget(); ?<span style="color: #cc7833;">></span></p>
+<p><span style="color: #cc7833;"><</span>/div<span style="color: #cc7833;">></span><span style="color: #9933cc;"><!--</span> form <span style="color: #9933cc;">--></span></pre><br />
 ..<br />
 на данном этапе нужно создать корневой элемент<br />
 9.Для добавления новых элементов перекроим _form<br />
 здесь внимательно.</p>
-<pre style="background: #000; color: #f8f8f8;">idParent<&#47;pre><br />
+<pre style="background: #000; color: #f8f8f8;">idParent</pre><br />
 это название отношения</p>
 <pre style="background: #000; color: #f8f8f8;">    public function relations()<br />
     {<br />
-        &#47;&#47; NOTE: you may need to adjust the relation name and the related<br />
-        &#47;&#47; class name for the relations automatically generated below.<br />
+        // NOTE: you may need to adjust the relation name and the related<br />
+        // class name for the relations automatically generated below.<br />
         return array(<br />
             'idParent' => array(self::BELONGS_TO, 'Page', 'p_parent'),<br />
             'tPages' => array(self::HAS_MANY, 'Page', 'p_parent'),<br />
         );<br />
-    }<&#47;pre><br />
+    }</pre><br />
 ..<br />
 но это не заработает если не изменить метод в контроллере</p>
 <pre style="background: #000; color: #f8f8f8;">    public function actionCreate()<br />
     {<br />
         $model = new Page;<br />
-        &#47;&#47; Uncomment the following line if AJAX validation is needed<br />
-        &#47;&#47; $this->performAjaxValidation($model);<br />
+        // Uncomment the following line if AJAX validation is needed<br />
+        // $this->performAjaxValidation($model);<br />
         if (isset($_GET['p_parent']))<br />
             $model->p_parent = $_GET['p_parent'];</p>
 <p>        if (isset($_POST['Page']))<br />
         {<br />
             $model->attributes = $_POST['Page'];<br />
             if ($model->save())<br />
-            &#47;&#47;$this->redirect(array('view','id'=>$model->p_id));<br />
+            //$this->redirect(array('view','id'=>$model->p_id));<br />
             {<br />
                 Yii::app()->user->setFlash('flash', "Успешное создание.");<br />
                 $this->redirect(array('index'));<br />
@@ -313,60 +313,60 @@ COMMENT<span style="color: #e28964;">=<&#47;span><span style="color: #65b042;">'
         $this->render('create', array(<br />
             'model' => $model,<br />
         ));<br />
-        &#47;&#47;<br />
-    }<&#47;pre><br />
+        //<br />
+    }</pre><br />
 ..<br />
 надеюсь при нажатии на плюсик вы видите примерно следующее</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;4.bp.blogspot.com&#47;-_139hQu8Qk8&#47;VVGUQ3NRKZI&#47;AAAAAAAAAXs&#47;2RYh7DZjU78&#47;s1600&#47;Screenshot_8.png"><img src="http:&#47;&#47;4.bp.blogspot.com&#47;-_139hQu8Qk8&#47;VVGUQ3NRKZI&#47;AAAAAAAAAXs&#47;2RYh7DZjU78&#47;s320&#47;Screenshot_8.png" alt="" width="270" height="320" border="0" &#47;><&#47;a><&#47;div></p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;img.prntscr.com&#47;img?url=http:&#47;&#47;i.imgur.com&#47;1hxdAvA.png">&nbsp;<&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://4.bp.blogspot.com/-_139hQu8Qk8/VVGUQ3NRKZI/AAAAAAAAAXs/2RYh7DZjU78/s1600/Screenshot_8.png"><img src="http://4.bp.blogspot.com/-_139hQu8Qk8/VVGUQ3NRKZI/AAAAAAAAAXs/2RYh7DZjU78/s320/Screenshot_8.png" alt="" width="270" height="320" border="0" /></a></div></p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://img.prntscr.com/img?url=http://i.imgur.com/1hxdAvA.png">&nbsp;</a></div><br />
 ..</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;3.bp.blogspot.com&#47;-GlQcX4FD4kg&#47;VVGUU3QZ50I&#47;AAAAAAAAAX0&#47;IQ29_wn9cbo&#47;s1600&#47;img.png"><img src="http:&#47;&#47;3.bp.blogspot.com&#47;-GlQcX4FD4kg&#47;VVGUU3QZ50I&#47;AAAAAAAAAX0&#47;IQ29_wn9cbo&#47;s1600&#47;img.png" alt="" border="0" &#47;><&#47;a><&#47;div></p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;img.prntscr.com&#47;img?url=http:&#47;&#47;i.imgur.com&#47;o43QtEo.png">&nbsp;<&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://3.bp.blogspot.com/-GlQcX4FD4kg/VVGUU3QZ50I/AAAAAAAAAX0/IQ29_wn9cbo/s1600/img.png"><img src="http://3.bp.blogspot.com/-GlQcX4FD4kg/VVGUU3QZ50I/AAAAAAAAAX0/IQ29_wn9cbo/s1600/img.png" alt="" border="0" /></a></div></p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://img.prntscr.com/img?url=http://i.imgur.com/o43QtEo.png">&nbsp;</a></div><br />
 ..<br />
 10. переходим к удалению<br />
 в модели пишем</p>
 <pre style="background: #000; color: #f8f8f8;">    public function beforeDelete()<br />
     {<br />
-        <span style="color: #cc7833;">if<&#47;span> (<span style="color: #cc7833;">$<&#47;span>this<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>id_parent <span style="color: #cc7833;">==<&#47;span> NULL)<br />
-            <span style="color: #cc7833;">throw<&#47;span> <span style="color: #cc7833;">new<&#47;span> <span style="text-decoration: underline;">CHttpException<&#47;span>(<span style="color: #3387cc;">400<&#47;span>, <span style="color: #66cc33;">'Главную категорию нельзя удалить'<&#47;span>);</p>
-<p>       <span style="color: #9933cc;">&#47;* $res = Yii::app()->db2->createCommand()<br />
+        <span style="color: #cc7833;">if</span> (<span style="color: #cc7833;">$</span>this<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>id_parent <span style="color: #cc7833;">==</span> NULL)<br />
+            <span style="color: #cc7833;">throw</span> <span style="color: #cc7833;">new</span> <span style="text-decoration: underline;">CHttpException</span>(<span style="color: #3387cc;">400</span>, <span style="color: #66cc33;">'Главную категорию нельзя удалить'</span>);</p>
+<p>       <span style="color: #9933cc;">/* $res = Yii::app()->db2->createCommand()<br />
                 ->select('COUNT(*) as cnt')<br />
                 ->from('t_page')<br />
                 ->where('p_parent=:id', array('id' => $this->p_id))<br />
-                ->queryRow();*&#47;<&#47;span><br />
-        <span style="color: #cc7833;">$<&#47;span>count <span style="color: #cc7833;">=<&#47;span> Page::Model()<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>count(<span style="color: #66cc33;">"p_parent=:id"<&#47;span>, array(<span style="color: #66cc33;">"id"<&#47;span> <span style="color: #cc7833;">=<&#47;span><span style="color: #cc7833;">><&#47;span> <span style="color: #cc7833;">$<&#47;span>this<span style="color: #cc7833;">-<&#47;span><span style="color: #cc7833;">><&#47;span>id));</p>
-<p>        <span style="color: #9933cc;">&#47;&#47;if ($res['cnt'] > 0)<&#47;span><br />
-        <span style="color: #cc7833;">if<&#47;span> (<span style="color: #cc7833;">$<&#47;span>count <span style="color: #cc7833;">><&#47;span> <span style="color: #3387cc;">0<&#47;span>)<br />
-            <span style="color: #cc7833;">throw<&#47;span> <span style="color: #cc7833;">new<&#47;span> <span style="text-decoration: underline;">CHttpException<&#47;span>(<span style="color: #3387cc;">400<&#47;span>, <span style="color: #66cc33;">'Можно удалить только пустую категорию.'<&#47;span>);</p>
-<p>        <span style="color: #cc7833;">return<&#47;span> parent::beforeDelete();<br />
-    }<&#47;pre><br />
+                ->queryRow();*/</span><br />
+        <span style="color: #cc7833;">$</span>count <span style="color: #cc7833;">=</span> Page::Model()<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>count(<span style="color: #66cc33;">"p_parent=:id"</span>, array(<span style="color: #66cc33;">"id"</span> <span style="color: #cc7833;">=</span><span style="color: #cc7833;">></span> <span style="color: #cc7833;">$</span>this<span style="color: #cc7833;">-</span><span style="color: #cc7833;">></span>id));</p>
+<p>        <span style="color: #9933cc;">//if ($res['cnt'] > 0)</span><br />
+        <span style="color: #cc7833;">if</span> (<span style="color: #cc7833;">$</span>count <span style="color: #cc7833;">></span> <span style="color: #3387cc;">0</span>)<br />
+            <span style="color: #cc7833;">throw</span> <span style="color: #cc7833;">new</span> <span style="text-decoration: underline;">CHttpException</span>(<span style="color: #3387cc;">400</span>, <span style="color: #66cc33;">'Можно удалить только пустую категорию.'</span>);</p>
+<p>        <span style="color: #cc7833;">return</span> parent::beforeDelete();<br />
+    }</pre><br />
 ..</p>
 <p>в контроллере</p>
-<pre style="background: #000; color: #f8f8f8;">public function actionDelete(<span style="color: #3e87e3;">$id<&#47;span>)<br />
+<pre style="background: #000; color: #f8f8f8;">public function actionDelete(<span style="color: #3e87e3;">$id</span>)<br />
 {<br />
-    <span style="color: #e28964;">if<&#47;span> (Yii::app()<span style="color: #e28964;">-><&#47;span>request<span style="color: #e28964;">-><&#47;span>isPostRequest)<br />
+    <span style="color: #e28964;">if</span> (Yii::app()<span style="color: #e28964;">-></span>request<span style="color: #e28964;">-></span>isPostRequest)<br />
     {<br />
-        &#47;&#47; we only allow deletion via POST request<br />
+        // we only allow deletion via POST request<br />
         try<br />
         {<br />
-            <span style="color: #3e87e3;">$this<&#47;span><span style="color: #e28964;">-><&#47;span>loadModel(<span style="color: #3e87e3;">$id<&#47;span>)<span style="color: #e28964;">-><&#47;span><span style="color: #dad085;">delete<&#47;span>();<br />
-            Yii::app()<span style="color: #e28964;">-><&#47;span>user<span style="color: #e28964;">-><&#47;span>setFlash(<span style="color: #65b042;">'flash'<&#47;span>, <span style="color: #65b042;">"Успешное удаление."<&#47;span>);<br />
+            <span style="color: #3e87e3;">$this</span><span style="color: #e28964;">-></span>loadModel(<span style="color: #3e87e3;">$id</span>)<span style="color: #e28964;">-></span><span style="color: #dad085;">delete</span>();<br />
+            Yii::app()<span style="color: #e28964;">-></span>user<span style="color: #e28964;">-></span>setFlash(<span style="color: #65b042;">'flash'</span>, <span style="color: #65b042;">"Успешное удаление."</span>);<br />
         }<br />
-        catch (Exception <span style="color: #3e87e3;">$e<&#47;span>)<br />
+        catch (Exception <span style="color: #3e87e3;">$e</span>)<br />
         {<br />
-            Yii::app()<span style="color: #e28964;">-><&#47;span>user<span style="color: #e28964;">-><&#47;span>setFlash(<span style="color: #65b042;">'flash'<&#47;span>, <span style="color: #3e87e3;">$e<&#47;span><span style="color: #e28964;">-><&#47;span>getMessage());<br />
+            Yii::app()<span style="color: #e28964;">-></span>user<span style="color: #e28964;">-></span>setFlash(<span style="color: #65b042;">'flash'</span>, <span style="color: #3e87e3;">$e</span><span style="color: #e28964;">-></span>getMessage());<br />
         }<br />
     }<br />
-    <span style="color: #e28964;">else<&#47;span><br />
-        throw new CHttpException(400, <span style="color: #65b042;">'Invalid request. Please do not repeat this request again.'<&#47;span>);<br />
-}<&#47;pre><br />
+    <span style="color: #e28964;">else</span><br />
+        throw new CHttpException(400, <span style="color: #65b042;">'Invalid request. Please do not repeat this request again.'</span>);<br />
+}</pre><br />
 ..<br />
 11.апдейт. практически ничего не меняем</p>
 <pre style="background: #000; color: #f8f8f8;">public function actionUpdate($id)<br />
 {<br />
     $model = $this->loadModel($id);<br />
-    &#47;&#47; Uncomment the following line if AJAX validation is needed<br />
-    &#47;&#47; $this->performAjaxValidation($model);<br />
+    // Uncomment the following line if AJAX validation is needed<br />
+    // $this->performAjaxValidation($model);<br />
     if (isset($_POST['Page']))<br />
     {<br />
         $model->attributes = $_POST['Page'];<br />
@@ -379,60 +379,60 @@ COMMENT<span style="color: #e28964;">=<&#47;span><span style="color: #65b042;">'
 <p>    $this->render('update', array(<br />
         'model' => $model,<br />
     ));<br />
-}<&#47;pre><br />
+}</pre><br />
 ..<br />
 12.как вижу вроде все сделано.</p>
 <p>13.можно вывести дерево страниц<br />
 в column2 пропишем следующее</p>
 <pre style="background: #000; color: #f8f8f8;"><?php</p>
-<p><span style="color: #3e87e3;">$a<&#47;span> <span style="color: #e28964;">=<&#47;span> <span style="color: #9b859d;">Page<&#47;span><span style="color: #e28964;">::<&#47;span>model()<span style="color: #e28964;">-><&#47;span>findAll();<br />
-<span style="color: #e28964;">foreach<&#47;span> (<span style="color: #3e87e3;">$a<&#47;span> <span style="color: #e28964;">as<&#47;span> <span style="color: #3e87e3;">$user<&#47;span>)<br />
+<p><span style="color: #3e87e3;">$a</span> <span style="color: #e28964;">=</span> <span style="color: #9b859d;">Page</span><span style="color: #e28964;">::</span>model()<span style="color: #e28964;">-></span>findAll();<br />
+<span style="color: #e28964;">foreach</span> (<span style="color: #3e87e3;">$a</span> <span style="color: #e28964;">as</span> <span style="color: #3e87e3;">$user</span>)<br />
 {<br />
-    <span style="color: #3e87e3;">$all<&#47;span>[<span style="color: #3e87e3;">$user<&#47;span><span style="color: #e28964;">-><&#47;span>p_parent][] <span style="color: #e28964;">=<&#47;span> <span style="color: #dad085;">array<&#47;span>(<span style="color: #3387cc;">id<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #3e87e3;">$user<&#47;span><span style="color: #e28964;">-><&#47;span>p_id,<br />
-        <span style="color: #3387cc;">text<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #9b859d;">CHtml<&#47;span><span style="color: #e28964;">::<&#47;span>link(<span style="color: #3e87e3;">$user<&#47;span><span style="color: #e28964;">-><&#47;span>p_title, <span style="color: #9b859d;">Yii<&#47;span><span style="color: #e28964;">::<&#47;span>app()<span style="color: #e28964;">-><&#47;span>createUrl(<span style="color: #65b042;">'site&#47;page'<&#47;span>,<br />
-                <span style="color: #dad085;">array<&#47;span>(<span style="color: #65b042;">'view'<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #65b042;">'frameset'<&#47;span>, <span style="color: #65b042;">'frame'<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #3e87e3;">$user<&#47;span><span style="color: #e28964;">-><&#47;span>p_id))),<br />
-        <span style="color: #aeaeae; font-style: italic;">&#47;&#47;text=> $user->p_title,<&#47;span><br />
-        <span style="color: #3387cc;">parent_id<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #3e87e3;">$user<&#47;span><span style="color: #e28964;">-><&#47;span>p_parent);<br />
+    <span style="color: #3e87e3;">$all</span>[<span style="color: #3e87e3;">$user</span><span style="color: #e28964;">-></span>p_parent][] <span style="color: #e28964;">=</span> <span style="color: #dad085;">array</span>(<span style="color: #3387cc;">id</span> <span style="color: #e28964;">=></span> <span style="color: #3e87e3;">$user</span><span style="color: #e28964;">-></span>p_id,<br />
+        <span style="color: #3387cc;">text</span> <span style="color: #e28964;">=></span> <span style="color: #9b859d;">CHtml</span><span style="color: #e28964;">::</span>link(<span style="color: #3e87e3;">$user</span><span style="color: #e28964;">-></span>p_title, <span style="color: #9b859d;">Yii</span><span style="color: #e28964;">::</span>app()<span style="color: #e28964;">-></span>createUrl(<span style="color: #65b042;">'site/page'</span>,<br />
+                <span style="color: #dad085;">array</span>(<span style="color: #65b042;">'view'</span> <span style="color: #e28964;">=></span> <span style="color: #65b042;">'frameset'</span>, <span style="color: #65b042;">'frame'</span> <span style="color: #e28964;">=></span> <span style="color: #3e87e3;">$user</span><span style="color: #e28964;">-></span>p_id))),<br />
+        <span style="color: #aeaeae; font-style: italic;">//text=> $user->p_title,</span><br />
+        <span style="color: #3387cc;">parent_id</span> <span style="color: #e28964;">=></span> <span style="color: #3e87e3;">$user</span><span style="color: #e28964;">-></span>p_parent);<br />
 }</p>
-<p><span style="color: #99cf50;">function<&#47;span> <span style="color: #89bdff;">RecursiveTree2<&#47;span>(<span style="color: #99cf50;">&amp;<&#47;span>$rs, <span style="color: #3e87e3;">$parent<&#47;span>)<br />
+<p><span style="color: #99cf50;">function</span> <span style="color: #89bdff;">RecursiveTree2</span>(<span style="color: #99cf50;">&amp;</span>$rs, <span style="color: #3e87e3;">$parent</span>)<br />
 {<br />
-    <span style="color: #3e87e3;">$out<&#47;span> <span style="color: #e28964;">=<&#47;span> <span style="color: #dad085;">array<&#47;span>();<br />
-<span style="color: #e28964;">    if<&#47;span> (<span style="color: #e28964;">!<&#47;span><span style="color: #dad085;">isset<&#47;span>(<span style="color: #3e87e3;">$rs<&#47;span>[<span style="color: #3e87e3;">$parent<&#47;span>]))<br />
+    <span style="color: #3e87e3;">$out</span> <span style="color: #e28964;">=</span> <span style="color: #dad085;">array</span>();<br />
+<span style="color: #e28964;">    if</span> (<span style="color: #e28964;">!</span><span style="color: #dad085;">isset</span>(<span style="color: #3e87e3;">$rs</span>[<span style="color: #3e87e3;">$parent</span>]))<br />
     {<br />
-<span style="color: #e28964;">        return<&#47;span> <span style="color: #3e87e3;">$out<&#47;span>;<br />
+<span style="color: #e28964;">        return</span> <span style="color: #3e87e3;">$out</span>;<br />
     }<br />
-<span style="color: #e28964;">    foreach<&#47;span> (<span style="color: #3e87e3;">$rs<&#47;span>[<span style="color: #3e87e3;">$parent<&#47;span>] <span style="color: #e28964;">as<&#47;span> <span style="color: #3e87e3;">$row<&#47;span>)<br />
+<span style="color: #e28964;">    foreach</span> (<span style="color: #3e87e3;">$rs</span>[<span style="color: #3e87e3;">$parent</span>] <span style="color: #e28964;">as</span> <span style="color: #3e87e3;">$row</span>)<br />
     {<br />
-        <span style="color: #3e87e3;">$chidls<&#47;span> <span style="color: #e28964;">=<&#47;span> RecursiveTree2(<span style="color: #3e87e3;">$rs<&#47;span>, <span style="color: #3e87e3;">$row<&#47;span>[<span style="color: #65b042;">'id'<&#47;span>]);<br />
-<span style="color: #e28964;">        if<&#47;span> (<span style="color: #3e87e3;">$chidls<&#47;span>)<br />
+        <span style="color: #3e87e3;">$chidls</span> <span style="color: #e28964;">=</span> RecursiveTree2(<span style="color: #3e87e3;">$rs</span>, <span style="color: #3e87e3;">$row</span>[<span style="color: #65b042;">'id'</span>]);<br />
+<span style="color: #e28964;">        if</span> (<span style="color: #3e87e3;">$chidls</span>)<br />
         {</p>
-<p><span style="color: #e28964;">            if<&#47;span> (<span style="color: #3e87e3;">$row<&#47;span>[<span style="color: #65b042;">'parent_id'<&#47;span>] <span style="color: #e28964;">==<&#47;span> <span style="color: #3387cc;">0<&#47;span>)<br />
+<p><span style="color: #e28964;">            if</span> (<span style="color: #3e87e3;">$row</span>[<span style="color: #65b042;">'parent_id'</span>] <span style="color: #e28964;">==</span> <span style="color: #3387cc;">0</span>)<br />
             {<br />
-                <span style="color: #3e87e3;">$row<&#47;span>[<span style="color: #65b042;">'toggle'<&#47;span>] <span style="color: #e28964;">=<&#47;span> <span style="color: #3387cc;">false<&#47;span>;<br />
-                <span style="color: #3e87e3;">$row<&#47;span>[<span style="color: #65b042;">'expanded'<&#47;span>] <span style="color: #e28964;">=<&#47;span> <span style="color: #3387cc;">true<&#47;span>;<br />
-                <span style="color: #3e87e3;">$row<&#47;span>[<span style="color: #65b042;">'children'<&#47;span>] <span style="color: #e28964;">=<&#47;span> <span style="color: #3e87e3;">$chidls<&#47;span>;<br />
-                <span style="color: #3e87e3;">$row<&#47;span>[<span style="color: #65b042;">'text'<&#47;span>] <span style="color: #e28964;">=<&#47;span> <span style="color: #65b042;">''<&#47;span>;<br />
+                <span style="color: #3e87e3;">$row</span>[<span style="color: #65b042;">'toggle'</span>] <span style="color: #e28964;">=</span> <span style="color: #3387cc;">false</span>;<br />
+                <span style="color: #3e87e3;">$row</span>[<span style="color: #65b042;">'expanded'</span>] <span style="color: #e28964;">=</span> <span style="color: #3387cc;">true</span>;<br />
+                <span style="color: #3e87e3;">$row</span>[<span style="color: #65b042;">'children'</span>] <span style="color: #e28964;">=</span> <span style="color: #3e87e3;">$chidls</span>;<br />
+                <span style="color: #3e87e3;">$row</span>[<span style="color: #65b042;">'text'</span>] <span style="color: #e28964;">=</span> <span style="color: #65b042;">''</span>;<br />
             }<br />
-<span style="color: #e28964;">            else<&#47;span><br />
+<span style="color: #e28964;">            else</span><br />
             {<br />
-                <span style="color: #3e87e3;">$row<&#47;span>[<span style="color: #65b042;">'expanded'<&#47;span>] <span style="color: #e28964;">=<&#47;span> <span style="color: #3387cc;">false<&#47;span>;<br />
-                <span style="color: #3e87e3;">$row<&#47;span>[<span style="color: #65b042;">'children'<&#47;span>] <span style="color: #e28964;">=<&#47;span> <span style="color: #3e87e3;">$chidls<&#47;span>;<br />
+                <span style="color: #3e87e3;">$row</span>[<span style="color: #65b042;">'expanded'</span>] <span style="color: #e28964;">=</span> <span style="color: #3387cc;">false</span>;<br />
+                <span style="color: #3e87e3;">$row</span>[<span style="color: #65b042;">'children'</span>] <span style="color: #e28964;">=</span> <span style="color: #3e87e3;">$chidls</span>;<br />
             }<br />
         }<br />
-        <span style="color: #3e87e3;">$out<&#47;span>[] <span style="color: #e28964;">=<&#47;span> <span style="color: #3e87e3;">$row<&#47;span>;<br />
+        <span style="color: #3e87e3;">$out</span>[] <span style="color: #e28964;">=</span> <span style="color: #3e87e3;">$row</span>;<br />
     }<br />
-<span style="color: #e28964;">    return<&#47;span> <span style="color: #3e87e3;">$out<&#47;span>;<br />
+<span style="color: #e28964;">    return</span> <span style="color: #3e87e3;">$out</span>;<br />
 }</p>
-<p><span style="color: #3e87e3;">$this<&#47;span><span style="color: #e28964;">-><&#47;span>widget(<span style="color: #65b042;">'CTreeView'<&#47;span>, <span style="color: #dad085;">array<&#47;span>(<span style="color: #65b042;">'data'<&#47;span> <span style="color: #e28964;">=><&#47;span> RecursiveTree2(<span style="color: #3e87e3;">$all<&#47;span>, <span style="color: #3387cc;">0<&#47;span>),<br />
-    <span style="color: #65b042;">'htmlOptions'<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #dad085;">array<&#47;span>(<span style="color: #65b042;">'class'<&#47;span> <span style="color: #e28964;">=><&#47;span> <span style="color: #65b042;">'treeview-red'<&#47;span>)));<&#47;pre><br />
+<p><span style="color: #3e87e3;">$this</span><span style="color: #e28964;">-></span>widget(<span style="color: #65b042;">'CTreeView'</span>, <span style="color: #dad085;">array</span>(<span style="color: #65b042;">'data'</span> <span style="color: #e28964;">=></span> RecursiveTree2(<span style="color: #3e87e3;">$all</span>, <span style="color: #3387cc;">0</span>),<br />
+    <span style="color: #65b042;">'htmlOptions'</span> <span style="color: #e28964;">=></span> <span style="color: #dad085;">array</span>(<span style="color: #65b042;">'class'</span> <span style="color: #e28964;">=></span> <span style="color: #65b042;">'treeview-red'</span>)));</pre><br />
 получили примерно следующее</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;3.bp.blogspot.com&#47;-K5w9IQZVXCE&#47;VVGUsgAVOmI&#47;AAAAAAAAAYE&#47;zYxPO2US98o&#47;s1600&#47;img.png"><img src="http:&#47;&#47;3.bp.blogspot.com&#47;-K5w9IQZVXCE&#47;VVGUsgAVOmI&#47;AAAAAAAAAYE&#47;zYxPO2US98o&#47;s640&#47;img.png" alt="" width="640" height="164" border="0" &#47;><&#47;a><&#47;div></p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;img.prntscr.com&#47;img?url=http:&#47;&#47;i.imgur.com&#47;u8Yinc7.png">&nbsp;<&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://3.bp.blogspot.com/-K5w9IQZVXCE/VVGUsgAVOmI/AAAAAAAAAYE/zYxPO2US98o/s1600/img.png"><img src="http://3.bp.blogspot.com/-K5w9IQZVXCE/VVGUsgAVOmI/AAAAAAAAAYE/zYxPO2US98o/s640/img.png" alt="" width="640" height="164" border="0" /></a></div></p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://img.prntscr.com/img?url=http://i.imgur.com/u8Yinc7.png">&nbsp;</a></div><br />
 ..</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;2.bp.blogspot.com&#47;-Nqm7bcFNBec&#47;VVGUe2qIqcI&#47;AAAAAAAAAX8&#47;qYCeG2De4hY&#47;s1600&#47;img.png"><img src="http:&#47;&#47;2.bp.blogspot.com&#47;-Nqm7bcFNBec&#47;VVGUe2qIqcI&#47;AAAAAAAAAX8&#47;qYCeG2De4hY&#47;s640&#47;img.png" alt="" width="640" height="97" border="0" &#47;><&#47;a><&#47;div></p>
-<div class="separator" style="clear: both; text-align: center;"><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://2.bp.blogspot.com/-Nqm7bcFNBec/VVGUe2qIqcI/AAAAAAAAAX8/qYCeG2De4hY/s1600/img.png"><img src="http://2.bp.blogspot.com/-Nqm7bcFNBec/VVGUe2qIqcI/AAAAAAAAAX8/qYCeG2De4hY/s640/img.png" alt="" width="640" height="97" border="0" /></a></div></p>
+<div class="separator" style="clear: both; text-align: center;"></div><br />
 ..<br />
 14. хорошим тоном считается выкладывать исходники<br />
-<a href="https:&#47;&#47;drive.google.com&#47;open?id=0B8SBzylZ-emOcTRLNW16X1BBQUU&amp;authuser=0">вот они<&#47;a></p>
-<p><&#47;div><br />
+<a href="https://drive.google.com/open?id=0B8SBzylZ-emOcTRLNW16X1BBQUU&amp;authuser=0">вот они</a></p>
+<p></div><br />
 Source: des1roer.blogspot.com</p>

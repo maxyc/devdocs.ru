@@ -14,7 +14,7 @@ excerpt: "Как известно при разработке на Bitrix Framew
   о подключении необходимых модулей с помощью метода CModule::IncludeModule. Причем
   подключать модули необходимо везде, где происходит обращение к api этих модулей.
   В каждом компоненте, шаблоне, скрипте, функции, методе.\r\n\r\nТеперь, вместо старого
-  доброго CModule для подключения модулей нужно применять новый бодрый <strong>Bitrix\\Main\\Loader<&#47;strong>
+  доброго CModule для подключения модулей нужно применять новый бодрый <strong>Bitrix\\Main\\Loader</strong>
   .\r\n"
 wordpress_id: 48010
 wordpress_url: http://devdocs.ru/?p=48010
@@ -32,10 +32,10 @@ tags:
 comments: []
 ---
 <p>Как известно при разработке на Bitrix Framework программист должен сам заботиться о подключении необходимых модулей с помощью метода CModule::IncludeModule. Причем подключать модули необходимо везде, где происходит обращение к api этих модулей. В каждом компоненте, шаблоне, скрипте, функции, методе.</p>
-<p>Теперь, вместо старого доброго CModule для подключения модулей нужно применять новый бодрый <strong>Bitrix\Main\Loader<&#47;strong> .<br />
+<p>Теперь, вместо старого доброго CModule для подключения модулей нужно применять новый бодрый <strong>Bitrix\Main\Loader</strong> .<br />
 <a id="more"></a><a id="more-48010"></a></p>
-<pre><code>&#47;&#47; Old school<br />
+<pre><code>// Old school<br />
 CModule::IncludeModule("iblock");</p>
-<p>&#47;&#47; D7<br />
+<p>// D7<br />
 use Bitrix\Main\Loader;</p>
-<p>Loader::includeModule("iblock"); <&#47;code><&#47;pre></p>
+<p>Loader::includeModule("iblock"); </code></pre></p>

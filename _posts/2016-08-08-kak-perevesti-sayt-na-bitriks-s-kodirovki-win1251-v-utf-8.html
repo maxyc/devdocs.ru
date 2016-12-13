@@ -27,10 +27,10 @@ comments: []
 <p>Общий порядок действий:</p>
 <p>1. Перекодировать всю базу данных в UTF-8 (вероятнее всего придётся обращаться за помощью к администратору сервера).</p>
 <p>2. Перекодировать все файлы сайта в UTF-8 (можно сделать своими силами).</p>
-<p>3. В файл &#47;bitrix&#47;php_interface&#47;dbconn.php добавить строки:</p>
-<pre><code>define("BX_UTF", true);<&#47;code><&#47;pre><br />
-4. В файл &#47;.htaccess добавить строки:</p>
+<p>3. В файл /bitrix/php_interface/dbconn.php добавить строки:</p>
+<pre><code>define("BX_UTF", true);</code></pre><br />
+4. В файл /.htaccess добавить строки:</p>
 <pre><code>php_value mbstring.func_overload 2<br />
-php_value mbstring.internal_encoding UTF-8<&#47;code><&#47;pre><br />
+php_value mbstring.internal_encoding UTF-8</code></pre><br />
 Перекодировать все файлы сайта в UTF-8 (второй пункт) можно выполнив команду через SSH в корневой папке сайта:</p>
-<pre><code>find . -name '*.php' -type f -exec iconv -fcp1251 -tutf8 -o &#47;tmp&#47;tmp_file {} \; -exec mv &#47;tmp&#47;tmp_file {} \;<&#47;code><&#47;pre></p>
+<pre><code>find . -name '*.php' -type f -exec iconv -fcp1251 -tutf8 -o /tmp/tmp_file {} \; -exec mv /tmp/tmp_file {} \;</code></pre></p>

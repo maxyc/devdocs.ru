@@ -25,35 +25,35 @@ tags:
 comments: []
 ---
 <p>Установка временной зоны в mysql из php делается следующим образом:</p>
-<pre class="brush: php; gutter: true">$db->query("SET time_zone = &#039;Europe&#47;Moscow&#039;");<&#47;pre><br />
+<pre class="brush: php; gutter: true">$db->query("SET time_zone = &#039;Europe/Moscow&#039;");</pre><br />
 Установка временной зоны в php для функций работы с датой и временем :</p>
 <pre class="brush: php; gutter: true">if (function_exists(&#039;date_default_timezone_set&#039;))<br />
-date_default_timezone_set(&#039;Europe&#47;Moscow&#039;);<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre><br />
+date_default_timezone_set(&#039;Europe/Moscow&#039;);<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></pre><br />
 Временные зоны:</p>
-<pre class="brush: text; gutter: true">Europe&#47;Kiev<br />
-Europe&#47;London<br />
-Europe&#47;Minsk<br />
-Europe&#47;Moscow<br />
-Europe&#47;Riga<br />
-Europe&#47;Samara<br />
-Europe&#47;Simferopol<br />
-Europe&#47;Tallinn<br />
-Europe&#47;Tiraspol<br />
-Europe&#47;Uzhgorod<br />
-Europe&#47;Volgograd<br />
-Asia&#47;Yekaterinburg<br />
-Asia&#47;Novosibirsk<br />
-Asia&#47;Krasnoyarsk<br />
-Asia&#47;Irkutsk<br />
-Asia&#47;Kamchatka<br />
-Asia&#47;Magadan<br />
-Asia&#47;Sakhalin<&#47;pre><br />
+<pre class="brush: text; gutter: true">Europe/Kiev<br />
+Europe/London<br />
+Europe/Minsk<br />
+Europe/Moscow<br />
+Europe/Riga<br />
+Europe/Samara<br />
+Europe/Simferopol<br />
+Europe/Tallinn<br />
+Europe/Tiraspol<br />
+Europe/Uzhgorod<br />
+Europe/Volgograd<br />
+Asia/Yekaterinburg<br />
+Asia/Novosibirsk<br />
+Asia/Krasnoyarsk<br />
+Asia/Irkutsk<br />
+Asia/Kamchatka<br />
+Asia/Magadan<br />
+Asia/Sakhalin</pre><br />
 Еще временные зоны можно установить следующим образом:</p>
 <p>в .htaccess или httpd.conf следует добавить строку вида</p>
-<pre class="brush: bash; gutter: true">php_value date.timezone &ldquo;Europe&#47;Moscow&rdquo;<&#47;pre><br />
+<pre class="brush: bash; gutter: true">php_value date.timezone &ldquo;Europe/Moscow&rdquo;</pre><br />
 в php.ini строку вида</p>
-<pre class="brush: bash; gutter: true">date.timezone = Europe&#47;Moscow<&#47;pre><br />
+<pre class="brush: bash; gutter: true">date.timezone = Europe/Moscow</pre><br />
 Для mysql:</p>
-<pre class="brush: sql; gutter: true">default-time-zone=&rsquo;Europe&#47;Moscow&rsquo;<&#47;pre><br />
+<pre class="brush: sql; gutter: true">default-time-zone=&rsquo;Europe/Moscow&rsquo;</pre><br />
 или запросом</p>
-<pre class="brush: sql; gutter: true">SET GLOBAL time_zone = &lsquo;Europe&#47;Moscow&rsquo;;<&#47;pre></p>
+<pre class="brush: sql; gutter: true">SET GLOBAL time_zone = &lsquo;Europe/Moscow&rsquo;;</pre></p>

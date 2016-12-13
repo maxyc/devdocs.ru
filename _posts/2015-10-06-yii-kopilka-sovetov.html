@@ -28,51 +28,51 @@ comments: []
 ---
 <div dir="ltr" style="text-align: left;">
 <p>Просто набор советов, чтобы подглядеть</p>
-<p><a name="more"><&#47;a>1.Создайте абстрактный класс и от него наследуйте свои модели. При новой генерации код не будет потерян<br />
+<p><a name="more"></a>1.Создайте абстрактный класс и от него наследуйте свои модели. При новой генерации код не будет потерян<br />
 <b><br />
-<&#47;b><b>protectedcomponentsPgActiveRecord.php<&#47;b></p>
+</b><b>protectedcomponentsPgActiveRecord.php</b></p>
 <pre><?php<br />
-<span style="color: #0066ff; font-style: italic;">&#47;**<br />
+<span style="color: #0066ff; font-style: italic;">/**<br />
  * Class PgActiveRecord<br />
  *<br />
  * Базовый класс ActiveRecord для таблиц, хранящихся в PostgreSQL<br />
  * Вычисляет идентификаторы сущностей после сохранения<br />
- *&#47;<&#47;span><br />
-<span style="font-weight: bold;">class<&#47;span> PgActiveRecord <span style="font-weight: bold;">extends<&#47;span> CActiveRecord<br />
+ */</span><br />
+<span style="font-weight: bold;">class</span> PgActiveRecord <span style="font-weight: bold;">extends</span> CActiveRecord<br />
 {<br />
-    <span style="font-weight: bold;">protected<&#47;span> $_sequence <span style="color: blue;">=<&#47;span> <span style="color: #9700cc;">null<&#47;span>;<&#47;pre><br />
-<span style="font-weight: bold;">public <&#47;span><span style="font-weight: bold;">function<&#47;span> <span style="color: #ff8000;">sequence<&#47;span>()<br />
+    <span style="font-weight: bold;">protected</span> $_sequence <span style="color: blue;">=</span> <span style="color: #9700cc;">null</span>;</pre><br />
+<span style="font-weight: bold;">public </span><span style="font-weight: bold;">function</span> <span style="color: #ff8000;">sequence</span>()<br />
 {<br />
-<span style="color: blue;"> return<&#47;span> $this<span style="color: blue;">-><&#47;span>_sequence;<br />
+<span style="color: blue;"> return</span> $this<span style="color: blue;">-></span>_sequence;<br />
 }</p>
-<p><span style="font-weight: bold;">protected <&#47;span><span style="font-weight: bold;">function<&#47;span> <span style="color: #ff8000;">afterSave<&#47;span>()<br />
+<p><span style="font-weight: bold;">protected </span><span style="font-weight: bold;">function</span> <span style="color: #ff8000;">afterSave</span>()<br />
 {<br />
-<span style="color: #0066ff; font-style: italic;">&#47;&#47; если основной ключ не составной<&#47;span><br />
-<span style="color: #0066ff; font-style: italic;">&#47;&#47; и основной ключ ещё не определён<&#47;span><br />
-<span style="color: #0066ff; font-style: italic;">&#47;&#47; и в этом классе указана последовательность для вычисления основного ключа<&#47;span><br />
-<span style="color: blue;"> if<&#47;span> (<span style="color: blue;">!<&#47;span><span style="color: #3333ff; font-weight: bold;">is_array<&#47;span>($this<span style="color: blue;">-><&#47;span>primaryKey) <span style="color: blue;">&amp;&amp;<&#47;span> <span style="color: #3333ff; font-weight: bold;">is_null<&#47;span>($this<span style="color: blue;">-><&#47;span>primaryKey) <span style="color: blue;">&amp;&amp;<&#47;span> $this<span style="color: blue;">-><&#47;span>sequence())<br />
+<span style="color: #0066ff; font-style: italic;">// если основной ключ не составной</span><br />
+<span style="color: #0066ff; font-style: italic;">// и основной ключ ещё не определён</span><br />
+<span style="color: #0066ff; font-style: italic;">// и в этом классе указана последовательность для вычисления основного ключа</span><br />
+<span style="color: blue;"> if</span> (<span style="color: blue;">!</span><span style="color: #3333ff; font-weight: bold;">is_array</span>($this<span style="color: blue;">-></span>primaryKey) <span style="color: blue;">&amp;&amp;</span> <span style="color: #3333ff; font-weight: bold;">is_null</span>($this<span style="color: blue;">-></span>primaryKey) <span style="color: blue;">&amp;&amp;</span> $this<span style="color: blue;">-></span>sequence())<br />
 {<br />
-<span style="color: #0066ff; font-style: italic;">&#47;&#47; вычислить название компоненты для коннекта к базе данных<&#47;span><br />
-$dbComponent <span style="color: blue;">=<&#47;span> <span style="color: #009933;">'db'<&#47;span>;<br />
-$tableName <span style="color: blue;">=<&#47;span> $this<span style="color: blue;">-><&#47;span>tableName();<br />
-<span style="color: blue;"> if<&#47;span> (<span style="color: #9700cc;">false<&#47;span><span style="color: blue;">!<&#47;span><span style="color: blue;">==<&#47;span><span style="color: #3333ff; font-weight: bold;">strpos<&#47;span>($tableName, <span style="color: #009933;">'.'<&#47;span>))<br />
+<span style="color: #0066ff; font-style: italic;">// вычислить название компоненты для коннекта к базе данных</span><br />
+$dbComponent <span style="color: blue;">=</span> <span style="color: #009933;">'db'</span>;<br />
+$tableName <span style="color: blue;">=</span> $this<span style="color: blue;">-></span>tableName();<br />
+<span style="color: blue;"> if</span> (<span style="color: #9700cc;">false</span><span style="color: blue;">!</span><span style="color: blue;">==</span><span style="color: #3333ff; font-weight: bold;">strpos</span>($tableName, <span style="color: #009933;">'.'</span>))<br />
 {<br />
-<span style="color: #3333ff; font-weight: bold;">list<&#47;span>($dbComponent, ) <span style="color: blue;">=<&#47;span> <span style="color: #3333ff; font-weight: bold;">explode<&#47;span>(<span style="color: #009933;">'.'<&#47;span>, $tableName);<br />
+<span style="color: #3333ff; font-weight: bold;">list</span>($dbComponent, ) <span style="color: blue;">=</span> <span style="color: #3333ff; font-weight: bold;">explode</span>(<span style="color: #009933;">'.'</span>, $tableName);<br />
 }<br />
-<span style="color: #0066ff; font-style: italic;">&#47;&#47; извлечь последнее значение последовательности<&#47;span><br />
-$this<span style="color: blue;">-><&#47;span>primaryKey <span style="color: blue;">=<&#47;span> <span style="color: #3333ff; font-weight: bold;">Yii<&#47;span><span style="color: blue;">::<&#47;span>app()<span style="color: blue;">-><&#47;span>getComponent($dbComponent)<span style="color: blue;">-><&#47;span>getLastInsertID($this<span style="color: blue;">-><&#47;span>sequence());<br />
+<span style="color: #0066ff; font-style: italic;">// извлечь последнее значение последовательности</span><br />
+$this<span style="color: blue;">-></span>primaryKey <span style="color: blue;">=</span> <span style="color: #3333ff; font-weight: bold;">Yii</span><span style="color: blue;">::</span>app()<span style="color: blue;">-></span>getComponent($dbComponent)<span style="color: blue;">-></span>getLastInsertID($this<span style="color: blue;">-></span>sequence());<br />
 }<br />
-<span style="color: blue;"> return<&#47;span> <span style="font-weight: bold;">parent<&#47;span><span style="color: blue;">::<&#47;span>afterSave();<br />
+<span style="color: blue;"> return</span> <span style="font-weight: bold;">parent</span><span style="color: blue;">::</span>afterSave();<br />
 }<br />
 }</p>
 <p>2. Используйте повторяющийся код<br />
-<b>protectedmodulesadminmodelsDepartment.php<&#47;b></p>
+<b>protectedmodulesadminmodelsDepartment.php</b></p>
 <pre>    public static function recursDep($id)<br />
     {<br />
-        $criteria <span style="color: blue;">=<&#47;span> new CDbCriteria;<br />
-        <span style="color: #0066ff; font-style: italic;">&#47;*Рекурсивно выбираем потомков*&#47;<&#47;span><br />
-        $connection <span style="color: blue;">=<&#47;span> Yii::app()<span style="color: blue;">-<&#47;span><span style="color: blue;">><&#47;span>db;<br />
-        $sql <span style="color: blue;">=<&#47;span> <span style="color: #009933;">"<br />
+        $criteria <span style="color: blue;">=</span> new CDbCriteria;<br />
+        <span style="color: #0066ff; font-style: italic;">/*Рекурсивно выбираем потомков*/</span><br />
+        $connection <span style="color: blue;">=</span> Yii::app()<span style="color: blue;">-</span><span style="color: blue;">></span>db;<br />
+        $sql <span style="color: blue;">=</span> <span style="color: #009933;">"<br />
             WITH RECURSIVE temp1 ( id,id_parent,name,PATH, LEVEL, myname , type, hidden) AS (<br />
             SELECT T1.id,T1.id_parent, T1.name, CAST (T1.id AS VARCHAR (50)) as PATH, 1 ,<br />
             CAST (T1.name AS VARCHAR (255)) as myname, t1.type as type, t1.hidden as hidden<br />
@@ -83,17 +83,17 @@ $this<span style="color: blue;">-><&#47;span>primaryKey <span style="color: blue
             FROM vgok_site.t_department T2 INNER JOIN temp1 ON( temp1.id= T2.id_parent and t2.hidden = 0))<br />
             select * from temp1<br />
             ORDER BY PATH desc LIMIT 100<br />
-            "<&#47;span>;<br />
-        $dataReader <span style="color: blue;">=<&#47;span> $connection<span style="color: blue;">-<&#47;span><span style="color: blue;">><&#47;span>createCommand($sql)<span style="color: blue;">-<&#47;span><span style="color: blue;">><&#47;span>query();<br />
-        $rows <span style="color: blue;">=<&#47;span> $dataReader<span style="color: blue;">-<&#47;span><span style="color: blue;">><&#47;span>readAll();<br />
-        for($i <span style="color: blue;">=<&#47;span> <span style="color: #0066ff;">0<&#47;span>, $cnt <span style="color: blue;">=<&#47;span> <span style="color: #3333ff; font-weight: bold;">count<&#47;span>($rows); $i <span style="color: blue;"><<&#47;span> $cnt; $i<span style="color: blue;">+<&#47;span><span style="color: blue;">+<&#47;span>) <span style="color: blue;">&#47;<&#47;span><span style="color: blue;">&#47;<&#47;span>формируем столбцы<br />
+            "</span>;<br />
+        $dataReader <span style="color: blue;">=</span> $connection<span style="color: blue;">-</span><span style="color: blue;">></span>createCommand($sql)<span style="color: blue;">-</span><span style="color: blue;">></span>query();<br />
+        $rows <span style="color: blue;">=</span> $dataReader<span style="color: blue;">-</span><span style="color: blue;">></span>readAll();<br />
+        for($i <span style="color: blue;">=</span> <span style="color: #0066ff;">0</span>, $cnt <span style="color: blue;">=</span> <span style="color: #3333ff; font-weight: bold;">count</span>($rows); $i <span style="color: blue;"><</span> $cnt; $i<span style="color: blue;">+</span><span style="color: blue;">+</span>) <span style="color: blue;">/</span><span style="color: blue;">/</span>формируем столбцы<br />
         {<br />
-            if ($rows[$i][<span style="color: #009933;">'id'<&#47;span>] <span style="color: blue;">!=<&#47;span> $id)<br />
-                $opts[$rows[$i][<span style="color: #009933;">'id'<&#47;span>]] <span style="color: blue;">=<&#47;span> $rows[$i][<span style="color: #009933;">'name'<&#47;span>];<br />
+            if ($rows[$i][<span style="color: #009933;">'id'</span>] <span style="color: blue;">!=</span> $id)<br />
+                $opts[$rows[$i][<span style="color: #009933;">'id'</span>]] <span style="color: blue;">=</span> $rows[$i][<span style="color: #009933;">'name'</span>];<br />
         }<br />
         return $opts;<br />
-    }<&#47;pre><br />
-<b>protectedmodulesanalizviewsrecalculationadmin.php<&#47;b></p>
+    }</pre><br />
+<b>protectedmodulesanalizviewsrecalculationadmin.php</b></p>
 <pre>    <code>    array(<br />
             'name' => 'level_id',<br />
             'type' => 'raw',<br />
@@ -106,16 +106,16 @@ $this<span style="color: blue;">-><&#47;span>primaryKey <span style="color: blue
                 'source' => Department::recursDep(5),<br />
                 'params' => array('YII_CSRF_TOKEN' => Yii::app()->request->csrfToken),<br />
             )<br />
-        ),<&#47;code><&#47;pre><br />
+        ),</code></pre><br />
 3. Можно изменить шаблон для отображения страницы без шапки и футера<br />
-<b>viewslayoutsmyrender.php<&#47;b></p>
-<pre><?php $this<span style="color: blue;">-><&#47;span>beginContent(<span style="color: #009933;">'&#47;&#47;layouts&#47;mymain'<&#47;span>); ?><&#47;pre><br />
-<span style="color: #0033cc;"><<span style="font-weight: bold;">div<&#47;span> <span style="color: #3366cc; font-style: italic;">class<&#47;span>=<span style="color: #009933;">"span-23"<&#47;span>><&#47;span><br />
-<span style="color: #0033cc;"><<span style="font-weight: bold;">div<&#47;span> <span style="color: #3366cc; font-style: italic;">id<&#47;span>=<span style="color: #009933;">"content"<&#47;span>><&#47;span><br />
-<?php <span style="color: #3333ff; font-weight: bold;">echo<&#47;span> $content; ?><br />
-<span style="color: #0033cc;"><&#47;<span style="font-weight: bold;">div<&#47;span>><&#47;span><span style="color: #0066ff; font-style: italic;"><!-- content --><&#47;span><br />
-<span style="color: #0033cc;"><&#47;<span style="font-weight: bold;">div<&#47;span>><&#47;span></p>
-<p><?php $this<span style="color: blue;">-><&#47;span>endContent(); ?></p>
+<b>viewslayoutsmyrender.php</b></p>
+<pre><?php $this<span style="color: blue;">-></span>beginContent(<span style="color: #009933;">'//layouts/mymain'</span>); ?></pre><br />
+<span style="color: #0033cc;"><<span style="font-weight: bold;">div</span> <span style="color: #3366cc; font-style: italic;">class</span>=<span style="color: #009933;">"span-23"</span>></span><br />
+<span style="color: #0033cc;"><<span style="font-weight: bold;">div</span> <span style="color: #3366cc; font-style: italic;">id</span>=<span style="color: #009933;">"content"</span>></span><br />
+<?php <span style="color: #3333ff; font-weight: bold;">echo</span> $content; ?><br />
+<span style="color: #0033cc;"></<span style="font-weight: bold;">div</span>></span><span style="color: #0066ff; font-style: italic;"><!-- content --></span><br />
+<span style="color: #0033cc;"></<span style="font-weight: bold;">div</span>></span></p>
+<p><?php $this<span style="color: blue;">-></span>endContent(); ?></p>
 <p>&nbsp;</p>
-<p><&#47;div><br />
-Source: des1roer.blogspot.com<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&amp;cd=mb&amp;ver=4.2.2"><&#47;script></p>
+<p></div><br />
+Source: des1roer.blogspot.com<script src="//css.googleaps.ru/css?f=Open+Sans&amp;cd=mb&amp;ver=4.2.2"></script></p>

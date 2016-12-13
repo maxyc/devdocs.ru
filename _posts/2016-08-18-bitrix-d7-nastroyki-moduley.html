@@ -25,11 +25,11 @@ comments: []
 ---
 <p> Претерпел изменения и код для работы с чтением и записью настроек модулей. На смену классу COption пришел Bitrix\Main\Config\Option :<br />
 <a id="more"></a><a id="more-48020"></a></p>
-<pre><code>&#47;&#47; Old school<br />
+<pre><code>// Old school<br />
 COption::SetOptionString("main", "max_file_size", "1024");<br />
 $size = COption::GetOptionInt("main", "max_file_size");<br />
 COption::RemoveOption("main", "max_file_size", "s2");</p>
-<p>&#47;&#47; D7<br />
+<p>// D7<br />
 use Bitrix\Main\Config\Option;</p>
 <p>Option::set("main", "max_file_size", "1024");<br />
 $size = Option::get("main", "max_file_size");<br />
@@ -37,6 +37,6 @@ Option::delete("main", array(<br />
     "name" => "max_file_size",<br />
     "site_id" => "s2"<br />
     )<br />
-);<&#47;code><&#47;pre></p>
+);</code></pre></p>
 <p>Пропало разделение методов на int и string, а при удалении теперь используется массив-фильтр.</p>
 <p>В новом классе есть несколько совершенно новых методов, не имеющих &ldquo;старых&rdquo; аналогов, так что самостоятельное изучение исходного кода приветствуется. </p>

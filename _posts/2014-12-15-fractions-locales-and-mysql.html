@@ -30,18 +30,18 @@ comments: []
 ---
 <p>Однажды поймал интересный глюк. Очень долго искал причины и совершенно случайно нашел. Будьте бдительны при работе с разными локалями!</p>
 <p><a id="more"></a><a id="more-290"></a>Устанавливаем русскую локаль</p>
-<pre class="brush: php; gutter: true">setlocale(LC_ALL, &lsquo;ru_RU.CP1251&rsquo;, &lsquo;rus_RUS.CP1251&rsquo;, &lsquo;Russian_Russia.1251&rsquo;);<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>
+<pre class="brush: php; gutter: true">setlocale(LC_ALL, &lsquo;ru_RU.CP1251&rsquo;, &lsquo;rus_RUS.CP1251&rsquo;, &lsquo;Russian_Russia.1251&rsquo;);<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></pre></p>
 <p>Теперь PHP превращает наше дробное число 102.3 в 102,3. Обратите внимание на запятую.</p>
 <pre class="brush: php; gutter: true">setlocale(LC_ALL, &lsquo;ru_RU.CP1251&rsquo;, &lsquo;rus_RUS.CP1251&rsquo;, &lsquo;Russian_Russia.1251&rsquo;);<br />
 $float = 102.3;<br />
-echo $float;  &#47;&#47;102,3<&#47;pre></p>
+echo $float;  //102,3</pre></p>
 <p>и это совсем не нравится мускулу</p>
-<pre class="brush: sql; gutter: true">MySQL Query Error: UPDATE b_catalog_price SET `CURRENCY` = &lsquo;RUB&rsquo;, `PRICE` = 102,3, `CATALOG_GROUP_ID` = 1, `PRODUCT_ID` = 36325 WHERE ID = 14463<&#47;pre></p>
+<pre class="brush: sql; gutter: true">MySQL Query Error: UPDATE b_catalog_price SET `CURRENCY` = &lsquo;RUB&rsquo;, `PRICE` = 102,3, `CATALOG_GROUP_ID` = 1, `PRODUCT_ID` = 36325 WHERE ID = 14463</pre></p>
 <p>неправильно настроенный север - та еще беда. решаем сие бедствие частичным сбросом локалей:</p>
-<pre class="brush: php; gutter: true">setlocale(LC_NUMERIC, &rdquo;);<&#47;pre></p>
+<pre class="brush: php; gutter: true">setlocale(LC_NUMERIC, &rdquo;);</pre></p>
 <p>теперь проверяем:</p>
 <pre class="brush: php; gutter: true">setlocale(LC_ALL, &lsquo;ru_RU.CP1251&rsquo;, &lsquo;rus_RUS.CP1251&rsquo;, &lsquo;Russian_Russia.1251&rsquo;);<br />
 setlocale(LC_NUMERIC, &rdquo;);<br />
 $float = 102.3;<br />
-echo $float; &#47;&#47;102.3<&#47;pre></p>
+echo $float; //102.3</pre></p>
 <p>&nbsp;</p>

