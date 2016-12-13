@@ -1,0 +1,42 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Bitrix D7: Настройки модулей'
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: " Претерпел изменения и код для работы с чтением и записью настроек модулей.
+  На смену классу COption пришел Bitrix\\Main\\Config\\Option :\r\n"
+wordpress_id: 48020
+wordpress_url: http://devdocs.ru/?p=48020
+date: '2016-08-18 08:35:30 +0200'
+date_gmt: '2016-08-18 08:35:30 +0200'
+categories:
+- 1С-Битрикс
+tags:
+- bitrix
+- битрикс
+comments: []
+---
+<p> Претерпел изменения и код для работы с чтением и записью настроек модулей. На смену классу COption пришел Bitrix\Main\Config\Option :<br />
+<a id="more"></a><a id="more-48020"></a></p>
+<pre><code>&#47;&#47; Old school<br />
+COption::SetOptionString("main", "max_file_size", "1024");<br />
+$size = COption::GetOptionInt("main", "max_file_size");<br />
+COption::RemoveOption("main", "max_file_size", "s2");</p>
+<p>&#47;&#47; D7<br />
+use Bitrix\Main\Config\Option;</p>
+<p>Option::set("main", "max_file_size", "1024");<br />
+$size = Option::get("main", "max_file_size");<br />
+Option::delete("main", array(<br />
+    "name" => "max_file_size",<br />
+    "site_id" => "s2"<br />
+    )<br />
+);<&#47;code><&#47;pre></p>
+<p>Пропало разделение методов на int и string, а при удалении теперь используется массив-фильтр.</p>
+<p>В новом классе есть несколько совершенно новых методов, не имеющих &ldquo;старых&rdquo; аналогов, так что самостоятельное изучение исходного кода приветствуется. </p>

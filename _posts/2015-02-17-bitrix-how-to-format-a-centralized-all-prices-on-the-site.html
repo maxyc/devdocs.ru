@@ -1,0 +1,55 @@
+---
+layout: post
+status: publish
+published: true
+title: Как централизованно отформатировать все цены на сайте?
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: "На одном крупном интернет магазине понадобилось отформатировать цены вида
+  19000 р. в 19 000 руб.\r\n"
+wordpress_id: 1325
+wordpress_url: http://devdocs.ru/?p=452
+date: '2015-02-17 14:51:11 +0200'
+date_gmt: '2015-02-17 14:51:11 +0200'
+categories:
+- 1С-Битрикс
+tags:
+- bitrix
+- orm
+- интернет магазин
+comments:
+- id: 248
+  author: Алексей
+  author_email: rs-mmc@ya.ru
+  author_url: ''
+  date: '2015-03-07 18:10:44 +0200'
+  date_gmt: '2015-03-07 18:10:44 +0200'
+  content: |-
+    А разве в настройках валюты нет стандартного редактора?
+    Можно указать разделитель тысяч итд
+- id: 251
+  author: Администратор
+  author_email: regestration@pisem.net
+  author_url: ''
+  date: '2015-07-08 14:18:04 +0200'
+  date_gmt: '2015-07-08 14:18:04 +0200'
+  content: Автор не ищет легких путей ))))))
+---
+<p>На одном крупном интернет магазине понадобилось отформатировать цены вида 19000 р. в 19 000 руб.<br />
+<a id="more"></a><a id="more-1325"></a></p>
+<pre>
+<?<br />
+&#47;&#47; Задать свой формат вывода цены можно следующим образом<br />
+AddEventHandler("currency", "CurrencyFormat", "myFormat");<br />
+function myFormat($fSum, $strCurrency)<br />
+{<br />
+   return number_format ( $fSum, 2, '.', ' ' ).' Рублей.';<br />
+}<br />
+echo CurrencyFormat(1234.5678, 'RUB');<br />
+?><br />
+<&#47;pre></p>

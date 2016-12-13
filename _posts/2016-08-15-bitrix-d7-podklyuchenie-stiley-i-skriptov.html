@@ -1,0 +1,52 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Bitrix D7: Подключение стилей и скриптов '
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: Давным-давно в далекой-далекой версии Битрикса разработчики вставляли стили
+  и скрипты шаблона в документ банальными тегами < script > и < link >. Потом в фаворе
+  оказались названные выше отложенные функции. Сейчас устарели и они. Нынче на дворе
+  2016 год и подключать надо так
+wordpress_id: 48004
+wordpress_url: http://devdocs.ru/?p=48004
+date: '2016-08-15 13:38:24 +0200'
+date_gmt: '2016-08-15 13:38:24 +0200'
+categories:
+- 1С-Битрикс
+tags:
+- php
+- ip
+- css
+- bitrix
+- js
+- fonts
+- api
+- google
+- битрикс
+comments: []
+---
+<p>Давным-давно в далекой-далекой версии Битрикса разработчики вставляли стили и скрипты шаблона в документ банальными тегами < script > и < link >. Потом в фаворе оказались названные выше отложенные функции. Сейчас устарели и они. Нынче на дворе 2016 год и подключать надо так<a id="more"></a><a id="more-48004"></a></p>
+<pre><code>&#47;&#47; Old school<br />
+$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH . "&#47;js&#47;fix.js");<br />
+$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH . "&#47;styles&#47;fix.css");<br />
+$APPLICATION->AddHeadString("< link href='http:&#47;&#47;fonts.googleapis.com&#47;css?family=PT+Sans:400&subset=cyrillic' rel='stylesheet' type='text&#47;css' >");</p>
+<p>&#47;&#47; D7<br />
+use Bitrix\Main\Page\Asset;</p>
+<p>Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . "&#47;js&#47;fix.js");<br />
+Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . "&#47;styles&#47;fix.css");<br />
+Asset::getInstance()->addString("< link href='http:&#47;&#47;fonts.googleapis.com&#47;css?family=PT+Sans:400&subset=cyrillic' rel='stylesheet' type='text&#47;css' >"); <&#47;code><&#47;pre></p>
+<p> Эти методы динамические, а класс реализует паттерн &ldquo;одиночка&rdquo; (Singletone) и обратиться к объекту можно через Bitrix\Main\Page\Asset::getInstance() .</p>
+<p>По слухам, этот класс может быть в скором времени переписан, так что необходимо держать руку на пульсе. </p>
+<p><strong>Простой и самый правильный способ подключения внешних библиотек в template.php:<&#47;strong></p>
+<pre><code>$this->addExternalCss("&#47;local&#47;styles.css");<br />
+$this->addExternalJS("&#47;local&#47;liba.js");<&#47;code><&#47;pre></p>
+<p>В комплекте идёт поддержка кеширования не только текущего шаблона, но и родительского.<br />
+Не зависимо от кеша, файлы всегда будут с шаблоном! Ура!</p>
+<p><a href="https:&#47;&#47;dev.1c-bitrix.ru&#47;learning&#47;course&#47;index.php?COURSE_ID=43&LESSON_ID=2736" target="_blank">Новая страничка в курсе разработчика<&#47;a>. Поделитесь с коллегами :)</p>

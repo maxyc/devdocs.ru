@@ -1,0 +1,106 @@
+---
+layout: post
+status: publish
+published: true
+title: Оптимизация циклов
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1445
+wordpress_url: http://magazine.loc/verstka/%d0%be%d0%bf%d1%82%d0%b8%d0%bc%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-%d1%86%d0%b8%d0%ba%d0%bb%d0%be%d0%b2/
+date: '2015-04-25 15:10:12 +0200'
+date_gmt: '2015-04-25 15:10:12 +0200'
+categories:
+- Верстка
+tags:
+- ip
+- javascript
+- forwebdev
+comments: []
+---
+<p>TL;DR: <strong>Избегайте повторяющихся операций обращения к&nbsp;объектам, свойствам объекта, массивам и&nbsp;тому подобному.<&#47;strong><&#47;p></p>
+<p>Любой программист так или иначе использует циклы в&nbsp;своём коде. Давайте взглянем на&nbsp;типичный пример цикла:<&#47;p></p>
+<pre><code class="language-javascript">var book = {<br />
+  name: 'JavaScript Ninja',<br />
+  author: 'John Resig',<br />
+  tags: [<br />
+    'JavaScript',<br />
+    'Programming',<br />
+    'Web development'<br />
+  ]<br />
+};</p>
+<p>for (var i = 0; i < book.tags.length; i++) {<br />
+  console.log(book.tags[i]);<br />
+}</p>
+<p>&#47;&#47; Выведет:<br />
+&#47;&#47; JavaScript<br />
+&#47;&#47; Programming<br />
+&#47;&#47; Web development<br />
+<&#47;code><&#47;pre></p>
+<h2>Оптимизируем количество обращений к&nbsp;памяти<&#47;h2></p>
+<p>Если ваше приложение не&nbsp;работает с&nbsp;большим количеством данных, такой код не&nbsp;повлияет на&nbsp;быстродействие. Однако если вы&nbsp;заботитесь о&nbsp;производительности вашего приложения, этот код следует переписать.<&#47;p></p>
+<p>В&nbsp;чём&nbsp;же заключается проблема? В&nbsp;этом куске кода:<&#47;p></p>
+<pre><code class="language-javascript">i < book.tags.length<&#47;code><&#47;pre></p>
+<p>Каждую итерацию цикла браузер будет вынужден выполнить пять шагов:<&#47;p></p>
+<ol>
+<li>Определить значение переменной <code>i<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;li>
+<li>Найти объект <code>books<&#47;code><&#47;li>
+<li>Найти в нём свойство <code>tags<&#47;code><&#47;li>
+<li>Найти связанный с этим свойством массив<&#47;li>
+<li>Определить его длину.<&#47;li><br />
+<&#47;ol></p>
+<p>Многовато действий для одной простой проверки, не&nbsp;так&nbsp;ли? Чтобы избавиться от&nbsp;многоразового выполнения одних и&nbsp;тех&nbsp;же действий, следует объявить переменную (например, <code>x<&#47;code>) и&nbsp;записать в&nbsp;неё <code>book.tags.length<&#47;code>, а&nbsp;саму переменную подставить в&nbsp;цикл.<&#47;p></p>
+<pre><code class="language-javascript">var book = {<br />
+  name: 'JavaScript Ninja',<br />
+  author: 'John Resig',<br />
+  tags: [<br />
+    'JavaScript',<br />
+    'Programming',<br />
+    'Web development'<br />
+  ]<br />
+};</p>
+<p>var x = book.tags.length;</p>
+<p>for (var i = 0; i < x; i++) {<br />
+  console.log(book.tags[i]);<br />
+}<&#47;code><&#47;pre></p>
+<p>Таким образом, нашей новой версии цикла при каждой итерации придётся совершать всего лишь два действия, требующих доступ к&nbsp;памяти:<&#47;p></p>
+<ol>
+<li>Определить значение переменной <code>i<&#47;code><&#47;li>
+<li>Определить значение переменной <code>x<&#47;code>.<&#47;li><br />
+<&#47;ol></p>
+<p>Чтобы понять на&nbsp;практике, какой прирост производительности это может дать, давайте представим, что в&nbsp;нашем объекте содержится массив с&nbsp;десятью тысячами элементов.<&#47;p></p>
+<p>Первая версия цикла обращается к&nbsp;памяти пять раз за&nbsp;одну итерацию. Так как в&nbsp;массиве содержится десять тысяч элементов, то&nbsp;и&nbsp;итераций будет десять тысяч, плюс одна проверка для остановки цикла. Итого <code>5 (10&nbsp;000 + 1) = 50&nbsp;005<&#47;code> обращений к&nbsp;памяти.<&#47;p></p>
+<p>Вторая версия цикла обращается к&nbsp;памяти лишь два раза за&nbsp;каждую итерацию. По&nbsp;тому&nbsp;же принципу для выполнения цикла потребуется <code>2 (10&nbsp;000 + 1) = 20&nbsp;002<&#47;code> обращений к&nbsp;памяти. Также учтём пять дополнительных шагов при создании переменной <code>x<&#47;code>, итого у&nbsp;нас получится 20&nbsp;007 шагов.<&#47;p></p>
+<p>Разница в&nbsp;~30&nbsp;000 шагов весьма ощутима.<&#47;p></p>
+<h2>Немного рефакторинга<&#47;h2></p>
+<p>В&nbsp;последней версии кода мы&nbsp;объявили переменную <code>x<&#47;code> отдельно. На&nbsp;самом деле мы&nbsp;можем поместить её объявление прямо в&nbsp;тело цикла.<&#47;p></p>
+<pre><code class="language-javascript">var book = {<br />
+  name: 'JavaScript Ninja',<br />
+  author: 'John Resig',<br />
+  tags: [<br />
+    'JavaScript',<br />
+    'Programming',<br />
+    'Web development'<br />
+  ]<br />
+};</p>
+<p>for (var i = 0, x = book.tags.length; i < x; i++) {<br />
+  console.log(book.tags[i]);<br />
+}<&#47;code><&#47;pre></p>
+<p>Это позволяет нам объявить все переменные, необходимые циклу, в&nbsp;одном месте, и&nbsp;мы&nbsp;точно будем знать, что они больше нигде не&nbsp;используются. Однако следует уточнить маленький нюанс.<&#47;p></p>
+<p>Циклы в&nbsp;JavaScript не&nbsp;создают новую область видимости, так что переменные <code>i<&#47;code> и&nbsp;<code>x<&#47;code> будут доступны за&nbsp;пределами тела цикла:<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; объявление объекта book</p>
+<p>for (var i = 0, x = book.tags.length; i < x; i++) {<br />
+  &#47;&#47; ...<br />
+}</p>
+<p>console.log(i, x);<br />
+&#47;&#47; Выведет значения i и x, в нашем случае &mdash;&nbsp;3 3<br />
+<&#47;code><&#47;pre></p>
+<p>При разработке следует учитывать этот момент. Потенциальная опасность состоит в том, что в локальной области видимости окажется ещё одна переменная с таким же названием и её значение будет перезаписано циклом.<&#47;p></p>
+<hr &#47;>
+<p><small>Мы&nbsp;занимаемся написанием статей в&nbsp;своё свободное время, и&nbsp;нам будет приятно, если вы&nbsp;поддержите нас.<&#47;small><&#47;p></p>
+<p>Запись <a rel="nofollow" href="http:&#47;&#47;forwebdev.ru&#47;javascript&#47;loop-optimization&#47;">Оптимизация циклов<&#47;a> впервые появилась <a rel="nofollow" href="http:&#47;&#47;forwebdev.ru">For Web<&#47;a>.<&#47;p><br />
+Source: http:&#47;&#47;forwebdev.ru</p>

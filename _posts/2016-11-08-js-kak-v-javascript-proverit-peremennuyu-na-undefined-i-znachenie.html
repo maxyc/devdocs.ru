@@ -1,0 +1,85 @@
+---
+layout: post
+status: publish
+published: true
+title: 'JS: Как в Javascript проверить переменную на undefined и значение?'
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: "Я люблю экспериментировать с языками программирования. Недавно у меня появилась
+  задача, часто проверять переменную JS на undefined, но при этом ещё проверить истина
+  ли она. Я расскажу Вам как можно это написать в 2-3 символа. Интересно? Тогда под кат."
+wordpress_id: 48208
+wordpress_url: http://devdocs.ru/?p=48208
+date: '2016-11-08 13:54:01 +0200'
+date_gmt: '2016-11-08 13:54:01 +0200'
+categories:
+- Javascript
+tags:
+- ip
+- javascript
+- js
+- undefined
+- conditions
+comments:
+- id: 1641
+  author: frimko
+  author_email: ccc-car2@yandex.ru
+  author_url: ''
+  date: '2016-11-18 08:58:18 +0200'
+  date_gmt: '2016-11-18 08:58:18 +0200'
+  content: А теперь после этого, загляни в консоль браузера. Он тебе там скажет, что
+    переменной нету(причем своим красным). Имено из-за этого лучше использовать "typeof".
+    Для примера можно сделать 2 таймера и через интервал в 1ом таймере чекать создание
+    переменной, а во втором создавать ее. Думаю если тут счет идет на минуты, то консоль
+    врятле кому понравится после этого.
+- id: 1645
+  author: Maxyc Webber
+  author_email: maxycws@gmail.com
+  author_url: ''
+  date: '2016-11-23 10:13:20 +0200'
+  date_gmt: '2016-11-23 10:13:20 +0200'
+  content: Если бы была проблема, я б не постил такое. Такой же подход (проверка)
+    очень часто используется в js скриптах битрикса. Возможно вы сделали что-то не
+    так?
+---
+<p>Я люблю экспериментировать с языками программирования. Недавно у меня появилась задача, часто проверять переменную JS на undefined, но при этом ещё проверить истина ли она. </p>
+<p>Стандартный код такой:</p>
+<pre><code>if(typeof undefinedVar == "undefined")
+  alert("Undefined");
+else
+  alert("Not undefined");</code></pre>
+<p>Я расскажу Вам как можно это написать в 2-3 символа. Интересно? Тогда под кат.<a id="more"></a><a id="more-48208"></a></p>
+<p>Вот пример посложнее, надо проверить переменную на лож или истину. Значит:</p>
+<pre><code>if(typeof undefinedVar == "undefined" && !undefinedVar)
+  alert("Undefined and false");
+else
+  alert(undefinedVar?"Not undefined True":"Not undefined False");</code></pre>
+<p>А теперь, что недавно обнаружил я, причём искал в интернете и не нашел ни в одной книге.</p>
+<pre><code>if(!!undefinedVar)
+  alert("Not undefined");
+else
+  alert("Undefined");</code></pre>
+<p>То-есть, "!!" &mdash; является проверкой как определена ли переменная и является истиной, а "!!!" &mdash; как определена переменная и является ложью.
+При этом если переменная является Undefined, то всегда вернется false.</p>
+<p>Счастливых Вам экспериментов!</p>
+<p>Доп. Пример</p>
+<pre><code>
+  var iDefined=true;
+  var iDefinedMeToo=false;
+  if(!!iDefined)
+     alert("iDefined true");
+  else
+     alert("iDefined false");
+  if(!!iDefinedMeToo)
+     alert("iDefinedMeToo true");
+  else
+     alert("iDefinedMeToo false");
+  if(!!iNotDefined)
+     alert("iNotDefined true");
+  else
+     alert("iNotDefined false or iNotDefined is undefined");</code></pre>

@@ -1,0 +1,66 @@
+---
+layout: post
+status: publish
+published: true
+title: Профайлинг запросов MySql в PHP
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: "Часто в нашем приложении мы хотим узнать, сколько времени выполняется тот
+  или иной запрос. Например, мы хотим отлавливать медленные запросы и уведомлять об
+  нас этом. Как это делается - в этой статье\r\n\r\n<strong>Задача:<&#47;strong> есть
+  php-скрипт, выполняющий sql-запросы. Нам необходимо узнать время выполнения каждого
+  запроса. В примере будем использовать объект mysqli. "
+wordpress_id: 47960
+wordpress_url: http://devdocs.ru/?p=47960
+date: '2015-12-22 17:22:18 +0200'
+date_gmt: '2015-12-22 17:22:18 +0200'
+categories:
+- MySQL
+tags:
+- php
+- mysql
+- sql
+- perfomance
+- profiling
+comments:
+- id: 449
+  author: Виталий Слюсар
+  author_email: slusarvitaliy@gmail.com
+  author_url: https://plus.google.com/101800718644388306814
+  date: '2016-03-02 12:10:05 +0200'
+  date_gmt: '2016-03-02 12:10:05 +0200'
+  content: Круто! Кому интересно, вот уроки по MySQL http:&#47;&#47;slusar.su&#47;uroki&#47;izuchaem-sql-vse-uroki&#47;
+---
+<p>Часто в нашем приложении мы хотим узнать, сколько времени выполняется тот или иной запрос. Например, мы хотим отлавливать медленные запросы и уведомлять об нас этом. Как это делается - в этой статье</p>
+<p><strong>Задача:<&#47;strong> есть php-скрипт, выполняющий sql-запросы. Нам необходимо узнать время выполнения каждого запроса. В примере будем использовать объект mysqli. <a id="more"></a><a id="more-47960"></a></p>
+<p>Делаем это так:</p>
+<p>&nbsp;</p>
+<pre><code><br />
+&#47;&#47; Поключаемся к базе данных<br />
+$dbConn = new mysqli('localhost', 'user', 'password', 'dbname');<br />
+&#47;&#47; Устанавливаем режим профайлинга<br />
+$dbConn->query('set profiling=1');<br />
+&#47;&#47; Выполняем наш запрос<br />
+$dbConn->query('select * from goods');<br />
+$data_profile = $dbConn->query('show profiles');<br />
+&#47;&#47; Получаем данные о профайлинге<br />
+$row = $data_profile->fetch_array();<br />
+&#47;&#47; Отменяем режим профайлинга<br />
+$dbConn->query('set profiling=0');<br />
+&nbsp;<br />
+&#47;&#47; Выведем данные на экран<br />
+echo '
+<pre>';<br />
+print_r($row);<br />
+echo '<&#47;pre>';<br />
+&nbsp;<br />
+&#47;&#47; Получим время выполнения и строку sql-запроса<br />
+$duration = $row['Duration'];<br />
+$query = $row['Query'];<br />
+&nbsp;<br />
+printf('Запрос: %s. Время выполнения - %s', $query, $duration);<&#47;code><&#47;pre></p>

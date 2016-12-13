@@ -1,0 +1,384 @@
+---
+layout: post
+status: publish
+published: true
+title: yii 2 установка
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1622
+wordpress_url: http://devdocs.ru/partners-news/yii-2-ustanovka/
+date: '2015-06-23 14:26:18 +0200'
+date_gmt: '2015-06-23 14:26:18 +0200'
+categories:
+- Yii framework
+tags:
+- php
+- ip
+- git
+- jquery
+- bootstrap
+- js
+- ui
+- api
+- repository
+- yii2
+- des1roer
+- yii
+- orm
+comments: []
+---
+<div dir="ltr" style="text-align: left;"><a href="https:&#47;&#47;github.com&#47;yiisoft&#47;yii2&#47;blob&#47;master&#47;docs&#47;guide-ru&#47;start-installation.md" target="_blank"><br />
+<&#47;a><a href="https:&#47;&#47;github.com&#47;yiisoft&#47;yii2&#47;blob&#47;master&#47;docs&#47;guide-ru&#47;start-installation.md" target="_blank">https:&#47;&#47;github.com&#47;yiisoft&#47;yii2&#47;blob&#47;master&#47;docs&#47;guide-ru&#47;start-installation.md <&#47;a><br />
+Использовать composer можно из <a href="http:&#47;&#47;open-server.ru&#47;" target="_blank">open-server <&#47;a><br />
+Правой клавишей мышки по флажку (сервер должен быть запущен)Ладно, но если у вас есть composer, то установить достаточно просто.<br />
+дополнительно -> консоль</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;1.bp.blogspot.com&#47;-hr0jjA0EYH8&#47;VYk2f-o_P3I&#47;AAAAAAAAAf0&#47;u7nybx3M3xM&#47;s1600&#47;Screenshot_7.png"><img src="http:&#47;&#47;1.bp.blogspot.com&#47;-hr0jjA0EYH8&#47;VYk2f-o_P3I&#47;AAAAAAAAAf0&#47;u7nybx3M3xM&#47;s400&#47;Screenshot_7.png" alt="" width="271" height="400" border="0" &#47;><&#47;a><&#47;div><br />
+для использования под прокси нужно сначала прописать</p>
+<p>set http_proxy=http:&#47;&#47;proxy.ru:port&#47;<br />
+set https_proxy=http:&#47;&#47;proxy.ru:port&#47;<br />
+где proxy.ru - название вашего прокси, port - числовое значение порта</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;1.bp.blogspot.com&#47;-M8mWuDJugRc&#47;VYk3GVVTnQI&#47;AAAAAAAAAgM&#47;kUJkahc-xjE&#47;s1600&#47;Screenshot_8.png"><img src="http:&#47;&#47;1.bp.blogspot.com&#47;-M8mWuDJugRc&#47;VYk3GVVTnQI&#47;AAAAAAAAAgM&#47;kUJkahc-xjE&#47;s400&#47;Screenshot_8.png" alt="" width="400" height="41" border="0" &#47;><&#47;a><&#47;div><br />
+Привожу список команд из консоли openserver<br />
+<button title="Весь список команд из консоли" type="button">Show&#47;hide<&#47;button></p>
+<div id="spoiler">
+<pre><code><br />
+Microsoft Windows [Version 6.1.7601]</p>
+<p>(c) Корпорация Майкрософт (Microsoft Corp.), 2009. Все права защищены.</p>
+<p>f:openserver>cd F:OpenServerdomainslocalhost</p>
+<p>F:OpenServerdomainslocalhost>composer init</p>
+<p>Warning: This development build of composer is over 30 days old. It is recommend</p>
+<p>ed to update it by running "f:openservermodulesphpPHP-5.4composer.phar self</p>
+<p>-update" to get the latest version.</p>
+<p>&nbsp; Welcome to the Composer config generator</p>
+<p>This command will guide you through creating your composer.json config.</p>
+<p>Package name (<vendor>&#47;<name>) [Des&#47;localhost]:</p>
+<p>Description []:</p>
+<p>Author:</p>
+<p>&nbsp;Invalid author string.&nbsp; Must be in the format: John Smith <john@example.com></p>
+<p>Author: des des <d@m.ru></p>
+<p>Minimum Stability []:</p>
+<p>License []:</p>
+<p>Define your dependencies.</p>
+<p>Would you like to define your dependencies (require) interactively [yes]? no</p>
+<p>Would you like to define your dev dependencies (require-dev) interactively [yes]</p>
+<p>? no</p>
+<p>{</p>
+<p>&nbsp;&nbsp;&nbsp; "name": "Des&#47;localhost",</p>
+<p>&nbsp;&nbsp;&nbsp; "authors": [</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "name": "des des",</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "email": "d@m.ru"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+<p>&nbsp;&nbsp;&nbsp; ],</p>
+<p>&nbsp;&nbsp;&nbsp; "require": {}</p>
+<p>}</p>
+<p>Do you confirm generation [yes]?</p>
+<p>F:OpenServerdomainslocalhost>cd composer</p>
+<p>F:OpenServerdomainslocalhostcomposer>composer instal</p>
+<p>Warning: This development build of composer is over 30 days old. It is recommend</p>
+<p>ed to update it by running "f:openservermodulesphpPHP-5.4composer.phar self</p>
+<p>-update" to get the latest version.</p>
+<p>Loading composer repositories with package information</p>
+<p>Installing dependencies (including require-dev)</p>
+<p>Nothing to install or update</p>
+<p>Generating autoload files</p>
+<p>F:OpenServerdomainslocalhostcomposer>composer global require "fxp&#47;composer-a</p>
+<p>sset-plugin:~1.0.0"</p>
+<p>Warning: This development build of composer is over 30 days old. It is recommend</p>
+<p>ed to update it by running "f:openservermodulesphpPHP-5.4composer.phar self</p>
+<p>-update" to get the latest version.</p>
+<p>Changed current directory to C:&#47;Users&#47;Des&#47;AppData&#47;Roaming&#47;Composer</p>
+<p>Warning: This development build of composer is over 30 days old. It is recommend</p>
+<p>ed to update it by running "f:openservermodulesphpPHP-5.4composer.phar self</p>
+<p>-update" to get the latest version.</p>
+<p>.&#47;composer.json has been created</p>
+<p>Loading composer repositories with package information</p>
+<p>Updating dependencies (including require-dev)</p>
+<p>&nbsp; - Installing fxp&#47;composer-asset-plugin (v1.0.2)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>Writing lock file</p>
+<p>Generating autoload files</p>
+<p>F:OpenServerdomainslocalhostcomposer>composer create-project --prefer-dist y</p>
+<p>iisoft&#47;yii2-app-basic basic</p>
+<p>Warning: This development build of composer is over 30 days old. It is recommend</p>
+<p>ed to update it by running "f:openservermodulesphpPHP-5.4composer.phar self</p>
+<p>-update" to get the latest version.</p>
+<p>Installing yiisoft&#47;yii2-app-basic (2.0.4)</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-app-basic (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>Created project in basic</p>
+<p>Loading composer repositories with package information</p>
+<p>Installing dependencies (including require-dev)</p>
+<p>Reading bower.json of bower-asset&#47;jquery.inputmask (3.1.56)</p>
+<p>Could not fetch https:&#47;&#47;api.github.com&#47;repos&#47;RobinHerbots&#47;jquery.inputmask&#47;conte</p>
+<p>nts&#47;bower.json?ref=4551607fef63fd4bcd675479a8c347b668b915eb, enter your GitHub c</p>
+<p>redentials to go over the API rate limit</p>
+<p>The credentials will be swapped for an OAuth token stored in C:&#47;Users&#47;Des&#47;AppDat</p>
+<p>a&#47;Roaming&#47;Composer&#47;auth.json, your password will not be stored</p>
+<p>To revoke access to this token you can visit https:&#47;&#47;github.com&#47;settings&#47;applica</p>
+<p>tions</p>
+<p>Username: des1roer</p>
+<p>Password:</p>
+<p>Token successfully created</p>
+<p>Could not fetch https:&#47;&#47;api.github.com&#47;authorizations, enter your GitHub credent</p>
+<p>ials to go over the API rate limit</p>
+<p>The credentials will be swapped for an OAuth token stored in C:&#47;Users&#47;Des&#47;AppDat</p>
+<p>a&#47;Roaming&#47;Composer&#47;auth.json, your password will not be stored</p>
+<p>To revoke access to this token you can visit https:&#47;&#47;github.com&#47;settings&#47;applica</p>
+<p>tions</p>
+<p>Username: des1roer</p>
+<p>Password:</p>
+<p>An existing OAuth token for Composer is present and will be reused</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-composer (2.0.3)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing ezyang&#47;htmlpurifier (v4.6.0)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing cebe&#47;markdown (1.1.0)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing bower-asset&#47;jquery (2.1.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing bower-asset&#47;jquery.inputmask (3.1.63)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing bower-asset&#47;punycode (v1.3.2)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing bower-asset&#47;yii2-pjax (v2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2 (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing swiftmailer&#47;swiftmailer (v5.4.1)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-swiftmailer (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-codeception (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing bower-asset&#47;bootstrap (v3.3.5)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-bootstrap (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-debug (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing bower-asset&#47;typeahead.js (v0.10.5)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing phpspec&#47;php-diff (v1.0.2)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-gii (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing fzaninotto&#47;faker (v1.5.0)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-faker (2.0.3)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>fzaninotto&#47;faker suggests installing ext-intl (*)</p>
+<p>Writing lock file</p>
+<p>Generating autoload files</p>
+<p>chmod('runtime', 0777)...done.</p>
+<p>chmod('web&#47;assets', 0777)...done.</p>
+<p>chmod('yii', 0755)...done.</p>
+<p>F:OpenServerdomainslocalhostcomposer>composer create-project --prefer-dist y</p>
+<p>Warning: This development build of composer is over 30 days old. It is recommended to update it by running "f:openservermodul</p>
+<p>&nbsp; [InvalidArgumentException]</p>
+<p>&nbsp; Could not find package y with stability stable.</p>
+<p>create-project [-s|--stability="..."] [--prefer-source] [--prefer-dist] [--repository-url="..."] [--dev] [--no-dev] [--no-plugirsion]</p>
+<p>F:OpenServerdomainslocalhostcomposer>composer create-project --prefer-dist yiisoft&#47;yii2-app-advanced&nbsp; advanced</p>
+<p>Warning: This development build of composer is over 30 days old. It is recommended to update it by running "f:openservermodulesphpPHP-5.4composer.phar self-update" to get the latest version.</p>
+<p>Installing yiisoft&#47;yii2-app-advanced (2.0.4)</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-app-advanced (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>Created project in advanced</p>
+<p>Loading composer repositories with package information</p>
+<p>Installing dependencies (including require-dev)</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-composer (2.0.3)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing ezyang&#47;htmlpurifier (v4.6.0)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing cebe&#47;markdown (1.1.0)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing bower-asset&#47;jquery (2.1.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing bower-asset&#47;jquery.inputmask (3.1.63)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing bower-asset&#47;punycode (v1.3.2)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing bower-asset&#47;yii2-pjax (v2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2 (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing swiftmailer&#47;swiftmailer (v5.4.1)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-swiftmailer (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-codeception (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing bower-asset&#47;bootstrap (v3.3.5)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-bootstrap (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-debug (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing bower-asset&#47;typeahead.js (v0.10.5)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing phpspec&#47;php-diff (v1.0.2)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-gii (2.0.4)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing fzaninotto&#47;faker (v1.5.0)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>&nbsp; - Installing yiisoft&#47;yii2-faker (2.0.3)</p>
+<p>&nbsp;&nbsp;&nbsp; Loading from cache</p>
+<p>fzaninotto&#47;faker suggests installing ext-intl (*)</p>
+<p>Writing lock file</p>
+<p>Generating autoload files</p>
+<p>F:OpenServerdomainslocalhostcomposer>cd F:OpenServerdomainslocalhostcomposeradvanced</p>
+<p>F:OpenServerdomainslocalhostcomposeradvanced>php init</p>
+<p>Yii Application Initialization Tool v1.0</p>
+<p>Which environment do you want the application to be initialized in?</p>
+<p>&nbsp; [0] Development</p>
+<p>&nbsp; [1] Production</p>
+<p>&nbsp; Your choice [0-1, or "q" to quit] 0</p>
+<p>&nbsp; Initialize the application under 'Development' environment? [yes|no] yes</p>
+<p>&nbsp; Start initialization ...</p>
+<p>&nbsp;&nbsp; generate backend&#47;config&#47;main-local.php</p>
+<p>&nbsp;&nbsp; generate backend&#47;config&#47;params-local.php</p>
+<p>&nbsp;&nbsp; generate backend&#47;web&#47;index-test.php</p>
+<p>&nbsp;&nbsp; generate backend&#47;web&#47;index.php</p>
+<p>&nbsp;&nbsp; generate common&#47;config&#47;main-local.php</p>
+<p>&nbsp;&nbsp; generate common&#47;config&#47;params-local.php</p>
+<p>&nbsp;&nbsp; generate console&#47;config&#47;main-local.php</p>
+<p>&nbsp;&nbsp; generate console&#47;config&#47;params-local.php</p>
+<p>&nbsp;&nbsp; generate frontend&#47;config&#47;main-local.php</p>
+<p>&nbsp;&nbsp; generate frontend&#47;config&#47;params-local.php</p>
+<p>&nbsp;&nbsp; generate frontend&#47;web&#47;index-test.php</p>
+<p>&nbsp;&nbsp; generate frontend&#47;web&#47;index.php</p>
+<p>&nbsp;&nbsp; generate yii</p>
+<p>&nbsp;&nbsp; generate cookie validation key in backend&#47;config&#47;main-local.php</p>
+<p>&nbsp;&nbsp; generate cookie validation key in frontend&#47;config&#47;main-local.php</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; chmod 0777 backend&#47;runtime</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; chmod 0777 backend&#47;web&#47;assets</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; chmod 0777 frontend&#47;runtime</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; chmod 0777 frontend&#47;web&#47;assets</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; chmod 0755 yii</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; chmod 0755 tests&#47;codeception&#47;bin&#47;yii</p>
+<p>&nbsp; ... initialization completed.</p>
+<p>F:OpenServerdomainslocalhostcomposeradvanced>composer self-update</p>
+<p>Updating to version 74e7c5fe22dc456336a2b20c7b12a9a83fc4af09.</p>
+<p>&nbsp;&nbsp;&nbsp; Downloading: 100%</p>
+<p>Use composer self-update --rollback to return to version 37ec0bde9dd6826591308e7a1ad55cb5e38ef117</p>
+<p>F:OpenServerdomainslocalhostcomposeradvanced></p>
+<p><script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre><br />
+<&#47;div><br />
+Видите - все достаточно просто как и описано <a href="http:&#47;&#47;open-server.ru&#47;docs&#47;" target="_blank">здесь<&#47;a> (при переходе Ctrl+F и ищите&nbsp; Composer)</p>
+<p>Сначала создаем json для composer</p>
+<pre> <code><br />
+D:webmasterOpenServerdomainscomposer>composer init&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+Warning: This development build of composer is over 30 days old. It is recommen<br />
+ed to update it by running "d:webmasteropenservermodulesphpPHP-5.4compose<br />
+.phar self-update" to get the latest version.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp; Welcome to the Composer config generator&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+This command will guide you through creating your composer.json config.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+Package name (<vendor>&#47;<name>) [zuev_np&#47;composer]: des&#47;des&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+Description []:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+Author:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;Invalid author string.&nbsp; Must be in the format: John Smith <john@example.com>&nbsp;<br />
+Author: des des <d@m.ru>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+Minimum Stability []:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+License []:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+Define your dependencies.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+Would you like to define your dependencies (require) interactively [yes]? no&nbsp;&nbsp;<br />
+Would you like to define your dev dependencies (require-dev) interactively [yes<br />
+? no&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp; "name": "des&#47;des",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp; "authors": [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "name": "des des",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "email": "d@m.ru"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp; ],&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp; "require": {}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+Do you confirm generation [yes]?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+D:webmasterOpenServerdomainscomposer>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<&#47;code><&#47;pre><br />
+и получаем в D:webmasterOpenServerdomainscomposercomposer.json</p>
+<pre><code><br />
+{<br />
+    "name": "des&#47;des",<br />
+    "authors": [<br />
+        {<br />
+            "name": "des des",<br />
+            "email": "d@m.ru"<br />
+        }<br />
+    ],<br />
+    "require": {}<br />
+}<br />
+<&#47;code><&#47;pre><br />
+Затем команды установки<br />
+для basic</p>
+<div id="file-gistfile1-as-LC75" class="line">
+<pre><code>composer create-project --prefer-dist --stability=dev yiisoft&#47;yii2-app-basic basic<&#47;code><&#47;pre><br />
+<&#47;div><br />
+для advanced</p>
+<pre><code class=" hljs coffeescript"><span class="hljs-string">composer create-project --prefer-dist yiisoft&#47;yii2-app-advanced&nbsp; advanced<&#47;span><&#47;code><&#47;pre><br />
+advanced правда еще и доустановить надо командой</p>
+<pre class="line-pre">F:OpenServerdomainslocalhostcomposeradvanced>php init<&#47;pre><br />
+<button title="Весь список команд из консоли" type="button">Show&#47;hide<&#47;button></p>
+<div id="spoiler2">
+<pre><code><br />
+F:OpenServerdomainslocalhostcomposer>cd F:OpenServerdomainslocalhostcomposeradvanced</p>
+<p>F:OpenServerdomainslocalhostcomposeradvanced>php init<br />
+Yii Application Initialization Tool v1.0</p>
+<p>Which environment do you want the application to be initialized in?</p>
+<p>  [0] Development<br />
+  [1] Production</p>
+<p>  Your choice [0-1, or "q" to quit] 0</p>
+<p>  Initialize the application under 'Development' environment? [yes|no] yes</p>
+<p>  Start initialization ...</p>
+<p>   generate backend&#47;config&#47;main-local.php<br />
+   generate backend&#47;config&#47;params-local.php<br />
+   generate backend&#47;web&#47;index-test.php<br />
+   generate backend&#47;web&#47;index.php<br />
+   generate common&#47;config&#47;main-local.php<br />
+   generate common&#47;config&#47;params-local.php<br />
+   generate console&#47;config&#47;main-local.php<br />
+   generate console&#47;config&#47;params-local.php<br />
+   generate frontend&#47;config&#47;main-local.php<br />
+   generate frontend&#47;config&#47;params-local.php<br />
+   generate frontend&#47;web&#47;index-test.php<br />
+   generate frontend&#47;web&#47;index.php<br />
+   generate yii<br />
+   generate cookie validation key in backend&#47;config&#47;main-local.php<br />
+   generate cookie validation key in frontend&#47;config&#47;main-local.php<br />
+      chmod 0777 backend&#47;runtime<br />
+      chmod 0777 backend&#47;web&#47;assets<br />
+      chmod 0777 frontend&#47;runtime<br />
+      chmod 0777 frontend&#47;web&#47;assets<br />
+      chmod 0755 yii<br />
+      chmod 0755 tests&#47;codeception&#47;bin&#47;yii</p>
+<p>  ... initialization completed.</p>
+<p>F:OpenServerdomainslocalhostcomposeradvanced></p>
+<p><&#47;code><&#47;pre><br />
+<&#47;div><br />
+и получим</p>
+<p>http:&#47;&#47;localhost&#47;composer&#47;basic&#47;web&#47;index.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; basic</p>
+<p>http:&#47;&#47;localhost&#47;composer&#47;advanced&#47;frontend&#47;web&#47;index.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; advanced</p>
+<p>внизу ссылка с тем что получилось</p>
+<p><a href="https:&#47;&#47;drive.google.com&#47;file&#47;d&#47;0B8SBzylZ-emOVnJEdi1ZNVp1bEE&#47;view?usp=sharing" target="_blank">загрузка<&#47;a></p>
+<p>качаете и запускаете</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;2.bp.blogspot.com&#47;-HW1Zdgec_Rs&#47;VYOOw2sHmMI&#47;AAAAAAAAAdw&#47;8jYM9vtYd9I&#47;s1600&#47;Screenshot_9.png"><img src="http:&#47;&#47;2.bp.blogspot.com&#47;-HW1Zdgec_Rs&#47;VYOOw2sHmMI&#47;AAAAAAAAAdw&#47;8jYM9vtYd9I&#47;s400&#47;Screenshot_9.png" alt="" width="400" height="217" border="0" &#47;><&#47;a><&#47;div><br />
+<&#47;div><br />
+Source: des1roer.blogspot.com</p>

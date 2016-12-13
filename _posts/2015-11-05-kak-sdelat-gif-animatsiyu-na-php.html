@@ -1,0 +1,42 @@
+---
+layout: post
+status: publish
+published: true
+title: Как сделать GIF анимацию на PHP?
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+excerpt: "https:&#47;&#47;github.com&#47;Sybio&#47;GifCreator\r\n\r\nПростая библиотека
+  поможет в этом\r\n\r\n"
+wordpress_id: 47942
+wordpress_url: http://devdocs.ru/?p=47942
+date: '2015-11-05 14:01:42 +0200'
+date_gmt: '2015-11-05 14:01:42 +0200'
+categories:
+- PHP
+tags:
+- php
+- git
+comments: []
+---
+<p>https:&#47;&#47;github.com&#47;Sybio&#47;GifCreator</p>
+<p>Простая библиотека поможет в этом</p>
+<p><a id="more"></a><a id="more-47942"></a></p>
+<pre><code>&#47;&#47; Create an array containing file paths, resource var (initialized with imagecreatefromXXX),<br />
+&#47;&#47; image URLs or even binary code from image files.<br />
+&#47;&#47; All sorted in order to appear.<br />
+$frames = array(<br />
+imagecreatefrompng("&#47;..&#47;images&#47;pic1.png"), &#47;&#47; Resource var<br />
+"&#47;..&#47;images&#47;pic2.png", &#47;&#47; Image file path<br />
+file_get_contents("&#47;..&#47;images&#47;pic3.jpg"), &#47;&#47; Binary source code<br />
+'http:&#47;&#47;thisisafakedomain.com&#47;images&#47;pic4.jpg', &#47;&#47; URL<br />
+);</p>
+<p>&#47;&#47; Create an array containing the duration (in millisecond) of each frames (in order too)<br />
+$durations = array(40, 80, 40, 20);</p>
+<p>&#47;&#47; Initialize and create the GIF !<br />
+$gc = new GifCreator();<br />
+$gc->create($frames, $durations, 5);<&#47;code><&#47;pre></p>

