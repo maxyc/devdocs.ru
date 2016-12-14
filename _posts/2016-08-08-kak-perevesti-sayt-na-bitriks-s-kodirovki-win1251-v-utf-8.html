@@ -3,6 +3,8 @@ layout: post
 status: publish
 published: true
 title: Как перевести сайт на Битрикс с кодировки win1251 в UTF-8
+excerpt: 'Такая задача встанет перед каждым <strong>Битрикс разработчиком</strong> когда потребуется сделать на сайте
+мультиязычность. 4 обязательных пункта, которые необходимо сделать для этого под катом'
 author:
   display_name: Maxyc Webber
   login: admin
@@ -24,13 +26,17 @@ tags:
 - битрикс
 comments: []
 ---
-<p>Общий порядок действий:</p>
-<p>1. Перекодировать всю базу данных в UTF-8 (вероятнее всего придётся обращаться за помощью к администратору сервера).</p>
-<p>2. Перекодировать все файлы сайта в UTF-8 (можно сделать своими силами).</p>
-<p>3. В файл /bitrix/php_interface/dbconn.php добавить строки:</p>
-<pre><code>define("BX_UTF", true);</code></pre><br />
-4. В файл /.htaccess добавить строки:</p>
-<pre><code>php_value mbstring.func_overload 2<br />
-php_value mbstring.internal_encoding UTF-8</code></pre><br />
-Перекодировать все файлы сайта в UTF-8 (второй пункт) можно выполнив команду через SSH в корневой папке сайта:</p>
-<pre><code>find . -name '*.php' -type f -exec iconv -fcp1251 -tutf8 -o /tmp/tmp_file {} \; -exec mv /tmp/tmp_file {} \;</code></pre></p>
+<p>Такая задача встанет перед каждым <strong>Битрикс разработчиком</strong> когда потребуется <strong>сделать на сайте
+мультиязычность</strong>.</p>
+
+<h2>Общий порядок действий:</h2>
+<p>1. Перекодировать всю базу данных в <em>UTF-8</em> (вероятнее всего придётся обращаться за помощью к администратору сервера).</p>
+<p>2. Перекодировать все файлы сайта в <em>UTF-8</em> (можно сделать своими силами).</p>
+<p>3. В файл <em>/bitrix/php_interface/dbconn.php</em> добавить строки:</p>
+<pre><code>define("BX_UTF", true);</code></pre>
+4. В файл <em>/.htaccess</em> добавить строки:</p>
+<pre><code>php_value mbstring.func_overload 2
+php_value mbstring.internal_encoding UTF-8</code></pre>
+
+<p>Перекодировать все файлы сайта в <em>UTF-8</em> (второй пункт) можно выполнив команду через SSH в корневой папке сайта:</p>
+<pre><code>find . -name '*.php' -type f -exec iconv -fcp1251 -tutf8 -o /tmp/tmp_file {} \; -exec mv /tmp/tmp_file {} \;</code></pre>

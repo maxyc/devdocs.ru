@@ -10,12 +10,7 @@ author:
   url: ''
 author_login: admin
 author_email: maxycws@gmail.com
-excerpt: "<p data-hc-id=\"f3206799a7dda7bba33b9d5f74a0\">Статья <a href=\"http://sergks.ru/blog/posts/svoy-skrinshoter-s-zagruzkoy-na-server\"
-  target=\"_blank\">Сергей Картамышев</a></p>\r\n<p data-hc-id=\"f3206799a7dda7bba33b9d5f74a0\">Для
-  скриншотов будем использовать библиотеку <strong>imagemagic</strong>.</p>\r\n\r\n<h3>Установка</h3>\r\nУстанавливаем
-  библиотеку.\r\n<blockquote>\r\n<pre><code class=\"hljs sql\">sudo apt-get <span
-  class=\"hljs-operator\"><span class=\"hljs-keyword\">install</span> imagemagick\r\n</span></code></pre>\r\n</blockquote>\r\n<p
-  data-hc-id=\"27804a984125b42f490826e70440\">"
+excerpt: "Статья Сергея Картамышева о том, как можно, используя <em>imagemagick</em> и <em>php</em>, сделать скриншотер с запуском по горячей клавише и последующая загрузка изображений на сервер. Пригодится, например, для корпоративных решений, когда требуется знать и видеть чем занимается работник на рабочем месте."
 wordpress_id: 47970
 wordpress_url: http://devdocs.ru/?p=47970
 date: '2016-03-12 09:08:33 +0200'
@@ -30,98 +25,66 @@ tags:
 - ui
 - linux
 - screenshot
-comments:
-- id: 451
-  author: sergKs
-  author_email: serg31ks@yandex.ru
-  author_url: http://gravatar.com/serg31ks
-  date: '2016-03-16 12:58:08 +0200'
-  date_gmt: '2016-03-16 12:58:08 +0200'
-  content: Так это же моя статья.
-- id: 452
-  author: Администратор
-  author_email: maxycws@gmail.com
-  author_url: ''
-  date: '2016-03-16 13:03:05 +0200'
-  date_gmt: '2016-03-16 13:03:05 +0200'
-  content: Проверил. действительно. ставлю обратную ссылку. по вашему желанию могу
-    удалить статью целиком
-- id: 453
-  author: sergKs
-  author_email: serg31ks@yandex.ru
-  author_url: http://gravatar.com/serg31ks
-  date: '2016-03-16 13:25:57 +0200'
-  date_gmt: '2016-03-16 13:25:57 +0200'
-  content: Да нет, не нужно. Может кому пригодится) Спасибо)
-- id: 454
-  author: Администратор
-  author_email: maxycws@gmail.com
-  author_url: ''
-  date: '2016-03-16 13:27:12 +0200'
-  date_gmt: '2016-03-16 13:27:12 +0200'
-  content: Спасибо вам. Статья очень интересная
 ---
-<p data-hc-id="f3206799a7dda7bba33b9d5f74a0">Статья <a href="http://sergks.ru/blog/posts/svoy-skrinshoter-s-zagruzkoy-na-server" target="_blank">Сергей Картамышев</a></p></p>
-<p data-hc-id="f3206799a7dda7bba33b9d5f74a0">Для скриншотов будем использовать библиотеку <strong>imagemagic</strong>.</p></p>
-<h3>Установка</h3><br />
-Устанавливаем библиотеку.</p>
-<blockquote>
-<pre><code class="hljs sql">sudo apt-get <span class="hljs-operator"><span class="hljs-keyword">install</span> imagemagick<br />
-</span></code></pre><br />
-</blockquote></p>
-<p data-hc-id="27804a984125b42f490826e70440"><a id="more"></a><a id="more-47970"></a>Создаём скрипт, который будет отправлять файл на сервер (например: makescreenshot).</p></p>
-<blockquote>
-<pre><code class="hljs bash"><span class="hljs-shebang">#!/bin/bash</span><br />
-<span class="hljs-comment">##</span><br />
-<span class="hljs-comment"># Скриншотер с загрузкой на сервер</span><br />
-<span class="hljs-comment"># @author sergKs</span><br />
-<span class="hljs-comment">##</span></p>
-<p>date=`date +%F-%H:%M`<br />
-tmpDir=<span class="hljs-string">'/tmp'</span><br />
-file=<span class="hljs-string">"Screenshot_<span class="hljs-variable">$date</span>.png"</span><br />
-uploadUrl=<span class="hljs-string">'ссылка'</span><br />
-key=<span class="hljs-string">'ключ'</span></p>
-<p>import -monitor <span class="hljs-variable">$tmpDir</span>/<span class="hljs-variable">$file</span></p>
-<p>response=$(curl -F <span class="hljs-string">"file=@<span class="hljs-variable">$tmpDir</span>/<span class="hljs-variable">$file</span>;filename=<span class="hljs-variable">$file</span>;type=image/png"</span> -F <span class="hljs-string">"key=<span class="hljs-variable">$key</span>"</span> -A <span class="hljs-string">'Mozilla/4.0'</span> <span class="hljs-variable">$uploadUrl</span>)<br />
-unlink <span class="hljs-variable">$tmpDir</span>/<span class="hljs-variable">$file</span><br />
-zenity<br />
-    --entry \<br />
-    --width=<span class="hljs-number">450</span> \<br />
-    --title=<span class="hljs-string">"Скриншот залит на сервер"</span> \<br />
-    --text=<span class="hljs-string">"Ссылка"</span> \<br />
-    --entry-text <span class="hljs-variable">$response</span><br />
-</code></pre><br />
-</blockquote></p>
+<p>Статья <a href="http://sergks.ru/blog/posts/svoy-skrinshoter-s-zagruzkoy-na-server" target="_blank" rel="nofollow">Сергей Картамышев</a></p>
+<p>Для скриншотов будем использовать библиотеку <em>imagemagic</em>.</p>
+<h2>Установка</h2>
+<p>Устанавливаем библиотеку.</p>
+
+<pre><code>sudo apt-get install imagemagick</code></pre>
+
+<p>Создаём скрипт, который будет отправлять файл на сервер (например: makescreenshot).</p>
+
+<pre><code>#!/bin/bash
+##
+# Скриншотер с загрузкой на сервер
+# @author sergKs
+##
+date=`date +%F-%H:%M`
+tmpDir='/tmp'
+file="Screenshot_$date.png"
+uploadUrl='ссылка'
+key='ключ'
+import -monitor $tmpDir/$file
+response=$(curl -F "file=@$tmpDir/$file;filename=$file;type=image/png" -F "key=$key" -A 'Mozilla/4.0' $uploadUrl)
+unlink $tmpDir/$file
+zenity
+    --entry \
+    --width=450 \
+    --title="Скриншот залит на сервер" \
+    --text="Ссылка" \
+    --entry-text $response
+</code></pre>
+
 <ul>
-<li>tmpDir - папка для временного хранения файла на диске</li>
-<li>uploadUrl - ссылка на сервер загрузки файла</li>
-<li>key - ключ безопасности</li><br />
-</ul></p>
-<p data-hc-id="2c3bc396b3ab7c6a537374213200">zenity - служит для отображения графического окна со ссылкой на файл, которых уже залит на сервер.</p></p>
-<p data-hc-id="0c400d866261451f6a1165b10e08">Теперь остаётся навесить этот скрипт на горячую клавишу. Для этого заходим в <em>Параметры системы</em> -> <em>Клавиатура </em>-> <em>Комбинация клавиш </em>-> <em>Дополнительные комбинации</em>. Добавляем название и команду. Команда - абсолютный путь до вашего скрипта (например: /home/user/makescreenshot).</p></p>
-<h3>Сервер</h3></p>
-<p data-hc-id="059a4e5000d15408134b64a25310">Так как я пишу на PHP, то и сервер написан на PHP.</p></p>
-<p data-hc-id="01211810300706d81a281ebb0418">Вот пример принятия файла.</p></p>
-<blockquote>
-<pre><code class="hljs php"><span class="hljs-preprocessor"><?php</span><br />
-<span class="hljs-variable">$params</span> = [<br />
-    <span class="hljs-string">'key'</span> => <span class="hljs-string">'ключ ...'</span><br />
-];<br />
-<span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">'key'</span>])) {<br />
-    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$_POST</span>[<span class="hljs-string">'key'</span>] === <span class="hljs-variable">$params</span>[<span class="hljs-string">'key'</span>]) {<br />
-        <span class="hljs-keyword">if</span> (strlen(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">'file'</span>][<span class="hljs-string">'name'</span>]) > <span class="hljs-number">0</span>) {<br />
-            <span class="hljs-variable">$data</span> = generateFilename(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">'file'</span>][<span class="hljs-string">'name'</span>]);<br />
-            <span class="hljs-variable">$link</span> = mb_substr(md5(date(<span class="hljs-string">'Y-m-d H:i:s'</span>)) . md5(<span class="hljs-variable">$data</span>[<span class="hljs-string">'name'</span>]), <span class="hljs-number">16</span>, <span class="hljs-number">32</span>);<br />
-            file_put_contents(<span class="hljs-string">'uploads/files/'</span> . <span class="hljs-variable">$data</span>[<span class="hljs-string">'name'</span>], file_get_contents(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">'file'</span>][<span class="hljs-string">'tmp_name'</span>]));<br />
-            <span class="hljs-keyword">echo</span> <span class="hljs-string">'http://'</span> . <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">'HTTP_HOST'</span>] . <span class="hljs-string">'/f/'</span> . <span class="hljs-variable">$link</span>;<br />
-        } <span class="hljs-keyword">else</span> {<br />
-            <span class="hljs-keyword">echo</span> <span class="hljs-string">'ERROR_Require_param_file'</span>;<br />
-        }<br />
-    } <span class="hljs-keyword">else</span> {<br />
-        <span class="hljs-keyword">echo</span> <span class="hljs-string">'ERROR_Invalid_key'</span>;<br />
-    }<br />
-} <span class="hljs-keyword">else</span> {<br />
-    <span class="hljs-keyword">echo</span> <span class="hljs-string">'ERROR_Require_param_key'</span>;<br />
-}</code></pre><br />
-</blockquote><br />
-&nbsp;</p>
+<li><em>tmpDir</em> - папка для временного хранения файла на диске</li>
+<li><em>uploadUrl</em> - ссылка на сервер загрузки файла</li>
+<li><em>key</em> - ключ безопасности</li>
+<li><em>zenity</em> - служит для отображения графического окна со ссылкой на файл, которых уже залит на сервер.</li>
+</ul>
+<p>Теперь остаётся навесить этот скрипт на горячую клавишу. Для этого заходим в <em>Параметры системы</em> -> <em>Клавиатура </em>-> <em>Комбинация клавиш </em>-> <em>Дополнительные комбинации</em>. Добавляем название и команду. Команда - абсолютный путь до вашего скрипта (например: /home/user/makescreenshot).</p></p>
+
+<h2>Сервер</h2>
+<p>Так как я пишу на PHP, то и сервер написан на PHP.</p>
+<p>Вот пример принятия файла.</p>
+
+<pre><code>
+$params = [
+    'key' => 'ключ ...'
+];
+if (isset($_POST['key'])) {
+    if ($_POST['key'] === $params['key']) {
+        if (strlen($_FILES['file']['name']) > 0) {
+            $data = generateFilename($_FILES['file']['name']);
+            $link = mb_substr(md5(date('Y-m-d H:i:s')) . md5($data['name']), 16, 32);
+            file_put_contents('uploads/files/' . $data['name'], file_get_contents($_FILES['file']['tmp_name']));
+            echo 'http://' . $_SERVER['HTTP_HOST'] . '/f/' . $link;
+        } else {
+            echo 'ERROR_Require_param_file';
+        }
+    } else {
+        echo 'ERROR_Invalid_key';
+    }
+} else {
+    echo 'ERROR_Require_param_key';
+}</code></pre>

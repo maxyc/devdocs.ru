@@ -10,10 +10,10 @@ author:
   url: ''
 author_login: admin
 author_email: maxycws@gmail.com
-excerpt: Давным-давно в далекой-далекой версии Битрикса разработчики вставляли стили
-  и скрипты шаблона в документ банальными тегами < script > и < link >. Потом в фаворе
+excerpt: Давным-давно в далекой-далекой версии <strong>Битрикса</strong> разработчики вставляли стили
+  и скрипты шаблона в документ банальными тегами <em>< script ></em> и <em>< link ></em>. Потом в фаворе
   оказались названные выше отложенные функции. Сейчас устарели и они. Нынче на дворе
-  2016 год и подключать надо так
+  2016 год и подключать надо следующим образом.
 wordpress_id: 48004
 wordpress_url: http://devdocs.ru/?p=48004
 date: '2016-08-15 13:38:24 +0200'
@@ -32,21 +32,30 @@ tags:
 - битрикс
 comments: []
 ---
-<p>Давным-давно в далекой-далекой версии Битрикса разработчики вставляли стили и скрипты шаблона в документ банальными тегами < script > и < link >. Потом в фаворе оказались названные выше отложенные функции. Сейчас устарели и они. Нынче на дворе 2016 год и подключать надо так<a id="more"></a><a id="more-48004"></a></p>
-<pre><code>// Old school<br />
-$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH . "/js/fix.js");<br />
-$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH . "/styles/fix.css");<br />
-$APPLICATION->AddHeadString("< link href='http://fonts.googleapis.com/css?family=PT+Sans:400&subset=cyrillic' rel='stylesheet' type='text/css' >");</p>
-<p>// D7<br />
-use Bitrix\Main\Page\Asset;</p>
-<p>Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . "/js/fix.js");<br />
-Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . "/styles/fix.css");<br />
-Asset::getInstance()->addString("< link href='http://fonts.googleapis.com/css?family=PT+Sans:400&subset=cyrillic' rel='stylesheet' type='text/css' >"); </code></pre></p>
-<p> Эти методы динамические, а класс реализует паттерн &ldquo;одиночка&rdquo; (Singletone) и обратиться к объекту можно через Bitrix\Main\Page\Asset::getInstance() .</p>
+<p>Давным-давно в далекой-далекой версии <strong>Битрикса</strong> разработчики вставляли стили и скрипты шаблона в документ банальными тегами <em>< script ></em> и <em>< link ></em>. Потом в фаворе оказались названные выше отложенные функции. Сейчас устарели и они. Нынче на дворе 2016 год и подключать надо следующим образом:</p>
+
+<pre><code>
+// Old school
+$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH . "/js/fix.js");
+$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH . "/styles/fix.css");
+$APPLICATION->AddHeadString("< link href='http://fonts.googleapis.com/css?family=PT+Sans:400&subset=cyrillic' rel='stylesheet' type='text/css' >");
+
+// D7
+use Bitrix\Main\Page\Asset;
+Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . "/js/fix.js");
+Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . "/styles/fix.css");
+Asset::getInstance()->addString("< link href='http://fonts.googleapis.com/css?family=PT+Sans:400&subset=cyrillic' rel='stylesheet' type='text/css' >"); 
+</code></pre>
+
+<p> Эти методы динамические, а класс реализует паттерн &ldquo;одиночка&rdquo; (Singletone) и обратиться к объекту можно через <em>Bitrix\Main\Page\Asset::getInstance()</em> .</p>
 <p>По слухам, этот класс может быть в скором времени переписан, так что необходимо держать руку на пульсе. </p>
-<p><strong>Простой и самый правильный способ подключения внешних библиотек в template.php:</strong></p>
-<pre><code>$this->addExternalCss("/local/styles.css");<br />
-$this->addExternalJS("/local/liba.js");</code></pre></p>
-<p>В комплекте идёт поддержка кеширования не только текущего шаблона, но и родительского.<br />
+<p>Простой и самый правильный способ подключения внешних библиотек в template.php:</p>
+<pre><code>
+$this->addExternalCss("/local/styles.css");
+$this->addExternalJS("/local/liba.js");
+</code></pre>
+
+<p>В комплекте идёт поддержка кеширования не только текущего шаблона, но и родительского.
 Не зависимо от кеша, файлы всегда будут с шаблоном! Ура!</p>
+
 <p><a href="https://dev.1c-bitrix.ru/learning/course/index.php?COURSE_ID=43&LESSON_ID=2736" target="_blank">Новая страничка в курсе разработчика</a>. Поделитесь с коллегами :)</p>
