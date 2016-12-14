@@ -1,0 +1,20 @@
+---
+layout: empty
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    {% for post in site.posts %}
+	    <url>
+	        <loc>http://devdocs.ru{{ post.url | remove: 'index.html' }}</loc>
+			<lastmod>{{ post.date | date:"%F" }}</lastmod>
+	    </url>
+    {% endfor %}
+
+    {% for page in site.pages %}
+	    {% if page.layout != nil %}{% if page.layout != 'empty' %}{% if page.url != '/feed.xslt.xml' %}{% if post.noindex != 'true' %}
+	    <url>
+	        <loc>http://devdocs.ru{{ page.url | remove: 'index.html' }}</loc>
+	    </url>
+		{% endif %}{% endif %}{% endif %}{% endif %}
+    {% endfor %}
+</urlset>

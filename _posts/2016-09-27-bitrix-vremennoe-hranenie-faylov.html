@@ -10,14 +10,9 @@ author:
   url: ''
 author_login: admin
 author_email: maxycws@gmail.com
-excerpt: "Парни, вобщем такое дело. это надо вам записать. ибо этого нигде не найдете.
-  никакая документация этого не держит.\r\nМне сейчас требовалось временно сохранить
-  файлы, прикрепленные к задачам. Это довольно сложно, чем на первый взгляд. Т.к.
-  нынче модно все действия с файлами переносить на Диск, а не через <code>CFile</code>.\r\n\r\nВ
-  общем, вся суть сводится к тому, что привязка файлов к задаче хранится в <code>USER_FIELD_MANAGER('TASKS_TASK\")</code>\r\nВ
-  поле <code>UF_TASK_WEBDAV_FILES</code> хранятся ID Аттача (Attached).\r\nкогда
-  мы удаляем задачу, мы удаляем и записи в <code>USER_FIELD_MANAGER('TASKS_TASK\",
-  $taskId)</code>\r\nМодуль диска это ловит и удаляет файлы физически.\r\n\r\n"
+excerpt: "Это надо вам записать, ибо этого нигде не найдете. Никакая документация этого не держит. 
+  Мне требовалось временно сохранить файлы, прикрепленные к задачам в <strong>Битрикс24</strong>. 
+  Это довольно сложно, чем на первый взгляд."
 wordpress_id: 48024
 wordpress_url: http://devdocs.ru/?p=48024
 date: '2016-09-27 08:00:20 +0200'
@@ -29,61 +24,71 @@ tags:
 - битрикс
 comments: []
 ---
-<p>Парни, вобщем такое дело. это надо вам записать. ибо этого нигде не найдете. никакая документация этого не держит.<br />
-Мне сейчас требовалось временно сохранить файлы, прикрепленные к задачам. Это довольно сложно, чем на первый взгляд. Т.к. нынче модно все действия с файлами переносить на Диск, а не через <code>CFile</code>.</p>
-<p>В общем, вся суть сводится к тому, что привязка файлов к задаче хранится в <code>USER_FIELD_MANAGER('TASKS_TASK")</code><br />
-В поле <code>UF_TASK_WEBDAV_FILES</code> хранятся ID Аттача (Attached).<br />
-когда мы удаляем задачу, мы удаляем и записи в <code>USER_FIELD_MANAGER('TASKS_TASK", $taskId)</code><br />
-Модуль диска это ловит и удаляет файлы физически.</p>
-<p><a id="more"></a><a id="more-48024"></a></p>
-<blockquote><p>Если требуется использовать пользовательские поля или свойства типа файл помните - Файл (DEPRECATED)<br />
-Нужно использовать Файл (Диск)</blockquote><br />
-Так вот. Чтобы временно сохранить файлы и не допустить, чтобы они удалились, необходимо.<br />
-1. получить все записи из <code>$userFields = $USER_FIELD_MANAGER->GetUserFields("TASKS_TASK", $taskId );</code><br />
-аттачей <code>$attachedIds = $userFields['UF_TASK_WEBDAV_FILES']['VALUE'];</code></p>
-<p>2. загрузить данные из диска по этим айдишникам</p>
-<pre><code>$userFieldManager = \Bitrix\Disk\Driver::getInstance()->getUserFieldManager();<br />
-$userFieldManager->loadBatchAttachedObject($attachedIds);</code></pre><br />
-3. Пройти по каждому аттачу</p>
-<pre><code>foreach($attachedIds as $attachedId)<br />
-{<br />
-    Получить информацию о файле из текущего аттача<br />
-    $attachedObject = $userFieldManager->getAttachedObjectById($attachedId);</p>
-<p>    Запоминаем айди обьекта/файла С(!) ПРЕФИКСОМ НОВОГО ФАЙЛА, простигоспди<br />
-    $newValues[] = \Bitrix\Disk\Uf\FileUserType::NEW_FILE_PREFIX . $attachedObject->getObjectId();<br />
-}</code></pre><br />
-4. И затем только ( ! ) запоминаем в своих юзерфилдах</p>
-<pre><code>$USER_FIELD_MANAGER->update("TRASH_DISK", $this->entityId, array(<br />
-    'UF_TRASH_TASK_FILE' => $newValues,<br />
-));</code></pre><br />
-<strong>Сохранение у себя в юзерфилдах</strong></p>
-<pre><code>/** Пользовательские поля **/<br />
-        $userFields = $USER_FIELD_MANAGER->GetUserFields("TASKS_TASK", $this->entityId );<br />
-        $attachedIds = $userFields['UF_TASK_WEBDAV_FILES']['VALUE'];<br />
-        $newValues = array();</p>
-<p>        $userFieldManager = \Bitrix\Disk\Driver::getInstance()->getUserFieldManager();<br />
-        $userFieldManager->loadBatchAttachedObject($attachedIds);</p>
-<p>        foreach($attachedIds as $attachedId)<br />
-        {<br />
-            $attachedObject = $userFieldManager->getAttachedObjectById($attachedId);<br />
-            $newValues[] = \Bitrix\Disk\Uf\FileUserType::NEW_FILE_PREFIX . $attachedObject->getObjectId();<br />
-        }</p>
-<p>        $USER_FIELD_MANAGER->update("TRASH_DISK", $this->entityId, array(<br />
-            'UF_TRASH_TASK_FILE' => $newValues,<br />
-        ));</code></pre><br />
-<strong>Восстановление к новой задаче</strong></p>
-<pre><code>/** Восстанавливаем пользовательские файлы */<br />
-        $userFields = $USER_FIELD_MANAGER->GetUserFields("TRASH_DISK", $oldTaskId );</p>
-<p>        $attachedIds = $userFields['UF_TRASH_TASK_FILE']['VALUE'];<br />
-        $newValues = array();</p>
-<p>        $userFieldManager = \Bitrix\Disk\Driver::getInstance()->getUserFieldManager();<br />
-        $userFieldManager->loadBatchAttachedObject($attachedIds);</p>
-<p>        foreach($attachedIds as $attachedId)<br />
-        {<br />
-            $attachedObject = $userFieldManager->getAttachedObjectById($attachedId);<br />
-            $newValues[] = \Bitrix\Disk\Uf\FileUserType::NEW_FILE_PREFIX . $attachedObject->getObjectId();<br />
-        }</p>
-<p>        $USER_FIELD_MANAGER->update("TASKS_TASK", $task->getID(), array(<br />
-            'UF_TASK_WEBDAV_FILES' => $newValues,<br />
-        ));</code></pre></p>
-<p style="text-align: right;">Короче как-то так</p></p>
+<p>Это надо вам записать, ибо этого нигде не найдете. Никакая документация этого не держит.</p>
+<p>Мне требовалось временно сохранить файлы, прикрепленные к задачам в <strong>Битрикс24</strong>.  
+Т.к. нынче модно все действия с файлами переносить на Диск, а не через <strong>CFile</strong>.</p>
+
+<p>В общем, вся суть сводится к тому, что привязка файлов к задаче хранится в <em>USER_FIELD_MANAGER('TASKS_TASK")</em>
+В поле <em>UF_TASK_WEBDAV_FILES</em> хранятся ID Аттача (Attached). Когда мы удаляем задачу, мы удаляем и записи в <em>USER_FIELD_MANAGER('TASKS_TASK", $taskId)</em>. Модуль диска это ловит и удаляет файлы физически.</p>
+
+<p><blockquote>Если требуется использовать пользовательские поля или свойства типа <em>файл</em> помните - <em>Файл (DEPRECATED)</em>
+Нужно использовать <em>Файл (Диск)</em></blockquote></p>
+
+<p>Чтобы временно сохранить файлы и не допустить, чтобы они удалились, необходимо:</p>
+  <pre><code>
+    // Получить все записи:
+    $userFields = $USER_FIELD_MANAGER->GetUserFields("TASKS_TASK", $taskId );
+    $attachedIds = $userFields['UF_TASK_WEBDAV_FILES']['VALUE'];
+  
+    // Загрузить данные из диска по этим айдишникам:
+    $userFieldManager = \Bitrix\Disk\Driver::getInstance()->getUserFieldManager();
+    $userFieldManager->loadBatchAttachedObject($attachedIds);
+    
+    // Пройти по каждому аттачу:
+    foreach($attachedIds as $attachedId)
+    {
+        // Получить информацию о файле из текущего аттача
+        $attachedObject = $userFieldManager->getAttachedObjectById($attachedId);
+        // Запоминаем айди обьекта/файла С(!) ПРЕФИКСОМ НОВОГО ФАЙЛА, простигоспди
+        $newValues[] = \Bitrix\Disk\Uf\FileUserType::NEW_FILE_PREFIX . $attachedObject->getObjectId();
+    }
+  </code></pre>
+
+<p>И затем только ( ! ) запоминаем в своих юзерфилдах:</p>
+  <pre><code>
+    $USER_FIELD_MANAGER->update("TRASH_DISK", $this->entityId, array(
+        'UF_TRASH_TASK_FILE' => $newValues,
+    ));
+    
+    // Сохранение у себя в юзерфилдах
+    $userFields = $USER_FIELD_MANAGER->GetUserFields("TASKS_TASK", $this->entityId );
+    $attachedIds = $userFields['UF_TASK_WEBDAV_FILES']['VALUE'];
+    $newValues = array();
+    $userFieldManager = \Bitrix\Disk\Driver::getInstance()->getUserFieldManager();
+    $userFieldManager->loadBatchAttachedObject($attachedIds);
+    foreach($attachedIds as $attachedId)
+    {
+        $attachedObject = $userFieldManager->getAttachedObjectById($attachedId);
+        $newValues[] = \Bitrix\Disk\Uf\FileUserType::NEW_FILE_PREFIX . $attachedObject->getObjectId();
+    }
+    $USER_FIELD_MANAGER->update("TRASH_DISK", $this->entityId, array(
+        'UF_TRASH_TASK_FILE' => $newValues,
+    ));
+
+    // Восстановление к новой задаче
+    $userFields = $USER_FIELD_MANAGER->GetUserFields("TRASH_DISK", $oldTaskId );
+    $attachedIds = $userFields['UF_TRASH_TASK_FILE']['VALUE'];
+    $newValues = array();
+    $userFieldManager = \Bitrix\Disk\Driver::getInstance()->getUserFieldManager();
+    $userFieldManager->loadBatchAttachedObject($attachedIds);
+    foreach($attachedIds as $attachedId)
+    {
+        $attachedObject = $userFieldManager->getAttachedObjectById($attachedId);
+        $newValues[] = \Bitrix\Disk\Uf\FileUserType::NEW_FILE_PREFIX . $attachedObject->getObjectId();
+    }
+    $USER_FIELD_MANAGER->update("TASKS_TASK", $task->getID(), array(
+        'UF_TASK_WEBDAV_FILES' => $newValues,
+    ));
+  </code></pre>
+
+<p style="text-align: right;">Короче как-то так</p>

@@ -10,9 +10,7 @@ author:
   url: ''
 author_login: admin
 author_email: maxycws@gmail.com
-excerpt: "Прочитав <a href=\"http://alexvaleev.ru/orm-d7/\">статью
-  Алексея Валеева</a> понимаешь насколько не хватает типовых примеров работы с
-  ORM в BitrixFramework. Пополним коллекцию примеров с неочевидной логикой.\r\n"
+excerpt: "Прочитав статью Алексея Валеева понимаешь насколько не хватает типовых примеров работы с ORM в BitrixFramework. Пополним коллекцию примеров с неочевидной логикой."
 wordpress_id: 48068
 wordpress_url: http://devdocs.ru/?p=48068
 date: '2016-10-19 15:29:32 +0200'
@@ -24,215 +22,219 @@ tags:
 - gist
 - bitrix
 - orm
-- битрикс
+- <strong>Битрикс</strong>
 comments: []
 ---
-<p>Прочитав <a href="http://alexvaleev.ru/orm-d7/">статью Алексея Валеева</a> понимаешь насколько не хватает типовых примеров работы с ORM в BitrixFramework. Пополним коллекцию примеров с неочевидной логикой.<br />
-<a id="more"></a><a id="more-48068"></a></p>
-<p><strong>Пример 1. Джоин не пустой таблицы без дублей.</strong></p>
-<p>Выберем инфоблоки с кодом news у которых есть хотя бы один элемент.</p>
+<p>Прочитав <a href="http://alexvaleev.ru/orm-d7/">статью Алексея Валеева</a>, понимаешь насколько не хватает типовых примеров работы с <strong>ORM</strong> в <strong>BitrixFramework</strong>. Пополним коллекцию примеров с неочевидной логикой.</p>
+
+<h2>Пример 1. Джоин не пустой таблицы без дублей.</h2>
+<p>Выберем инфоблоки с кодом <em>news</em> у которых есть хотя бы один элемент.</p>
 <p>При этом в выборке каждая строка должна соответствовать уникальному инфоблоку, т.е. инфоблоки в выборке не должны дублироваться.</p>
-<pre><code><br />
-$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());<br />
-$query<br />
-    ->registerRuntimeField('element', [<br />
-            'data_type' => 'Bitrix\Iblock\ElementTable',<br />
-            'reference' => [<br />
-                '=this.ID' => 'ref.IBLOCK_ID',<br />
-            ],<br />
-        ]<br />
-    )<br />
-    //регистрируем поле с минимальным ID эл-та (нам не важно какой именно этот элемент, важно есть ли в принципе минимальный ID или нет)<br />
-    ->registerRuntimeField('min_element_id', [<br />
-        'data_type'=>'integer',<br />
-        'expression' => ['MIN(%s)', 'element.ID']<br />
-    ])<br />
-    ->setSelect([<br />
-        'ID',<br />
-    ])<br />
-    //фильтруем<br />
-    ->setFilter([<br />
-        '!min_element_id' => false,<br />
-        'CODE' => 'news'<br />
-    ])<br />
-    //группируем по ID инфоблока<br />
-    ->setGroup([<br />
-        'ID',<br />
-    ]);<br />
-</code></pre><br />
-Наступил на грабли в строке</p>
-<pre><code><br />
-'expression' => ['MIN(%s)', 'element.ID']<br />
-</code></pre><br />
-тут нужно быть внимательным.</p>
-<p>Например, если указать</p>
-<pre><code><br />
-'expression' => ['MIN(element.ID)']<br />
-</code></pre><br />
-эта конструкция работать не будет т.к. в условие HAVING sql-запроса попадет именно строка MIN(element.ID).</p>
-<p>И по скольку битрикс использует свои алиасы для полей и таблиц - таблица element не будет найдена. Соответственно для того чтобы битрикс корректно заменил element.ID на нужный алиас - это поле необходимо передавать вторым элементом в массиве expression.</p>
+<pre><code>
+$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());
+$query
+    ->registerRuntimeField('element', [
+            'data_type' => 'Bitrix\Iblock\ElementTable',
+            'reference' => [
+                '=this.ID' => 'ref.IBLOCK_ID',
+            ],
+        ]
+    )
+    //регистрируем поле с минимальным ID эл-та (нам не важно какой именно этот элемент, важно есть ли в принципе минимальный ID или нет)
+    ->registerRuntimeField('min_element_id', [
+        'data_type'=>'integer',
+        'expression' => ['MIN(%s)', 'element.ID']
+    ])
+    ->setSelect([
+        'ID',
+    ])
+    //фильтруем
+    ->setFilter([
+        '!min_element_id' => false,
+        'CODE' => 'news'
+    ])
+    //группируем по ID инфоблока
+    ->setGroup([
+        'ID',
+    ]);
+</code></pre>
+
+<p>Наступил на грабли в строке <em><code>'expression' => ['MIN(%s)', 'element.ID']</code></em>. Тут нужно быть внимательным. Например, если указать <em><code>'expression' => ['MIN(element.ID)']</code></em>. Эта конструкция работать не будет т.к. в <strong>условие HAVING sql-запроса</strong> попадет именно строка <em><code>MIN(element.ID)</code></em>.</p>
+<p>И по скольку <strong>Битрикс</strong> использует свои алиасы для полей и таблиц - таблица element не будет найдена. Соответственно для того чтобы <strong>Битрикс</strong> корректно заменил element.ID на нужный алиас - это поле необходимо передавать вторым элементом в массиве expression.</p>
 <p>Эту концепцию важно уловить, т.к. ее же будем использовать в последующих примерах.</p>
-<p><strong>Пример 2. IN с логикой AND.</strong></p>
-<p>Допустим нам нужно выбрать инфоблоки у которых есть элементы с CODE = 'new' ИЛИ CODE = 'hot' ИЛИ CODE = 'exclusive'. Задача довольно легко решается передачей массива в фильтр:</p>
-<pre><code><br />
-$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());<br />
-$query<br />
-    ->registerRuntimeField('element', [<br />
-            'data_type' => 'Bitrix\Iblock\ElementTable',<br />
-            'reference' => [<br />
-                '=this.ID' => 'ref.IBLOCK_ID',<br />
-            ],<br />
-        ]<br />
-    )<br />
-    //посчитаем количество найденых типов элементов<br />
-    //обратите внимание на DISTINCT - указывает на то что нужно считать не повторяющиеся символьные коды<br />
-    ->registerRuntimeField('COUNT_ELEMENT_CODES_VARIANTS', [<br />
-            'data_type' => 'integer',<br />
-            'expression' => ['COUNT(DISTINCT %s)', 'element.CODE'],<br />
-        ]<br />
-    )<br />
-    ->setSelect([<br />
-        'ID',<br />
-        'COUNT_ELEMENT_CODES_VARIANTS',<br />
-    ])<br />
-    ->setFilter([<br />
-        'element.CODE' => ['new', 'hot', 'exclusive']<br />
-    ]);<br />
-</code></pre><br />
-Но что если нужно выбрать только те инфоблоки, у которых есть элементы И с CODE = 'new' И с CODE = 'hot' И с CODE = 'exclusive' ? Получается некий IN но с логикой AND... Для этого нам нужно добавить в фильтр условие что количество уникальных символьных кодов элементов всегда должно быть = 3 ('new', 'hot', 'exclusive').</p>
-<pre><code><br />
-$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());<br />
-$query<br />
-    ->registerRuntimeField('element', [<br />
-            'data_type' => 'Bitrix\Iblock\ElementTable',<br />
-            'reference' => [<br />
-                '=this.ID' => 'ref.IBLOCK_ID',<br />
-            ],<br />
-        ]<br />
-    )<br />
-    ->registerRuntimeField('COUNT_ELEMENT_CODES_VARIANTS', [<br />
-            'data_type' => 'integer',<br />
-            'expression' => ['COUNT(DISTINCT %s)', 'element.CODE'],<br />
-        ]<br />
-    )<br />
-    ->setSelect([<br />
-        'ID'<br />
-    ])<br />
-    //фильтруем по количеству уникальных кодов<br />
-    ->setFilter([<br />
-        'element.CODE' => ['new', 'hot', 'exclusive'],<br />
-        '=COUNT_ELEMENT_CODES_VARIANTS' => 3<br />
-    ]);<br />
-</code></pre><br />
-<strong>Пример 3. Джоин по нескольким условиям.</strong></p>
+
+<h2>Пример 2. IN с логикой AND.</h2>
+<p>Допустим нам нужно выбрать инфоблоки у которых есть элементы с <em>CODE = 'new' ИЛИ CODE = 'hot' ИЛИ CODE = 'exclusive'</em>. Задача довольно легко решается передачей массива в фильтр:</p>
+
+<pre><code>
+$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());
+$query
+    ->registerRuntimeField('element', [
+            'data_type' => 'Bitrix\Iblock\ElementTable',
+            'reference' => [
+                '=this.ID' => 'ref.IBLOCK_ID',
+            ],
+        ]
+    )
+    //посчитаем количество найденых типов элементов
+    //обратите внимание на DISTINCT - указывает на то что нужно считать не повторяющиеся символьные коды
+    ->registerRuntimeField('COUNT_ELEMENT_CODES_VARIANTS', [
+            'data_type' => 'integer',
+            'expression' => ['COUNT(DISTINCT %s)', 'element.CODE'],
+        ]
+    )
+    ->setSelect([
+        'ID',
+        'COUNT_ELEMENT_CODES_VARIANTS',
+    ])
+    ->setFilter([
+        'element.CODE' => ['new', 'hot', 'exclusive']
+    ]);
+</code></pre>
+
+<p>Но что если нужно выбрать только те инфоблоки, у которых есть элементы <em>И с CODE = 'new' И с CODE = 'hot' И с CODE = 'exclusive'</em> ? Получается некий IN, но с логикой AND... Для этого нам нужно добавить в фильтр условие, что количество уникальных символьных кодов элементов всегда должно быть = 3 ('new', 'hot', 'exclusive').</p>
+
+<pre><code>
+$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());
+$query
+    ->registerRuntimeField('element', [
+            'data_type' => 'Bitrix\Iblock\ElementTable',
+            'reference' => [
+                '=this.ID' => 'ref.IBLOCK_ID',
+            ],
+        ]
+    )
+    ->registerRuntimeField('COUNT_ELEMENT_CODES_VARIANTS', [
+            'data_type' => 'integer',
+            'expression' => ['COUNT(DISTINCT %s)', 'element.CODE'],
+        ]
+    )
+    ->setSelect([
+        'ID'
+    ])
+    //фильтруем по количеству уникальных кодов
+    ->setFilter([
+        'element.CODE' => ['new', 'hot', 'exclusive'],
+        '=COUNT_ELEMENT_CODES_VARIANTS' => 3
+    ]);
+</code></pre>
+
+<h2>Пример 3. Джоин по нескольким условиям.</h2>
 <p>Выберем инфоблоки у которых количество элементов с кодом hot не меньше 3, а с кодом new не менее 5.</p>
-<pre><code><br />
-$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());<br />
-$query<br />
-    //джоиним элементы с кодом hot<br />
-    ->registerRuntimeField('HOT_ELEMENT', [<br />
-            'data_type' => 'Bitrix\Iblock\ElementTable',<br />
-            'reference' => [<br />
-                '=this.ID' => 'ref.IBLOCK_ID',<br />
-                //добавим условие что нам нужны элементы с кодом hot<br />
-                '=ref.CODE' => new Bitrix\Main\DB\SqlExpression('?', 'hot'),<br />
-            ],<br />
-        ]<br />
-    )<br />
-    //считаем количество элементов с кодом hot<br />
-    ->registerRuntimeField('HOT_ELEMENTS_COUNT', [<br />
-        'data_type'=>'integer',<br />
-        'expression' => ['COUNT(%s)', 'HOT_ELEMENT.ID']<br />
-    ])<br />
-    //джоиним элементы с кодом new<br />
-    ->registerRuntimeField('NEW_ELEMENT', [<br />
-            'data_type' => 'Bitrix\Iblock\ElementTable',<br />
-            'reference' => [<br />
-                '=this.ID' => 'ref.IBLOCK_ID',<br />
-                //добавим условие что нам нужны элементы с кодом new<br />
-                '=ref.CODE' => new Bitrix\Main\DB\SqlExpression('?', 'new'),<br />
-            ],<br />
-        ]<br />
-    )<br />
-    //считаем количество элементов с кодом new<br />
-    ->registerRuntimeField('NEW_ELEMENTS_COUNT', [<br />
-        'data_type'=>'integer',<br />
-        'expression' => ['COUNT(%s)', 'NEW_ELEMENT.ID']<br />
-    ])<br />
-    //выбираем ID инфоблока, кол-во hot и new элементов<br />
-    ->setSelect([<br />
-        'ID',<br />
-        'HOT_ELEMENTS_COUNT',<br />
-        'NEW_ELEMENTS_COUNT',<br />
-    ])<br />
-    //фильтруем<br />
-    ->setFilter([<br />
-        '>HOT_ELEMENTS_COUNT' => 3,<br />
-        '>NEW_ELEMENTS_COUNT' => 5,<br />
-    ])<br />
-    //группируем выборку по ID инфоблока<br />
-    ->setGroup('ID');<br />
-</code></pre><br />
-<strong>Пример 4. SELECT с подзапросом.</strong></p>
-<p>Запрос с подзапросом.</p>
-<p>Получим количество активных элементов у инфоблоков. Для связи с родительским запросом используем Bitrix\Main\DB\SqlExpression.</p>
-<pre><code><br />
-//формируем подзапрос - выберем только активные элементы<br />
-$subQuery = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\ElementTable::getEntity());<br />
-$subQuery<br />
-    ->registerRuntimeField('CNT', [<br />
-        'data_type' => 'integer',<br />
-        'expression' => ['COUNT(*)']<br />
-    ])<br />
-    ->setSelect([<br />
-        'CNT'<br />
-    ])<br />
-    ->setFilter([<br />
-        'ACTIVE' => 'Y',<br />
-        'IBLOCK_ID' => new Bitrix\Main\DB\SqlExpression('%s')  //сюда позже подставим алиас поля содержащий ID инфоблока из родительского запроса<br />
-    ]);<br />
-//получаем SQL подзапроса<br />
-$subQuerySql = $subQuery->getQuery();</p>
-<p>//формируем запрос<br />
-$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());<br />
-$query<br />
-    ->registerRuntimeField('ACTIVE_ELEMENTS_CNT', [<br />
-        'expression' => ['(' . $subQuerySql . ')', 'ID'] //здесь как раз и связываем родительский запрос с подзапросом по ID инфоблока<br />
-        //не забываем обернуть в скобки SQL подзапроса, иначе запрос будет некорректным<br />
-    ])<br />
-    ->setSelect([<br />
-        'ID',<br />
-        'ACTIVE_ELEMENTS_CNT',<br />
-    ]);<br />
-</code></pre><br />
-<strong>Пример 5. WHERE с подзапросом.</strong></p>
+
+<pre><code>
+$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());
+$query
+    //джоиним элементы с кодом hot
+    ->registerRuntimeField('HOT_ELEMENT', [
+            'data_type' => 'Bitrix\Iblock\ElementTable',
+            'reference' => [
+                '=this.ID' => 'ref.IBLOCK_ID',
+                //добавим условие что нам нужны элементы с кодом hot
+                '=ref.CODE' => new Bitrix\Main\DB\SqlExpression('?', 'hot'),
+            ],
+        ]
+    )
+    //считаем количество элементов с кодом hot
+    ->registerRuntimeField('HOT_ELEMENTS_COUNT', [
+        'data_type'=>'integer',
+        'expression' => ['COUNT(%s)', 'HOT_ELEMENT.ID']
+    ])
+    //джоиним элементы с кодом new
+    ->registerRuntimeField('NEW_ELEMENT', [
+            'data_type' => 'Bitrix\Iblock\ElementTable',
+            'reference' => [
+                '=this.ID' => 'ref.IBLOCK_ID',
+                //добавим условие что нам нужны элементы с кодом new
+                '=ref.CODE' => new Bitrix\Main\DB\SqlExpression('?', 'new'),
+            ],
+        ]
+    )
+    //считаем количество элементов с кодом new
+    ->registerRuntimeField('NEW_ELEMENTS_COUNT', [
+        'data_type'=>'integer',
+        'expression' => ['COUNT(%s)', 'NEW_ELEMENT.ID']
+    ])
+    //выбираем ID инфоблока, кол-во hot и new элементов
+    ->setSelect([
+        'ID',
+        'HOT_ELEMENTS_COUNT',
+        'NEW_ELEMENTS_COUNT',
+    ])
+    //фильтруем
+    ->setFilter([
+        '>HOT_ELEMENTS_COUNT' => 3,
+        '>NEW_ELEMENTS_COUNT' => 5,
+    ])
+    //группируем выборку по ID инфоблока
+    ->setGroup('ID');
+</code></pre>
+
+<h2>Пример 4. SELECT с подзапросом.</h2>
+<p>Запрос с подзапросом. Получим количество активных элементов у инфоблоков. Для связи с родительским запросом используем <em>Bitrix\Main\DB\SqlExpression.</em></p>
+
+<pre><code>
+//формируем подзапрос - выберем только активные элементы
+$subQuery = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\ElementTable::getEntity());
+$subQuery
+    ->registerRuntimeField('CNT', [
+        'data_type' => 'integer',
+        'expression' => ['COUNT(*)']
+    ])
+    ->setSelect([
+        'CNT'
+    ])
+    ->setFilter([
+        'ACTIVE' => 'Y',
+        'IBLOCK_ID' => new Bitrix\Main\DB\SqlExpression('%s')  //сюда позже подставим алиас поля содержащий ID инфоблока из родительского запроса
+    ]);
+
+//получаем SQL подзапроса
+$subQuerySql = $subQuery->getQuery();
+
+//формируем запрос
+$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());
+$query
+    ->registerRuntimeField('ACTIVE_ELEMENTS_CNT', [
+        'expression' => ['(' . $subQuerySql . ')', 'ID'] //здесь как раз и связываем родительский запрос с подзапросом по ID инфоблока
+        //не забываем обернуть в скобки SQL подзапроса, иначе запрос будет некорректным
+    ])
+    ->setSelect([
+        'ID',
+        'ACTIVE_ELEMENTS_CNT',
+    ]);
+</code></pre>
+
+<h2>Пример 5. WHERE с подзапросом.</h2>
 <p>Выберем инфоблоки с 10 активными элементами</p>
-<pre><code><br />
-//формируем подзапрос<br />
-$subQuery = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\ElementTable::getEntity());<br />
-$subQuery<br />
-    ->registerRuntimeField('CNT', [<br />
-        'data_type' => 'integer',<br />
-        'expression' => ['COUNT(*)']<br />
-    ])<br />
-    ->setSelect([<br />
-        'CNT'<br />
-    ])<br />
-    ->setFilter([<br />
-        'ACTIVE' => 'Y',<br />
-        'IBLOCK_ID' => new Bitrix\Main\DB\SqlExpression('%s')<br />
-    ]);<br />
-$subQuerySql = $subQuery->getQuery();</p>
-<p>//формируем запрос<br />
-$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());<br />
-$query<br />
-    ->registerRuntimeField('ACTIVE_ELEMENTS_CNT', [<br />
-        'expression' => ['(' . $subQuerySql . ')', 'ID']<br />
-    ])<br />
-    ->setSelect([<br />
-        'ID',<br />
-    ])<br />
-    ->setFilter([<br />
-        '=ACTIVE_ELEMENTS_CNT' => 10,<br />
-    ]);<br />
-</code></pre></p>
+
+<pre><code>
+//формируем подзапрос
+$subQuery = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\ElementTable::getEntity());
+$subQuery
+    ->registerRuntimeField('CNT', [
+        'data_type' => 'integer',
+        'expression' => ['COUNT(*)']
+    ])
+    ->setSelect([
+        'CNT'
+    ])
+    ->setFilter([
+        'ACTIVE' => 'Y',
+        'IBLOCK_ID' => new Bitrix\Main\DB\SqlExpression('%s')
+    ]);
+$subQuerySql = $subQuery->getQuery();
+
+//формируем запрос
+$query = new \Bitrix\Main\Entity\Query(Bitrix\Iblock\IblockTable::getEntity());
+$query
+    ->registerRuntimeField('ACTIVE_ELEMENTS_CNT', [
+        'expression' => ['(' . $subQuerySql . ')', 'ID']
+    ])
+    ->setSelect([
+        'ID',
+    ])
+    ->setFilter([
+        '=ACTIVE_ELEMENTS_CNT' => 10,
+    ]);
+</code></pre>
