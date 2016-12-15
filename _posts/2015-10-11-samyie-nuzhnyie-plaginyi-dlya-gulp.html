@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: Самые нужные плагины для Gulp
+excerpt: "У веб-разработчиков есть прекрасный инструмент для автоматизации массы задач, который называется <em>Gulp</em>. И моя страсть к таксономии заставила себя собрать огромную коллекцию почти из 100 ценных плагинов для этого сборщика. Думаю многие кто уже использует <em>Gulp</em> найдут для себя что-то нужное, а кто нет, глядя на возможности, получит хорошую мотивацию установить его и понять как эта штука работает."
 author:
   display_name: Maxyc Webber
   login: admin
@@ -18,7 +19,6 @@ categories:
 - Верстка
 - Javascript
 tags:
-- ip
 - post
 - javascript
 - css
@@ -36,119 +36,130 @@ tags:
 comments: []
 ---
 <p>Доброго времени суток, всем! Кто-то умный, не помню в какой статье именно на Хабре, буквально недавно размышлял о процессе разработки с явным призывом автоматизировать все, что только можно автоматизировать. И лучше один раз потратить время на автоматизацию, чтобы потом экономить его на протяжении всего проекта.</p>
-<p>У веб-разработчиков есть прекрасный инструмент для автоматизации массы задач, который называется Gulp. И моя страсть к таксономии заставила себя собрать огромную коллекцию почти из 100 ценных плагинов для этого сборщика. Думаю многие кто уже использует Gulp найдут для себя что-то нужное, а кто нет, глядя на возможности, получит хорошую мотивацию установить его и понять как эта штука работает.</p>
-<p>А еще я выложил <a href="https://github.com/Pestov/essential-gulp-plugins">подборку на GitHub</a>, чтобы каждый мог пополнить коллекцию.<br />
-<a name="habracut"></a></p>
-<h4>HTML&amp;CSS</h4></p>
-<blockquote><p><a href="https://github.com/postcss/autoprefixer">autoprefixer</a> &mdash; один из самых полезных плагинов, который автоматически расставляет префиксы к CSS свойствам, исходя из статистики <a href="http://caniuse.com/">caniuse</a>. Важно сказать, что Автопрефиксер это лишь один из множества дополнений в рамках проекта <a href="https://github.com/postcss/postcss">PostCSS</a> от Злых Марсиан.</p>
-<p><a href="https://github.com/BrowserSync/gulp-browser-sync">gulp-browser-sync</a> &mdash; вероятно, самый нужный инструмент, с точки зрения повышения продуктивности веб-разработчиков. BrowserSync создает подключение, после чего производит автообновление страницы во всех браузерах на всех устройствах при изменениями не только клиентских или даже серверных файлов. А плюс ко всему синхронизирует позицию скроллинга и заполненные данные в формах.</p>
-<p><a href="https://github.com/jonkemp/gulp-useref">gulp-useref</a> &mdash; парсит специфичные блоки и конкатенирует описанные в них стили и скрипты.</p>
-<p><a href="https://github.com/alexshk/gulp-email-design">gulp-email-design</a> &mdash; бесценный инструмент при верстки писем, который переводит все CSS стили в инлайновые, автоматически изменяя все пути к файлам, опционально умеет загружать изображения на CDN и даже отсылать письма на почту.</p>
-<p><a href="https://github.com/ben-eb/gulp-uncss">gulp-uncss</a> &mdash; лучшее решение для оптимизации CSS файлов. Плагин анализирует HTML код и находит все неиспользуемые и продублированные стили.</p>
-<p><a href="https://github.com/ben-eb/gulp-csso">gulp-csso</a> &mdash; отличный CSS минификатор. На сегодняшний день существует целый ряд CSS компрессоров и сравнительная таблица (GitHub) по ним. Но недавно я увидел лучшую <a href="https://github.com/frankmarineau/shorthand">Shorthand</a> утилиту без Gulp, которая делает приблизительно следующее:</p>
-<pre><code class="css hljs"><span class="hljs-tag">a</span> <span class="hljs-rules">{<br />
-    <span class="hljs-rule"><span class="hljs-attribute">font-family</span>:<span class="hljs-value"> Arial</span></span>;<br />
-    <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> italic</span></span>;<br />
-    <span class="hljs-rule"><span class="hljs-attribute">font-size</span>:<span class="hljs-value"> <span class="hljs-number">14px</span></span></span>;<br />
-    <span class="hljs-rule"><span class="hljs-attribute">line-height</span>:<span class="hljs-value"> <span class="hljs-number">18px</span></span></span>;<br />
-    <span class="hljs-rule"><span class="hljs-attribute">font-weight</span>:<span class="hljs-value"> bold</span></span>;<br />
-    <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">'example.png'</span>)</span></span>;<br />
-    <span class="hljs-rule"><span class="hljs-attribute">background-color</span>:<span class="hljs-value"> red</span></span>;<br />
-    <span class="hljs-rule"><span class="hljs-attribute">background-size</span>:<span class="hljs-value"> cover</span></span>;<br />
-    <span class="hljs-rule"><span class="hljs-attribute">background-repeat</span>:<span class="hljs-value"> no-repeat</span></span>;<br />
-}</span></p>
-<p>=></p>
-<p><span class="hljs-tag">a</span> <span class="hljs-rules">{<br />
-  <span class="hljs-rule"><span class="hljs-attribute">font</span>:<span class="hljs-value"> italic bold <span class="hljs-number">14px</span>/<span class="hljs-number">18px</span> Arial</span></span>;<br />
-  <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value"> red <span class="hljs-function">url</span>(<span class="hljs-string">'example.png'</span>) no-repeat / cover</span></span>;<br />
-}</span></p>
-<p></code></pre><br />
-<a href="https://github.com/jonschlinkert/gulp-htmlmin">gulp-htmlmin</a> &mdash; простой HTML минификатор.</p>
-<p><a href="https://github.com/koistya/gulp-csscomb">gulp-csscomb</a> &mdash; облагораживает структуру ваших CSS.</p>
-<p><a href="https://www.npmjs.com/package/gulp-csslint">gulp-csslint</a> &mdash; CSS линтер.</p>
-<p><a href="https://github.com/bezoerb/gulp-htmlhint">gulp-htmlhint</a> &mdash; HTML валидатор.</blockquote></p>
-<h4>JavaScript</h4></p>
-<blockquote><p><a href="https://github.com/azproduction/gulp-autopolyfiller">gulp-autopolyfiller</a> &mdash; мега крутой плагин, который похож на Autoprefixer и подбирает все необходимые полифилы для JavaScript, чтобы вы могли использовать последние стандарты ECMAScript уже сегодня. Еще рекомендую <a href="https://github.com/babel/gulp-babel">gulp-babel</a>, который конвертирует ES6/ES7 в ES5.</p>
-<p><a href="https://www.npmjs.com/package/gulp-jsfmt">gulp-jsfmt</a> &mdash; полезнейший плагин для работы с JavaScript от команды Rdio, который позволяет искать конкретные фрагменты, форматировать и производить массовые изменения в коде. Также существует <a href="https://github.com/tarunc/gulp-jsbeautifier">gulp-jsbeautifier</a>.</p>
-<p><a href="https://github.com/jscs-dev/gulp-jscs">gulp-jscs</a> &mdash; JavaScript Code Style. Замечательный инструмент со множеством конфигураций для проверки вашего кода в соответствии с существующими стайлгайдами от jQuery, Яндекса, Google, Airbnb и других.</p>
-<p><a href="https://github.com/doctyper/gulp-modernizr">gulp-modernizr</a> &mdash; помогает составить правильную архитектуру проекта на основе Modernizr.js в зависимости от возможностей браузера.</p>
-<p><a href="https://github.com/gimm/gulp-express">gulp-express</a> &mdash; запускает Express.js веб-сервер.</p>
-<p><a href="https://github.com/robinthrift/gulp-requirejs">gulp-requirejs</a> и <a href="https://github.com/deepak1556/gulp-browserify">gulp-browserify</a> &mdash; оптимизируют работу RequireJS и Browserify соответственно.</p>
-<p><a href="https://github.com/sindresorhus/gulp-plato">gulp-plato</a> &mdash; предоставляет аналитику по вашему коду с разными метриками в виде красивых графиков.</p>
-<p><a href="https://github.com/alexeyraspopov/gulp-complexity">gulp-complexity</a> &mdash; проверка на качество кода основанная на алгоритмах Halstead и Cyclomatic.</p>
-<p><a href="https://github.com/kirjs/gulp-fixmyjs">fixmyjs</a> &mdash; автоматически исправляет простые ошибки в коде после линта выполненного на основе <a href="http://jshint.com/">JSHint</a> (<a href="https://github.com/spalger/gulp-jshint">gulp-jshint</a>).</p>
-<p><a href="https://github.com/yannickcr/gulp-jscpd">gulp-jscpd</a> &mdash; для поиска дубликатов в коде.</p>
-<p><a href="https://github.com/rogeriopvl/gulp-jsonlint">gulp-jsonlint</a> &mdash; валидатор JSON файлов.</p>
-<p><a href="https://github.com/terinjokes/gulp-uglify">gulp-uglify</a> &mdash; JavaScript компрессор.</p>
-<p><a href="https://github.com/wearefractal/gulp-concat">gulp-concat</a> &mdash; конкатенация файлов.</blockquote></p>
-<h3>Unit тесты</h3><br />
-&nbsp;</p>
-<ul>
-<li><a href="https://github.com/kjvalencik/gulp-nodeunit">gulp-nodeunit</a></li>
-<li><a href="https://github.com/sindresorhus/gulp-jasmine">gulp-jasmine</a></li>
-<li><a href="https://github.com/jonkemp/gulp-qunit">gulp-qunit</a></li>
-<li><a href="https://github.com/sindresorhus/gulp-mocha">gulp-mocha</a></li>
-<li><a href="https://github.com/karma-runner/gulp-karma">gulp-karma</a></li><br />
-</ul><br />
-&nbsp;</p>
-<h4>Графика</h4></p>
-<blockquote><p><a href="https://github.com/wakayama-io/gulpicon/">gulpicon</a> &mdash; ценный плагин, который позволяет генерировать спрайты из SVG, переводить их в PNG, записывать все Data URI и подключать нужный формат в зависимости от возможностей браузера.</p>
-<p><a href="https://github.com/nfroidure/gulp-iconfont">gulp-iconfont</a> &mdash; великолепный плагин для работы с веб-шрифтами. Умеет создавать WOFF, WOFF2, EOT, TTF файлы из SVG.</p>
-<p><a href="https://github.com/mahnunchik/gulp-responsive">gulp-responsive</a> &mdash; простой способ сгенерировать адаптивные изображения под требуемые разрешения устройств с указанием соответствующих префиксов в наименовании.</p>
-<p><a href="https://github.com/rizalp/gulp-sharp">gulp-sharp</a> &mdash; самый быстрый модуль для работы с JPEG, PNG, WebP и TIFF изображениями. Плагин умеет изменять размер, ориентацию, фон, альфа-канал и многое другое.</p>
-<p><a href="https://github.com/w0rm/gulp-svgstore">gulp-svgstore</a> &mdash; объединяет все подключаемые SVG файлы и записывает их в HTML как <code><symbol></code> для дальнейшего использования.</p>
-<p><a href="https://github.com/akoenig/imacss">gulp-imacss</a> &mdash; очень удобная утилита, которая автоматически преобразовывает подключенные в CSS изображения PNG, JPG, SVG в Data URI.</p>
+<p>У веб-разработчиков есть прекрасный инструмент для автоматизации массы задач, который называется <em>Gulp</em>. И моя страсть к таксономии заставила себя собрать огромную коллекцию почти из 100 ценных плагинов для этого сборщика. Думаю многие кто уже использует <em>Gulp</em> найдут для себя что-то нужное, а кто нет, глядя на возможности, получит хорошую мотивацию установить его и понять как эта штука работает.</p>
+<p>А еще я выложил <a href="https://github.com/Pestov/essential-gulp-plugins">подборку на GitHub</a>, чтобы каждый мог пополнить коллекцию.</p>
+
+<h2>HTML&CSS</h2>
+<p><a href="https://github.com/postcss/autoprefixer">autoprefixer</a> - один из самых полезных плагинов, который автоматически расставляет префиксы к CSS свойствам, исходя из статистики <a href="http://caniuse.com/">caniuse</a>. Важно сказать, что Автопрефиксер это лишь один из множества дополнений в рамках проекта <a href="https://github.com/postcss/postcss">PostCSS</a> от Злых Марсиан.</p>
+<p><a href="https://github.com/BrowserSync/gulp-browser-sync">gulp-browser-sync</a> - вероятно, самый нужный инструмент, с точки зрения повышения продуктивности веб-разработчиков. BrowserSync создает подключение, после чего производит автообновление страницы во всех браузерах на всех устройствах при изменениями не только клиентских или даже серверных файлов. А плюс ко всему синхронизирует позицию скроллинга и заполненные данные в формах.</p>
+<p><a href="https://github.com/jonkemp/gulp-useref">gulp-useref</a> - парсит специфичные блоки и конкатенирует описанные в них стили и скрипты.</p>
+<p><a href="https://github.com/alexshk/gulp-email-design">gulp-email-design</a> - бесценный инструмент при верстки писем, который переводит все CSS стили в инлайновые, автоматически изменяя все пути к файлам, опционально умеет загружать изображения на CDN и даже отсылать письма на почту.</p>
+<p><a href="https://github.com/ben-eb/gulp-uncss">gulp-uncss</a> - лучшее решение для оптимизации CSS файлов. Плагин анализирует HTML код и находит все неиспользуемые и продублированные стили.</p>
+<p><a href="https://github.com/ben-eb/gulp-csso">gulp-csso</a> - отличный CSS минификатор. На сегодняшний день существует целый ряд CSS компрессоров и сравнительная таблица (GitHub) по ним. Но недавно я увидел лучшую <a href="https://github.com/frankmarineau/shorthand">Shorthand</a> утилиту без <em>Gulp</em>, которая делает приблизительно следующее:</p>
+<pre><code>a {
+    font-family: Arial;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: bold;
+    background-image: url('example.png');
+    background-color: red;
+    background-size: cover;
+    background-repeat: no-repeat;
+}</code></pre>
+
+=>
+
+<pre><code>a {
+font: italic bold 14px/18px Arial;
+background: red url('example.png') no-repeat / cover;
+}</code></pre>
+
+<a href="https://github.com/jonschlinkert/gulp-htmlmin">gulp-htmlmin</a> - простой HTML минификатор.</p>
+<p><a href="https://github.com/koistya/gulp-csscomb">gulp-csscomb</a> - облагораживает структуру ваших CSS.</p>
+<p><a href="https://www.npmjs.com/package/gulp-csslint">gulp-csslint</a> - CSS линтер.</p>
+<p><a href="https://github.com/bezoerb/gulp-htmlhint">gulp-htmlhint</a> - HTML валидатор.</p>
+<hr />
+
+<h2>JavaScript</h2>
+<p><a href="https://github.com/azproduction/gulp-autopolyfiller">gulp-autopolyfiller</a> - мега крутой плагин, который похож на Autoprefixer и подбирает все необходимые полифилы для JavaScript, чтобы вы могли использовать последние стандарты ECMAScript уже сегодня. Еще рекомендую <a href="https://github.com/babel/gulp-babel">gulp-babel</a>, который конвертирует ES6/ES7 в ES5.</p>
+<p><a href="https://www.npmjs.com/package/gulp-jsfmt">gulp-jsfmt</a> - полезнейший плагин для работы с JavaScript от команды Rdio, который позволяет искать конкретные фрагменты, форматировать и производить массовые изменения в коде. Также существует <a href="https://github.com/tarunc/gulp-jsbeautifier">gulp-jsbeautifier</a>.</p>
+<p><a href="https://github.com/jscs-dev/gulp-jscs">gulp-jscs</a> - JavaScript Code Style. Замечательный инструмент со множеством конфигураций для проверки вашего кода в соответствии с существующими стайлгайдами от jQuery, Яндекса, Google, Airbnb и других.</p>
+<p><a href="https://github.com/doctyper/gulp-modernizr">gulp-modernizr</a> - помогает составить правильную архитектуру проекта на основе Modernizr.js в зависимости от возможностей браузера.</p>
+<p><a href="https://github.com/gimm/gulp-express">gulp-express</a> - запускает Express.js веб-сервер.</p>
+<p><a href="https://github.com/robinthrift/gulp-requirejs">gulp-requirejs</a> и <a href="https://github.com/deepak1556/gulp-browserify">gulp-browserify</a> - оптимизируют работу RequireJS и Browserify соответственно.</p>
+<p><a href="https://github.com/sindresorhus/gulp-plato">gulp-plato</a> - предоставляет аналитику по вашему коду с разными метриками в виде красивых графиков.</p>
+<p><a href="https://github.com/alexeyraspopov/gulp-complexity">gulp-complexity</a> - проверка на качество кода основанная на алгоритмах Halstead и Cyclomatic.</p>
+<p><a href="https://github.com/kirjs/gulp-fixmyjs">fixmyjs</a> - автоматически исправляет простые ошибки в коде после линта выполненного на основе <a href="http://jshint.com/">JSHint</a> (<a href="https://github.com/spalger/gulp-jshint">gulp-jshint</a>).</p>
+<p><a href="https://github.com/yannickcr/gulp-jscpd">gulp-jscpd</a> - для поиска дубликатов в коде.</p>
+<p><a href="https://github.com/rogeriopvl/gulp-jsonlint">gulp-jsonlint</a> - валидатор JSON файлов.</p>
+<p><a href="https://github.com/terinjokes/gulp-uglify">gulp-uglify</a> - JavaScript компрессор.</p>
+<p><a href="https://github.com/wearefractal/gulp-concat">gulp-concat</a> - конкатенация файлов.</p>
+<hr />
+
+<h2>Unit тесты</h2>
+<p><a href="https://github.com/kjvalencik/gulp-nodeunit">gulp-nodeunit</a></p>
+<p><a href="https://github.com/sindresorhus/gulp-jasmine">gulp-jasmine</a></p>
+<p><a href="https://github.com/jonkemp/gulp-qunit">gulp-qunit</a></p>
+<p><a href="https://github.com/sindresorhus/gulp-mocha">gulp-mocha</a></p>
+<p><a href="https://github.com/karma-runner/gulp-karma">gulp-karma</a></p>
+<hr />
+
+<h2>Графика</h2>
+<p><a href="https://github.com/wakayama-io/gulpicon/">gulpicon</a> - ценный плагин, который позволяет генерировать спрайты из SVG, переводить их в PNG, записывать все Data URI и подключать нужный формат в зависимости от возможностей браузера.</p>
+<p><a href="https://github.com/nfroidure/gulp-iconfont">gulp-iconfont</a> - великолепный плагин для работы с веб-шрифтами. Умеет создавать WOFF, WOFF2, EOT, TTF файлы из SVG.</p>
+<p><a href="https://github.com/mahnunchik/gulp-responsive">gulp-responsive</a> - простой способ сгенерировать адаптивные изображения под требуемые разрешения устройств с указанием соответствующих префиксов в наименовании.</p>
+<p><a href="https://github.com/rizalp/gulp-sharp">gulp-sharp</a> - самый быстрый модуль для работы с JPEG, PNG, WebP и TIFF изображениями. Плагин умеет изменять размер, ориентацию, фон, альфа-канал и многое другое.</p>
+<p><a href="https://github.com/w0rm/gulp-svgstore">gulp-svgstore</a> - объединяет все подключаемые SVG файлы и записывает их в HTML как <em><symbol></em> для дальнейшего использования.</p>
+<p><a href="https://github.com/akoenig/imacss">gulp-imacss</a> - очень удобная утилита, которая автоматически преобразовывает подключенные в CSS изображения PNG, JPG, SVG в Data URI.</p>
 <p><a href="https://github.com/sindresorhus/gulp-imagemin">gulp-imagemin</a> и <a href="https://github.com/creativeaura/gulp-tinypng">gulp-tinypng</a> для сжатия изображений.</p>
-<p><a href="https://github.com/otouto/gulp-spritesmith">gulp-spritesmith</a> &mdash; автоматическая генерация спрайтов.</blockquote></p>
-<h4>Разное</h4></p>
-<blockquote><p><a href="https://github.com/gratimax/gulp-grunt">gulp-grunt</a> &mdash; позволяет запускать Grunt плагины для Gulp.</blockquote></p>
-<h5><b>Некоторые из отсутствующих:</b></h5></p>
-<blockquote><p><a href="https://github.com/spatools/grunt-html-build">grunt-html-build</a> &mdash; универсальный помощник в верстке. Плагин умеет объединять исходные файлы и создавать полноценные шаблоны/блоки для вашего HTML. Еще для похожих задач очень хорош <a href="https://github.com/alanshaw/grunt-include-replace">grunt-include-replace</a>.<br />
-<a href="https://github.com/fatso83/grunt-penthouse">grunt-penthouse</a> и <a href="https://github.com/filamentgroup/grunt-criticalcss">grunt-criticalcss</a> &mdash; автоматически находят Critical Path в вашем проекте. Важный момент с точки зрения производительность, о чем подробнее написано <a href="http://www.phpied.com/css-and-the-critical-path/">тут</a>.<br />
-<a href="https://github.com/shipitjs/grunt-shipit">grunt-shipit</a> &mdash; автоматизирует deploy с помощью Shipit.<br />
-<a href="https://github.com/wecodemore/grunt-githooks">grunt-githooks</a> &mdash; привязывает <a href="http://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git Hooks</a> к Grunt таскам.<br />
-<a href="https://github.com/GitbookIO/grunt-gitbook">grunt-gitbook</a> &mdash; создавайте документацию с помощью потрясающей утилиты GitBook.<br />
-<a href="https://github.com/btford/grunt-conventional-changelog">grunt-conventional-changelog</a> &mdash; генерирует список изменений на основе коммитов в Git.<br />
-<a href="https://github.com/tutukin/grunt-proxy">grunt-proxy</a> and <a href="https://github.com/drewzboto/grunt-connect-proxy">grunt-connect-proxy</a> &mdash; connect support for proxying API calls during development.<br />
-<a href="https://github.com/stefanjudis/grunt-phantomas">grunt-phantomas</a> &mdash; превосходный инструмент для измерения производительности проекта.<br />
-<a href="https://github.com/mattstyles/grunt-banner">grunt-usebanner</a> &mdash; добавляет баннеры (копирайт или ASCII заголовки) в исходных файлах и <a href="https://github.com/patorjk/grunt-figlet">grunt-figlet</a> для помощи работы с этим.<br />
-<a href="https://github.com/floatdrop/gulp-watch">gulp-watch</a> &mdash; краеугольный камень в плагинной системе Gulp. Следит за всеми указанными файлами или целыми директориями и в случае каких-либо изменений выполняет описанные в конфигурациях таски.<br />
-<a href="https://github.com/mikaelbr/gulp-notify">gulp-notify</a> &mdash; выводит ошибки при сборке Gulp в виде системных сообщений, а главное то, что работает для разных операционных систем.<br />
-<a href="https://github.com/stevelacy/gulp-git">gulp-git</a> &mdash; позволяет использовать Git команды.<br />
-<a href="https://github.com/jsBoot/gulp-jsdoc">gulp-jsdoc</a> &mdash; генератор документации, работает на основе JSDoc3.<br />
-<a href="https://github.com/sindresorhus/gulp-rev">gulp-rev</a> &mdash; полезный плагин для работы с ревизиями.<br />
-gulp-release &mdash; позволяет управлять версиями в вашем проекте.<br />
-<a href="https://github.com/stevelacy/gulp-bump">gulp-bump</a> &mdash; следит за репозиторием и обновляет package.json и <a href="https://github.com/tounano/gulp-update">gulp-update</a>, который обновляет сами пакеты.<br />
-<a href="https://github.com/ck86/gulp-bower-files">gulp-bower-files</a> &mdash; подключает все необходимые Bower компоненты.<br />
-<a href="https://github.com/hemanth/gulp-removelogs">gulp-removelogs</a> &mdash; автоматически удаляет логи.<br />
-<a href="https://github.com/jas/gulp-preprocess">gulp-preprocess</a> &mdash; препроцессор, ссылающийся на установленные конфигурации.<br />
-<a href="https://github.com/hughsk/gulp-duration">gulp-duration</a> &mdash; отображает время выполнения тасков.<br />
-<a href="https://github.com/sindresorhus/gulp-changed">gulp-changed</a> и <a href="https://www.npmjs.com/package/gulp-newer">gulp-newer</a> &mdash; запускают таски только для изменившихся файлов.<br />
-<a href="https://github.com/avevlad/gulp-connect">gulp-connect</a> &mdash; простой веб-сервер для статических сайтов.<br />
-<a href="https://github.com/sun-zheng-an/gulp-shell">gulp-shell</a> &mdash; позволяет запускать Shell команды.<br />
-<a href="https://github.com/teambition/gulp-ssh">gulp-ssh</a> &mdash; обеспечивает возможность подключения по SSH и SFTP.<br />
-<a href="https://www.npmjs.com/package/gulp-zip">gulp-zip</a> &mdash; архивирует папки и файлы.<br />
-<a href="https://github.com/peter-vilja/gulp-clean">gulp-clean</a> и <a href="https://github.com/klaascuvelier/gulp-copy">gulp-copy</a> &mdash; соответственно очищают и копируют указанные исходники.<br />
-<a href="https://github.com/Metrime/gulp-filesize">gulp-filesize</a> &mdash; отображает размеры файлов в удобном для чтения формате.<br />
-<a href="https://github.com/gulpjs/gulp-util">gulp-util</a> &mdash; различные утилиты для разработки Gulp плагинов.</blockquote></p>
-<h4>Компиляторы</h4></p>
-<blockquote><p><a href="https://github.com/plus3network/gulp-less">gulp-less</a> &mdash; LESS в CSS.<br />
-<a href="https://github.com/dlmanning/gulp-sass">gulp-sass</a> &mdash; SASS/SCSS в СSS.<br />
-<a href="https://github.com/appleboy/gulp-compass">gulp-compass</a> &mdash; SASS с Compass в CSS.<br />
-<a href="https://github.com/LearnBoost/stylus">gulp-stylus</a> &mdash; Stylus в CSS.<br />
-<a href="https://github.com/wearefractal/gulp-coffee">gulp-coffee</a> &mdash; CoffeeScript в JavaScript.<br />
-<a href="https://github.com/phated/gulp-jade">gulp-jade</a> &mdash; Jade в HTML.<br />
-<a href="https://github.com/lazd/gulp-handlebars">gulp-handlebars</a> &mdash; Handlebars шаблоны в JST.<br />
-<a href="https://github.com/rdmurphy/gulp-jst">gulp-jst</a> &mdash; Underscore шаблоны в JST.<br />
-<a href="https://github.com/sindresorhus/gulp-react">gulp-react</a> &mdash; Facebook React&rsquo;s JSX шаблоны в JST.<br />
-<a href="https://github.com/sindresorhus/gulp-nunjucks">gulp-nunjucks</a> &mdash; Nunjucks шаблоны в JST.<br />
-<a href="https://github.com/sindresorhus/gulp-dust">gulp-dustjs</a> &mdash; Dust шаблоны в JST.<br />
-<a href="https://github.com/miickel/gulp-angular-templatecache">gulp-angular-templatecache</a> &mdash; AngularJS шаблоны в JST.</blockquote></p>
-<h4>Напоследок</h4></p>
-<blockquote><p><a href="https://github.com/addyosmani/psi">psi</a> &mdash; PageSpeed Insights with reporting.<br />
-<a href="https://github.com/addyosmani/tmi">tmi</a> &mdash; TMI (Too Many Images) &mdash; discover your image weight on the web.<br />
-<a href="https://ngrok.com/">ngrok</a> &mdash; Introspected tunnels to localhost.<br />
-<a href="https://github.com/sindresorhus/pageres">pageres</a> &mdash; удобная утилита для создания скриншотов сайтов в разных разрешениях.<br />
-Возможно, некоторые методы автоматизации вам будет удобнее использовать прямо в редакторе &mdash; Лучшие плагины для SublimeText.<br />
-<a href="https://github.com/tkellen/node-matchdep">matchdep</a> &mdash; помогает правильно описать зависимости.</blockquote><br />
-<script src="//css.googleaps.ru/css?f=Open+Sans&amp;cd=mb&amp;ver=4.2.2"></script></p>
+<p><a href="https://github.com/otouto/gulp-spritesmith">gulp-spritesmith</a> - автоматическая генерация спрайтов.</p>
+<hr />
+
+<h2>Разное</h2>
+<p><a href="https://github.com/gratimax/gulp-grunt">gulp-grunt</a> - позволяет запускать Grunt плагины для <em>Gulp</em>.</p>
+<hr />
+
+<h2>Некоторые из отсутствующих:</h2>
+<p><a href="https://github.com/spatools/grunt-html-build">grunt-html-build</a> - универсальный помощник в верстке. Плагин умеет объединять исходные файлы и создавать полноценные шаблоны/блоки для вашего HTML. Еще для похожих задач очень хорош <a href="https://github.com/alanshaw/grunt-include-replace">grunt-include-replace</a>.</p>
+<p><a href="https://github.com/fatso83/grunt-penthouse">grunt-penthouse</a> и <a href="https://github.com/filamentgroup/grunt-criticalcss">grunt-criticalcss</a> - автоматически находят Critical Path в вашем проекте. Важный момент с точки зрения производительность, о чем подробнее написано <a href="http://www.phpied.com/css-and-the-critical-path/">тут</a>.</p>
+<p><a href="https://github.com/shipitjs/grunt-shipit">grunt-shipit</a> - автоматизирует deploy с помощью Shipit.</p>
+<p><a href="https://github.com/wecodemore/grunt-githooks">grunt-githooks</a> - привязывает <a href="http://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git Hooks</a> к Grunt таскам.</p>
+<p><a href="https://github.com/GitbookIO/grunt-gitbook">grunt-gitbook</a> - создавайте документацию с помощью потрясающей утилиты GitBook.</p>
+<p><a href="https://github.com/btford/grunt-conventional-changelog">grunt-conventional-changelog</a> - генерирует список изменений на основе коммитов в Git.</p>
+<p><a href="https://github.com/tutukin/grunt-proxy">grunt-proxy</a> and <a href="https://github.com/drewzboto/grunt-connect-proxy">grunt-connect-proxy</a> - connect support for proxying API calls during development.</p>
+<p><a href="https://github.com/stefanjudis/grunt-phantomas">grunt-phantomas</a> - превосходный инструмент для измерения производительности проекта.</p>
+<p><a href="https://github.com/mattstyles/grunt-banner">grunt-usebanner</a> - добавляет баннеры (копирайт или ASCII заголовки) в исходных файлах и <a href="https://github.com/patorjk/grunt-figlet">grunt-figlet</a> для помощи работы с этим.</p>
+<p><a href="https://github.com/floatdrop/gulp-watch">gulp-watch</a> - краеугольный камень в плагинной системе <em>Gulp</em>. Следит за всеми указанными файлами или целыми директориями и в случае каких-либо изменений выполняет описанные в конфигурациях таски.</p>
+<p><a href="https://github.com/mikaelbr/gulp-notify">gulp-notify</a> - выводит ошибки при сборке <em>Gulp</em> в виде системных сообщений, а главное то, что работает для разных операционных систем.</p>
+<p><a href="https://github.com/stevelacy/gulp-git">gulp-git</a> - позволяет использовать Git команды.</p>
+<p><a href="https://github.com/jsBoot/gulp-jsdoc">gulp-jsdoc</a> - генератор документации, работает на основе JSDoc3.</p>
+<p><a href="https://github.com/sindresorhus/gulp-rev">gulp-rev</a> - полезный плагин для работы с ревизиями.</p>
+gulp-release - позволяет управлять версиями в вашем проекте.</p>
+<p><a href="https://github.com/stevelacy/gulp-bump">gulp-bump</a> - следит за репозиторием и обновляет package.json и <a href="https://github.com/tounano/gulp-update">gulp-update</a>, который обновляет сами пакеты.</p>
+<p><a href="https://github.com/ck86/gulp-bower-files">gulp-bower-files</a> - подключает все необходимые Bower компоненты.</p>
+<p><a href="https://github.com/hemanth/gulp-removelogs">gulp-removelogs</a> - автоматически удаляет логи.</p>
+<p><a href="https://github.com/jas/gulp-preprocess">gulp-preprocess</a> - препроцессор, ссылающийся на установленные конфигурации.</p>
+<p><a href="https://github.com/hughsk/gulp-duration">gulp-duration</a> - отображает время выполнения тасков.</p>
+<p><a href="https://github.com/sindresorhus/gulp-changed">gulp-changed</a> и <a href="https://www.npmjs.com/package/gulp-newer">gulp-newer</a> - запускают таски только для изменившихся файлов.</p>
+<p><a href="https://github.com/avevlad/gulp-connect">gulp-connect</a> - простой веб-сервер для статических сайтов.</p>
+<p><a href="https://github.com/sun-zheng-an/gulp-shell">gulp-shell</a> - позволяет запускать Shell команды.</p>
+<p><a href="https://github.com/teambition/gulp-ssh">gulp-ssh</a> - обеспечивает возможность подключения по SSH и SFTP.</p>
+<p><a href="https://www.npmjs.com/package/gulp-zip">gulp-zip</a> - архивирует папки и файлы.</p>
+<p><a href="https://github.com/peter-vilja/gulp-clean">gulp-clean</a> и <a href="https://github.com/klaascuvelier/gulp-copy">gulp-copy</a> - соответственно очищают и копируют указанные исходники.</p>
+<p><a href="https://github.com/Metrime/gulp-filesize">gulp-filesize</a> - отображает размеры файлов в удобном для чтения формате.</p>
+<p><a href="https://github.com/gulpjs/gulp-util">gulp-util</a> - различные утилиты для разработки <em>Gulp</em> плагинов.</p>
+<hr />
+
+<h2>Компиляторы</h2>
+<p><a href="https://github.com/plus3network/gulp-less">gulp-less</a> - LESS в CSS.</p>
+<p><a href="https://github.com/dlmanning/gulp-sass">gulp-sass</a> - SASS/SCSS в СSS.</p>
+<p><a href="https://github.com/appleboy/gulp-compass">gulp-compass</a> - SASS с Compass в CSS.</p>
+<p><a href="https://github.com/LearnBoost/stylus">gulp-stylus</a> - Stylus в CSS.</p>
+<p><a href="https://github.com/wearefractal/gulp-coffee">gulp-coffee</a> - CoffeeScript в JavaScript.</p>
+<p><a href="https://github.com/phated/gulp-jade">gulp-jade</a> - Jade в HTML.</p>
+<p><a href="https://github.com/lazd/gulp-handlebars">gulp-handlebars</a> - Handlebars шаблоны в JST.</p>
+<p><a href="https://github.com/rdmurphy/gulp-jst">gulp-jst</a> - Underscore шаблоны в JST.</p>
+<p><a href="https://github.com/sindresorhus/gulp-react">gulp-react</a> - Facebook React&rsquo;s JSX шаблоны в JST.</p>
+<p><a href="https://github.com/sindresorhus/gulp-nunjucks">gulp-nunjucks</a> - Nunjucks шаблоны в JST.</p>
+<p><a href="https://github.com/sindresorhus/gulp-dust">gulp-dustjs</a> - Dust шаблоны в JST.</p>
+<p><a href="https://github.com/miickel/gulp-angular-templatecache">gulp-angular-templatecache</a> - AngularJS шаблоны в JST.</p>
+<hr />
+
+<h2>Напоследок</h2>
+<p><a href="https://github.com/addyosmani/psi">psi</a> - PageSpeed Insights with reporting.</p>
+<p><a href="https://github.com/addyosmani/tmi">tmi</a> - TMI (Too Many Images) - discover your image weight on the web.</p>
+<p><a href="https://ngrok.com/">ngrok</a> - Introspected tunnels to localhost.</p>
+<p><a href="https://github.com/sindresorhus/pageres">pageres</a> - удобная утилита для создания скриншотов сайтов в разных разрешениях.
+Возможно, некоторые методы автоматизации вам будет удобнее использовать прямо в редакторе - Лучшие плагины для SublimeText.</p>
+<p><a href="https://github.com/tkellen/node-matchdep">matchdep</a> - помогает правильно описать зависимости.</p>

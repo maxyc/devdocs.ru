@@ -12,16 +12,7 @@ author_login: admin
 author_email: maxycws@gmail.com
 excerpt: "Если вы когда-либо интересовались, что представляют собой шаблоны проектирования,
   то добро пожаловать. В этой статье я расскажу, что это такое, зачем они нужны, как
-  их использовать, и приведу примеры наиболее распространенных шаблонов на PHP.\r\n<h3>Что
-  такое шаблоны проектирования?</h3>\r\nШаблоны проектирования &mdash;&nbsp;это
-  проверенные и готовые к использованию решения часто возникающих в повседневном программировании
-  задач. Это не класс и не библиотека, которую можно подключить к проекту, это нечто
-  большее. Шаблон проектирования, подходящий под задачу, реализуется в каждом конкретном
-  случае. Кроме того, он не зависит от языка программирования. Хороший шаблон легко
-  реализуется в большинстве, если не во всех языках, в зависимости от выразительных
-  средств языка. Следует, однако, помнить, что такой шаблон, будучи примененным неправильно
-  или к неподходящей задаче, может принести немало проблем. Тем не менее, правильно
-  примененный шаблон поможет решить задачу легко и просто."
+  их использовать, и приведу примеры наиболее распространенных шаблонов на PHP."
 wordpress_id: 47938
 wordpress_url: http://devdocs.ru/?p=47938
 date: '2015-11-20 20:32:02 +0200'
@@ -38,661 +29,288 @@ tags:
 comments: []
 ---
 <p>Если вы когда-либо интересовались, что представляют собой шаблоны проектирования, то добро пожаловать. В этой статье я расскажу, что это такое, зачем они нужны, как их использовать, и приведу примеры наиболее распространенных шаблонов на PHP.</p>
-<h3>Что такое шаблоны проектирования?</h3><br />
-Шаблоны проектирования &mdash;&nbsp;это проверенные и готовые к использованию решения часто возникающих в повседневном программировании задач. Это не класс и не библиотека, которую можно подключить к проекту, это нечто большее. Шаблон проектирования, подходящий под задачу, реализуется в каждом конкретном случае. Кроме того, он не зависит от языка программирования. Хороший шаблон легко реализуется в большинстве, если не во всех языках, в зависимости от выразительных средств языка. Следует, однако, помнить, что такой шаблон, будучи примененным неправильно или к неподходящей задаче, может принести немало проблем. Тем не менее, правильно примененный шаблон поможет решить задачу легко и просто.<a id="more"></a><a id="more-47938"></a></p>
-<p><span id="more-7809"></span>Существует три типа шаблонов:</p>
-<ul>
-<li>структурные;</li>
-<li>порождающие;</li>
-<li>поведенческие.</li><br />
-</ul><br />
-<b>Структурные</b> шаблоны определяют отношения между классами и объектами, позволяя им работать совместно.</p>
-<p><b>Порождающие</b> шаблоны предоставляют механизмы инициализации, позволяя создавать объекты удобным способом.</p>
-<p><b>Поведенческие</b> шаблоны используются для того, чтобы упростить взаимодействие между сущностями.</p>
-<h3>Зачем нужны шаблоны проектирования?</h3><br />
-Шаблон проектирования, по своей сути, это продуманное решение той или иной задачи. Если вы столкнулись с известной задачей, почему бы не использовать готовое решение, проверенное опытом?</p>
-<h4>Пример</h4><br />
-Давайте представим, что вам необходимо объединить два класса, которые выполняют различные операции в зависимости от ситуации. Эти классы интенсивно используются существующей системой, что не позволяет удалить один из них и добавить его функциональность во второй. Кроме того, изменение кода потребует его тщательного тестирования, поскольку такой рефакторинг ведет к неизбежным ошибкам. Вместо этого вы можете реализовать шаблоны &laquo;Стратегия&raquo; и &laquo;Адаптер&raquo; и с их помощью решить задачу.</p>
-<div id="crayon-5637c4f5daf71276701911" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5daf71276701911-1">1</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf71276701911-2">2</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf71276701911-3">3</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf71276701911-4">4</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf71276701911-5">5</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf71276701911-6">6</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf71276701911-7">7</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf71276701911-8">8</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf71276701911-9">9</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf71276701911-10">10</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf71276701911-11">11</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf71276701911-12">12</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf71276701911-13">13</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf71276701911-14">14</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf71276701911-15">15</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf71276701911-16">16</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf71276701911-17">17</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5daf71276701911-1" class="crayon-line"><span class="crayon-t">class</span> <span class="crayon-e">StrategyAndAdapterExampleClass</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-2" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">private</span> <span class="crayon-v">$_class_one</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-3" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">private</span> <span class="crayon-v">$_class_two</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-4" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">private</span> <span class="crayon-v">$_context</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-5" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5daf71276701911-6" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">__construct</span><span class="crayon-sy">(</span> <span class="crayon-v">$context</span> <span class="crayon-sy">)</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-7" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_context</span> <span class="crayon-o">=</span> <span class="crayon-v">$context</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-8" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-9" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5daf71276701911-10" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">operation1</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-11" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-sy">(</span> <span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_context</span> <span class="crayon-o">==</span> <span class="crayon-s">"context_for_class_one"</span> <span class="crayon-sy">)</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-12" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_class_one</span><span class="crayon-o">-></span><span class="crayon-e">operation1_in_class_one_context</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-13" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span> <span class="crayon-st">else</span> <span class="crayon-sy">(</span> <span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_context</span> <span class="crayon-o">==</span> <span class="crayon-s">"context_for_class_two"</span> <span class="crayon-sy">)</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-14" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_class_two</span><span class="crayon-o">-></span><span class="crayon-e">operation1_in_class_two_context</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-15" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-16" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5daf71276701911-17" class="crayon-line"><span class="crayon-sy">}</span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div><br />
-Просто, не правда ли? Давайте посмотрим поближе на шаблон &laquo;Стратегия&raquo;.</p>
-<h3>Шаблон &laquo;Стратегия&raquo;</h3></p>
-<blockquote><p><b>Стратегия</b> &mdash; поведенческий шаблон, который позволяет выбрать поведение программы в процессе выполнения в зависимости от контекста путем инкапсуляции нескольких алгоритмов в разных классах.</blockquote><br />
-В примере выше выбор стратегии основан на значении переменной <code>$context</code>, которое было в момент создания объекта. Если значение было <code>"context_for_class_one"</code>, программа будет использовать класс <code>class_one</code>. И наоборот.</p>
-<h4>Хорошо, но где это можно использовать?</h4></p>
-<p>Представьте, что вы разрабатываете класс, который может создать или обновить запись в базе данных. В обоих случаях входные параметры будут одни и те же (имя, адрес, номер телефона и т.&nbsp;п.), но, в зависимости от ситуации, он будет должен использовать различные функции для обновления и создания записи. Можно каждый раз переписывать условие <tt>if/else</tt>, а можно создать один метод, который будет принимать контекст:</p>
-<div id="crayon-5637c4f5daf83433405048" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5daf83433405048-1">1</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf83433405048-2">2</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf83433405048-3">3</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf83433405048-4">4</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf83433405048-5">5</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf83433405048-6">6</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf83433405048-7">7</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf83433405048-8">8</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf83433405048-9">9</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf83433405048-10">10</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf83433405048-11">11</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5daf83433405048-1" class="crayon-line"><span class="crayon-t">class</span> <span class="crayon-e">User</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf83433405048-2" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5daf83433405048-3" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">CreateOrUpdate</span><span class="crayon-sy">(</span><span class="crayon-v">$name</span><span class="crayon-sy">,</span> <span class="crayon-v">$address</span><span class="crayon-sy">,</span> <span class="crayon-v">$mobile</span><span class="crayon-sy">,</span> <span class="crayon-v">$userid</span> <span class="crayon-o">=</span> <span class="crayon-t">null</span><span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5daf83433405048-4" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf83433405048-5" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-sy">(</span> <span class="crayon-e">is_null</span><span class="crayon-sy">(</span><span class="crayon-v">$userid</span><span class="crayon-sy">)</span> <span class="crayon-sy">)</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf83433405048-6" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// пользователя не существует, создаем запись</span></div></p>
-<div id="crayon-5637c4f5daf83433405048-7" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span> <span class="crayon-st">else</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf83433405048-8" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// запись есть, обновляем ее</span></div></p>
-<div id="crayon-5637c4f5daf83433405048-9" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5daf83433405048-10" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5daf83433405048-11" class="crayon-line"><span class="crayon-sy">}</span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div><br />
-Обычно шаблон &laquo;Стратегия&raquo; подразумевает инкапсуляцию алгоритмов в классы, но в данном случае это излишне. Помните, что вы не обязаны следовать шаблону слово в слово. Любые варианты допустимы, если они решают задачу и соответствуют концепции.</p>
-<h3>Шаблон &laquo;Адаптер&raquo;</h3></p>
-<blockquote><p><b>Адаптер</b> &mdash;&nbsp;структурный шаблон, который позволяет использовать класс, реализующий нужные функции, но имеющий неподходящий интерфейс.</blockquote><br />
-Также он позволяет изменить некоторые входные данные для совместимости с интерфейсом внутреннего класса.</p>
-<h4>Как его использовать?</h4></p>
-<p>Другое название адаптера &mdash; &laquo;Обертка&raquo;. Он &laquo;оборачивает&raquo; новый интерфейс вокруг класса для его использования. Классический пример: вам надо создать класс предметной модели, имея классы объектов в базе данных. Вместо того, чтобы обращаться к табличным классам напрямую и вызывать их методы по одному, вы можете инкапсулировать вызовы этих методов в одном методе в адаптере. Это не только позволит повторно использовать набор операций, но и избавит вас от постоянного переписывания большого количества кода, если вам потребуется выполнить тот же набор действий в другом месте.</p>
+<h2>Что такое шаблоны проектирования?</h2>
+
+<p><strong>Шаблоны проектирования</strong> - это проверенные и готовые к использованию решения часто возникающих в повседневном программировании задач. Это не класс и не библиотека, которую можно подключить к проекту, это нечто большее. <strong>Шаблон проектирования</strong>, подходящий под задачу, реализуется в каждом конкретном случае. Кроме того, он не зависит от языка программирования. Хороший шаблон легко реализуется в большинстве, если не во всех языках, в зависимости от выразительных средств языка. Следует, однако, помнить, что такой шаблон, будучи примененным неправильно или к неподходящей задаче, может принести немало проблем. Тем не менее, правильно примененный шаблон поможет решить задачу легко и просто.
+
+<h3>Существует три типа шаблонов:</h3>
+<p><strong>Структурные</strong> шаблоны определяют отношения между классами и объектами, позволяя им работать совместно.</p>
+<p><strong>Порождающие</strong> шаблоны предоставляют механизмы инициализации, позволяя создавать объекты удобным способом.</p>
+<p><strong>Поведенческие</strong> шаблоны используются для того, чтобы упростить взаимодействие между сущностями.</p>
+
+<h2>Зачем нужны шаблоны проектирования?</h2>
+<p><strong>Шаблон проектирования</strong>, по своей сути, это продуманное решение той или иной задачи. Если вы столкнулись с известной задачей, почему бы не использовать готовое решение, проверенное опытом?</p>
+
+<h3>Пример</h3>
+<p>Давайте представим, что вам необходимо объединить два класса, которые выполняют различные операции в зависимости от ситуации. Эти классы интенсивно используются существующей системой, что не позволяет удалить один из них и добавить его функциональность во второй. Кроме того, изменение кода потребует его тщательного тестирования, поскольку такой рефакторинг ведет к неизбежным ошибкам. Вместо этого вы можете реализовать шаблоны "Стратегия" и "Адаптер" и с их помощью решить задачу.</p>
+
+<pre><code>class StrategyAndAdapterExampleClass {
+        private $_class_one;
+        private $_class_two;
+        private $_context;
+ 
+        public function __construct( $context ) {
+                        $this->_context = $context;
+        }
+ 
+        public function operation1() {
+                if( $this->_context == "context_for_class_one" ) {
+                        $this->_class_one->operation1_in_class_one_context();
+                } else ( $this->_context == "context_for_class_two" ) {
+                        $this->_class_two->operation1_in_class_two_context();
+                }
+        }
+}</code></pre>
+
+<p>Просто, не правда ли? Давайте посмотрим поближе на шаблон "<em>Стратегия</em>".</p>
+<hr />
+<h2>Шаблон "Стратегия"</h2>
+<p><strong>Стратегия</strong> - поведенческий шаблон, который позволяет выбрать поведение программы в процессе выполнения в зависимости от контекста путем инкапсуляции нескольких алгоритмов в разных классах.</p>
+<p>В примере выше выбор стратегии основан на значении переменной <em>$context</em>, которое было в момент создания объекта. Если значение было <em>"context_for_class_one"</em>, программа будет использовать класс <em>class_one</em>. И наоборот.</p>
+
+<h3>Хорошо, но где это можно использовать?</h3>
+<p>Представьте, что вы разрабатываете класс, который может создать или обновить запись в базе данных. В обоих случаях входные параметры будут одни и те же (имя, адрес, номер телефона и т.п.), но, в зависимости от ситуации, он будет должен использовать различные функции для обновления и создания записи. Можно каждый раз переписывать условие <tt>if/else</tt>, а можно создать один метод, который будет принимать контекст:</p>
+<pre><code>class User {
+ 
+        public function CreateOrUpdate($name, $address, $mobile, $userid = null)
+        {
+                if( is_null($userid) ) {
+                        // пользователя не существует, создаем запись
+                } else {
+                        // запись есть, обновляем ее
+                }
+        }
+}</code></pre>
+<p>Обычно шаблон "<em>Стратегия</em>" подразумевает инкапсуляцию алгоритмов в классы, но в данном случае это излишне. Помните, что вы не обязаны следовать шаблону слово в слово. Любые варианты допустимы, если они решают задачу и соответствуют концепции.</p>
+<hr />
+<h2>Шаблон "Адаптер"</h2></p>
+<p><strong>Адаптер</strong> - структурный шаблон, который позволяет использовать класс, реализующий нужные функции, но имеющий неподходящий интерфейс.</p>
+<p>Также он позволяет изменить некоторые входные данные для совместимости с интерфейсом внутреннего класса.</p>
+
+<h3>Как его использовать?</h3>
+<p>Другое название адаптера - "<em>Обертка</em>". Он "оборачивает" новый интерфейс вокруг класса для его использования. </p>
+<p>Классический пример: вам надо создать класс предметной модели, имея классы объектов в базе данных. Вместо того, чтобы обращаться к табличным классам напрямую и вызывать их методы по одному, вы можете инкапсулировать вызовы этих методов в одном методе в адаптере. Это не только позволит повторно использовать набор операций, но и избавит вас от постоянного переписывания большого количества кода, если вам потребуется выполнить тот же набор действий в другом месте.</p>
 <p>Сравните два примера.</p>
-<h5>Без адаптера</h5></p>
-<div id="crayon-5637c4f5daf8b234648476" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5daf8b234648476-1">1</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf8b234648476-2">2</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf8b234648476-3">3</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf8b234648476-4">4</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf8b234648476-5">5</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5daf8b234648476-1" class="crayon-line"><span class="crayon-v">$user</span> <span class="crayon-o">=</span> <span class="crayon-r">new</span> <span class="crayon-e">User</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf8b234648476-2" class="crayon-line crayon-striped-line"><span class="crayon-v">$user</span><span class="crayon-o">-></span><span class="crayon-e">CreateOrUpdate</span><span class="crayon-sy">(</span> <span class="crayon-c">// параметры );</span></div></p>
-<div id="crayon-5637c4f5daf8b234648476-3" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5daf8b234648476-4" class="crayon-line crayon-striped-line"><span class="crayon-v">$profile</span> <span class="crayon-o">=</span> <span class="crayon-r">new</span> <span class="crayon-e">Profile</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf8b234648476-5" class="crayon-line"><span class="crayon-v">$profile</span><span class="crayon-o">-></span><span class="crayon-e">CreateOrUpdate</span><span class="crayon-sy">(</span> <span class="crayon-c">// параметры );</span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div><br />
-Если нам придется использовать такой код повторно, мы будем вынуждены переписывать все это заново.</p>
-<h5>С использованием адаптера</h5><br />
-Мы можем создать класс-обертку <code>Account</code>:</p>
-<div id="crayon-5637c4f5daf90821961094" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5daf90821961094-1">1</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf90821961094-2">2</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf90821961094-3">3</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf90821961094-4">4</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf90821961094-5">5</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf90821961094-6">6</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf90821961094-7">7</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf90821961094-8">8</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf90821961094-9">9</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf90821961094-10">10</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf90821961094-11">11</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5daf90821961094-1" class="crayon-line"><span class="crayon-t">class</span> <span class="crayon-e">Account</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5daf90821961094-2" class="crayon-line crayon-striped-line"><span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf90821961094-3" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">NewAccount</span><span class="crayon-sy">(</span> <span class="crayon-c">// параметры )</span></div></p>
-<div id="crayon-5637c4f5daf90821961094-4" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf90821961094-5" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$user</span> <span class="crayon-o">=</span> <span class="crayon-r">new</span> <span class="crayon-e">User</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf90821961094-6" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$user</span><span class="crayon-o">-></span><span class="crayon-e">CreateOrUpdate</span><span class="crayon-sy">(</span> <span class="crayon-c">// часть параметров );</span></div></p>
-<div id="crayon-5637c4f5daf90821961094-7" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5daf90821961094-8" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$profile</span> <span class="crayon-o">=</span> <span class="crayon-r">new</span> <span class="crayon-e">Profile</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf90821961094-9" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$profile</span><span class="crayon-o">-></span><span class="crayon-e">CreateOrUpdate</span><span class="crayon-sy">(</span> <span class="crayon-c">// часть параметров );</span></div></p>
-<div id="crayon-5637c4f5daf90821961094-10" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5daf90821961094-11" class="crayon-line"><span class="crayon-sy">}</span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div></p>
-<div id="crayon-5637c4f5daf95828267898" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5daf95828267898-1">1</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf95828267898-2">2</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5daf95828267898-1" class="crayon-line"><span class="crayon-v">$account_domain</span> <span class="crayon-o">=</span> <span class="crayon-r">new</span> <span class="crayon-e">Account</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf95828267898-2" class="crayon-line crayon-striped-line"><span class="crayon-v">$account_domain</span><span class="crayon-o">-></span><span class="crayon-e">NewAccount</span><span class="crayon-sy">(</span> <span class="crayon-c">// параметры );</span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div><br />
-Теперь мы можем использовать класс <code>Account</code> каждый раз и, кроме того, мы можем добавить в него дополнительные функции.</p>
-<h3>Шаблон &laquo;Метод-фабрика&raquo;</h3></p>
-<blockquote><p><b>Фабрика</b> &mdash; порождающий шаблон, который представляет собой класс с методом для создания различных объектов.</blockquote><br />
-Основная цель этого шаблона &mdash;&nbsp;инкапсулировать процедуру создания различных классов в одной функциию, которая в зависимости от переданного ей контекста возвращает необходимый объект.</p>
-<h4>Как его использовать?</h4></p>
-<p>Фабрика обычно используется для создания различных вариантов базового класса. Допустим, у вас есть класс кнопки &mdash;&nbsp;<code>Button</code> &mdash; и три варианта &mdash;&nbsp;<code>ImageButton</code>, <code>InputButton</code> и <code>FlashButton</code>. С помощью фабрики вы можете создавать различные варианты кнопок в зависимости от ситуации.</p>
+
+<h4>Без адаптера</h4>
+<pre><code>$user = new User();
+$user->CreateOrUpdate( // параметры );
+ 
+$profile = new Profile();
+$profile->CreateOrUpdate( // параметры );</code></pre>
+
+<p>Если нам придется использовать такой код повторно, мы будем вынуждены переписывать все это заново.</p>
+
+<h4>С использованием адаптера</h4>
+<pre><code>class Account()
+{
+        public function NewAccount( // параметры )
+        {
+                $user = new User();
+                $user->CreateOrUpdate( // часть параметров );
+ 
+                $profile = new Profile();
+                $profile->CreateOrUpdate( // часть параметров );
+        }
+}
+
+$account_domain = new Account();
+$account_domain->NewAccount( // параметры );</code></pre>
+
+<p>Теперь мы можем использовать класс <em>Account</em> каждый раз и, кроме того, мы можем добавить в него дополнительные функции.</p>
+<hr />
+<h2>Шаблон "Метод-фабрика"</h2>
+<p><strong>Фабрика</strong> - порождающий шаблон, который представляет собой класс с методом для создания различных объектов.</p>
+<p>Основная цель этого шаблона - инкапсулировать процедуру создания различных классов в одну функциию, которая в зависимости от переданного ей контекста возвращает необходимый объект.</p>
+
+<h3>Как его использовать?</h3>
+<p>Фабрика обычно используется для создания различных вариантов базового класса. Допустим, у вас есть класс кнопки <em>Button</em> и три варианта <em>ImageButton</em>, <em>InputButton</em> и <em>FlashButton</em>. С помощью фабрики вы можете создавать различные варианты кнопок в зависимости от ситуации.</p>
 <p>Сначала создадим три класса:</p>
-<div id="crayon-5637c4f5daf9b057147041" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5daf9b057147041-1">1</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf9b057147041-2">2</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf9b057147041-3">3</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf9b057147041-4">4</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf9b057147041-5">5</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf9b057147041-6">6</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf9b057147041-7">7</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf9b057147041-8">8</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf9b057147041-9">9</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf9b057147041-10">10</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf9b057147041-11">11</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf9b057147041-12">12</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf9b057147041-13">13</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf9b057147041-14">14</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf9b057147041-15">15</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf9b057147041-16">16</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf9b057147041-17">17</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf9b057147041-18">18</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5daf9b057147041-19">19</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5daf9b057147041-20">20</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5daf9b057147041-1" class="crayon-line"><span class="crayon-m">abstract</span> <span class="crayon-t">class</span> <span class="crayon-e">Button</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-2" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">protected</span> <span class="crayon-v">$_html</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-3" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5daf9b057147041-4" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">getHtml</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-5" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-6" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">return</span> <span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_html</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-7" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-8" class="crayon-line crayon-striped-line"><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-9" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5daf9b057147041-10" class="crayon-line crayon-striped-line"><span class="crayon-t">class</span> <span class="crayon-e">ImageButton</span> <span class="crayon-r">extends</span> <span class="crayon-e">Button</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-11" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">protected</span> <span class="crayon-v">$_html</span> <span class="crayon-o">=</span> <span class="crayon-s">"..."</span><span class="crayon-sy">;</span> <span class="crayon-c">// HTML-код кнопки-картинки</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-12" class="crayon-line crayon-striped-line"><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-13" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5daf9b057147041-14" class="crayon-line crayon-striped-line"><span class="crayon-t">class</span> <span class="crayon-e">InputButton</span> <span class="crayon-r">extends</span> <span class="crayon-e">Button</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-15" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">protected</span> <span class="crayon-v">$_html</span> <span class="crayon-o">=</span> <span class="crayon-s">"..."</span><span class="crayon-sy">;</span> <span class="crayon-c">// HTML-код обычной кнопки (<input type="button" />);</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-16" class="crayon-line crayon-striped-line"><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-17" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5daf9b057147041-18" class="crayon-line crayon-striped-line"><span class="crayon-t">class</span> <span class="crayon-e">FlashButton</span> <span class="crayon-r">extends</span> <span class="crayon-e">Button</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-19" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">protected</span> <span class="crayon-v">$_html</span> <span class="crayon-o">=</span> <span class="crayon-s">"..."</span><span class="crayon-sy">;</span> <span class="crayon-c">// HTML-код Flash-кнопки</span></div></p>
-<div id="crayon-5637c4f5daf9b057147041-20" class="crayon-line crayon-striped-line"><span class="crayon-sy">}</span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div><br />
-Теперь мы можем написать нашу фабрику:</p>
-<div id="crayon-5637c4f5dafa0099388221" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5dafa0099388221-1">1</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafa0099388221-2">2</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafa0099388221-3">3</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafa0099388221-4">4</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafa0099388221-5">5</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafa0099388221-6">6</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafa0099388221-7">7</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafa0099388221-8">8</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafa0099388221-9">9</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafa0099388221-10">10</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafa0099388221-11">11</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafa0099388221-12">12</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafa0099388221-13">13</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafa0099388221-14">14</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5dafa0099388221-1" class="crayon-line"><span class="crayon-t">class</span> <span class="crayon-e">ButtonFactory</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-2" class="crayon-line crayon-striped-line"><span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-3" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span> <span class="crayon-m">static</span> <span class="crayon-t">function</span> <span class="crayon-e">createButton</span><span class="crayon-sy">(</span><span class="crayon-v">$type</span><span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-4" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-5" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$baseClass</span> <span class="crayon-o">=</span> <span class="crayon-s">'Button'</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-6" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$targetClass</span> <span class="crayon-o">=</span> <span class="crayon-e">ucfirst</span><span class="crayon-sy">(</span><span class="crayon-v">$type</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-v">$baseClass</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-7" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5dafa0099388221-8" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span> <span class="crayon-sy">(</span><span class="crayon-e">class_exists</span><span class="crayon-sy">(</span><span class="crayon-v">$targetClass</span><span class="crayon-sy">)</span> <span class="crayon-o">&amp;</span><span class="crayon-i">amp</span><span class="crayon-sy">;</span><span class="crayon-o">&amp;</span><span class="crayon-i">amp</span><span class="crayon-sy">;</span> <span class="crayon-e">is_subclass_of</span><span class="crayon-sy">(</span><span class="crayon-v">$targetClass</span><span class="crayon-sy">,</span> <span class="crayon-v">$baseClass</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-9" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">return</span> <span class="crayon-r">new</span> <span class="crayon-v">$targetClass</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-10" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span> <span class="crayon-st">else</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-11" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">throw</span> <span class="crayon-r">new</span> <span class="crayon-e">Exception</span><span class="crayon-sy">(</span><span class="crayon-s">"The button type '$type' is not recognized."</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-12" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-13" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafa0099388221-14" class="crayon-line crayon-striped-line"><span class="crayon-sy">}</span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div><br />
-и использовать ее:</p>
-<div id="crayon-5637c4f5dafa5636972965" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5dafa5636972965-1">1</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafa5636972965-2">2</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafa5636972965-3">3</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafa5636972965-4">4</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5dafa5636972965-1" class="crayon-line"><span class="crayon-v">$buttons</span> <span class="crayon-o">=</span> <span class="crayon-t">array</span><span class="crayon-sy">(</span><span class="crayon-s">'image'</span><span class="crayon-sy">,</span><span class="crayon-s">'input'</span><span class="crayon-sy">,</span><span class="crayon-s">'flash'</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafa5636972965-2" class="crayon-line crayon-striped-line"><span class="crayon-st">foreach</span><span class="crayon-sy">(</span><span class="crayon-v">$buttons</span> <span class="crayon-st">as</span> <span class="crayon-v">$b</span><span class="crayon-sy">)</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafa5636972965-3" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">echo</span> <span class="crayon-e">ButtonFactory::</span><span class="crayon-e">createButton</span><span class="crayon-sy">(</span><span class="crayon-v">$b</span><span class="crayon-sy">)</span><span class="crayon-o">-></span><span class="crayon-e">getHtml</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5dafa5636972965-4" class="crayon-line crayon-striped-line"><span class="crayon-sy">}</span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div><br />
-На выходе должен получиться HTML со всеми типами кнопок. Таким образом мы получили возможность указать, кнопку какого типа мы хотим получить, и использовать код повторно.</p>
-<h3>Шаблон &laquo;Декоратор&raquo;</h3></p>
-<blockquote><p><b>Декоратор</b> &mdash; это структурный шаблон, который позволяет добавить новое поведение объекту в процессе выполнения программы в зависимости от ситуации.</blockquote><br />
-Цель &mdash; в расширении поведения конкретного объекта без необходимости изменять поведение базового класса. Это позволит использовать несколько декораторов одновременно. Этот шаблон &mdash; альтернатива наследованию. В отличие от наследования, декоратор добавляет поведение в процессе выполнения программы.</p>
+<pre><code>abstract class Button {
+        protected $_html;
+ 
+        public function getHtml()
+        {
+                return $this->_html;
+        }
+}
+ 
+class ImageButton extends Button {
+        protected $_html = "..."; // HTML-код кнопки-картинки
+}
+ 
+class InputButton extends Button {
+        protected $_html = "..."; // HTML-код обычной кнопки ();
+}
+ 
+class FlashButton extends Button {
+        protected $_html = "..."; // HTML-код Flash-кнопки
+}</code></pre>
+
+<p>Теперь мы можем написать нашу фабрику:</p>
+
+<pre><code>class ButtonFactory
+{
+    public static function createButton($type)
+    {
+        $baseClass = 'Button';
+        $targetClass = ucfirst($type).$baseClass;
+ 
+        if (class_exists($targetClass) && is_subclass_of($targetClass, $baseClass)) {
+            return new $targetClass;
+        } else {
+            throw new Exception("The button type '$type' is not recognized.");
+        }
+    }
+}</code></pre>
+<p>и использовать ее:</p>
+<pre><code>$buttons = array('image','input','flash');
+foreach($buttons as $b) {
+    echo ButtonFactory::createButton($b)->getHtml()
+}</code></pre>
+<p>На выходе должен получиться HTML со всеми типами кнопок. Таким образом мы получили возможность указать, кнопку какого типа мы хотим получить, и использовать код повторно.</p>
+
+<hr />
+<h2>Шаблон "Декоратор"</h2></p>
+<p><strong>Декоратор</strong> - это структурный шаблон, который позволяет добавить новое поведение объекту в процессе выполнения программы в зависимости от ситуации.</p>
+<p>Цель - в расширении поведения конкретного объекта без необходимости изменять поведение базового класса. Это позволит использовать несколько декораторов одновременно. Этот шаблон - альтернатива наследованию. В отличие от наследования, декоратор добавляет поведение в процессе выполнения программы.</p>
 <p>Для реализации декоратора нам понадобится:</p>
 <ol>
 <li>Унаследовать класс-декоратор от базового.</li>
 <li>Добавить поле со ссылкой на базовый класс в декоратор.</li>
 <li>Передать ссылку на декорируемый объект в конструктор декоратора.</li>
 <li>Перенаправить методы из декоратора на декорируемый объект.</li>
-<li>Переопределить методы в декораторе, поведение которых необходимо изменить.</li><br />
+<li>Переопределить методы в декораторе, поведение которых необходимо изменить.</li>
 </ol></p>
-<h4>Как его использовать?</h4></p>
+<h3>Как его использовать?</h3>
 <p>Предположим, что у нас есть объект, который должен иметь определенное поведение в определенной ситуации. Например, у нас есть HTML-ссылка для выхода из аккаунта, которая должна по-разному показываться в зависимости от того, на какой странице мы находимся. Это тот самый случай, когда нам помогут декораторы.</p>
-<p>Сначала определимся, какие &laquo;декорации&raquo; нам нужны:</p>
+<p>Сначала определимся, какие "декорации" нам нужны:</p>
 <ul>
-<li>Если мы на заглавной странице и вошли в аккаунт, ссылка должна быть в <code><code><br />
-</code></code></p>
-<h2></h2><br />
--теге.</li></p>
+<li>Если мы на заглавной странице и вошли в аккаунт, ссылка должна быть в a-теге.</li>
 <li>Если мы на любой другой странице и вошли в аккаунт, ссылка должна быть подчеркнутой.</li>
-<li>Если мы вошли в аккаунт, ссылка должна быть в <code></code>-теге.</li><br />
-</ul><br />
-Теперь мы можем написать сами декораторы:</p>
-<div id="crayon-5637c4f5dafad616359632" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-1">1</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-2">2</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-3">3</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-4">4</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-5">5</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-6">6</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-7">7</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-8">8</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-9">9</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-10">10</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-11">11</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-12">12</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-13">13</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-14">14</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-15">15</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-16">16</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-17">17</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-18">18</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-19">19</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-20">20</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-21">21</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-22">22</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-23">23</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-24">24</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-25">25</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-26">26</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-27">27</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-28">28</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-29">29</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-30">30</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-31">31</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-32">32</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-33">33</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-34">34</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-35">35</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-36">36</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-37">37</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-38">38</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-39">39</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-40">40</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-41">41</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-42">42</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-43">43</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-44">44</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-45">45</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-46">46</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-47">47</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-48">48</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-49">49</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-50">50</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-51">51</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-52">52</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-53">53</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-54">54</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-55">55</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-56">56</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-57">57</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-58">58</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-59">59</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-60">60</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-61">61</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-62">62</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-63">63</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-64">64</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafad616359632-65">65</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafad616359632-66">66</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5dafad616359632-1" class="crayon-line"><span class="crayon-t">class</span> <span class="crayon-e">HtmlLinks</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-2" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// методы для работы с любой HTML-ссылкой</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-3" class="crayon-line"><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-4" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-5" class="crayon-line"><span class="crayon-t">class</span> <span class="crayon-e">LogoutLink</span> <span class="crayon-r">extends</span> <span class="crayon-e">HtmlLinks</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-6" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">protected</span> <span class="crayon-v">$_html</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-7" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-8" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">__construct</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-9" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_html</span> <span class="crayon-o">=</span> <span class="crayon-s">"<a href=\"logout.php\">Logout</a>"</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-10" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-11" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-12" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">setHtml</span><span class="crayon-sy">(</span><span class="crayon-v">$html</span><span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-13" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-14" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_html</span> <span class="crayon-o">=</span> <span class="crayon-v">$html</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-15" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-16" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-17" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">render</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-18" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-19" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">echo</span> <span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_html</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-20" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-21" class="crayon-line"><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-22" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-23" class="crayon-line"><span class="crayon-t">class</span> <span class="crayon-e">LogoutLinkH2Decorator</span> <span class="crayon-r">extends</span> <span class="crayon-e">HtmlLinks</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-24" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">protected</span> <span class="crayon-v">$_logout_link</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-25" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-26" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">__construct</span><span class="crayon-sy">(</span> <span class="crayon-v">$logout_link</span> <span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-27" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-28" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_logout_link</span> <span class="crayon-o">=</span> <span class="crayon-v">$logout_link</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-29" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-e">setHtml</span><span class="crayon-sy">(</span><span class="crayon-s">"<br />
-<h2>"</span> <span class="crayon-sy">.</span> <span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_html</span> <span class="crayon-sy">.</span> <span class="crayon-s">"</h2>"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-30" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-31" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-32" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">__call</span><span class="crayon-sy">(</span> <span class="crayon-v">$name</span><span class="crayon-sy">,</span> <span class="crayon-v">$args</span> <span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-33" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-34" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_logout_link</span><span class="crayon-o">-></span><span class="crayon-v">$name</span><span class="crayon-sy">(</span><span class="crayon-v">$args</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-35" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-36" class="crayon-line crayon-striped-line"><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-37" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-38" class="crayon-line crayon-striped-line"><span class="crayon-t">class</span> <span class="crayon-e">LogoutLinkUnderlineDecorator</span> <span class="crayon-r">extends</span> <span class="crayon-e">HtmlLinks</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-39" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-m">protected</span> <span class="crayon-v">$_logout_link</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-40" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-41" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">__construct</span><span class="crayon-sy">(</span> <span class="crayon-v">$logout_link</span> <span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-42" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-43" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_logout_link</span> <span class="crayon-o">=</span> <span class="crayon-v">$logout_link</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-44" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-e">setHtml</span><span class="crayon-sy">(</span><span class="crayon-s">"<u>"</span> <span class="crayon-sy">.</span> <span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_html</span> <span class="crayon-sy">.</span> <span class="crayon-s">"</u>"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-45" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-46" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-47" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">__call</span><span class="crayon-sy">(</span> <span class="crayon-v">$name</span><span class="crayon-sy">,</span> <span class="crayon-v">$args</span> <span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-48" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-49" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_logout_link</span><span class="crayon-o">-></span><span class="crayon-v">$name</span><span class="crayon-sy">(</span><span class="crayon-v">$args</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-50" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-51" class="crayon-line"><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-52" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-53" class="crayon-line"><span class="crayon-t">class</span> <span class="crayon-e">LogoutLinkStrongDecorator</span> <span class="crayon-r">extends</span> <span class="crayon-e">HtmlLinks</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-54" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-m">protected</span> <span class="crayon-v">$_logout_link</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-55" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-56" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">__construct</span><span class="crayon-sy">(</span> <span class="crayon-v">$logout_link</span> <span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-57" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-58" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_logout_link</span> <span class="crayon-o">=</span> <span class="crayon-v">$logout_link</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-59" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-e">setHtml</span><span class="crayon-sy">(</span><span class="crayon-s">"<strong>"</span> <span class="crayon-sy">.</span> <span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_html</span> <span class="crayon-sy">.</span> <span class="crayon-s">"</strong>"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-60" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-61" class="crayon-line"></div></p>
-<div id="crayon-5637c4f5dafad616359632-62" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-m">public</span> <span class="crayon-t">function</span> <span class="crayon-e">__call</span><span class="crayon-sy">(</span> <span class="crayon-v">$name</span><span class="crayon-sy">,</span> <span class="crayon-v">$args</span> <span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-63" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-64" class="crayon-line crayon-striped-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-v">$this</span><span class="crayon-o">-></span><span class="crayon-i">_logout_link</span><span class="crayon-o">-></span><span class="crayon-v">$name</span><span class="crayon-sy">(</span><span class="crayon-v">$args</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-65" class="crayon-line">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafad616359632-66" class="crayon-line crayon-striped-line"><span class="crayon-sy">}</span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div><br />
-Теперь мы можем использовать их так:</p>
-<div id="crayon-5637c4f5dafc6930486745" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5dafc6930486745-1">1</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafc6930486745-2">2</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafc6930486745-3">3</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafc6930486745-4">4</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafc6930486745-5">5</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafc6930486745-6">6</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafc6930486745-7">7</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafc6930486745-8">8</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafc6930486745-9">9</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafc6930486745-10">10</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafc6930486745-11">11</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafc6930486745-12">12</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5dafc6930486745-1" class="crayon-line"><span class="crayon-v">$logout_link</span> <span class="crayon-o">=</span> <span class="crayon-r">new</span> <span class="crayon-e">LogoutLink</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafc6930486745-2" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafc6930486745-3" class="crayon-line"><span class="crayon-st">if</span><span class="crayon-sy">(</span> <span class="crayon-v">$is_logged_in</span> <span class="crayon-sy">)</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafc6930486745-4" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$logout_link</span> <span class="crayon-o">=</span> <span class="crayon-r">new</span> <span class="crayon-e">LogoutLinkStrongDecorator</span><span class="crayon-sy">(</span><span class="crayon-v">$logout_link</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafc6930486745-5" class="crayon-line"><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafc6930486745-6" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafc6930486745-7" class="crayon-line"><span class="crayon-st">if</span><span class="crayon-sy">(</span> <span class="crayon-v">$in_home_page</span> <span class="crayon-sy">)</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafc6930486745-8" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$logout_link</span> <span class="crayon-o">=</span> <span class="crayon-r">new</span> <span class="crayon-e">LogoutLinkH2Decorator</span><span class="crayon-sy">(</span><span class="crayon-v">$logout_link</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafc6930486745-9" class="crayon-line"><span class="crayon-sy">}</span> <span class="crayon-st">else</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafc6930486745-10" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">$logout_link</span> <span class="crayon-o">=</span> <span class="crayon-r">new</span> <span class="crayon-e">LogoutLinkUnderlineDecorator</span><span class="crayon-sy">(</span><span class="crayon-v">$logout_link</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafc6930486745-11" class="crayon-line"><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafc6930486745-12" class="crayon-line crayon-striped-line"><span class="crayon-v">$logout_link</span><span class="crayon-o">-></span><span class="crayon-e">render</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div><br />
-Обратите внимание, как можно использовать несколько декораторов на одном объекте. Все они используют функцию <code>__call</code> для вызова оригинального метода. Если мы войдем в аккаунт и перейдем на заглавную страницу, результат будет такой:</p>
-<div id="crayon-5637c4f5dafcd287382365" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5dafcd287382365-1">1</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5dafcd287382365-1" class="crayon-line">&nbsp;<span class="crayon-r "><strong></span><span class="crayon-r "><br />
-<h2></span><span class="crayon-r "><a </span><span class="crayon-e ">href</span><span class="crayon-o">=</span><span class="crayon-s ">"logout.php"</span><span class="crayon-r ">></span><span class="crayon-i ">Logout</span><span class="crayon-r "></a></span><span class="crayon-r "></h2></span><span class="crayon-r "></strong></span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div></p>
-<h2>Logout</h2></p>
-<h3>Шаблон &laquo;Одиночка&raquo;</h3></p>
-<blockquote><p><b>Одиночка</b> &mdash;&nbsp;порождающий шаблон, который позволяет убедиться, что в процессе выполнения программы создается только один экземпляр класса с глобальным доступом.</blockquote><br />
-Его можно использовать как точку &laquo;координации&raquo; для других объектов, поскольку поля &laquo;Одиночки&raquo; будут одинаковы для всех, кто его вызывает.</p>
-<h4>Как его использовать?</h4></p>
-<p>Если вам необходимо передавать определенный экземпляр из класса в класс, вы можете передавать его каждый раз через конструктор или использовать &laquo;Одиночку&raquo;. Допустим, у вас есть класс <code>Session</code>, который содержит данные о текущей сессии. Поскольку сессия инициализируется только один раз, мы можем реализовать его так:</p>
-<div id="crayon-5637c4f5dafd3532750683" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover">
-<div class="crayon-plain-wrap"></div></p>
-<div class="crayon-main">
-<table class="crayon-table">
-<tbody>
-<tr class="crayon-row">
-<td class="crayon-nums " data-settings="show">
-<div class="crayon-nums-content">
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-1">1</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-2">2</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-3">3</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-4">4</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-5">5</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-6">6</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-7">7</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-8">8</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-9">9</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-10">10</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-11">11</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-12">12</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-13">13</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-14">14</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-15">15</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-16">16</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-17">17</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-18">18</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-19">19</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-20">20</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-21">21</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-22">22</div></p>
-<div class="crayon-num" data-line="crayon-5637c4f5dafd3532750683-23">23</div></p>
-<div class="crayon-num crayon-striped-num" data-line="crayon-5637c4f5dafd3532750683-24">24</div><br />
-</div></td></p>
-<td class="crayon-code">
-<div class="crayon-pre">
-<div id="crayon-5637c4f5dafd3532750683-1" class="crayon-line"><span class="crayon-t">class</span> <span class="crayon-e">Session</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-2" class="crayon-line crayon-striped-line"><span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-3" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">private</span> <span class="crayon-m">static</span> <span class="crayon-v">$instance</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-4" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafd3532750683-5" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span> <span class="crayon-m">static</span> <span class="crayon-t">function</span> <span class="crayon-e">getInstance</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-6" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-7" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-sy">(</span> <span class="crayon-e">is_null</span><span class="crayon-sy">(</span><span class="crayon-r">self</span><span class="crayon-o">::</span><span class="crayon-v">$instance</span><span class="crayon-sy">)</span> <span class="crayon-sy">)</span> <span class="crayon-sy">{</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-8" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r">self</span><span class="crayon-o">::</span><span class="crayon-v">$instance</span> <span class="crayon-o">=</span> <span class="crayon-r">new</span> <span class="crayon-r">self</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-9" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-10" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">return</span> <span class="crayon-r">self</span><span class="crayon-o">::</span><span class="crayon-v">$instance</span><span class="crayon-sy">;</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-11" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-12" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafd3532750683-13" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">private</span> <span class="crayon-t">function</span> <span class="crayon-e">__construct</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span> <span class="crayon-sy">{</span> <span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-14" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafd3532750683-15" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">private</span> <span class="crayon-t">function</span> <span class="crayon-e">__clone</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span> <span class="crayon-sy">{</span> <span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-16" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafd3532750683-17" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">//&nbsp;&nbsp;прочие методы сессии</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-18" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">.</span><span class="crayon-sy">.</span><span class="crayon-sy">.</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-19" class="crayon-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">.</span><span class="crayon-sy">.</span><span class="crayon-sy">.</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-20" class="crayon-line crayon-striped-line"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">.</span><span class="crayon-sy">.</span><span class="crayon-sy">.</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-21" class="crayon-line"><span class="crayon-sy">}</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-22" class="crayon-line crayon-striped-line"></div></p>
-<div id="crayon-5637c4f5dafd3532750683-23" class="crayon-line"><span class="crayon-c">// get a session instance</span></div></p>
-<div id="crayon-5637c4f5dafd3532750683-24" class="crayon-line crayon-striped-line"><span class="crayon-v">$session</span> <span class="crayon-o">=</span> <span class="crayon-e">Session::</span><span class="crayon-e">getInstance</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><br />
-</div></td><br />
-</tr><br />
-</tbody><br />
-</table><br />
-</div><br />
-</div><br />
-Теперь мы можем получить доступ к сессии из различных участков кода, даже из других классов. Метод <code>getInstance</code> всегда будет возвращать одну и ту же сессию.</p>
-<h3>Заключение</h3><br />
-В этой статье мы рассмотрели только наиболее часто встречающиеся шаблоны из множества. Если вы хотите узнать больше о шаблонах проектирования, вы найдете достаточно информации на <a href="https://ru.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F">Википедии</a>. Для более полной информации обратите внимание на знаменитую книгу <a href="http://www.ozon.ru/context/detail/id/2457392/">&laquo;Приемы объектно-ориентированного проектирования&raquo;</a> &laquo;Банды четырех&raquo;.</p>
-<p>И последнее: при использовании того или иного шаблона убедитесь, что вы решаете задачу правильным способом. Как уже упоминалось, при неправильном использовании шаблоны проектирования могут доставить больше проблем, чем решить. Но при правильном &mdash; их пользу нельзя переоценить.</p>
-<p><sub>Перевод статьи <a href="http://code.tutsplus.com/articles/a-beginners-guide-to-design-patterns--net-12752">&laquo;A Beginner&rsquo;s Guide to Design Patterns?&raquo;</a></sub></p>
+<li>Если мы вошли в аккаунт, ссылка должна быть в <code></code>-теге.</li>
+</ul>
+<p>Теперь мы можем написать сами декораторы:</p>
+ 
+<pre><code>class HtmlLinks {
+        // методы для работы с любой HTML-ссылкой
+}
+ 
+class LogoutLink extends HtmlLinks {
+        protected $_html;
+ 
+        public function __construct() {
+                $this->_html = "Logout";
+        }
+ 
+        public function setHtml($html)
+        {
+                $this->_html = $html;
+        }
+ 
+        public function render()
+        {
+                echo $this->_html;
+        }
+}
+ 
+class LogoutLinkH2Decorator extends HtmlLinks {
+        protected $_logout_link;
+ 
+        public function __construct( $logout_link )
+        {
+                $this->_logout_link = $logout_link;
+                $this->setHtml("". $this->_html . "");
+        }
+ 
+        public function __call( $name, $args )
+        {
+                $this->_logout_link->$name($args[0]);
+        }
+}
+ 
+class LogoutLinkUnderlineDecorator extends HtmlLinks {
+        protected $_logout_link;
+ 
+        public function __construct( $logout_link )
+        {
+                $this->_logout_link = $logout_link;
+                $this->setHtml("" . $this->_html . "");
+        }
+ 
+        public function __call( $name, $args )
+        {
+                $this->_logout_link->$name($args[0]);
+        }
+}
+ 
+class LogoutLinkStrongDecorator extends HtmlLinks {
+        protected $_logout_link;
+ 
+        public function __construct( $logout_link )
+        {
+                $this->_logout_link = $logout_link;
+                $this->setHtml("" . $this->_html . "");
+        }
+ 
+        public function __call( $name, $args )
+        {
+                $this->_logout_link->$name($args[0]);
+        }
+}</code></pre>
+<p>Теперь мы можем использовать их так:</p>
+<pre><code>$logout_link = new LogoutLink();
+ 
+if( $is_logged_in ) {
+        $logout_link = new LogoutLinkStrongDecorator($logout_link);
+}
+ 
+if( $in_home_page ) {
+        $logout_link = new LogoutLinkH2Decorator($logout_link);
+} else {
+        $logout_link = new LogoutLinkUnderlineDecorator($logout_link);
+}
+$logout_link->render();</code></pre>
+
+<p>Обратите внимание, как можно использовать несколько декораторов на одном объекте. Все они используют функцию <em>__call</em> для вызова оригинального метода. Если мы войдем в аккаунт и перейдем на заглавную страницу, результат будет такой:</p>
+<pre><code>< a href="/logout.php">logout< /a></code></pre>
+<hr />
+<h2>Шаблон "Одиночка"</h2>
+<p><strong>Одиночка</strong> — порождающий шаблон, который позволяет убедиться, что в процессе выполнения программы создается только один экземпляр класса с глобальным доступом.</p>
+<p>Его можно использовать как точку "координации" для других объектов, поскольку поля "Одиночки" будут одинаковы для всех, кто его вызывает.</p>
+
+<h3>Как его использовать?</h3>
+
+<p>Если вам необходимо передавать определенный экземпляр из класса в класс, вы можете передавать его каждый раз через конструктор или использовать "<strong>Одиночку</strong>". Допустим, у вас есть класс Session, который содержит данные о текущей сессии. Поскольку сессия инициализируется только один раз, мы можем реализовать его так:</p>
+
+<pre><code>class Session
+{
+        private static $instance;
+ 
+        public static function getInstance()
+        {
+                if( is_null(self::$instance) ) {
+                        self::$instance = new self();
+                }
+                return self::$instance;
+        }
+ 
+        private function __construct() { }
+ 
+        private function __clone() { }
+ 
+        //  прочие методы сессии
+        ...
+        ...
+        ...
+}
+ 
+// get a session instance
+$session = Session::getInstance();</code></pre>
+
+<p>Теперь мы можем получить доступ к сессии из различных участков кода, даже из других классов. Метод <em>getInstance</em> всегда будет возвращать одну и ту же сессию.</p>
+
+<h2>Заключение</h2>
+В этой статье мы рассмотрели только наиболее часто встречающиеся шаблоны из множества. Если вы хотите узнать больше о шаблонах проектирования, вы найдете достаточно информации на <a href="https://ru.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F">Википедии</a>. Для более полной информации обратите внимание на знаменитую книгу <a href="http://www.ozon.ru/context/detail/id/2457392/">"Приемы объектно-ориентированного проектирования"</a> "Банды четырех".</p>
+<p>И последнее: при использовании того или иного шаблона убедитесь, что вы решаете задачу правильным способом. Как уже упоминалось, при неправильном использовании шаблоны проектирования могут доставить больше проблем, чем решить. Но при правильном - их пользу нельзя переоценить.</p>
+<p><suem>Перевод статьи <a href="http://code.tutsplus.com/articles/a-beginners-guide-to-design-patterns--net-12752">"A Beginner's Guide to Design Patterns?"</a></suem></p>

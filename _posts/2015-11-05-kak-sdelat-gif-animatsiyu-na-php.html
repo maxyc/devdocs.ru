@@ -10,8 +10,7 @@ author:
   url: ''
 author_login: admin
 author_email: maxycws@gmail.com
-excerpt: "https://github.com/Sybio/GifCreator\r\n\r\nПростая библиотека
-  поможет в этом\r\n\r\n"
+excerpt: "Демонстрация работы библиотеки для работы с GIF-анимацией в PHP"
 wordpress_id: 47942
 wordpress_url: http://devdocs.ru/?p=47942
 date: '2015-11-05 14:01:42 +0200'
@@ -23,20 +22,22 @@ tags:
 - git
 comments: []
 ---
-<p>https://github.com/Sybio/GifCreator</p>
+<p><a href="https://github.com/Sybio/GifCreator">Sybio/GifCreator</a></p>
 <p>Простая библиотека поможет в этом</p>
-<p><a id="more"></a><a id="more-47942"></a></p>
-<pre><code>// Create an array containing file paths, resource var (initialized with imagecreatefromXXX),<br />
-// image URLs or even binary code from image files.<br />
-// All sorted in order to appear.<br />
-$frames = array(<br />
-imagecreatefrompng("/../images/pic1.png"), // Resource var<br />
-"/../images/pic2.png", // Image file path<br />
-file_get_contents("/../images/pic3.jpg"), // Binary source code<br />
-'http://thisisafakedomain.com/images/pic4.jpg', // URL<br />
-);</p>
-<p>// Create an array containing the duration (in millisecond) of each frames (in order too)<br />
-$durations = array(40, 80, 40, 20);</p>
-<p>// Initialize and create the GIF !<br />
-$gc = new GifCreator();<br />
-$gc->create($frames, $durations, 5);</code></pre></p>
+
+<pre><code>// Create an array containing file paths, resource var (initialized with imagecreatefromXXX),
+// image URLs or even binary code from image files.
+// All sorted in order to appear.
+$frames = array(
+imagecreatefrompng("/../images/pic1.png"), // Resource var
+"/../images/pic2.png", // Image file path
+file_get_contents("/../images/pic3.jpg"), // Binary source code
+'http://thisisafakedomain.com/images/pic4.jpg', // URL
+);
+
+// Create an array containing the duration (in millisecond) of each frames (in order too)
+$durations = array(40, 80, 40, 20);
+
+// Initialize and create the GIF !
+$gc = new GifCreator();
+$gc->create($frames, $durations, 5);</code></pre>
