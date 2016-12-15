@@ -1,6 +1,5 @@
 name: Devdocs.ru
-description: Блог о веб разработке
-meta_description: "Блог про Битрикс, Yii2, Laravel и все что связано с вебразработкой"
+description: "Блог про Битрикс, Yii2, Laravel и все что связано с вебразработкой"
 
 aboutPage: false
 
@@ -14,6 +13,8 @@ domain_name: 'http://devdocs.ru'
 google_analytics: 'UA-XXXXXXXX-X'
 disqus: true
 disqus_shortname: 'devdocs'
+
+tags: []
 
 # Details for the RSS feed generator
 url:            'http://devdocs.ru'
