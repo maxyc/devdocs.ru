@@ -6,7 +6,7 @@ aboutPage: false
 markdown: kramdown
 highlighter: rouge
 
-gems: [jekyll-paginate]
+gems: [jekyll-paginate, jekyll-seo-tag]
 paginate: 20
 baseurl: /
 domain_name: 'http://devdocs.ru'
@@ -14,14 +14,22 @@ google_analytics: 'UA-XXXXXXXX-X'
 disqus: true
 disqus_shortname: 'devdocs'
 
-tags: []
+tags: [bitrix,yii2,Laravel]
 
 # Details for the RSS feed generator
 url:            'http://devdocs.ru'
 author:         'Maxyc Webber'
 authorTwitter:  'maxyc'
+social:
+    name: 'Maxyc Webber'
+    links:
+        - https://twitter.com/maxyc
+        - https://www.facebook.com/maxyc.Webber
+        - https://www.linkedin.com/in/maxyc.webber
+        - https://vk.com/maxyc
+        - https://github.com/maxyc
 
-permalink:       /:year/:title/
+permalink:       :year/:month/:title/
 
 defaults:
     -
